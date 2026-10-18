@@ -1,0 +1,25 @@
+<div class="divide-y divide-line rounded-2xl border border-line bg-surface">
+  @for (item of items(); track item.id) {
+    <section class="px-5 sm:px-6">
+      <h3>
+        <button
+          class="flex min-h-14 w-full items-center justify-between gap-4 py-4 text-left font-semibold text-fg"
+          type="button"
+          [attr.aria-expanded]="openItem() === item.id"
+          [attr.aria-controls]="item.id"
+          (click)="toggle(item.id)"
+        >
+          {{ item.question }}
+          @if (openItem() === item.id) {
+            <app-icon name="close" />
+          } @else {
+            <app-icon name="plus" />
+          }
+        </button>
+      </h3>
+      <div class="pb-5 pr-8 text-fg-muted" [id]="item.id" [hidden]="openItem() !== item.id">
+        <p>{{ item.answer }}</p>
+      </div>
+    </section>
+  }
+</div>

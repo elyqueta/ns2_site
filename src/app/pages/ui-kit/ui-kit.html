@@ -1,0 +1,275 @@
+<main class="min-h-screen bg-bg text-fg">
+  <div class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16">
+    <div class="flex min-h-20 items-center justify-between border-b border-line">
+      <a
+        class="inline-flex min-h-11 items-center"
+        routerLink="/"
+        [attr.aria-label]="copy.logoBrand"
+      >
+        <img
+          class="h-9 w-auto dark:hidden"
+          src="/brand/logo-horizontal.svg"
+          [alt]="copy.logoLight"
+          width="1487"
+          height="689"
+        />
+        <img
+          class="hidden h-9 w-auto dark:block"
+          src="/brand/logo-horizontal-dark.svg"
+          [alt]="copy.logoDark"
+          width="1487"
+          height="689"
+        />
+      </a>
+      <app-theme-toggle />
+    </div>
+
+    <header class="py-14 sm:py-20">
+      <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+        {{ copy.eyebrow }}
+      </p>
+      <h1
+        class="mt-5 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight"
+      >
+        {{ copy.title }}
+      </h1>
+      <p class="mt-6 max-w-[62ch] text-lead leading-relaxed text-fg-muted">{{ copy.lead }}</p>
+    </header>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="palette-title">
+      <h2 id="palette-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionColors }}
+      </h2>
+      <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        @for (color of palette; track color.token) {
+          <article class="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4">
+            <span
+              class="size-12 shrink-0 rounded-xl border border-line"
+              [class]="color.swatchClass"
+            ></span>
+            <div class="min-w-0">
+              <h3 class="font-semibold">{{ color.name }}</h3>
+              <p class="text-sm text-fg-muted">{{ color.lightValue }} · {{ color.darkValue }}</p>
+              <p class="font-mono text-xs text-fg-muted">--{{ color.token }}</p>
+            </div>
+          </article>
+        }
+      </div>
+      <div class="mt-6 rounded-2xl border border-line bg-surface p-5">
+        <p class="font-display text-h1 font-semibold tracking-tight">{{ copy.fontH1 }}</p>
+        <p class="mt-4 text-lead text-fg-muted">{{ copy.leadSample }}</p>
+        <p class="mt-3 max-w-[62ch] text-fg">{{ copy.bodySample }}</p>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="typography-title">
+      <h2 id="typography-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionTypography }}
+      </h2>
+      <div class="mt-7 grid gap-4 rounded-2xl border border-line bg-surface p-5 sm:p-8">
+        <p class="font-display text-display font-semibold leading-[0.98] tracking-tight">
+          {{ copy.fontDisplay }}
+        </p>
+        <p class="font-display text-h1 font-semibold tracking-tight">{{ copy.fontH1 }}</p>
+        <p class="font-display text-h2 font-semibold tracking-tight">{{ copy.fontH2 }}</p>
+        <p class="font-display text-h3 font-semibold">{{ copy.fontH3 }}</p>
+        <p class="text-lead text-fg-muted">{{ copy.leadSample }}</p>
+        <p>{{ copy.fontBody }} · {{ copy.bodySample }}</p>
+        <p class="text-sm text-fg-muted">{{ copy.fontSmall }} · {{ copy.sectionTypography }}</p>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="buttons-title">
+      <h2 id="buttons-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionButtons }}
+      </h2>
+      <div class="mt-7 grid gap-6 rounded-2xl border border-line bg-surface p-5 sm:p-8">
+        <div class="flex flex-wrap items-center gap-3">
+          <app-button [label]="copy.buttonPrimary" />
+          <app-button [label]="copy.buttonSecondary" variant="secondary" />
+          <app-button [label]="copy.buttonGhost" variant="ghost" />
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <app-button [label]="copy.buttonPrimary" size="lg" [showArrow]="true" />
+          <app-button
+            [label]="copy.buttonSecondary"
+            size="md"
+            variant="secondary"
+            [showArrow]="true"
+          />
+          <app-button
+            [label]="copy.buttonGhost"
+            variant="ghost"
+            href="/servicos"
+            [showArrow]="true"
+          />
+        </div>
+        <div class="flex flex-wrap items-center gap-6">
+          <app-link-arrow [label]="actions.learnMore" href="/sobre" />
+          <app-link-arrow [label]="actions.whatsapp" [href]="whatsappUrl" [external]="true" />
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="section-heading-title">
+      <h2 id="section-heading-title" class="sr-only">{{ copy.sectionHeadings }}</h2>
+      <app-section-heading
+        [index]="copy.sectionIndex"
+        [title]="copy.headingPrefix"
+        [highlight]="copy.headingHighlight"
+        [description]="copy.headingDescription"
+      />
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="cards-title">
+      <h2 id="cards-title" class="font-display text-h2 font-semibold">{{ copy.sectionCards }}</h2>
+      <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <app-service-card [item]="serviceItem()" />
+        <app-product-card [item]="productItem()" />
+        <app-package-card [item]="packageItem()" />
+        <app-post-card [item]="postItem()" />
+        <app-partner-card [item]="partnerItem()" />
+        <app-project-card [item]="projectItem()" />
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="badges-title">
+      <h2 id="badges-title" class="font-display text-h2 font-semibold">{{ copy.sectionBadges }}</h2>
+      <div class="mt-7 flex flex-wrap gap-3 rounded-2xl border border-line bg-surface p-5 sm:p-8">
+        <app-badge [label]="copy.badgeNew" />
+        <app-badge [label]="copy.badgeFeatured" tone="accent" />
+        <app-badge [label]="copy.badgeAvailable" tone="success" />
+        <app-badge [label]="copy.fieldRequired" tone="danger" />
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="icons-title">
+      <h2 id="icons-title" class="font-display text-h2 font-semibold">{{ copy.sectionIcons }}</h2>
+      <ul class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        @for (icon of icons; track icon.name) {
+          <li class="flex min-h-20 items-center gap-3 rounded-xl border border-line bg-surface p-4">
+            <app-icon [name]="icon.name" />
+            <span class="text-sm text-fg-muted">{{ icon.label }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="media-title">
+      <h2 id="media-title" class="font-display text-h2 font-semibold">{{ copy.sectionMedia }}</h2>
+      <div class="mt-7 grid gap-6 md:grid-cols-2">
+        <app-media-slot [alt]="copy.mediaCaption" [expectedFile]="copy.mediaExpected" />
+        <div class="rounded-2xl border border-line bg-surface p-5">
+          <img
+            class="mx-auto h-20 w-auto"
+            src="/brand/logo-mark.svg"
+            [alt]="copy.logoMark"
+            width="655"
+            height="689"
+          />
+          <p class="mt-4 text-center text-sm text-fg-muted">{{ copy.logoMark }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="accordion-title">
+      <h2 id="accordion-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionAccordion }}
+      </h2>
+      <div class="mt-7">
+        <app-accordion [items]="faqItems" />
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="form-title">
+      <h2 id="form-title" class="font-display text-h2 font-semibold">{{ copy.sectionForm }}</h2>
+      <div
+        class="mt-7 grid gap-5 rounded-2xl border border-line bg-surface p-5 md:grid-cols-2 sm:p-8"
+      >
+        <app-form-field
+          fieldId="demo-name"
+          [label]="copy.fieldName"
+          [placeholder]="copy.fieldNamePlaceholder"
+          [value]="currentName()"
+          [helpText]="copy.fieldHelp"
+          [required]="true"
+          (valueChange)="currentName.set($event)"
+        />
+        <app-form-field
+          fieldId="demo-email"
+          [label]="copy.fieldEmail"
+          type="email"
+          [placeholder]="copy.fieldEmailPlaceholder"
+          [error]="copy.fieldRequired"
+          [required]="true"
+        />
+        <app-form-field
+          fieldId="demo-service"
+          [label]="copy.fieldService"
+          kind="select"
+          [placeholder]="copy.fieldServicePlaceholder"
+          [options]="services"
+          (valueChange)="selectedService.set($event)"
+        />
+        <app-form-field
+          fieldId="demo-message"
+          [label]="copy.fieldMessage"
+          kind="textarea"
+          [placeholder]="copy.fieldMessagePlaceholder"
+        />
+        <p class="text-sm text-fg-muted md:col-span-2">
+          {{ currentName() }} · {{ selectedService() }}
+        </p>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="breadcrumb-title">
+      <h2 id="breadcrumb-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionBreadcrumbs }}
+      </h2>
+      <div class="mt-7 rounded-2xl border border-line bg-surface p-5">
+        <app-page-hero
+          [title]="copy.pageHeroTitle"
+          [lead]="copy.pageHeroLead"
+          [breadcrumbs]="breadcrumbs"
+          [current]="copy.breadcrumbCurrent"
+          [breadcrumbLabel]="copy.breadcrumbLabel"
+        />
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="marquee-title">
+      <h2 id="marquee-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionMarquee }}
+      </h2>
+      <div class="mt-7">
+        <app-marquee [items]="copy.marqueeItems" [label]="copy.sectionMarquee" />
+      </div>
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="sr-only">{{ copy.sectionCallToAction }}</h2>
+      <app-cta-band
+        [title]="copy.ctaTitle"
+        [description]="copy.ctaDescription"
+        [whatsappUrl]="whatsappUrl"
+        [whatsappLabel]="actions.whatsapp"
+        [contactLabel]="actions.contact"
+      />
+    </section>
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="pipes-title">
+      <h2 id="pipes-title" class="font-display text-h2 font-semibold">{{ copy.sectionPipes }}</h2>
+      <div class="mt-7 grid gap-4 sm:grid-cols-2">
+        <article class="rounded-2xl border border-line bg-surface p-5">
+          <h3 class="font-semibold">{{ copy.sampleDateLabel }}</h3>
+          <p class="mt-2 text-fg-muted">{{ sampleDate | dataPt }}</p>
+        </article>
+        <article class="rounded-2xl border border-line bg-surface p-5">
+          <h3 class="font-semibold">{{ copy.sampleCurrencyLabel }}</h3>
+          <p class="mt-2 text-fg-muted">{{ sampleCurrency | kz }}</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</main>

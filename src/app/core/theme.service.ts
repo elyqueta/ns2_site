@@ -1,18 +1,20 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { Injectable, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 
 export type Theme = 'dark' | 'light';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  readonly theme = signal<Theme>('dark');
-
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
+  readonly theme = signal<Theme>(this.readInitialTheme());
+  private readonly syncThemeAfterRender = afterNextRender(() => {
+    this.applyTheme(this.theme());
+  });
 
-  constructor() {
+  private readInitialTheme(): Theme {
     if (!isPlatformBrowser(this.platformId)) {
-      return;
+      return 'dark';
     }
 
     const storedTheme = localStorage.getItem('ns2-theme');
@@ -23,7 +25,8 @@ export class ThemeService {
           ? 'dark'
           : 'light';
 
-    this.applyTheme(activeTheme);
+    this.applyThemeToDocument(activeTheme);
+    return activeTheme;
   }
 
   setTheme(theme: Theme): void {
@@ -36,8 +39,16 @@ export class ThemeService {
     localStorage.setItem('ns2-theme', theme);
   }
 
+  toggle(): void {
+    this.setTheme(this.theme() === 'dark' ? 'light' : 'dark');
+  }
+
   private applyTheme(theme: Theme): void {
     this.theme.set(theme);
+    this.applyThemeToDocument(theme);
+  }
+
+  private applyThemeToDocument(theme: Theme): void {
     this.document.documentElement.classList.toggle('dark', theme === 'dark');
     this.document
       .querySelector('meta[name="theme-color"]')

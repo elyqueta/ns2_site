@@ -1,0 +1,19 @@
+@if (external()) {
+  <a
+    class="group inline-flex min-h-11 items-center gap-2 text-accent-bright underline decoration-line underline-offset-4 transition-colors hover:text-fg"
+    [href]="href()"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {{ label() }}
+    <app-icon name="arrow-diagonal" />
+  </a>
+} @else {
+  <a
+    class="group inline-flex min-h-11 items-center gap-2 text-accent-bright underline decoration-line underline-offset-4 transition-colors hover:text-fg"
+    [routerLink]="href()"
+  >
+    {{ label() }}
+    <app-icon name="arrow" />
+  </a>
+}

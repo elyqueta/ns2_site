@@ -1,0 +1,17 @@
+<nav [attr.aria-label]="label()">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-fg-muted">
+    @for (item of items(); track item.label) {
+      <li class="flex items-center gap-2">
+        @if (item.href; as link) {
+          <a class="min-h-11 py-3 transition-colors hover:text-accent-bright" [routerLink]="link">
+            {{ item.label }}
+          </a>
+        } @else {
+          <span>{{ item.label }}</span>
+        }
+        <span aria-hidden="true">/</span>
+      </li>
+    }
+    <li class="min-h-11 py-3 font-medium text-fg" aria-current="page">{{ current() }}</li>
+  </ol>
+</nav>

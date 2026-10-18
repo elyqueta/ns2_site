@@ -1,0 +1,29 @@
+<figure
+  class="relative aspect-[3/2] overflow-hidden rounded-image border border-line bg-surface-2"
+  [attr.aria-label]="alt()"
+>
+  @if (src(); as imageSrc) {
+    <img
+      class="size-full object-cover"
+      [ngSrc]="imageSrc"
+      [alt]="alt()"
+      [width]="width()"
+      [height]="height()"
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  } @else {
+    <div class="absolute inset-0 bg-gradient-to-br from-accent/25 via-surface-2 to-bg"></div>
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,var(--line)_1px,transparent_1px),linear-gradient(to_bottom,var(--line)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-50"
+    ></div>
+    <div
+      class="absolute inset-0 bg-accent/5 [clip-path:polygon(48%_0,100%_0,100%_100%,0_100%)]"
+    ></div>
+    <figcaption
+      class="absolute inset-x-4 bottom-4 rounded-2xl border border-line bg-bg/90 p-4 backdrop-blur"
+    >
+      <p class="font-display text-sm font-semibold text-fg">{{ expectedFile() }}</p>
+      <p class="mt-1 text-xs text-fg-muted">{{ alt() }}</p>
+    </figcaption>
+  }
+</figure>

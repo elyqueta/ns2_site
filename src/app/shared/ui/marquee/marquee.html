@@ -1,0 +1,8 @@
+<ul
+  class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
+  [attr.aria-label]="label()"
+>
+  @for (item of items(); track item) {
+    <li>{{ item }}</li>
+  }
+</ul>

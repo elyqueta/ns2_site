@@ -13,10 +13,10 @@
   --fg: #0a0e1a;
   --fg-muted: #52607a;
   --accent: #2f63ae;
-  --accent-bright: #437bc7;
+  --accent-bright: #2f63ae;
   --accent-glow: rgb(47 99 174 / 18%);
   --on-accent: #ffffff;
-  --success: #059669;
+  --success: #047857;
   --danger: #dc2626;
 }
 
@@ -28,7 +28,7 @@
   --line: rgb(255 255 255 / 9%);
   --fg: #f4f6fb;
   --fg-muted: #9aa3b8;
-  --accent: #437bc7;
+  --accent: #4074ba;
   --accent-bright: #6ba0ea;
   --accent-glow: rgb(67 123 199 / 35%);
   --on-accent: #ffffff;

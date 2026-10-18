@@ -1,0 +1,29 @@
+<section
+  class="relative isolate overflow-hidden rounded-[2rem] border border-line bg-surface px-6 py-12 sm:px-10 sm:py-16 lg:px-16"
+>
+  <div
+    class="absolute inset-y-0 right-0 -z-10 w-2/3 bg-gradient-to-l from-accent/20 to-transparent [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
+  ></div>
+  <div class="max-w-3xl">
+    <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">{{ title() }}</h2>
+    <p class="mt-4 max-w-[62ch] text-lead text-fg-muted">{{ description() }}</p>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+        [href]="whatsappUrl()"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <app-icon name="whatsapp" />
+        {{ whatsappLabel() }}
+      </a>
+      <a
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-6 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
+        [routerLink]="contactUrl()"
+      >
+        {{ contactLabel() }}
+        <app-icon name="arrow" />
+      </a>
+    </div>
+  </div>
+</section>

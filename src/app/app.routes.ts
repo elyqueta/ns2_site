@@ -3,6 +3,7 @@ import { pt } from './i18n/pt';
 
 const minimalPage = () =>
   import('./pages/minimal-page/minimal-page').then((module) => module.MinimalPage);
+const uiKitPage = () => import('./pages/ui-kit/ui-kit').then((module) => module.UiKit);
 
 export const routes: Routes = [
   {
@@ -104,7 +105,7 @@ export const routes: Routes = [
   },
   {
     path: 'ui-kit',
-    loadComponent: minimalPage,
+    loadComponent: uiKitPage,
     title: pt.pages.uiKit,
     data: {
       headingKey: 'pages.uiKit',

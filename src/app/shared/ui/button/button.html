@@ -1,0 +1,30 @@
+@if (href(); as link) {
+  @if (external()) {
+    <a
+      [class]="classes()"
+      [href]="link"
+      target="_blank"
+      rel="noopener noreferrer"
+      [attr.aria-label]="ariaLabel()"
+    >
+      {{ label() }}
+      @if (showArrow()) {
+        <app-icon name="arrow-diagonal" />
+      }
+    </a>
+  } @else {
+    <a [class]="classes()" [routerLink]="link" [attr.aria-label]="ariaLabel()">
+      {{ label() }}
+      @if (showArrow()) {
+        <app-icon name="arrow" />
+      }
+    </a>
+  }
+} @else {
+  <button [class]="classes()" type="button" [attr.aria-label]="ariaLabel()">
+    {{ label() }}
+    @if (showArrow()) {
+      <app-icon name="arrow" />
+    }
+  </button>
+}

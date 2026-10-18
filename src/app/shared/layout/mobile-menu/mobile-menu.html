@@ -1,0 +1,61 @@
+@if (open()) {
+  <div
+    #panel
+    id="mobile-navigation"
+    class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 xl:hidden"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="menuLabel"
+    (keydown)="handleKeydown($event)"
+  >
+    <div class="flex min-h-14 items-center justify-between">
+      <img
+        class="h-9 w-auto dark:hidden"
+        src="/brand/logo-horizontal.svg"
+        alt="NS2 Innovation"
+        width="1487"
+        height="689"
+      />
+      <img
+        class="hidden h-9 w-auto dark:block"
+        src="/brand/logo-horizontal-dark.svg"
+        alt="NS2 Innovation"
+        width="1487"
+        height="689"
+      />
+      <div class="flex items-center gap-2">
+        <app-theme-toggle />
+        <button
+          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface"
+          type="button"
+          [attr.aria-label]="closeLabel"
+          (click)="close.emit()"
+        >
+          <app-icon name="close" />
+        </button>
+      </div>
+    </div>
+
+    <nav class="my-auto py-12" [attr.aria-label]="menuLabel">
+      <ul appRevealChildren class="grid">
+        @for (item of items(); track item.href) {
+          <li>
+            <a
+              class="block border-b border-line py-3 font-display text-h2 font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
+              [routerLink]="item.href"
+              routerLinkActive="text-accent-bright"
+              [routerLinkActiveOptions]="{ exact: item.href === '/' }"
+              ariaCurrentWhenActive="page"
+              (click)="close.emit()"
+            >
+              <span class="mr-4 inline-block w-8 font-sans text-xs font-medium text-fg-muted">
+                {{ item.index }}
+              </span>
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+}

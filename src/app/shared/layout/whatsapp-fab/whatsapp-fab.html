@@ -1,0 +1,14 @@
+<a
+  class="group fixed bottom-5 right-5 z-30 inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-full bg-accent px-3 text-on-accent shadow-lg shadow-accent-glow transition-[padding,background-color] duration-300 hover:bg-accent-bright focus-visible:outline-offset-4 sm:bottom-8 sm:right-8"
+  [href]="url"
+  target="_blank"
+  rel="noopener noreferrer"
+  [attr.aria-label]="label"
+>
+  <app-icon name="whatsapp" />
+  <span
+    class="max-w-0 whitespace-nowrap text-sm font-semibold opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-48 group-hover:opacity-100 group-focus-visible:max-w-48 group-focus-visible:opacity-100"
+  >
+    {{ label }}
+  </span>
+</a>

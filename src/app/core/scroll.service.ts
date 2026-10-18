@@ -30,6 +30,7 @@ export class ScrollService {
   private lenis: LenisInstance | null = null;
   private runtime: AnimationRuntime | null = null;
   private renderedInBrowser = false;
+  private stopped = false;
   private loadGeneration = 0;
   private routerSubscription: Subscription | null = null;
   private readonly onLenisScroll = (): void => this.runtime?.ScrollTrigger.update();
@@ -91,10 +92,12 @@ export class ScrollService {
   }
 
   stop(): void {
+    this.stopped = true;
     this.lenis?.stop();
   }
 
   start(): void {
+    this.stopped = false;
     this.lenis?.start();
   }
 
@@ -124,6 +127,9 @@ export class ScrollService {
         }
 
         this.lenis = new Lenis({ autoRaf: false, smoothWheel: true });
+        if (this.stopped) {
+          this.lenis.stop();
+        }
         this.lenis.on('scroll', this.onLenisScroll);
         this.animation.addTicker(this.onFrame);
       })

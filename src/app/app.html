@@ -1,1 +1,14 @@
-<router-outlet />
+<a
+  class="fixed left-4 top-4 z-[80] -translate-y-24 rounded-button bg-accent px-5 py-3 font-semibold text-on-accent transition-transform focus:translate-y-0"
+  href="#conteudo"
+>
+  {{ skipLinkLabel }}
+</a>
+<app-header />
+<main id="conteudo" tabindex="-1" class="min-h-screen bg-bg text-fg">
+  <router-outlet />
+</main>
+<app-footer />
+<app-whatsapp-fab />
+<app-preloader />
+<app-page-transition />

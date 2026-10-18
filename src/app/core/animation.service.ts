@@ -1,5 +1,6 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
+  ApplicationRef,
   DestroyRef,
   ErrorHandler,
   Injectable,
@@ -10,6 +11,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { filter, take } from 'rxjs';
 
 export interface AnimationMode {
   readonly reducedMotion: boolean;
@@ -40,6 +42,7 @@ interface AnimationRegistration {
 export class AnimationService {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly applicationRef = inject(ApplicationRef);
   private readonly destroyRef = inject(DestroyRef);
   private readonly errorHandler = inject(ErrorHandler);
   private readonly registrations = new Set<AnimationRegistration>();
@@ -47,6 +50,7 @@ export class AnimationService {
   private readonly motionListeners = new Set<(reducedMotion: boolean) => void>();
   private readonly initialized = signal(false);
   private runtime: AnimationRuntime | null = null;
+  private stableSubscription: import('rxjs').Subscription | null = null;
   private lastReducedMotion: boolean | null = null;
   private responsiveMedia: ReturnType<typeof import('gsap').gsap.matchMedia> | null = null;
 
@@ -79,7 +83,14 @@ export class AnimationService {
 
   private readonly renderCallback = afterNextRender(() => {
     if (isPlatformBrowser(this.platformId)) {
-      void this.initialize().catch((error: unknown) => this.errorHandler.handleError(error));
+      this.stableSubscription = this.applicationRef.isStable
+        .pipe(
+          filter((stable) => stable),
+          take(1),
+        )
+        .subscribe(() => {
+          void this.initialize().catch((error: unknown) => this.errorHandler.handleError(error));
+        });
     }
   });
 
@@ -90,10 +101,9 @@ export class AnimationService {
     this.registrations.clear();
     this.responsiveMedia?.revert();
     this.responsiveMedia = null;
-    this.runtime?.gsap.ticker.remove(this.refreshTicker);
+    this.stableSubscription?.unsubscribe();
+    this.stableSubscription = null;
   });
-
-  private readonly refreshTicker = (): void => this.runtime?.ScrollTrigger.refresh();
 
   register(element: HTMLElement, builder: AnimationBuilder): () => void {
     const registration: AnimationRegistration = {

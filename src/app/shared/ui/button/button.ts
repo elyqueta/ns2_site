@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Magnetic } from '../../directives/magnetic.directive';
 import { Icon } from '../icon/icon';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
@@ -7,7 +8,7 @@ export type ButtonSize = 'md' | 'lg';
 
 @Component({
   selector: 'app-button',
-  imports: [Icon, RouterLink],
+  imports: [Icon, Magnetic, RouterLink],
   templateUrl: './button.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

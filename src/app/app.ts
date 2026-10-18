@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AnimationService } from './core/animation.service';
+import { ScrollService } from './core/scroll.service';
 import { ThemeService } from './core/theme.service';
 
 @Component({
@@ -10,4 +12,6 @@ import { ThemeService } from './core/theme.service';
 })
 export class App {
   protected readonly theme = inject(ThemeService);
+  protected readonly animation = inject(AnimationService);
+  protected readonly scroll = inject(ScrollService);
 }

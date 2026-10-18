@@ -247,6 +247,127 @@
       </div>
     </section>
 
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="animations-title">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 id="animations-title" class="font-display text-h2 font-semibold">
+            {{ copy.sectionAnimations }}
+          </h2>
+          <p class="mt-3 max-w-[62ch] text-fg-muted">{{ copy.animationDescription }}</p>
+        </div>
+        <button
+          class="inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-2.5 font-semibold transition-colors hover:bg-surface-2"
+          type="button"
+          [attr.aria-pressed]="animation.simulateReducedMotion()"
+          (click)="toggleReducedMotionSimulation()"
+        >
+          {{ reducedMotionSimulationLabel() }}
+        </button>
+      </div>
+
+      <div class="mt-7 grid gap-5 md:grid-cols-2">
+        <article
+          appReveal
+          class="rounded-2xl border border-line bg-surface p-6"
+          aria-labelledby="reveal-demo-title"
+        >
+          <h3 id="reveal-demo-title" class="font-display text-h3 font-semibold">
+            {{ copy.revealLabel }}
+          </h3>
+          <p class="mt-3 text-fg-muted">{{ copy.headingDescription }}</p>
+        </article>
+
+        <article
+          appRevealChildren
+          class="grid gap-3 rounded-2xl border border-line bg-surface p-6"
+          aria-labelledby="reveal-children-title"
+        >
+          <h3 id="reveal-children-title" class="font-display text-h3 font-semibold">
+            {{ copy.revealChildrenLabel }}
+          </h3>
+          <p class="text-fg-muted">{{ copy.cardDescription }}</p>
+          <p class="text-fg-muted">{{ copy.animationDescription }}</p>
+        </article>
+
+        <article class="rounded-2xl border border-line bg-surface p-6">
+          <h3 appSplitText class="font-display text-h3 font-semibold">
+            {{ copy.splitTextLabel }}
+          </h3>
+        </article>
+
+        <div
+          [appMaskImage]="'diagonal'"
+          class="flex min-h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-bright p-6 text-center font-display text-h3 font-semibold text-on-accent"
+          [attr.aria-label]="copy.maskImageLabel"
+        >
+          {{ copy.maskImageLabel }}
+        </div>
+
+        <div class="relative min-h-40 overflow-hidden rounded-2xl border border-line bg-surface">
+          <div
+            appParallax="10"
+            class="absolute inset-6 rounded-xl bg-gradient-to-br from-accent/70 to-accent-bright/30"
+            aria-hidden="true"
+          ></div>
+          <p class="relative p-6 font-semibold">{{ copy.parallaxLabel }}</p>
+        </div>
+
+        <div
+          class="flex min-h-40 items-center justify-center rounded-2xl border border-line bg-surface p-6"
+        >
+          <button
+            appMagnetic
+            class="inline-flex min-h-11 items-center justify-center rounded-button bg-accent px-6 py-3 font-semibold text-on-accent"
+            type="button"
+          >
+            {{ copy.magneticLabel }}
+          </button>
+        </div>
+
+        <app-card>
+          <h3 class="font-display text-h3 font-semibold">{{ copy.spotlightLabel }}</h3>
+          <p class="mt-3 text-fg-muted">{{ copy.cardDescription }}</p>
+        </app-card>
+
+        <article
+          appTilt
+          class="rounded-2xl border border-line bg-surface p-6"
+          aria-labelledby="tilt-demo-title"
+        >
+          <h3 id="tilt-demo-title" class="font-display text-h3 font-semibold">
+            {{ copy.tiltLabel }}
+          </h3>
+        </article>
+
+        <article class="rounded-2xl border border-line bg-surface p-6">
+          <p class="font-display text-display font-semibold text-accent-bright">
+            <span appCountUp="8">8</span>
+          </p>
+          <p class="mt-2 text-fg-muted">{{ copy.countUpLabel }}</p>
+        </article>
+
+        <div
+          class="flex min-h-40 items-center justify-center rounded-2xl border border-line bg-surface p-6"
+        >
+          <svg
+            class="h-16 w-full max-w-64 text-accent-bright"
+            viewBox="0 0 256 64"
+            fill="none"
+            role="img"
+            [attr.aria-label]="copy.drawLineLabel"
+          >
+            <path
+              appDrawLine
+              d="M4 52C52 8 96 8 128 32S204 56 252 12"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+
     <section class="border-t border-line py-12 sm:py-16" aria-labelledby="cta-title">
       <h2 id="cta-title" class="sr-only">{{ copy.sectionCallToAction }}</h2>
       <app-cta-band

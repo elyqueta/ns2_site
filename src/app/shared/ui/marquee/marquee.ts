@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { MarqueeMotion } from '../../directives/marquee.directive';
 
 @Component({
   selector: 'app-marquee',
+  imports: [MarqueeMotion],
   templateUrl: './marquee.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

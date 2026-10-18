@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { AccordionHeight } from '../../directives/accordion-height.directive';
 import { Icon } from '../icon/icon';
 
 export interface AccordionItem {
@@ -9,7 +10,7 @@ export interface AccordionItem {
 
 @Component({
   selector: 'app-accordion',
-  imports: [Icon],
+  imports: [AccordionHeight, Icon],
   templateUrl: './accordion.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

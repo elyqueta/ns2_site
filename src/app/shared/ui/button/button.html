@@ -6,6 +6,7 @@
       target="_blank"
       rel="noopener noreferrer"
       [attr.aria-label]="ariaLabel()"
+      [appMagnetic]="variant() === 'primary'"
     >
       {{ label() }}
       @if (showArrow()) {
@@ -13,7 +14,12 @@
       }
     </a>
   } @else {
-    <a [class]="classes()" [routerLink]="link" [attr.aria-label]="ariaLabel()">
+    <a
+      [class]="classes()"
+      [routerLink]="link"
+      [attr.aria-label]="ariaLabel()"
+      [appMagnetic]="variant() === 'primary'"
+    >
       {{ label() }}
       @if (showArrow()) {
         <app-icon name="arrow" />
@@ -21,7 +27,12 @@
     </a>
   }
 } @else {
-  <button [class]="classes()" type="button" [attr.aria-label]="ariaLabel()">
+  <button
+    [class]="classes()"
+    type="button"
+    [attr.aria-label]="ariaLabel()"
+    [appMagnetic]="variant() === 'primary'"
+  >
     {{ label() }}
     @if (showArrow()) {
       <app-icon name="arrow" />

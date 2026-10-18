@@ -17,8 +17,16 @@
           }
         </button>
       </h3>
-      <div class="pb-5 pr-8 text-fg-muted" [id]="item.id" [hidden]="openItem() !== item.id">
-        <p>{{ item.answer }}</p>
+      <div
+        class="h-0 overflow-hidden"
+        [appAccordionHeight]="openItem() === item.id"
+        [id]="item.id"
+        [attr.aria-hidden]="openItem() !== item.id"
+        [attr.inert]="openItem() !== item.id ? '' : null"
+      >
+        <div class="pb-5 pr-8 text-fg-muted">
+          <p>{{ item.answer }}</p>
+        </div>
       </div>
     </section>
   }

@@ -9,10 +9,12 @@ import {
 } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { AnimationService } from '../../core/animation.service';
 import { Accordion, AccordionItem } from '../../shared/ui/accordion/accordion';
 import { Badge } from '../../shared/ui/badge/badge';
 import { BreadcrumbItem } from '../../shared/ui/breadcrumb/breadcrumb';
 import { Button } from '../../shared/ui/button/button';
+import { Card } from '../../shared/ui/card/card';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { FormField, FormFieldOption } from '../../shared/ui/form-field/form-field';
 import { Icon, iconNames } from '../../shared/ui/icon/icon';
@@ -40,6 +42,15 @@ import {
 } from '../../shared/ui/card-content';
 import { pt } from '../../i18n/pt';
 import { WhatsappService } from '../../core/whatsapp.service';
+import { CountUp } from '../../shared/directives/count-up.directive';
+import { DrawLine } from '../../shared/directives/draw-line.directive';
+import { Magnetic } from '../../shared/directives/magnetic.directive';
+import { MaskImage } from '../../shared/directives/mask-image.directive';
+import { Parallax } from '../../shared/directives/parallax.directive';
+import { Reveal } from '../../shared/directives/reveal.directive';
+import { RevealChildren } from '../../shared/directives/reveal-children.directive';
+import { SplitTextReveal } from '../../shared/directives/split-text.directive';
+import { Tilt } from '../../shared/directives/tilt.directive';
 
 interface PaletteToken {
   readonly name: string;
@@ -56,14 +67,20 @@ interface PaletteToken {
     Accordion,
     Badge,
     Button,
+    Card,
     CtaBand,
+    CountUp,
     DataPtPipe,
+    DrawLine,
     FormField,
     Icon,
     KzPipe,
     LinkArrow,
+    Magnetic,
+    MaskImage,
     Marquee,
     MediaSlot,
+    Parallax,
     PageHero,
     PackageCard,
     PartnerCard,
@@ -72,7 +89,11 @@ interface PaletteToken {
     ProjectCard,
     SectionHeading,
     ServiceCard,
+    Reveal,
+    RevealChildren,
+    SplitTextReveal,
     ThemeToggle,
+    Tilt,
   ],
   templateUrl: './ui-kit.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +101,7 @@ interface PaletteToken {
 export class UiKit implements OnInit, OnDestroy {
   private readonly meta = inject(Meta);
   private readonly whatsapp = inject(WhatsappService);
+  readonly animation = inject(AnimationService);
 
   readonly copy = pt.uiKit;
   readonly actions = pt.actions;
@@ -88,6 +110,15 @@ export class UiKit implements OnInit, OnDestroy {
   readonly sampleCurrency = 0;
   readonly currentName = signal('');
   readonly selectedService = signal('');
+  readonly reducedMotionSimulationLabel = computed(() =>
+    this.animation.simulateReducedMotion()
+      ? this.copy.stopReducedMotionSimulation
+      : this.copy.simulateReducedMotion,
+  );
+
+  toggleReducedMotionSimulation(): void {
+    this.animation.simulateReducedMotion.update((current) => !current);
+  }
 
   readonly palette: readonly PaletteToken[] = [
     {

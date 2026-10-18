@@ -7,7 +7,7 @@ describe('UI formatting pipes', () => {
   });
 
   it('formats dates in Portuguese', () => {
-    expect(new DataPtPipe().transform(new Date(2026, 9, 18))).toContain('2026');
+    expect(new DataPtPipe().transform(new Date(2026, 9, 18))).toBe('18 de Outubro de 2026');
   });
 
   it('rejects invalid values rather than hiding them', () => {

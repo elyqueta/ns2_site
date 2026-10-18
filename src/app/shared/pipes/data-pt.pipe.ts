@@ -14,6 +14,11 @@ export class DataPtPipe implements PipeTransform {
       throw new RangeError('The dataPt pipe requires a valid date.');
     }
 
-    return this.formatter.format(date);
+    return this.formatter
+      .format(date)
+      .replace(
+        /\b(janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\b/,
+        (month) => `${month[0].toLocaleUpperCase('pt-AO')}${month.slice(1)}`,
+      );
   }
 }

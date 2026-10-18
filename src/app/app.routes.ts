@@ -60,13 +60,14 @@ export const routes: Routes = [
   {
     path: 'noticias',
     pathMatch: 'full',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/noticias/noticias').then((module) => module.Noticias),
     title: pt.pages.news,
     data: { headingKey: 'pages.news', seo: { description: pt.seo.news } },
   },
   {
     path: 'noticias/:slug',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/noticia-detalhe/noticia-detalhe').then((module) => module.NoticiaDetalhe),
     title: pt.pages.newsDetail,
     data: {
       headingKey: 'pages.newsDetail',

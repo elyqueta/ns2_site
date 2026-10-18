@@ -95,7 +95,7 @@ export class DesenvolvimentoWeb {
       name,
       quoteUrl: this.whatsapp.createWhatsappUrl(`Olá! Gostaria de um orçamento para ${name}.`),
       contactUrl: `/contacto?servico=${encodeURIComponent(slug)}`,
-      sectionUrl: `#${slug}`,
+      sectionUrl: `/desenvolvimento-web#${slug}`,
     };
   }
 

@@ -1,13 +1,33 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Ns2Site</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html lang="pt-AO">
+  <head>
+    <meta charset="utf-8" />
+    <title>NS2 Innovation | Tecnologia em Angola</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Tecnologia e comércio de produtos informáticos em Luanda, Angola."
+    />
+    <meta name="theme-color" content="#05070D" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('dark');
+        const storedTheme = localStorage.getItem('ns2-theme');
+        const darkTheme =
+          storedTheme === 'dark' ||
+          (storedTheme !== 'light' && !window.matchMedia('(prefers-color-scheme: light)').matches);
+
+        root.classList.toggle('dark', darkTheme);
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', darkTheme ? '#05070D' : '#F6F8FC');
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

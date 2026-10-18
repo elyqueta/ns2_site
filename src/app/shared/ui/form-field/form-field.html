@@ -1,0 +1,56 @@
+<div class="grid gap-2">
+  <label class="font-semibold text-fg" [for]="fieldId()">
+    {{ label() }}
+    @if (required()) {
+      <span class="text-danger" aria-hidden="true">*</span>
+    }
+  </label>
+  @if (kind() === 'textarea') {
+    <textarea
+      class="min-h-11 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+      [id]="fieldId()"
+      [rows]="rows()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="invalid()"
+      (input)="updateValue($event)"
+    ></textarea>
+  } @else if (kind() === 'select') {
+    <select
+      class="min-h-11 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg focus:border-accent focus:outline-none"
+      [id]="fieldId()"
+      [value]="value()"
+      [required]="required()"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="invalid()"
+      (change)="updateValue($event)"
+    >
+      @if (placeholder()) {
+        <option value="">{{ placeholder() }}</option>
+      }
+      @for (option of options(); track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  } @else {
+    <input
+      class="min-h-11 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+      [id]="fieldId()"
+      [type]="type()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="invalid()"
+      (input)="updateValue($event)"
+    />
+  }
+  @if (helpText(); as help) {
+    <p class="text-sm text-fg-muted" [id]="helpId()">{{ help }}</p>
+  }
+  @if (error(); as message) {
+    <p class="text-sm text-danger" [id]="errorId()">{{ message }}</p>
+  }
+</div>

@@ -1,0 +1,19 @@
+<div
+  appMarquee
+  class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
+  [attr.aria-label]="label()"
+  role="region"
+>
+  <div data-marquee-track class="flex w-max">
+    <ul class="flex w-max flex-nowrap items-center gap-8 pr-8" [attr.aria-label]="label()">
+      @for (item of items(); track item) {
+        <li class="shrink-0">{{ item }}</li>
+      }
+    </ul>
+    <ul class="flex w-max flex-nowrap items-center gap-8 pr-8" aria-hidden="true">
+      @for (item of items(); track item) {
+        <li class="shrink-0">{{ item }}</li>
+      }
+    </ul>
+  </div>
+</div>

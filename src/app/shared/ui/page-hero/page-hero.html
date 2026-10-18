@@ -1,0 +1,16 @@
+<header class="relative isolate overflow-hidden border-b border-line bg-surface">
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 -z-10 w-2/3 bg-gradient-to-l from-accent/15 to-transparent [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
+  ></div>
+  <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-24 lg:px-16 lg:py-32">
+    @if (breadcrumbs().length > 0) {
+      <app-breadcrumb [items]="breadcrumbs()" [current]="current()" [label]="breadcrumbLabel()" />
+    }
+    <h1
+      class="mt-10 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight text-fg"
+    >
+      {{ title() }}
+    </h1>
+    <p class="mt-6 max-w-[62ch] text-lead leading-relaxed text-fg-muted">{{ lead() }}</p>
+  </div>
+</header>

@@ -1,0 +1,13 @@
+<button
+  class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg transition-colors hover:bg-surface-2"
+  type="button"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-pressed]="theme() === 'dark'"
+  (click)="toggle()"
+>
+  @if (theme() === 'dark') {
+    <app-icon name="sun" />
+  } @else {
+    <app-icon name="moon" />
+  }
+</button>

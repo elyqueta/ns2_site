@@ -1,0 +1,26 @@
+<app-card>
+  @if (item().label; as category) {
+    <p
+      class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+    >
+      {{ category }}
+    </p>
+  }
+  <h3 class="font-display text-h3 font-semibold text-fg">{{ item().title }}</h3>
+  @if (item().priceFrom; as price) {
+    <div class="mt-5">
+      <p class="text-xs font-medium text-fg-muted">{{ item().priceLabel }}</p>
+      <p class="mt-1 font-display text-xl font-semibold text-fg">{{ price | kz }}</p>
+    </div>
+  }
+  <p class="mt-3 text-fg-muted">{{ item().description }}</p>
+  @if (item().href; as link) {
+    <a
+      class="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+      [routerLink]="link"
+    >
+      {{ item().title }}
+      <app-icon name="arrow" />
+    </a>
+  }
+</app-card>

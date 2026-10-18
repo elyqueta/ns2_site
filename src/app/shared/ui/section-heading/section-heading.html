@@ -1,0 +1,16 @@
+<div class="max-w-3xl">
+  <p class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+    {{ index() }}
+  </p>
+  <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+    @if (highlight(); as featuredWord) {
+      {{ title() }}
+      <span class="text-accent-bright">{{ featuredWord }}</span>
+    } @else {
+      {{ title() }}
+    }
+  </h2>
+  @if (description(); as summary) {
+    <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">{{ summary }}</p>
+  }
+</div>

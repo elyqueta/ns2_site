@@ -1,13 +1,73 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Ns2Site</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html lang="pt-AO">
+  <head>
+    <meta charset="utf-8" />
+    <title>NS2 Innovation | Tecnologia em Angola</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Tecnologia e comércio de produtos informáticos em Luanda, Angola."
+    />
+    <meta name="theme-color" content="#05070D" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.ns2innovation.com/#organization",
+            "name": "NS2 Innovation",
+            "url": "https://www.ns2innovation.com/",
+            "description": "NS2 Innovation, em Luanda: redes e servidores, suporte de TI, manutenção, equipamentos informáticos, websites e sistemas web para empresas e particulares.",
+            "email": "contacto@ns2innovation.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Avenida 21 de Janeiro, Bairro Gamek (próximo da Organizações Chana), n.º s/n",
+              "addressLocality": "Luanda",
+              "addressRegion": "Luanda",
+              "addressCountry": "AO"
+            }
+          },
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://www.ns2innovation.com/#local-business",
+            "name": "NS2 Innovation",
+            "url": "https://www.ns2innovation.com/",
+            "telephone": "+244 924 666 323",
+            "email": "contacto@ns2innovation.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Avenida 21 de Janeiro, Bairro Gamek (próximo da Organizações Chana), n.º s/n",
+              "addressLocality": "Luanda",
+              "addressRegion": "Luanda",
+              "addressCountry": "AO"
+            },
+            "parentOrganization": {
+              "@id": "https://www.ns2innovation.com/#organization"
+            }
+          }
+        ]
+      }
+    </script>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('dark');
+        const storedTheme = localStorage.getItem('ns2-theme');
+        const darkTheme =
+          storedTheme === 'dark' ||
+          (storedTheme !== 'light' && !window.matchMedia('(prefers-color-scheme: light)').matches);
+
+        root.classList.toggle('dark', darkTheme);
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', darkTheme ? '#05070D' : '#F6F8FC');
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

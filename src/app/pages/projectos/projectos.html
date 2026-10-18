@@ -1,0 +1,57 @@
+<app-page-hero
+  [title]="copy.title.pt"
+  [lead]="copy.lead.pt"
+  [breadcrumbs]="breadcrumbs"
+  [current]="copy.title.pt"
+  [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+/>
+
+<main id="conteudo">
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <p
+      class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+    >
+      {{ copy.confirmedLabel.pt }}
+    </p>
+    <div class="grid gap-5 lg:grid-cols-2 lg:items-stretch">
+      <div
+        class="group relative aspect-[4/3] overflow-hidden rounded-card border border-line bg-surface lg:aspect-auto lg:min-h-[520px]"
+      >
+        <iframe
+          class="absolute inset-0 h-full w-full border-0 bg-surface"
+          [src]="previewUrl"
+          [title]="project.previewTitle.pt"
+          loading="lazy"
+          tabindex="-1"
+          aria-hidden="true"
+          scrolling="no"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+        <a
+          class="absolute inset-0 z-10 grid place-items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
+          [href]="project.url"
+          [attr.aria-label]="copy.previewLinkLabel.pt"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="rounded-button bg-surface px-5 py-3 font-semibold text-fg opacity-0 shadow-xl transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+          >
+            {{ copy.previewLinkLabel.pt }}
+          </span>
+        </a>
+      </div>
+      <app-project-card [item]="projectCard" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
+    <app-cta-band
+      [title]="copy.ctaTitle.pt"
+      [description]="copy.ctaDescription.pt"
+      [whatsappUrl]="whatsappUrl"
+      [whatsappLabel]="copy.whatsappLabel.pt"
+      [contactLabel]="copy.contactLabel.pt"
+    />
+  </section>
+</main>

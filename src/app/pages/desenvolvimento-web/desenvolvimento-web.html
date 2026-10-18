@@ -1,0 +1,441 @@
+<app-page-hero
+  [title]="copy.hero.title.pt"
+  [lead]="copy.hero.lead.pt"
+  [breadcrumbs]="breadcrumbs"
+  [current]="copy.hero.title.pt"
+  [breadcrumbLabel]="copy.hero.breadcrumbLabel.pt"
+/>
+
+<main id="conteudo">
+  <section class="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-16">
+    <a
+      class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+      href="/projectos"
+    >
+      {{ copy.proof.text.pt }}
+      <span>{{ copy.proof.link.pt }}</span>
+      <app-icon name="arrow" />
+    </a>
+  </section>
+
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+      <div class="max-w-3xl">
+        <p
+          class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ copy.sections.websites.index.pt }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.websites.title.pt }}
+        </h2>
+        <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
+          {{ copy.sections.websites.description.pt }}
+        </p>
+      </div>
+
+      <ul class="mt-10 grid gap-5 lg:grid-cols-2">
+        @for (package of websitePackages; track package.slug) {
+          <li [id]="package.slug">
+            <article
+              class="flex h-full flex-col rounded-card border p-6 sm:p-8"
+              [class.border-accent]="package.destaque"
+              [class.bg-accent/5]="package.destaque"
+              [class.border-line]="!package.destaque"
+              [class.bg-bg]="!package.destaque"
+            >
+              <div class="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h3 class="font-display text-h3 font-semibold text-fg">{{ package.nome.pt }}</h3>
+                  <p class="mt-3 max-w-[55ch] text-fg-muted">{{ package.descricao.pt }}</p>
+                </div>
+                <div class="shrink-0 text-right">
+                  <p class="text-xs font-medium text-fg-muted">{{ copy.labels.startingAt.pt }}</p>
+                  <p class="mt-1 font-display text-xl font-semibold text-fg">
+                    {{ package.aPartirDe | kz }}
+                  </p>
+                </div>
+              </div>
+
+              <dl class="mt-6 grid grid-cols-2 gap-4 rounded-2xl bg-surface p-4">
+                <div>
+                  <dt class="text-xs font-medium text-fg-muted">{{ copy.labels.pagesLabel.pt }}</dt>
+                  <dd class="mt-1 font-semibold text-fg">{{ package.paginas.pt }}</dd>
+                </div>
+                <div>
+                  <dt class="text-xs font-medium text-fg-muted">{{ copy.labels.termLabel.pt }}</dt>
+                  <dd class="mt-1 font-semibold text-fg">{{ package.prazo.pt }}</dd>
+                </div>
+              </dl>
+
+              <div class="mt-6 grid gap-6 sm:grid-cols-2">
+                <div>
+                  <h4 class="font-semibold text-fg">{{ copy.labels.includesLabel.pt }}</h4>
+                  <ul class="mt-3 space-y-2 text-sm text-fg-muted">
+                    @for (item of package.inclui; track item.pt) {
+                      <li class="flex gap-2">
+                        <app-icon class="mt-0.5 shrink-0 text-accent-bright" name="check" />
+                        <span>{{ item.pt }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-fg">{{ copy.labels.notIncludedLabel.pt }}</h4>
+                  <ul class="mt-3 space-y-2 text-sm text-fg-muted">
+                    @for (item of package.naoInclui; track item.pt) {
+                      <li>{{ item.pt }}</li>
+                    }
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-auto pt-7">
+                <div class="flex flex-col gap-3 sm:flex-row">
+                  <a
+                    class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+                    [href]="package.quoteUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <app-icon name="whatsapp" />
+                    {{ copy.labels.quoteLabel.pt }}
+                  </a>
+                  <a
+                    class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
+                    [href]="package.contactUrl"
+                  >
+                    {{ copy.labels.contactLabel.pt }}
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
+        }
+      </ul>
+
+      <p
+        class="mt-8 rounded-2xl border border-line bg-bg p-5 text-sm leading-relaxed text-fg-muted"
+      >
+        {{ homeDisclaimer }}
+      </p>
+      <p class="mt-4 text-sm text-fg-muted">{{ copy.labels.infrastructureNote.pt }}</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <div class="max-w-3xl">
+      <p
+        class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+      >
+        {{ copy.sections.shops.index.pt }}
+      </p>
+      <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+        {{ copy.sections.shops.title.pt }}
+      </h2>
+      <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
+        {{ copy.sections.shops.description.pt }}
+      </p>
+    </div>
+
+    <ul class="mt-10 grid gap-5 lg:grid-cols-3">
+      @for (package of shopPackages; track package.slug) {
+        <li [id]="package.slug">
+          <article
+            class="flex h-full flex-col rounded-card border border-line bg-surface p-6 sm:p-7"
+          >
+            <h3 class="font-display text-h3 font-semibold text-fg">{{ package.nome.pt }}</h3>
+            <p class="mt-3 text-fg-muted">{{ package.descricao.pt }}</p>
+            <div class="mt-5">
+              @if (package.aPartirDe; as price) {
+                <p class="text-xs font-medium text-fg-muted">{{ copy.labels.startingAt.pt }}</p>
+                <p class="mt-1 font-display text-xl font-semibold text-fg">{{ price | kz }}</p>
+              } @else {
+                <p class="text-xs font-medium text-fg-muted">{{ package.prazo.pt }}</p>
+                <p class="mt-1 font-display text-xl font-semibold text-fg">
+                  {{ copy.labels.quoteRequired.pt }}
+                </p>
+              }
+            </div>
+            <p class="mt-4 text-sm text-fg-muted">
+              {{ copy.labels.termLabel.pt }}: {{ package.prazo.pt }}
+            </p>
+            <h4 class="mt-6 font-semibold text-fg">{{ copy.labels.includesLabel.pt }}</h4>
+            <ul class="mt-3 space-y-2 text-sm text-fg-muted">
+              @for (item of package.inclui; track item.pt) {
+                <li class="flex gap-2">
+                  <app-icon class="mt-0.5 shrink-0 text-accent-bright" name="check" />
+                  <span>{{ item.pt }}</span>
+                </li>
+              }
+            </ul>
+            <div class="mt-auto flex flex-col gap-3 pt-7">
+              <a
+                class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+                [href]="package.quoteUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <app-icon name="whatsapp" />
+                {{ copy.labels.quoteLabel.pt }}
+              </a>
+              <a
+                class="inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
+                [href]="package.contactUrl"
+              >
+                {{ copy.labels.contactLabel.pt }}
+              </a>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+    <p
+      class="mt-8 rounded-2xl border border-line bg-surface p-5 text-sm leading-relaxed text-fg-muted"
+    >
+      {{ homeDisclaimer }}
+    </p>
+    <p class="mt-4 text-sm text-fg-muted">{{ shopPaymentNote }}</p>
+  </section>
+
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+      <div class="max-w-3xl">
+        <p
+          class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ copy.sections.systems.index.pt }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.systems.title.pt }}
+        </h2>
+        <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
+          {{ copy.sections.systems.description.pt }}
+        </p>
+      </div>
+
+      <ul class="mt-10 grid gap-5 lg:grid-cols-3">
+        @for (package of systemPackages; track package.slug) {
+          <li [id]="package.slug">
+            <article class="flex h-full flex-col rounded-card border border-line bg-bg p-6 sm:p-7">
+              <h3 class="font-display text-h3 font-semibold text-fg">{{ package.nome.pt }}</h3>
+              <p class="mt-3 text-fg-muted">{{ package.descricao.pt }}</p>
+              <div class="mt-5">
+                @if (package.aPartirDe; as price) {
+                  <p class="text-xs font-medium text-fg-muted">{{ copy.labels.startingAt.pt }}</p>
+                  <p class="mt-1 font-display text-xl font-semibold text-fg">{{ price | kz }}</p>
+                } @else {
+                  <p class="font-display text-xl font-semibold text-fg">{{ package.prazo.pt }}</p>
+                }
+              </div>
+              <p class="mt-4 text-sm text-fg-muted">
+                {{ copy.labels.termLabel.pt }}: {{ package.prazo.pt }}
+              </p>
+              <h4 class="mt-6 font-semibold text-fg">{{ copy.labels.includesLabel.pt }}</h4>
+              <ul class="mt-3 space-y-2 text-sm text-fg-muted">
+                @for (item of package.inclui; track item.pt) {
+                  <li class="flex gap-2">
+                    <app-icon class="mt-0.5 shrink-0 text-accent-bright" name="check" />
+                    <span>{{ item.pt }}</span>
+                  </li>
+                }
+              </ul>
+              <div class="mt-auto flex flex-col gap-3 pt-7">
+                <a
+                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+                  [href]="package.quoteUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <app-icon name="whatsapp" />
+                  {{ copy.labels.quoteLabel.pt }}
+                </a>
+                <a
+                  class="inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
+                  [href]="package.contactUrl"
+                >
+                  {{ copy.labels.contactLabel.pt }}
+                </a>
+              </div>
+            </article>
+          </li>
+        }
+      </ul>
+      <p
+        class="mt-8 rounded-2xl border border-line bg-bg p-5 text-sm leading-relaxed text-fg-muted"
+      >
+        {{ homeDisclaimer }}
+      </p>
+
+      <section
+        class="mt-12 rounded-card border border-line bg-bg p-6 sm:p-8"
+        aria-labelledby="system-timeline-title"
+      >
+        <h3 id="system-timeline-title" class="font-display text-h3 font-semibold text-fg">
+          {{ copy.labels.systemTimelineLabel.pt }}
+        </h3>
+        <ol
+          appRevealChildren
+          class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          aria-labelledby="system-timeline-title"
+        >
+          @for (step of systemTimeline; track step.number) {
+            <li
+              class="flex min-h-16 items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3"
+            >
+              <span class="font-display text-sm font-semibold text-accent-bright">{{
+                step.number
+              }}</span>
+              <span class="font-medium text-fg">{{ step.title }}</span>
+            </li>
+          }
+        </ol>
+      </section>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <article
+      class="rounded-card border border-line bg-surface p-6 sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-10"
+    >
+      <div class="max-w-3xl">
+        <p
+          class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ copy.sections.maintenance.index.pt }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.maintenance.title.pt }}
+        </h2>
+        <p class="mt-4 font-semibold text-fg">
+          {{ copy.sections.maintenance.priceLabel.pt }} {{ maintenancePrice | kz }}/mês
+        </p>
+        <p class="mt-4 max-w-[62ch] leading-relaxed text-fg-muted">
+          {{ copy.sections.maintenance.description.pt }}
+        </p>
+      </div>
+      <a
+        class="mt-7 inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright lg:mt-0"
+        [href]="maintenanceWhatsappUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <app-icon name="whatsapp" />
+        {{ copy.labels.quoteLabel.pt }}
+      </a>
+    </article>
+  </section>
+
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+      <div class="max-w-3xl">
+        <p
+          class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ copy.sections.process.index.pt }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.process.title.pt }}
+        </h2>
+      </div>
+      <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        @for (step of processSteps; track step.number) {
+          <li class="rounded-card border border-line bg-bg p-6">
+            <p class="font-display text-sm font-semibold text-accent-bright">{{ step.number }}</p>
+            <h3 class="mt-4 font-display text-h3 font-semibold text-fg">{{ step.title }}</h3>
+          </li>
+        }
+      </ol>
+      <p class="mt-6 text-sm text-fg-muted">{{ copy.sections.process.paymentNote.pt }}</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <div class="max-w-3xl">
+      <p
+        class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+      >
+        {{ copy.sections.diagnostic.index.pt }}
+      </p>
+      <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+        {{ copy.sections.diagnostic.title.pt }}
+      </h2>
+      <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
+        {{ copy.sections.diagnostic.description.pt }}
+      </p>
+    </div>
+    <ul class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      @for (card of diagnosticCards; track card.id) {
+        <li class="flex flex-col rounded-card border border-line bg-surface p-6">
+          <h3 class="font-display text-lg font-semibold text-fg">{{ card.need }}</h3>
+          @if (card.recommendations.length > 0) {
+            <ul class="mt-5 space-y-4">
+              @for (recommendation of card.recommendations; track recommendation.slug) {
+                <li class="rounded-xl border border-line bg-bg p-4">
+                  <p class="font-semibold text-fg">{{ recommendation.name }}</p>
+                  <div class="mt-3 flex flex-col gap-2">
+                    <a
+                      class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+                      [href]="recommendation.sectionUrl"
+                    >
+                      {{ copy.sections.diagnostic.viewLabel.pt }}
+                      <app-icon name="arrow" />
+                    </a>
+                    <a
+                      class="inline-flex min-h-11 items-center gap-2 font-semibold text-fg focus-visible:outline-offset-4"
+                      [href]="recommendation.quoteUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <app-icon name="whatsapp" />
+                      {{ copy.sections.diagnostic.quoteLabel.pt }}
+                    </a>
+                  </div>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="mt-4 text-sm leading-relaxed text-fg-muted">
+              {{ automationPendingMessage }}
+            </p>
+            <a
+              class="mt-auto inline-flex min-h-11 items-center gap-2 pt-4 font-semibold text-fg focus-visible:outline-offset-4"
+              [href]="generalWhatsappUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <app-icon name="whatsapp" />
+              {{ copy.sections.diagnostic.quoteLabel.pt }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+      <div class="mb-10 max-w-3xl">
+        <p
+          class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ copy.sections.faq.index.pt }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.faq.title.pt }}
+        </h2>
+      </div>
+      <app-accordion [items]="faqItems" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <app-cta-band
+      [title]="copy.sections.quote.title.pt"
+      [description]="copy.sections.quote.description.pt"
+      [whatsappUrl]="generalWhatsappUrl"
+      [whatsappLabel]="copy.sections.quote.whatsappLabel.pt"
+      [contactLabel]="copy.sections.quote.contactLabel.pt"
+    />
+  </section>
+</main>

@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 import { pt } from './i18n/pt';
 
-const minimalPage = () =>
-  import('./pages/minimal-page/minimal-page').then((module) => module.MinimalPage);
 const uiKitPage = () => import('./pages/ui-kit/ui-kit').then((module) => module.UiKit);
+const legalPage = () => import('./pages/legal/legal').then((module) => module.Legal);
 
 export const routes: Routes = [
   {
@@ -38,32 +37,36 @@ export const routes: Routes = [
   },
   {
     path: 'produtos',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/produtos/produtos').then((module) => module.Produtos),
     title: pt.pages.products,
     data: { headingKey: 'pages.products', seo: { description: pt.seo.products } },
   },
   {
     path: 'desenvolvimento-web',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/desenvolvimento-web/desenvolvimento-web').then(
+        (module) => module.DesenvolvimentoWeb,
+      ),
     title: pt.pages.web,
     data: { headingKey: 'pages.web', seo: { description: pt.seo.web } },
   },
   {
     path: 'projectos',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/projectos/projectos').then((module) => module.Projectos),
     title: pt.pages.projects,
     data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
   },
   {
     path: 'noticias',
     pathMatch: 'full',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/noticias/noticias').then((module) => module.Noticias),
     title: pt.pages.news,
     data: { headingKey: 'pages.news', seo: { description: pt.seo.news } },
   },
   {
     path: 'noticias/:slug',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/noticia-detalhe/noticia-detalhe').then((module) => module.NoticiaDetalhe),
     title: pt.pages.newsDetail,
     data: {
       headingKey: 'pages.newsDetail',
@@ -73,13 +76,14 @@ export const routes: Routes = [
   {
     path: 'parceiros',
     pathMatch: 'full',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/parceiros/parceiros').then((module) => module.Parceiros),
     title: pt.pages.partners,
     data: { headingKey: 'pages.partners', seo: { description: pt.seo.partners } },
   },
   {
     path: 'parceiros/:slug',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/parceiro-detalhe/parceiro-detalhe').then((module) => module.ParceiroDetalhe),
     title: pt.pages.partnerDetail,
     data: {
       headingKey: 'pages.partnerDetail',
@@ -88,21 +92,29 @@ export const routes: Routes = [
   },
   {
     path: 'contacto',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/contacto/contacto').then((module) => module.Contacto),
     title: pt.pages.contact,
     data: { headingKey: 'pages.contact', seo: { description: pt.seo.contact } },
   },
   {
     path: 'politica-de-privacidade',
-    loadComponent: minimalPage,
+    loadComponent: legalPage,
     title: pt.pages.privacy,
-    data: { headingKey: 'pages.privacy', seo: { description: pt.seo.privacy } },
+    data: {
+      headingKey: 'pages.privacy',
+      legalDocument: 'privacy',
+      seo: { description: pt.seo.privacy },
+    },
   },
   {
     path: 'termos-e-condicoes',
-    loadComponent: minimalPage,
+    loadComponent: legalPage,
     title: pt.pages.terms,
-    data: { headingKey: 'pages.terms', seo: { description: pt.seo.terms } },
+    data: {
+      headingKey: 'pages.terms',
+      legalDocument: 'terms',
+      seo: { description: pt.seo.terms },
+    },
   },
   {
     path: 'ui-kit',
@@ -116,7 +128,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/not-found/not-found').then((module) => module.NotFound),
     title: pt.pages.notFound,
     data: {
       headingKey: 'pages.notFound',

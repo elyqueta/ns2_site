@@ -30,6 +30,7 @@ export class PageTransition {
   readonly stage = signal<PageTransitionStage>('cover');
   private coverComplete = false;
   private navigationComplete = false;
+  private preserveFragment = false;
   private safetyTimer: number | undefined;
 
   private readonly renderCallback = afterNextRender(() => {
@@ -39,7 +40,7 @@ export class PageTransition {
 
     const subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        this.beginTransition();
+        this.beginTransition(event.url);
       } else if (
         event instanceof NavigationEnd ||
         event instanceof NavigationCancel ||
@@ -51,10 +52,11 @@ export class PageTransition {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   });
 
-  private beginTransition(): void {
+  private beginTransition(url: string): void {
     this.clearTimers();
     this.coverComplete = false;
     this.navigationComplete = false;
+    this.preserveFragment = Boolean(this.router.parseUrl(url).fragment);
     this.stage.set('cover');
     this.visible.set(true);
     this.safetyTimer = this.document.defaultView?.setTimeout(() => this.hide(), 850);
@@ -67,7 +69,9 @@ export class PageTransition {
 
   coverFinished(): void {
     this.coverComplete = true;
-    this.scroll.resetToTop();
+    if (!this.preserveFragment) {
+      this.scroll.resetToTop();
+    }
     this.startRevealWhenReady();
   }
 
@@ -87,6 +91,7 @@ export class PageTransition {
     this.stage.set('cover');
     this.coverComplete = false;
     this.navigationComplete = false;
+    this.preserveFragment = false;
   }
 
   private clearTimers(): void {

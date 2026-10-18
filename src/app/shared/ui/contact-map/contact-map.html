@@ -1,0 +1,147 @@
+<section class="contact-map-section" aria-labelledby="contact-map-title">
+  <div class="mb-8">
+    <h2 id="contact-map-title" class="font-display text-h2 font-semibold tracking-tight text-fg">
+      {{ copy().sectionTitle }}
+    </h2>
+    <p class="mt-4 max-w-[62ch] text-fg-muted">{{ copy().sectionLead }}</p>
+  </div>
+
+  <div
+    class="grid min-w-0 grid-cols-1 overflow-hidden rounded-card border border-line bg-surface lg:grid-cols-[minmax(0,1.5fr)_minmax(20rem,0.8fr)]"
+  >
+    <div class="relative min-w-0">
+      <div
+        #mapElement
+        class="h-[340px] w-full bg-surface-2 sm:h-[420px] lg:h-[520px]"
+        role="application"
+        [attr.aria-label]="copy().mapLabel"
+      ></div>
+      <div class="absolute right-3 top-3 z-10 grid gap-2">
+        <button
+          class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-xl font-semibold text-fg shadow-lg focus-visible:outline-offset-2"
+          type="button"
+          [attr.aria-label]="copy().zoomIn"
+          (click)="zoomIn()"
+        >
+          +
+        </button>
+        <button
+          class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-xl font-semibold text-fg shadow-lg focus-visible:outline-offset-2"
+          type="button"
+          [attr.aria-label]="copy().zoomOut"
+          (click)="zoomOut()"
+        >
+          −
+        </button>
+        <button
+          class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-fg shadow-lg focus-visible:outline-offset-2"
+          type="button"
+          [attr.aria-label]="copy().recenter"
+          (click)="recenter()"
+        >
+          <app-icon name="pin" />
+        </button>
+      </div>
+      @if (mapStatus() === 'loading') {
+        <p
+          class="absolute bottom-3 left-3 rounded-full bg-surface px-4 py-2 text-sm text-fg shadow-lg"
+          role="status"
+        >
+          {{ copy().mapLoading }}
+        </p>
+      } @else if (mapStatus() === 'unavailable') {
+        <p
+          class="absolute bottom-3 left-3 right-3 rounded-xl bg-surface px-4 py-3 text-sm text-danger shadow-lg"
+          role="status"
+        >
+          {{ copy().mapUnavailable }}
+        </p>
+      }
+    </div>
+
+    <aside class="flex min-w-0 flex-col gap-5 p-4 sm:p-7">
+      <div>
+        <p class="font-display text-lg font-semibold text-fg">{{ config().name }}</p>
+        <p class="mt-2 text-sm leading-relaxed text-fg-muted">{{ config().address }}</p>
+        <p class="mt-2 text-xs leading-relaxed text-fg-muted">
+          {{ copy().approximationNotice }}
+        </p>
+        <a
+          class="mt-3 inline-flex min-h-11 items-center font-semibold text-accent-bright focus-visible:outline-offset-4"
+          [href]="phoneUrl()"
+        >
+          {{ config().phone }}
+        </a>
+        @if (straightDistanceKm() !== null) {
+          <p class="mt-3 rounded-xl border border-line bg-surface-2 p-3 text-sm text-fg">
+            <span class="font-semibold">{{ copy().straightDistanceLabel }}:</span>
+            {{ straightDistanceLabel() }}
+            <span class="mt-1 block text-xs text-fg-muted">{{ copy().straightDistanceNote }}</span>
+          </p>
+        }
+      </div>
+
+      <div class="grid gap-3">
+        <button
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 text-center font-semibold text-on-accent transition-colors hover:bg-accent-bright focus-visible:outline-offset-4 disabled:cursor-wait disabled:opacity-70"
+          type="button"
+          [attr.aria-label]="copy().locationButtonLabel"
+          [disabled]="locationStatus() === 'loading' || mapStatus() !== 'ready'"
+          (click)="requestLocation()"
+        >
+          {{ copy().locationButton }}
+        </button>
+        <label class="grid gap-2 text-sm font-semibold text-fg" for="contact-map-origin">
+          {{ copy().originLabel }}
+          <input
+            id="contact-map-origin"
+            class="min-h-11 rounded-xl border border-line bg-surface-2 px-4 py-3 font-normal text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+            type="text"
+            [placeholder]="copy().originPlaceholder"
+            [value]="manualOrigin()"
+            (input)="updateOrigin($event)"
+          />
+        </label>
+        <p class="text-xs leading-relaxed text-fg-muted">{{ copy().originHelp }}</p>
+        <a
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 text-center font-semibold text-fg transition-colors hover:bg-surface-2 focus-visible:outline-offset-4"
+          [href]="googleMapsUrl()"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ copy().googleMapsLabel }}
+          <app-icon name="arrow" />
+        </a>
+      </div>
+
+      @if (locationStatus() !== 'idle') {
+        <p
+          class="min-h-12 rounded-xl border border-line bg-surface-2 p-4 text-sm text-fg-muted"
+          role="status"
+          aria-live="polite"
+        >
+          @switch (locationStatus()) {
+            @case ('loading') {
+              {{ copy().locationLoading }}
+            }
+            @case ('success') {
+              {{ copy().locationSuccess }}
+            }
+            @case ('denied') {
+              {{ copy().permissionDenied }}
+            }
+            @case ('timeout') {
+              {{ copy().locationTimeout }}
+            }
+            @case ('unsupported') {
+              {{ copy().geolocationUnavailable }}
+            }
+            @case ('unavailable') {
+              {{ copy().positionUnavailable }}
+            }
+          }
+        </p>
+      }
+    </aside>
+  </div>
+</section>

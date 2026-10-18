@@ -1,19 +1,31 @@
 <div
-  appMarquee
+  [appMarquee]="32"
   class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
   [attr.aria-label]="label()"
   role="region"
 >
   <div data-marquee-track class="flex w-max">
-    <ul class="flex w-max flex-nowrap items-center gap-8 pr-8" [attr.aria-label]="label()">
-      @for (item of items(); track item) {
-        <li class="shrink-0">{{ item }}</li>
+    <div class="flex w-max">
+      @for (copy of copies; track copy) {
+        <ul
+          class="flex w-max flex-nowrap items-center gap-8 pr-8"
+          [attr.aria-label]="copy === 0 ? label() : null"
+          [attr.aria-hidden]="copy > 0 ? 'true' : null"
+        >
+          @for (item of items(); track item) {
+            <li class="shrink-0">{{ item }}</li>
+          }
+        </ul>
       }
-    </ul>
-    <ul class="flex w-max flex-nowrap items-center gap-8 pr-8" aria-hidden="true">
-      @for (item of items(); track item) {
-        <li class="shrink-0">{{ item }}</li>
+    </div>
+    <div class="flex w-max" aria-hidden="true">
+      @for (copy of copies; track copy) {
+        <ul class="flex w-max flex-nowrap items-center gap-8 pr-8">
+          @for (item of items(); track item) {
+            <li class="shrink-0">{{ item }}</li>
+          }
+        </ul>
       }
-    </ul>
+    </div>
   </div>
 </div>

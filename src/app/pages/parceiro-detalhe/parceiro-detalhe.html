@@ -1,0 +1,84 @@
+@if (partner(); as item) {
+  <app-page-hero
+    [title]="item.nome"
+    [lead]="item.categoria.pt"
+    [breadcrumbs]="breadcrumbs"
+    [current]="item.nome"
+    [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+  />
+
+  <main id="conteudo">
+    <section class="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-16 lg:py-24">
+      <div class="max-w-4xl">
+        <p
+          class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+        >
+          {{ item.categoria.pt }}
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-fg-muted">{{ item.descricao.pt }}</p>
+
+        <section class="mt-10" [attr.aria-label]="copy.productsTitle.pt">
+          <h3 class="font-display text-h3 font-semibold text-fg">
+            {{ copy.productsTitle.pt }}
+          </h3>
+          <ul class="mt-5 space-y-3">
+            @for (product of partnerProducts(); track product.pt) {
+              <li class="flex gap-3 text-fg-muted">
+                <app-icon name="check" class="mt-1 shrink-0 text-accent-bright" />
+                <span>{{ product.pt }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+
+        <a
+          class="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+          routerLink="/produtos"
+          [fragment]="item.categoriaProdutoSlug"
+        >
+          {{ copy.productsLink.pt }}
+          <app-icon name="arrow" />
+        </a>
+      </div>
+    </section>
+
+    <section class="border-y border-line bg-surface">
+      <div class="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-16">
+        <h2 class="font-display text-h3 font-semibold text-fg">{{ copy.otherBrandsTitle.pt }}</h2>
+        <ul class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          @for (otherPartner of otherPartners(); track otherPartner.title) {
+            <li class="h-full">
+              <app-partner-card [item]="otherPartner" />
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-16 lg:py-24">
+      <app-cta-band
+        [title]="quoteTitle()"
+        [description]="quoteDescription()"
+        [whatsappUrl]="whatsappUrl()"
+        [whatsappLabel]="copy.whatsappLabel.pt"
+        [contactLabel]="copy.contactLabel.pt"
+      />
+    </section>
+  </main>
+} @else {
+  <app-page-hero
+    [title]="copy.notFoundTitle.pt"
+    [lead]="copy.notFoundDescription.pt"
+    [current]="copy.notFoundTitle.pt"
+    [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+  />
+  <main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-16">
+    <a
+      class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+      routerLink="/parceiros"
+    >
+      {{ copy.allPartnersLabel.pt }}
+      <app-icon name="arrow" />
+    </a>
+  </main>
+}

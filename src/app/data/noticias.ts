@@ -154,3 +154,41 @@ export const noticias: readonly Noticia[] = [
     ],
   },
 ];
+
+export const newsPageContent = {
+  title: { pt: 'Notícias' } satisfies LocalizedText,
+  lead: {
+    pt: 'Ideias práticas para acompanhar a tecnologia e tomar decisões informadas.',
+  } satisfies LocalizedText,
+  homeLabel: { pt: 'Início' } satisfies LocalizedText,
+  breadcrumbLabel: { pt: 'Navegação estrutural' } satisfies LocalizedText,
+  latestLabel: { pt: 'Artigo em destaque' } satisfies LocalizedText,
+  categoryLabel: { pt: 'Filtrar notícias por categoria' } satisfies LocalizedText,
+  allCategoriesLabel: { pt: 'Todas' } satisfies LocalizedText,
+  readLabel: { pt: 'Ler artigo' } satisfies LocalizedText,
+  minutesLabel: { pt: 'min de leitura' } satisfies LocalizedText,
+  emptyTitle: { pt: 'Não há artigos nesta categoria.' } satisfies LocalizedText,
+  notFoundTitle: { pt: 'Artigo não encontrado' } satisfies LocalizedText,
+  notFoundDescription: {
+    pt: 'O artigo que procura não está disponível. Explore as notícias publicadas.',
+  } satisfies LocalizedText,
+  allNewsLabel: { pt: 'Ver todas as notícias' } satisfies LocalizedText,
+  publishedLabel: { pt: 'Publicado em' } satisfies LocalizedText,
+  authorLabel: { pt: 'Por' } satisfies LocalizedText,
+  shareLabel: { pt: 'Partilhar artigo' } satisfies LocalizedText,
+  copyLinkLabel: { pt: 'Copiar ligação' } satisfies LocalizedText,
+  copySuccess: { pt: 'Ligação copiada.' } satisfies LocalizedText,
+  copyError: {
+    pt: 'Não foi possível copiar a ligação. Copie o endereço da página no navegador.',
+  } satisfies LocalizedText,
+  whatsappLabel: { pt: 'Partilhar no WhatsApp' } satisfies LocalizedText,
+  relatedLabel: { pt: 'Artigos relacionados' } satisfies LocalizedText,
+  ctaTitle: { pt: 'Tem um desafio de tecnologia?' } satisfies LocalizedText,
+  ctaDescription: {
+    pt: 'Converse com a NS2 Innovation sobre uma solução adequada à sua realidade.',
+  } satisfies LocalizedText,
+  contactLabel: { pt: 'Falar connosco' } satisfies LocalizedText,
+  quoteMessage: {
+    pt: 'Olá! Gostaria de conversar com a NS2 Innovation sobre uma solução de tecnologia.',
+  } satisfies LocalizedText,
+} as const;

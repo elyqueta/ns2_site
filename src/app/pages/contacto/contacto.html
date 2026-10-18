@@ -1,0 +1,262 @@
+<app-page-hero
+  [title]="copy.title"
+  [lead]="copy.lead"
+  [breadcrumbs]="breadcrumbs"
+  [current]="copy.title"
+  [breadcrumbLabel]="copy.breadcrumbLabel"
+/>
+
+<div class="min-w-0">
+  <section class="mx-auto min-w-0 max-w-[1440px] px-4 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-24">
+    <div
+      class="grid min-w-0 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(18rem,0.75fr)_minmax(0,1.25fr)] lg:gap-16"
+    >
+      <section class="min-w-0" aria-labelledby="contact-details-title">
+        <h2 id="contact-details-title" class="font-display text-h2 font-semibold text-fg">
+          {{ copy.contactTitle }}
+        </h2>
+        <ul class="mt-6 grid min-w-0 gap-4 sm:mt-8">
+          <li class="min-w-0 rounded-card border border-line bg-surface p-4 sm:p-5">
+            <h3 class="flex items-center gap-3 font-semibold text-fg">
+              <app-icon name="whatsapp" class="text-accent-bright" />
+              {{ copy.whatsappTitle }}
+            </h3>
+            <a
+              class="mt-3 inline-flex min-h-11 max-w-full items-center break-all font-semibold text-accent-bright focus-visible:outline-offset-4"
+              href="https://wa.me/244924666323"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ contact.phones[0].label }}
+            </a>
+          </li>
+          <li class="min-w-0 rounded-card border border-line bg-surface p-4 sm:p-5">
+            <h3 class="flex items-center gap-3 font-semibold text-fg">
+              <app-icon name="phone" class="text-accent-bright" />
+              {{ copy.phoneTitle }}
+            </h3>
+            @for (phone of contact.phones; track phone.href) {
+              <a
+                class="mt-2 flex min-h-11 max-w-full items-center break-words font-semibold text-accent-bright focus-visible:outline-offset-4"
+                [href]="phone.href"
+              >
+                {{ phone.label }}
+              </a>
+            }
+          </li>
+          <li class="min-w-0 rounded-card border border-line bg-surface p-4 sm:p-5">
+            <h3 class="flex items-center gap-3 font-semibold text-fg">
+              <app-icon name="email" class="text-accent-bright" />
+              {{ copy.emailTitle }}
+            </h3>
+            <a
+              class="mt-3 inline-flex min-h-11 items-center break-all font-semibold text-accent-bright focus-visible:outline-offset-4"
+              [href]="contact.email.href"
+            >
+              {{ contact.email.label }}
+            </a>
+          </li>
+          <li class="min-w-0 rounded-card border border-line bg-surface p-4 sm:p-5">
+            <h3 class="flex items-center gap-3 font-semibold text-fg">
+              <app-icon name="pin" class="text-accent-bright" />
+              {{ copy.addressTitle }}
+            </h3>
+            <p class="mt-3 break-words leading-relaxed text-fg-muted">{{ contact.address }}</p>
+            <a
+              class="mt-3 inline-flex min-h-11 max-w-full items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+              [href]="contact.mapUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ mapCopy.googleMapsLabel }}
+              <app-icon name="arrow" />
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section
+        class="min-w-0 rounded-card border border-line bg-surface p-4 sm:p-8"
+        aria-labelledby="contact-form-title"
+      >
+        <h2 id="contact-form-title" class="font-display text-h3 font-semibold text-fg">
+          {{ copy.formTitle }}
+        </h2>
+        <p class="mt-3 text-fg-muted">{{ copy.formDescription }}</p>
+
+        <form
+          class="mt-6 grid min-w-0 gap-5 sm:mt-8"
+          [formGroup]="form"
+          (ngSubmit)="submitVia('whatsapp')"
+        >
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="grid gap-2">
+              <label class="font-semibold text-fg" for="contact-name">
+                {{ copy.nameLabel }} <span class="text-danger" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="contact-name"
+                class="min-h-11 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+                type="text"
+                autocomplete="name"
+                formControlName="name"
+                required
+                [attr.aria-invalid]="fieldError('name') ? 'true' : null"
+                [attr.aria-describedby]="fieldError('name') ? 'contact-name-error' : null"
+              />
+              @if (fieldError('name'); as error) {
+                <p id="contact-name-error" class="text-sm text-danger">{{ error }}</p>
+              }
+            </div>
+            <div class="grid gap-2">
+              <label class="font-semibold text-fg" for="contact-company">{{
+                copy.companyLabel
+              }}</label>
+              <input
+                id="contact-company"
+                class="min-h-11 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+                type="text"
+                autocomplete="organization"
+                formControlName="company"
+              />
+            </div>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="grid gap-2">
+              <label class="font-semibold text-fg" for="contact-phone">
+                {{ copy.phoneLabel }} <span class="text-danger" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="contact-phone"
+                class="min-h-11 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+                type="tel"
+                autocomplete="tel"
+                formControlName="phone"
+                required
+                [attr.aria-invalid]="fieldError('phone') ? 'true' : null"
+                [attr.aria-describedby]="fieldError('phone') ? 'contact-phone-error' : null"
+              />
+              @if (fieldError('phone'); as error) {
+                <p id="contact-phone-error" class="text-sm text-danger">{{ error }}</p>
+              }
+            </div>
+            <div class="grid gap-2">
+              <label class="font-semibold text-fg" for="contact-email">{{ copy.emailLabel }}</label>
+              <input
+                id="contact-email"
+                class="min-h-11 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+                type="email"
+                autocomplete="email"
+                formControlName="email"
+                [attr.aria-invalid]="fieldError('email') ? 'true' : null"
+                [attr.aria-describedby]="fieldError('email') ? 'contact-email-error' : null"
+              />
+              @if (fieldError('email'); as error) {
+                <p id="contact-email-error" class="text-sm text-danger">{{ error }}</p>
+              }
+            </div>
+          </div>
+
+          <div class="grid gap-2">
+            <label class="font-semibold text-fg" for="contact-interest">
+              {{ copy.interestLabel }} <span class="text-danger" aria-hidden="true">*</span>
+            </label>
+            <select
+              id="contact-interest"
+              class="min-h-11 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg focus:border-accent focus:outline-none"
+              formControlName="interest"
+              required
+              [attr.aria-invalid]="fieldError('interest') ? 'true' : null"
+              [attr.aria-describedby]="fieldError('interest') ? 'contact-interest-error' : null"
+            >
+              <option value="">{{ copy.interestPlaceholder }}</option>
+              @for (interest of interests; track interest) {
+                <option [value]="interest">{{ interest }}</option>
+              }
+            </select>
+            @if (fieldError('interest'); as error) {
+              <p id="contact-interest-error" class="text-sm text-danger">{{ error }}</p>
+            }
+          </div>
+
+          <div class="grid gap-2">
+            <label class="font-semibold text-fg" for="contact-message">
+              {{ copy.messageLabel }} <span class="text-danger" aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              class="min-h-32 w-full min-w-0 rounded-xl border border-line bg-surface-2 px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+              rows="5"
+              formControlName="message"
+              [placeholder]="copy.messagePlaceholder"
+              required
+              [attr.aria-invalid]="fieldError('message') ? 'true' : null"
+              [attr.aria-describedby]="fieldError('message') ? 'contact-message-error' : null"
+            ></textarea>
+            @if (fieldError('message'); as error) {
+              <p id="contact-message-error" class="text-sm text-danger">{{ error }}</p>
+            }
+          </div>
+
+          <div class="grid gap-2">
+            <label class="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-fg-muted">
+              <input
+                class="mt-1 size-5 shrink-0 accent-accent"
+                type="checkbox"
+                formControlName="consent"
+                required
+                [attr.aria-invalid]="fieldError('consent') ? 'true' : null"
+                [attr.aria-describedby]="fieldError('consent') ? 'contact-consent-error' : null"
+              />
+              <span>{{ copy.consentLabel }}</span>
+            </label>
+            @if (fieldError('consent'); as error) {
+              <p id="contact-consent-error" class="text-sm text-danger">{{ error }}</p>
+            }
+          </div>
+
+          <div class="grid gap-3 sm:flex sm:flex-row">
+            <button
+              class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-button bg-accent px-4 py-3 text-center font-semibold text-on-accent transition-colors hover:bg-accent-bright focus-visible:outline-offset-4 sm:w-auto sm:px-6"
+              type="submit"
+            >
+              <app-icon name="whatsapp" />
+              {{ copy.whatsappSubmit }}
+            </button>
+            <button
+              class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-button border border-line px-4 py-3 text-center font-semibold text-fg transition-colors hover:bg-surface-2 focus-visible:outline-offset-4 sm:w-auto sm:px-6"
+              type="button"
+              (click)="submitVia('email')"
+            >
+              <app-icon name="email" />
+              {{ copy.emailSubmit }}
+            </button>
+          </div>
+          <p class="min-h-6 text-sm text-fg-muted" role="status" aria-live="polite">
+            {{ status() }}
+          </p>
+        </form>
+      </section>
+    </div>
+
+    <section class="mt-14 min-w-0 border-t border-line pt-12 sm:mt-20 sm:pt-16 lg:mt-28 lg:pt-24">
+      <app-contact-map [config]="mapConfig" [copy]="mapCopy" />
+    </section>
+
+    <nav class="mt-10 flex flex-wrap gap-5" [attr.aria-label]="copy.legalNavLabel">
+      <a
+        class="inline-flex min-h-11 items-center font-semibold text-accent-bright focus-visible:outline-offset-4"
+        routerLink="/politica-de-privacidade"
+      >
+        {{ copy.privacyLabel }}
+      </a>
+      <a
+        class="inline-flex min-h-11 items-center font-semibold text-accent-bright focus-visible:outline-offset-4"
+        routerLink="/termos-e-condicoes"
+      >
+        {{ copy.termsLabel }}
+      </a>
+    </nav>
+  </section>
+</div>

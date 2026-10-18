@@ -12,7 +12,42 @@ export interface Servico {
   readonly ordem: number;
   readonly ctaMensagem: LocalizedText;
   readonly href: string;
+  readonly imagem: {
+    readonly alt: LocalizedText;
+    readonly ficheiroEsperado: LocalizedText;
+  };
+  readonly faq?: readonly {
+    readonly pergunta: LocalizedText;
+    readonly resposta: LocalizedText;
+  }[];
 }
+
+export const servicesPageContent = {
+  breadcrumbLabel: { pt: 'Navegação estrutural' } satisfies LocalizedText,
+  homeLabel: { pt: 'Início' } satisfies LocalizedText,
+  title: { pt: 'Serviços' } satisfies LocalizedText,
+  lead: {
+    pt: 'Assistência completa a toda a procura de TI, de servidores a cabeamento estruturado. Concentramos as soluções num só lugar, com rapidez de implementação e baixo custo.',
+  } satisfies LocalizedText,
+  sectionIndex: { pt: '01 — Serviços' } satisfies LocalizedText,
+  listTitle: { pt: 'Assistência completa a toda a procura de TI.' } satisfies LocalizedText,
+  detailLink: { pt: 'Saber mais' } satisfies LocalizedText,
+  includesLabel: { pt: 'O que inclui' } satisfies LocalizedText,
+  audienceLabel: { pt: 'Para quem' } satisfies LocalizedText,
+  relatedLabel: { pt: 'Serviços relacionados' } satisfies LocalizedText,
+  previousLabel: { pt: 'Serviço anterior' } satisfies LocalizedText,
+  nextLabel: { pt: 'Serviço seguinte' } satisfies LocalizedText,
+  allServicesLabel: { pt: 'Todos os serviços' } satisfies LocalizedText,
+  quoteLabel: { pt: 'Pedir orçamento' } satisfies LocalizedText,
+  whatsappLabel: { pt: 'Falar no WhatsApp' } satisfies LocalizedText,
+  contactLabel: { pt: 'Ver contactos' } satisfies LocalizedText,
+  generalCtaTitle: { pt: 'Precisa de soluções de TI? Vamos começar.' } satisfies LocalizedText,
+  webCtaLabel: { pt: 'Conheça o desenvolvimento web' } satisfies LocalizedText,
+  notFoundTitle: { pt: 'Serviço não encontrado' } satisfies LocalizedText,
+  notFoundDescription: {
+    pt: 'O serviço que procura não está disponível. Consulte a lista de serviços.',
+  } satisfies LocalizedText,
+} as const;
 
 export const servicos: readonly Servico[] = [
   {
@@ -44,17 +79,21 @@ export const servicos: readonly Servico[] = [
       pt: 'Olá! Gostaria de um orçamento para infraestrutura de redes e servidores.',
     },
     href: '/servicos/infraestrutura-redes-servidores',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de infraestrutura de redes e servidores.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/infraestrutura-redes-servidores.webp' },
+    },
   },
   {
     slug: 'suporte-remoto',
     titulo: { pt: 'Suporte remoto' },
-    resumo: { pt: 'Atendimento por telefone, email e WhatsApp, com acesso remoto.' },
+    resumo: { pt: 'Atendimento rápido por telefone, email e WhatsApp, com acesso remoto.' },
     descricao: [
       {
         pt: 'Disponibilizamos atendimento personalizado através de vários canais: telefone, email e WhatsApp.',
       },
       {
-        pt: 'Realizamos acesso remoto para compreender melhor a sua dúvida e responder ao chamado com o objectivo de resolver o problema com agilidade e eficácia.',
+        pt: 'Além disso, realizamos acesso remoto para compreender melhor a sua dúvida. Respondemos ao seu chamado rapidamente, com o objectivo de resolver o problema com agilidade e eficácia.',
       },
     ],
     inclui: [
@@ -67,19 +106,23 @@ export const servicos: readonly Servico[] = [
     ordem: 2,
     ctaMensagem: { pt: 'Olá! Preciso de suporte remoto de TI.' },
     href: '/servicos/suporte-remoto',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de suporte remoto.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/suporte-remoto.webp' },
+    },
   },
   {
     slug: 'suporte-on-site',
     titulo: { pt: 'Suporte on site' },
     resumo: {
-      pt: 'Equipa técnica no local para resolver o que não se resolve à distância.',
+      pt: 'Equipa técnica que se desloca ao local para resolver o que não se resolve à distância.',
     },
     descricao: [
       {
-        pt: 'Perante problemas mais complexos, sem possibilidade de resolução remota, contamos com uma equipa técnica que se desloca ao local para intervir directamente e dar uma solução.',
+        pt: 'Perante problemas mais complexos, sem possibilidade de resolução remota, contamos com uma equipa técnica que se desloca de imediato ao local para intervir directamente e dar uma solução.',
       },
       {
-        pt: 'Em clientes com contrato, implementamos uma rotina de visitas para suporte preventivo, evitando paragens da operação por ocorrências repentinas.',
+        pt: 'Em clientes com contrato, implementamos uma rotina de visitas para suporte preventivo, evitando a paragem da operação por ocorrências repentinas.',
       },
     ],
     inclui: [
@@ -92,6 +135,10 @@ export const servicos: readonly Servico[] = [
     ordem: 3,
     ctaMensagem: { pt: 'Olá! Preciso de suporte técnico no local.' },
     href: '/servicos/suporte-on-site',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de suporte on site.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/suporte-on-site.webp' },
+    },
   },
   {
     slug: 'manutencao-equipamentos',
@@ -105,16 +152,23 @@ export const servicos: readonly Servico[] = [
       },
     ],
     inclui: [
-      { pt: 'Formatação e limpeza interna e externa' },
-      { pt: 'Troca de peças e cópia de segurança de dados' },
-      { pt: 'Avaliação de desempenho e actualização de componentes' },
-      { pt: 'Reparação de telemóveis e tablets' },
+      { pt: 'Formatação' },
+      { pt: 'Limpeza interna e externa' },
+      { pt: 'Troca de peças' },
+      { pt: 'Cópia de segurança (backup) de dados' },
+      { pt: 'Avaliação de desempenho' },
+      { pt: 'Actualização (upgrade) de componentes' },
+      { pt: 'Reparação de telemóveis e tablets (troca de ecrãs e películas)' },
     ],
     paraQuem: { pt: 'Empresas e particulares.' },
     icone: 'tools',
     ordem: 4,
     ctaMensagem: { pt: 'Olá! Gostaria de um orçamento de manutenção de equipamentos.' },
     href: '/servicos/manutencao-equipamentos',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de manutenção de equipamentos.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/manutencao-equipamentos.webp' },
+    },
   },
   {
     slug: 'contratos-ti',
@@ -122,22 +176,26 @@ export const servicos: readonly Servico[] = [
     resumo: { pt: 'Manutenção continuada e alta disponibilidade para a sua operação.' },
     descricao: [
       {
-        pt: 'A manutenção continuada é indispensável para a gestão e operação eficaz de uma empresa.',
+        pt: 'A manutenção continuada é indispensável para a gestão e operação eficaz de uma empresa: os dados só são úteis se forem válidos e estiverem disponíveis em tempo real.',
       },
       {
-        pt: 'Com foco na alta disponibilidade da operação e na disponibilização de dados para análise e acompanhamento, atendemos clientes de segmentos diversos.',
+        pt: 'Com foco na alta disponibilidade da operação e na disponibilização de dados para análise e acompanhamento, atendemos clientes de segmentos diversos, da estrutura à manutenção da tecnologia da informação como um todo.',
       },
     ],
     inclui: [
       { pt: 'Manutenção continuada' },
       { pt: 'Rotina de visitas preventivas' },
-      { pt: 'Acompanhamento da infraestrutura de TI' },
+      { pt: 'Acompanhamento da infraestrutura de TI como um todo' },
     ],
     paraQuem: { pt: 'Empresas de vários sectores que querem previsibilidade.' },
     icone: 'contract',
     ordem: 5,
     ctaMensagem: { pt: 'Olá! Gostaria de saber mais sobre contratos de TI.' },
     href: '/servicos/contratos-ti',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de contratos de TI.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/contratos-ti.webp' },
+    },
   },
   {
     slug: 'construtoria',
@@ -148,7 +206,7 @@ export const servicos: readonly Servico[] = [
         pt: 'O nosso processo de consultoria chama-se Construtoria porque vai além do levantamento das necessidades: acompanha as soluções até à implementação, com o melhor custo-benefício.',
       },
       {
-        pt: 'Trabalhamos na construção e revitalização dos processos e procedimentos ligados ao Sistema de Gestão da Qualidade (SGQ), usando a tecnologia como pilar para a agilidade e a automação.',
+        pt: 'Não nos limitamos à implementação de novos programas: trabalhamos na construção e revitalização dos processos e procedimentos ligados ao Sistema de Gestão da Qualidade (SGQ) da empresa, usando a tecnologia como pilar para a agilidade, a automação e o real aproveitamento do material levantado durante o processo.',
       },
     ],
     inclui: [
@@ -162,6 +220,10 @@ export const servicos: readonly Servico[] = [
     ordem: 6,
     ctaMensagem: { pt: 'Olá! Gostaria de conversar sobre consultoria (Construtoria).' },
     href: '/servicos/construtoria',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de construtoria.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/construtoria.webp' },
+    },
   },
   {
     slug: 'sistemas-software',
@@ -176,7 +238,7 @@ export const servicos: readonly Servico[] = [
       },
     ],
     inclui: [
-      { pt: 'Gestão de documentos e processos' },
+      { pt: 'Gestão de documentos e de processos' },
       { pt: 'Controlo de stocks' },
       { pt: 'Ordens de serviço' },
       { pt: 'Requisições e solicitações' },
@@ -186,24 +248,29 @@ export const servicos: readonly Servico[] = [
     ordem: 7,
     ctaMensagem: { pt: 'Olá! Gostaria de um sistema web para a minha empresa.' },
     href: '/servicos/sistemas-software',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de sistemas e software.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/sistemas-software.webp' },
+    },
   },
   {
     slug: 'locacao-equipamentos-ti',
     titulo: { pt: 'Locação de equipamentos de TI' },
     resumo: {
-      pt: 'Computadores, portáteis e periféricos, com instalação e manutenção.',
+      pt: 'Computadores, portáteis e periféricos modernos, com instalação e manutenção.',
     },
     descricao: [
       {
-        pt: 'Alugamos computadores, portáteis e periféricos para garantir o funcionamento da sua empresa.',
+        pt: 'Alugamos computadores, portáteis e periféricos modernos e de alto desempenho para garantir a qualidade do funcionamento da sua empresa.',
       },
       {
-        pt: 'Também fazemos a instalação e a manutenção dos equipamentos seleccionados e analisamos as necessidades do negócio para propor opções adequadas.',
+        pt: 'Também fazemos a instalação e a manutenção dos equipamentos seleccionados. Analisamos a estrutura e as necessidades do seu negócio para propor os equipamentos mais adequados, com melhor desempenho e custo-benefício.',
       },
     ],
     inclui: [
       { pt: 'Aluguer de computadores, portáteis e periféricos' },
-      { pt: 'Instalação e manutenção' },
+      { pt: 'Instalação' },
+      { pt: 'Manutenção' },
       { pt: 'Análise das necessidades do negócio' },
     ],
     paraQuem: {
@@ -213,6 +280,10 @@ export const servicos: readonly Servico[] = [
     ordem: 8,
     ctaMensagem: { pt: 'Olá! Gostaria de um orçamento para locação de equipamentos de TI.' },
     href: '/servicos/locacao-equipamentos-ti',
+    imagem: {
+      alt: { pt: 'Imagem representativa do serviço de locação de equipamentos de TI.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos-ti.webp' },
+    },
   },
   {
     slug: 'desenvolvimento-web',
@@ -231,5 +302,9 @@ export const servicos: readonly Servico[] = [
     ordem: 9,
     ctaMensagem: { pt: 'Olá! Gostaria de conversar sobre desenvolvimento web.' },
     href: '/desenvolvimento-web',
+    imagem: {
+      alt: { pt: 'Imagem representativa de websites e sistemas web.' },
+      ficheiroEsperado: { pt: 'public/images/servicos/desenvolvimento-web.webp' },
+    },
   },
 ];

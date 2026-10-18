@@ -22,13 +22,14 @@ export const routes: Routes = [
   {
     path: 'servicos',
     pathMatch: 'full',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/servicos/servicos').then((module) => module.Servicos),
     title: pt.pages.services,
     data: { headingKey: 'pages.services', seo: { description: pt.seo.services } },
   },
   {
     path: 'servicos/:slug',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/servico-detalhe/servico-detalhe').then((module) => module.ServicoDetalhe),
     title: pt.pages.serviceDetail,
     data: {
       headingKey: 'pages.serviceDetail',

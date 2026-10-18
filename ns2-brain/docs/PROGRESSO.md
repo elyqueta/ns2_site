@@ -2,13 +2,13 @@
 
 | Fase                               | Estado                  | Aprovada pelo utilizador                    | Notas                                                                                                                                                                       |
 | ---------------------------------- | ----------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 00 Fundações                       | ✅ aprovada             | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Slugs de detalhe ficam por prerenderizar até existirem dados nas fases correspondentes.                             |
+| 00 Fundações                       | ✅ aprovada             | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Rotas parametrizadas são prerenderizadas nas fases em que os dados correspondentes ficam disponíveis.                  |
 | 01 Design system e UI kit          | ✅ aprovada             | Sim — avançar para fase 02                  | UI kit com componentes reutilizáveis, pipes, ícones e temas; build, testes e validação visual aprovados.                                                                    |
 | 02 Motor de animação               | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | AnimationService, ScrollService, directivas GSAP/Lenis e demonstração no UI kit; build e testes aprovados.                                                                  |
 | 03 Layout global                   | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Header com navegação responsiva, menu móvel acessível, footer, WhatsApp flutuante, preloader de sessão e cortina de transição; build, testes e validação runtime aprovados. |
 | 04 Início                          | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Indicador com scroll suave, botões/menu sem quebra de linha, pin dos serviços revisto, marcas adaptadas ao mobile e fotografia local fornecida pelo utilizador.               |
-| 05 Sobre                           | 🟡 a aguardar aprovação | Não                                         | Página Sobre concluída com conteúdo oficial, processo animado por scroll, valores, diferenciais e CTA; build, testes e validação responsiva aprovados.                       |
-| 06 Serviços                        | ⬜ pendente             | —                                           |                                                                                                                                                                             |
+| 05 Sobre                           | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Página Sobre com conteúdo oficial, processo animado por scroll, valores, diferenciais e CTA; build, testes e validação responsiva aprovados.                                |
+| 06 Serviços                        | 🟡 a aguardar aprovação | Não                                         | Lista com 9 serviços e 8 páginas de detalhe prerenderizadas; SEO e JSON-LD Service por detalhe, CTAs específicos e navegação anterior/seguinte; build e testes aprovados.    |
 | 07 Produtos                        | ⬜ pendente             | —                                           |                                                                                                                                                                             |
 | 08 Desenvolvimento web + Projectos | ⬜ pendente             | —                                           |                                                                                                                                                                             |
 | 09 Notícias                        | ⬜ pendente             | —                                           |                                                                                                                                                                             |
@@ -33,13 +33,14 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - O JSON-LD `Organization`/`LocalBusiness` fica no documento base para ser emitido no HTML prerenderizado; os dados publicados limitam-se a nome, site, contacto e morada confirmados.
 - Nas correcções da Fase 04, o indicador "Descer para explorar" usa scroll suave com easing gradual; o pin de serviços fixa só a faixa de cartões para mantê-los inteiros na área visível; a faixa de marcas fica centrada no desktop e permite deslize horizontal sem scrollbar visível no telemóvel; o menu móvel permite scroll pelo rato/toque e anima a abertura/fecho; a fotografia local fornecida é usada na secção "Quem somos".
 - A Fase 05 usa a fotografia local fornecida pelo utilizador, conteúdo oficial de `empresa.md` e a directiva de progresso baseada em ScrollTrigger; sem métricas nem datas de fundação.
+- A Fase 06 usa os textos oficiais de `servicos.md`; a página de detalhe de desenvolvimento web continua a ligar à rota `/desenvolvimento-web` sem criar um detalhe duplicado. O JSON-LD Service é emitido por detalhe.
 
 ## Pendências de conteúdo (precisam do utilizador)
 
 - Confirmar a plataforma correspondente aos identificadores de redes sociais oficiais antes de os publicar; até lá, permanecem ocultos.
 - O horário de atendimento não foi fornecido e não é apresentado.
 - Rever ou substituir os três artigos-modelo antes de os considerar conteúdo editorial final.
-- A fotografia `public/images/equipa.jpeg` foi fornecida pelo utilizador e está aplicada na Home; a página Sobre ainda não foi implementada.
+- Faltam fotografias próprias para os oito detalhes de serviço; cada página mantém o `MediaSlot` com o caminho esperado registado em `assets.md`.
 
 ## Imagens em falta
 

@@ -14,33 +14,19 @@ export class MarqueeMotion {
       return;
     }
 
-    const tween = runtime.gsap.to(track, {
-      xPercent: -50,
-      duration: this.duration(),
-      ease: 'none',
-      repeat: -1,
-    });
-    const pause = () => tween.pause();
-    const resume = () => tween.resume();
-    element.addEventListener('pointerenter', pause);
-    element.addEventListener('pointerleave', resume);
-    let release: gsap.core.Tween | undefined;
-
-    const trigger = runtime.ScrollTrigger.create({
-      trigger: element,
-      onUpdate: (self) => {
-        release?.kill();
-        const speed = Math.min(Math.abs(self.getVelocity()) / 1800, 0.8);
-        tween.timeScale((self.direction < 0 ? -1 : 1) * (1 + speed));
-        release = runtime.gsap.delayedCall(0.35, () => tween.timeScale(1));
+    const tween = runtime.gsap.fromTo(
+      track,
+      { xPercent: 0 },
+      {
+        xPercent: -50,
+        duration: Math.max(1, this.duration()),
+        ease: 'none',
+        repeat: -1,
       },
-    });
+    );
 
     return () => {
-      element.removeEventListener('pointerenter', pause);
-      element.removeEventListener('pointerleave', resume);
-      release?.kill();
-      trigger.kill();
+      tween.kill();
     };
   });
 }

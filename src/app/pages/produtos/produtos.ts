@@ -17,6 +17,7 @@ import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { productsPageContent, produtos } from '../../data/produtos';
 import { pt } from '../../i18n/pt';
+import { HeaderOffset } from '../../shared/directives/header-offset.directive';
 import { RevealChildren } from '../../shared/directives/reveal-children.directive';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { Icon } from '../../shared/ui/icon/icon';
@@ -26,7 +27,7 @@ import { PageHero } from '../../shared/ui/page-hero/page-hero';
 
 @Component({
   selector: 'app-produtos',
-  imports: [CtaBand, Icon, Marquee, MediaSlot, PageHero, RevealChildren],
+  imports: [CtaBand, HeaderOffset, Icon, Marquee, MediaSlot, PageHero, RevealChildren],
   templateUrl: './produtos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

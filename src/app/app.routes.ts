@@ -44,13 +44,16 @@ export const routes: Routes = [
   },
   {
     path: 'desenvolvimento-web',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/desenvolvimento-web/desenvolvimento-web').then(
+        (module) => module.DesenvolvimentoWeb,
+      ),
     title: pt.pages.web,
     data: { headingKey: 'pages.web', seo: { description: pt.seo.web } },
   },
   {
     path: 'projectos',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/projectos/projectos').then((module) => module.Projectos),
     title: pt.pages.projects,
     data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
   },

@@ -1,0 +1,34 @@
+<app-page-hero
+  [title]="copy.title.pt"
+  [lead]="copy.lead.pt"
+  [breadcrumbs]="breadcrumbs"
+  [current]="copy.title.pt"
+  [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+/>
+
+<main id="conteudo">
+  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+    <p
+      class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
+    >
+      {{ copy.confirmedLabel.pt }}
+    </p>
+    <div class="grid gap-5 lg:grid-cols-2 lg:items-stretch">
+      <app-media-slot
+        [alt]="project.imagem.alt.pt"
+        [expectedFile]="project.imagem.ficheiroEsperado.pt"
+      />
+      <app-project-card [item]="projectCard" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
+    <app-cta-band
+      [title]="copy.ctaTitle.pt"
+      [description]="copy.ctaDescription.pt"
+      [whatsappUrl]="whatsappUrl"
+      [whatsappLabel]="copy.whatsappLabel.pt"
+      [contactLabel]="copy.contactLabel.pt"
+    />
+  </section>
+</main>

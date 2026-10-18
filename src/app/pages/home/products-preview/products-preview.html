@@ -22,7 +22,8 @@
           <p class="mt-3 text-fg-muted">{{ category.descricao.pt }}</p>
           <a
             class="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
-            [routerLink]="category.href"
+            [routerLink]="['/produtos']"
+            [fragment]="category.slug"
           >
             {{ copy.cardLinkLabel.pt }}
             <app-icon name="arrow" />

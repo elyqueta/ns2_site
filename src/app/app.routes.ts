@@ -38,7 +38,7 @@ export const routes: Routes = [
   },
   {
     path: 'produtos',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/produtos/produtos').then((module) => module.Produtos),
     title: pt.pages.products,
     data: { headingKey: 'pages.products', seo: { description: pt.seo.products } },
   },

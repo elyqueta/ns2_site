@@ -8,8 +8,8 @@
 | 03 Layout global                   | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Header com navegação responsiva, menu móvel acessível, footer, WhatsApp flutuante, preloader de sessão e cortina de transição; build, testes e validação runtime aprovados. |
 | 04 Início                          | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Indicador com scroll suave, botões/menu sem quebra de linha, pin dos serviços revisto, marcas adaptadas ao mobile e fotografia local fornecida pelo utilizador.               |
 | 05 Sobre                           | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Página Sobre com conteúdo oficial, processo animado por scroll, valores, diferenciais e CTA; build, testes e validação responsiva aprovados.                                |
-| 06 Serviços                        | 🟡 a aguardar aprovação | Não                                         | Lista com 9 serviços e 8 páginas de detalhe prerenderizadas; SEO e JSON-LD Service por detalhe, CTAs específicos e navegação anterior/seguinte; build e testes aprovados.    |
-| 07 Produtos                        | ⬜ pendente             | —                                           |                                                                                                                                                                             |
+| 06 Serviços                        | ✅ aprovada             | Sim — aprovada pelo utilizador a 2026-10-18 | Lista com 9 serviços e 8 páginas de detalhe prerenderizadas; SEO e JSON-LD Service por detalhe, CTAs específicos e navegação anterior/seguinte; build e testes aprovados.    |
+| 07 Produtos                        | 🟡 a aguardar aprovação | Não                                         | Catálogo com 6 categorias, cartões por marca/linha e tipo, CTAs WhatsApp, âncoras com scroll spy e faixa de marcas; build e testes aprovados.                               |
 | 08 Desenvolvimento web + Projectos | ⬜ pendente             | —                                           |                                                                                                                                                                             |
 | 09 Notícias                        | ⬜ pendente             | —                                           |                                                                                                                                                                             |
 | 10 Parceiros                       | ⬜ pendente             | —                                           |                                                                                                                                                                             |
@@ -34,6 +34,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Nas correcções da Fase 04, o indicador "Descer para explorar" usa scroll suave com easing gradual; o pin de serviços fixa só a faixa de cartões para mantê-los inteiros na área visível; a faixa de marcas fica centrada no desktop e permite deslize horizontal sem scrollbar visível no telemóvel; o menu móvel permite scroll pelo rato/toque e anima a abertura/fecho; a fotografia local fornecida é usada na secção "Quem somos".
 - A Fase 05 usa a fotografia local fornecida pelo utilizador, conteúdo oficial de `empresa.md` e a directiva de progresso baseada em ScrollTrigger; sem métricas nem datas de fundação.
 - A Fase 06 usa os textos oficiais de `servicos.md`; a página de detalhe de desenvolvimento web continua a ligar à rota `/desenvolvimento-web` sem criar um detalhe duplicado. O JSON-LD Service é emitido por detalhe.
+- A Fase 07 usa apenas marcas, linhas e tipos de produto descritos em `produtos.md`; os pedidos de orçamento preenchem mensagens específicas por categoria ou opção. As âncoras são tratadas pelo Lenis e o scroll spy usa ScrollTrigger; as imagens das seis categorias continuam em falta e usam MediaSlot.
 
 ## Pendências de conteúdo (precisam do utilizador)
 
@@ -41,6 +42,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - O horário de atendimento não foi fornecido e não é apresentado.
 - Rever ou substituir os três artigos-modelo antes de os considerar conteúdo editorial final.
 - Faltam fotografias próprias para os oito detalhes de serviço; cada página mantém o `MediaSlot` com o caminho esperado registado em `assets.md`.
+- Faltam fotografias próprias para as seis categorias de produto; a página mantém MediaSlot com os caminhos registados em `assets.md`.
 
 ## Imagens em falta
 

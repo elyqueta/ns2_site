@@ -59,8 +59,10 @@ export class ScrollService {
     void this.document.fonts?.ready.then(() => this.animation.refresh());
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.resetToTop();
+      .subscribe((event) => {
+        if (!this.router.parseUrl(event.urlAfterRedirects).fragment) {
+          this.resetToTop();
+        }
         this.animation.refresh();
       });
   });

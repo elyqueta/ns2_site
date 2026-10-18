@@ -190,7 +190,8 @@ export const pt = {
     },
   },
   seo: {
-    home: 'Tecnologia e comércio de produtos informáticos em Luanda, Angola.',
+    homeTitle: 'Início | NS2 Innovation',
+    home: 'NS2 Innovation, em Luanda: redes e servidores, suporte de TI, manutenção, equipamentos informáticos, websites e sistemas web para empresas e particulares.',
     about: 'Conheça a NS2 Innovation, empresa de tecnologia em Luanda, Angola.',
     services: 'Conheça os serviços de tecnologia da NS2 Innovation.',
     serviceDetail: 'Detalhes dos serviços de tecnologia da NS2 Innovation.',

@@ -1,0 +1,22 @@
+<section class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
+  <app-section-heading
+    [index]="copy.index.pt"
+    [title]="copy.title.pt"
+    [description]="copy.description.pt"
+  />
+  <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:mt-14 xl:grid-cols-4">
+    @for (item of packages; track item.title) {
+      <app-package-card [item]="item" />
+    }
+  </div>
+  <p class="mt-6 max-w-[80ch] text-sm leading-relaxed text-fg-muted">
+    {{ copy.disclaimer.pt }}
+  </p>
+  <a
+    class="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+    routerLink="/desenvolvimento-web"
+  >
+    {{ copy.linkLabel.pt }}
+    <span aria-hidden="true">→</span>
+  </a>
+</section>

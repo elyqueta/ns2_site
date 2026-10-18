@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { KzPipe } from '../../pipes/kz.pipe';
 import { Card } from '../card/card';
 import { Icon } from '../icon/icon';
 
@@ -8,11 +9,13 @@ export interface CardContent {
   readonly description: string;
   readonly href?: string;
   readonly label?: string;
+  readonly priceFrom?: number;
+  readonly priceLabel?: string;
 }
 
 @Component({
   selector: 'app-content-card',
-  imports: [Card, Icon, RouterLink],
+  imports: [Card, Icon, KzPipe, RouterLink],
   templateUrl: './content-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

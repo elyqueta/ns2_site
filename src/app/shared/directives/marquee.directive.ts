@@ -20,6 +20,10 @@ export class MarqueeMotion {
       ease: 'none',
       repeat: -1,
     });
+    const pause = () => tween.pause();
+    const resume = () => tween.resume();
+    element.addEventListener('pointerenter', pause);
+    element.addEventListener('pointerleave', resume);
     let release: gsap.core.Tween | undefined;
 
     const trigger = runtime.ScrollTrigger.create({
@@ -33,6 +37,8 @@ export class MarqueeMotion {
     });
 
     return () => {
+      element.removeEventListener('pointerenter', pause);
+      element.removeEventListener('pointerleave', resume);
       release?.kill();
       trigger.kill();
     };

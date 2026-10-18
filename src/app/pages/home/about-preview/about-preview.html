@@ -1,0 +1,27 @@
+<section
+  id="home-about"
+  class="mx-auto grid max-w-[1440px] items-center gap-12 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-16"
+>
+  <div class="lg:col-span-6">
+    <app-section-heading
+      [index]="copy.index.pt"
+      [title]="copy.title.pt"
+      [description]="copy.description.pt"
+    />
+    <app-button
+      class="mt-8 inline-flex"
+      [label]="copy.linkLabel.pt"
+      href="/sobre"
+      variant="ghost"
+      [showArrow]="true"
+    />
+  </div>
+  <div class="lg:col-span-6">
+    <app-media-slot
+      [alt]="copy.imageAlt.pt"
+      [expectedFile]="copy.expectedFile.pt"
+      [width]="960"
+      [height]="760"
+    />
+  </div>
+</section>

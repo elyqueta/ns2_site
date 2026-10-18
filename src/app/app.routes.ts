@@ -9,8 +9,8 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: minimalPage,
-    title: pt.pages.home,
+    loadComponent: () => import('./pages/home/home').then((module) => module.Home),
+    title: pt.seo.homeTitle,
     data: { headingKey: 'pages.home', seo: { description: pt.seo.home } },
   },
   {

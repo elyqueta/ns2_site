@@ -8,7 +8,10 @@ export const projectos = [
     descricao: {
       pt: 'Desenvolvimento do website da Gráfica Viva.',
     } satisfies LocalizedText,
-    url: null,
+    url: 'https://grafica-viva-front-end-t6oc.vercel.app/',
+    previewTitle: {
+      pt: 'Pré-visualização do website da Gráfica Viva.',
+    } satisfies LocalizedText,
     imagem: {
       alt: {
         pt: 'Pré-visualização do website da Gráfica Viva.',
@@ -26,6 +29,9 @@ export const projectosPageContent = {
   homeLabel: { pt: 'Início' } satisfies LocalizedText,
   breadcrumbLabel: { pt: 'Navegação estrutural' } satisfies LocalizedText,
   confirmedLabel: { pt: 'Projecto confirmado' } satisfies LocalizedText,
+  previewLinkLabel: {
+    pt: 'Visitar o website da Gráfica Viva',
+  } satisfies LocalizedText,
   ctaTitle: {
     pt: 'O seu projecto pode ser o próximo.',
   } satisfies LocalizedText,

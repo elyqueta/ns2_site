@@ -1,0 +1,28 @@
+<app-page-hero
+  [title]="copy.title"
+  [lead]="copy.lead"
+  [current]="pageTitle"
+  [breadcrumbLabel]="copy.breadcrumbLabel"
+/>
+
+<main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-16 lg:py-24">
+  <p class="sr-only">{{ pageDescription }}</p>
+  <div class="flex flex-col gap-3 sm:flex-row">
+    <a
+      class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright focus-visible:outline-offset-4"
+      routerLink="/"
+    >
+      {{ copy.homeLabel }}
+      <app-icon name="arrow" />
+    </a>
+    <a
+      class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-6 py-3 font-semibold text-fg transition-colors hover:bg-surface-2 focus-visible:outline-offset-4"
+      [href]="whatsappUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <app-icon name="whatsapp" />
+      {{ copy.whatsappLabel }}
+    </a>
+  </div>
+</main>

@@ -14,6 +14,58 @@ export const contactDetails = {
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=Avenida+21+de+Janeiro+Gamek+Luanda',
 } as const;
 
+export const contactPageContent = {
+  title: 'Vamos conversar.',
+  lead: 'Conte-nos o que precisa. A nossa equipa está disponível para ajudar.',
+  homeLabel: 'Início',
+  breadcrumbLabel: 'Navegação estrutural',
+  contactTitle: 'Fale connosco',
+  whatsappTitle: 'WhatsApp',
+  phoneTitle: 'Telefone',
+  emailTitle: 'Email',
+  addressTitle: 'Morada',
+  formTitle: 'Envie-nos uma mensagem',
+  formDescription:
+    'Preencha os campos abaixo. A mensagem será preparada no WhatsApp ou no seu programa de email.',
+  nameLabel: 'Nome',
+  companyLabel: 'Empresa',
+  phoneLabel: 'Telefone',
+  emailLabel: 'Email',
+  interestLabel: 'Assunto',
+  interestPlaceholder: 'Seleccione um assunto',
+  messageLabel: 'Mensagem',
+  messagePlaceholder: 'Descreva brevemente como podemos ajudar.',
+  consentLabel: 'Concordo em usar estes dados apenas para me contactarem.',
+  requiredError: 'Este campo é obrigatório.',
+  phoneError: 'Indique um número de telefone válido.',
+  emailError: 'Indique um endereço de email válido.',
+  messageError: 'A mensagem deve ter pelo menos 10 caracteres.',
+  consentError: 'É necessário dar consentimento para continuar.',
+  whatsappSubmit: 'Enviar por WhatsApp',
+  emailSubmit: 'Enviar por email',
+  sendingStatus: 'A abrir a aplicação escolhida…',
+  submissionError: 'Não foi possível abrir a aplicação. Tente novamente.',
+  mapSectionTitle: 'Como chegar até nós',
+  mapSectionLead: 'Consulte a localização da NS2 Innovation e escolha como iniciar a navegação.',
+  legalNavLabel: 'Informação legal',
+  privacyLabel: 'Política de Privacidade',
+  termsLabel: 'Termos e Condições',
+} as const;
+
+export const contactInterests = [
+  'Infraestrutura de redes e servidores',
+  'Suporte e manutenção',
+  'Contratos de TI',
+  'Consultoria (Construtoria)',
+  'Sistemas e software',
+  'Locação de equipamentos',
+  'Produtos (portáteis, desktops, peças, acessórios, móveis, consumíveis)',
+  'Websites',
+  'Loja online',
+  'Sistema web',
+  'Outro',
+] as const;
+
 export const footerServices = [
   {
     label: 'Infraestrutura de redes e servidores',

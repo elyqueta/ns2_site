@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 import { pt } from './i18n/pt';
 
-const minimalPage = () =>
-  import('./pages/minimal-page/minimal-page').then((module) => module.MinimalPage);
 const uiKitPage = () => import('./pages/ui-kit/ui-kit').then((module) => module.UiKit);
+const legalPage = () => import('./pages/legal/legal').then((module) => module.Legal);
 
 export const routes: Routes = [
   {
@@ -93,21 +92,29 @@ export const routes: Routes = [
   },
   {
     path: 'contacto',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/contacto/contacto').then((module) => module.Contacto),
     title: pt.pages.contact,
     data: { headingKey: 'pages.contact', seo: { description: pt.seo.contact } },
   },
   {
     path: 'politica-de-privacidade',
-    loadComponent: minimalPage,
+    loadComponent: legalPage,
     title: pt.pages.privacy,
-    data: { headingKey: 'pages.privacy', seo: { description: pt.seo.privacy } },
+    data: {
+      headingKey: 'pages.privacy',
+      legalDocument: 'privacy',
+      seo: { description: pt.seo.privacy },
+    },
   },
   {
     path: 'termos-e-condicoes',
-    loadComponent: minimalPage,
+    loadComponent: legalPage,
     title: pt.pages.terms,
-    data: { headingKey: 'pages.terms', seo: { description: pt.seo.terms } },
+    data: {
+      headingKey: 'pages.terms',
+      legalDocument: 'terms',
+      seo: { description: pt.seo.terms },
+    },
   },
   {
     path: 'ui-kit',
@@ -121,7 +128,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/not-found/not-found').then((module) => module.NotFound),
     title: pt.pages.notFound,
     data: {
       headingKey: 'pages.notFound',

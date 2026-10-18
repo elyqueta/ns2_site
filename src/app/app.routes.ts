@@ -77,13 +77,14 @@ export const routes: Routes = [
   {
     path: 'parceiros',
     pathMatch: 'full',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/parceiros/parceiros').then((module) => module.Parceiros),
     title: pt.pages.partners,
     data: { headingKey: 'pages.partners', seo: { description: pt.seo.partners } },
   },
   {
     path: 'parceiros/:slug',
-    loadComponent: minimalPage,
+    loadComponent: () =>
+      import('./pages/parceiro-detalhe/parceiro-detalhe').then((module) => module.ParceiroDetalhe),
     title: pt.pages.partnerDetail,
     data: {
       headingKey: 'pages.partnerDetail',

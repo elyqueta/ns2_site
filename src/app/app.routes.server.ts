@@ -1,5 +1,6 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { noticias } from './data/noticias';
+import { parceiros } from './data/parceiros';
 import { servicos } from './data/servicos';
 
 export const serverRoutes: ServerRoute[] = [
@@ -23,7 +24,7 @@ export const serverRoutes: ServerRoute[] = [
     path: 'parceiros/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      return [];
+      return parceiros.map((partner) => ({ slug: partner.slug }));
     },
   },
   {

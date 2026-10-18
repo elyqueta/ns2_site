@@ -1,3 +1,24 @@
 <section class="bg-surface py-5 sm:py-7" [attr.aria-label]="copy.label.pt">
-  <app-marquee [items]="copy.items" [label]="copy.label.pt" />
+  <ul
+    class="hidden flex-wrap items-center justify-center gap-x-10 gap-y-4 border-y border-line px-6 py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted md:flex lg:gap-x-14"
+  >
+    @for (brand of copy.items; track brand) {
+      <li class="shrink-0">{{ brand }}</li>
+    }
+  </ul>
+
+  <div
+    class="overflow-x-auto overscroll-x-contain border-y border-line py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:hidden"
+    role="region"
+    tabindex="0"
+    [attr.aria-label]="copy.label.pt"
+  >
+    <ul
+      class="flex w-max snap-x snap-mandatory flex-nowrap items-center gap-8 px-6 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
+    >
+      @for (brand of copy.items; track brand) {
+        <li class="shrink-0 snap-start">{{ brand }}</li>
+      }
+    </ul>
+  </div>
 </section>

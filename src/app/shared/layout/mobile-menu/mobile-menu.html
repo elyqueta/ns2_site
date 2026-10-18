@@ -1,8 +1,11 @@
-@if (open()) {
+@if (rendered()) {
   <div
     #panel
+    [appMobileMenuMotion]="open()"
+    (closed)="finishClosing()"
     id="mobile-navigation"
-    class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 xl:hidden"
+    data-lenis-prevent
+    class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto overscroll-y-contain bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 xl:hidden"
     role="dialog"
     aria-modal="true"
     [attr.aria-label]="menuLabel"
@@ -37,11 +40,12 @@
     </div>
 
     <nav class="my-auto py-12" [attr.aria-label]="menuLabel">
-      <ul appRevealChildren class="grid">
+      <ul class="grid">
         @for (item of items(); track item.href) {
           <li>
             <a
-              class="block border-b border-line py-3 font-display text-h2 font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
+              data-menu-link
+              class="block whitespace-nowrap border-b border-line py-3 font-display text-[clamp(1.25rem,5.6vw,2.5rem)] font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
               [routerLink]="item.href"
               routerLinkActive="text-accent-bright"
               [routerLinkActiveOptions]="{ exact: item.href === '/' }"

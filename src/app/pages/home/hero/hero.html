@@ -72,9 +72,10 @@
   </div>
 
   <a
-    class="absolute bottom-7 left-1/2 inline-flex min-h-11 -translate-x-1/2 items-center gap-3 rounded-full border border-line bg-surface/80 px-4 text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted backdrop-blur transition-colors hover:text-fg focus-visible:outline-offset-4"
+    class="absolute bottom-7 left-1/2 inline-flex min-h-11 -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-line bg-surface/80 px-4 text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted backdrop-blur transition-colors hover:text-fg focus-visible:outline-offset-4"
     href="#home-about"
     [attr.aria-label]="copy.scrollLabel.pt"
+    (click)="scrollToAbout($event)"
   >
     {{ copy.scrollLabel.pt }}
     <app-icon name="arrow" class="rotate-90" />

@@ -15,7 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'sobre',
-    loadComponent: minimalPage,
+    loadComponent: () => import('./pages/sobre/sobre').then((module) => module.Sobre),
     title: pt.pages.about,
     data: { headingKey: 'pages.about', seo: { description: pt.seo.about } },
   },

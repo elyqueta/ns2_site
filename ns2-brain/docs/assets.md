@@ -32,7 +32,7 @@ Regras: não alterar formas/cores; respeitar área de respiro; altura mínima do
 | Ficheiro sugerido | Onde | Descrição | Estado |
 |---|---|---|---|
 | `hero/hero-home.webp` | Home hero (opcional; o hero base é gradiente+SVG) | Ambiente tecnológico escuro, sem pessoas ou com técnicos angolanos | pendente |
-| `sobre/equipa.webp` | Home / Sobre | Equipa NS2 (real) | pendente |
+| `public/images/equipa.jpeg` | Home / Sobre | Fotografia fornecida pelo utilizador para a secção da equipa na Home | disponível; usada na Home |
 | `sobre/escritorio.webp` | Sobre | Escritório/loja NS2 | pendente |
 | `servicos/<slug>.webp` ×8 | Detalhe de serviço | Uma por serviço (rack, técnico, manutenção, contrato, consultoria, código, equipamentos) | pendente |
 | `produtos/<categoria>.webp` ×6 | Produtos | Notebooks, desktops, peças, acessórios, móveis, consumíveis | pendente |

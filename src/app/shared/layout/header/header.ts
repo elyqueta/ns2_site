@@ -49,6 +49,9 @@ export class Header {
 
   closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  focusMenuTrigger(): void {
     this.menuTrigger()?.nativeElement.focus();
   }
 }

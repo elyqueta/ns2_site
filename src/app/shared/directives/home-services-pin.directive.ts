@@ -26,7 +26,7 @@ export class HomeServicesPin {
       ease: 'none',
       scrollTrigger: {
         trigger: element,
-        start: 'top top+=80',
+        start: 'top top+=112',
         end: () => `+=${scrollLength()}`,
         pin: true,
         pinSpacing: true,

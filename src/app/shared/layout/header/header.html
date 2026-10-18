@@ -27,7 +27,7 @@
     <nav class="hidden items-center gap-5 xl:flex" [attr.aria-label]="navigationLabel">
       @for (item of navigation; track item.href) {
         <a
-          class="min-h-11 content-center text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+          class="min-h-11 whitespace-nowrap content-center text-sm font-medium text-fg-muted transition-colors hover:text-fg"
           [routerLink]="item.href"
           routerLinkActive="text-accent-bright"
           [routerLinkActiveOptions]="{ exact: item.href === '/' }"
@@ -66,4 +66,9 @@
     </div>
   </div>
 </header>
-<app-mobile-menu [open]="menuOpen()" [items]="navigation" (close)="closeMenu()" />
+<app-mobile-menu
+  [open]="menuOpen()"
+  [items]="navigation"
+  (close)="closeMenu()"
+  (closed)="focusMenuTrigger()"
+/>

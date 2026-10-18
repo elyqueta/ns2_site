@@ -12,9 +12,9 @@ import {
   viewChild,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MobileMenuMotion } from '../../directives/mobile-menu-motion.directive';
 import { I18nService } from '../../../core/i18n.service';
 import { ScrollService } from '../../../core/scroll.service';
-import { RevealChildren } from '../../directives/reveal-children.directive';
 import { Icon } from '../../ui/icon/icon';
 import { ThemeToggle } from '../../ui/theme-toggle/theme-toggle';
 
@@ -26,7 +26,7 @@ interface MobileNavigationItem {
 
 @Component({
   selector: 'app-mobile-menu',
-  imports: [Icon, RevealChildren, RouterLink, RouterLinkActive, ThemeToggle],
+  imports: [Icon, MobileMenuMotion, RouterLink, RouterLinkActive, ThemeToggle],
   templateUrl: './mobile-menu.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -37,25 +37,43 @@ export class MobileMenu {
   readonly open = input(false);
   readonly items = input.required<readonly MobileNavigationItem[]>();
   readonly close = output<void>();
+  readonly closed = output<void>();
   readonly panel = viewChild<ElementRef<HTMLElement>>('panel');
   readonly browserReady = signal(false);
+  readonly rendered = signal(false);
   readonly menuLabel = this.i18n.t('actions.mobileNavigation');
   readonly closeLabel = this.i18n.t('actions.closeMenu');
 
   private readonly renderCallback = afterNextRender(() => this.browserReady.set(true));
+  private readonly renderEffect = effect(() => {
+    if (!this.open()) {
+      return;
+    }
+
+    this.rendered.set(true);
+    queueMicrotask(() => this.panel()?.nativeElement.querySelector<HTMLElement>('a')?.focus());
+  });
   private readonly scrollEffect = effect(() => {
     if (!this.browserReady()) {
       return;
     }
 
-    if (this.open()) {
+    if (this.rendered()) {
       this.scroll.stop();
-      queueMicrotask(() => this.panel()?.nativeElement.querySelector<HTMLElement>('a')?.focus());
     } else {
       this.scroll.start();
     }
   });
   private readonly destroyCallback = this.destroyRef.onDestroy(() => this.scroll.start());
+
+  finishClosing(): void {
+    if (this.open()) {
+      return;
+    }
+
+    this.rendered.set(false);
+    this.closed.emit();
+  }
 
   handleKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {

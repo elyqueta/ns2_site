@@ -17,6 +17,7 @@ export interface ScrollToOptions {
   readonly immediate?: boolean;
   readonly offset?: number;
   readonly duration?: number;
+  readonly easing?: (progress: number) => number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -82,13 +83,29 @@ export class ScrollService {
       return;
     }
 
+    const behavior = options.immediate || this.animation.reducedMotion() ? 'auto' : 'smooth';
     if (typeof target === 'number') {
-      this.document.defaultView?.scrollTo({ top: target, behavior: 'auto' });
+      this.document.defaultView?.scrollTo({
+        top: target + (options.offset ?? 0),
+        behavior,
+      });
       return;
     }
 
     const element = typeof target === 'string' ? this.document.querySelector(target) : target;
-    element?.scrollIntoView({ behavior: 'auto' });
+    if (!element) {
+      return;
+    }
+
+    const view = this.document.defaultView;
+    if (!view) {
+      return;
+    }
+
+    view.scrollTo({
+      top: element.getBoundingClientRect().top + view.scrollY + (options.offset ?? 0),
+      behavior,
+    });
   }
 
   stop(): void {

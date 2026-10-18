@@ -28,9 +28,9 @@ export const homeContent = {
     } satisfies LocalizedText,
     linkLabel: { pt: 'Conheça a NS2' } satisfies LocalizedText,
     imageAlt: {
-      pt: 'Espaço reservado para imagem da equipa NS2 Innovation',
+      pt: 'Equipa a colaborar em frente a computadores num ambiente de trabalho.',
     } satisfies LocalizedText,
-    expectedFile: { pt: 'sobre/equipa.webp' } satisfies LocalizedText,
+    expectedFile: { pt: 'public/images/equipa.jpeg' } satisfies LocalizedText,
   },
   services: {
     index: { pt: '02 — O que fazemos' } satisfies LocalizedText,

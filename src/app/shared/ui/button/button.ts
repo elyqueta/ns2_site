@@ -32,7 +32,7 @@ export class Button {
     };
 
     return [
-      'inline-flex min-h-11 items-center justify-center gap-2 rounded-button font-semibold transition-colors focus-visible:outline-offset-4',
+      'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-button font-semibold transition-colors focus-visible:outline-offset-4',
       variantClasses[this.variant()],
       sizeClasses[this.size()],
     ].join(' ');

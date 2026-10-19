@@ -30,8 +30,16 @@ export const contactMapContent = {
   zoomOut: 'Diminuir o zoom do mapa',
   recenter: 'Recentralizar o mapa na NS2 Innovation',
   originLabel: 'Ponto de partida (opcional)',
-  originPlaceholder: 'Escreva uma morada ou local',
-  originHelp: 'O ponto de partida será enviado ao Google Maps, que calcula a rota.',
+  originPlaceholder: 'Escreva uma morada, bairro ou local',
+  originHelp:
+    'Escreva pelo menos 3 caracteres e escolha uma sugestão, ou envie o texto directamente ao Google Maps.',
+  originSearchLoading: 'A procurar locais…',
+  originSearchEmpty: 'Não encontrámos sugestões. Pode continuar a escrever ou abrir o Google Maps.',
+  originSearchUnavailable:
+    'A pesquisa de locais está indisponível. Pode continuar a escrever ou abrir o Google Maps.',
+  originSearchNotConfigured:
+    'As sugestões ainda não estão configuradas. Pode escrever o local e abrir o Google Maps.',
+  googleMapsAttribution: 'Google Maps',
   approximationNotice:
     'O marcador usa coordenadas aproximadas da zona do Gamek; confirme o ponto exacto antes de se deslocar.',
   googleMapsLabel: 'Traçar rota no Google Maps',

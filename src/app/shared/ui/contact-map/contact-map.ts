@@ -27,6 +27,11 @@ export interface ContactMapCopy {
   readonly originLabel: string;
   readonly originPlaceholder: string;
   readonly originHelp: string;
+  readonly originSearchLoading: string;
+  readonly originSearchEmpty: string;
+  readonly originSearchUnavailable: string;
+  readonly originSearchNotConfigured: string;
+  readonly googleMapsAttribution: string;
   readonly approximationNotice: string;
   readonly googleMapsLabel: string;
   readonly mapLoading: string;
@@ -45,6 +50,84 @@ export interface ContactMapCopy {
 type MapStatus = 'loading' | 'ready' | 'unavailable';
 type LocationStatus =
   'idle' | 'loading' | 'success' | 'denied' | 'unavailable' | 'timeout' | 'unsupported';
+type OriginSearchStatus = 'idle' | 'loading' | 'ready' | 'empty' | 'unavailable' | 'not-configured';
+
+interface OriginSuggestion {
+  readonly placeId: string;
+  readonly text: string;
+  readonly mainText: string;
+  readonly secondaryText: string;
+}
+
+interface GooglePlacesLibrary {
+  readonly AutocompleteSuggestion: {
+    readonly fetchAutocompleteSuggestions: (request: {
+      readonly input: string;
+      readonly language: string;
+      readonly region: string;
+    }) => Promise<unknown>;
+  };
+}
+
+declare global {
+  interface Window {
+    google?: {
+      maps?: {
+        importLibrary?: (name: 'places') => Promise<unknown>;
+      };
+    };
+  }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
+function isGooglePlacesLibrary(value: unknown): value is GooglePlacesLibrary {
+  if (!isRecord(value) || !isRecord(value['AutocompleteSuggestion'])) {
+    return false;
+  }
+  return typeof value['AutocompleteSuggestion']['fetchAutocompleteSuggestions'] === 'function';
+}
+
+function formattedText(value: unknown): string {
+  if (typeof value === 'string') {
+    return value;
+  }
+  return isRecord(value) && typeof value['text'] === 'string' ? value['text'] : '';
+}
+
+function readOriginSuggestions(response: unknown): readonly OriginSuggestion[] {
+  if (!isRecord(response) || !Array.isArray(response['suggestions'])) {
+    throw new Error('Google Places returned an invalid autocomplete response.');
+  }
+
+  return response['suggestions'].flatMap((item): OriginSuggestion[] => {
+    if (!isRecord(item) || !isRecord(item['placePrediction'])) {
+      return [];
+    }
+    const prediction = item['placePrediction'];
+    const placeId = prediction['placeId'];
+    const text = formattedText(prediction['text']);
+    if (typeof placeId !== 'string' || !text) {
+      return [];
+    }
+
+    const structuredFormat = isRecord(prediction['structuredFormat'])
+      ? prediction['structuredFormat']
+      : {};
+    const mainText = formattedText(structuredFormat['mainText']) || text;
+
+    return [
+      {
+        placeId,
+        text,
+        mainText,
+        secondaryText: formattedText(structuredFormat['secondaryText']),
+      },
+    ];
+  });
+}
 
 @Component({
   selector: 'app-contact-map',
@@ -63,12 +146,40 @@ export class ContactMap {
   private observer: IntersectionObserver | null = null;
   private mapLoading = false;
   private mapLoadTimeout: ReturnType<typeof setTimeout> | null = null;
+  private originSearchTimer: ReturnType<typeof setTimeout> | null = null;
+  private originSearchVersion = 0;
+  private placesLibrary: GooglePlacesLibrary | null = null;
+  private placesLibraryPromise: Promise<GooglePlacesLibrary> | null = null;
 
   readonly config = input.required<ContactMapConfig>();
   readonly copy = input.required<ContactMapCopy>();
   readonly mapStatus = signal<MapStatus>('loading');
   readonly locationStatus = signal<LocationStatus>('idle');
   readonly manualOrigin = signal('');
+  readonly selectedOriginPlaceId = signal<string | null>(null);
+  readonly originSuggestions = signal<readonly OriginSuggestion[]>([]);
+  readonly activeOriginSuggestion = signal(-1);
+  readonly originSearchStatus = signal<OriginSearchStatus>('idle');
+  readonly originSearchMessage = computed(() => {
+    switch (this.originSearchStatus()) {
+      case 'loading':
+        return this.copy().originSearchLoading;
+      case 'empty':
+        return this.copy().originSearchEmpty;
+      case 'unavailable':
+        return this.copy().originSearchUnavailable;
+      case 'not-configured':
+        return this.copy().originSearchNotConfigured;
+      default:
+        return '';
+    }
+  });
+  readonly activeOriginSuggestionId = computed(() => {
+    const index = this.activeOriginSuggestion();
+    return index >= 0 && index < this.originSuggestions().length
+      ? `contact-origin-option-${index}`
+      : null;
+  });
   readonly straightDistanceKm = signal<number | null>(null);
   readonly straightDistanceLabel = computed(() => {
     const distance = this.straightDistanceKm();
@@ -84,7 +195,13 @@ export class ContactMap {
     const { latitude, longitude } = this.config();
     const origin = this.manualOrigin().trim();
     const destination = `${latitude},${longitude}`;
-    const originParameter = origin ? `&origin=${encodeURIComponent(origin)}` : '';
+    const originParameter = origin
+      ? `&origin=${encodeURIComponent(origin)}${
+          this.selectedOriginPlaceId()
+            ? `&origin_place_id=${encodeURIComponent(this.selectedOriginPlaceId() ?? '')}`
+            : ''
+        }`
+      : '';
     return `https://www.google.com/maps/dir/?api=1&destination=${destination}${originParameter}`;
   });
 
@@ -121,6 +238,8 @@ export class ContactMap {
       this.map?.remove();
       this.map = null;
       this.clearMapLoadTimeout();
+      this.clearOriginSearchTimer();
+      this.originSearchVersion += 1;
     });
   }
 
@@ -129,10 +248,58 @@ export class ContactMap {
     const Input = this.document.defaultView?.HTMLInputElement;
     if (Input && target instanceof Input) {
       this.manualOrigin.set(target.value);
+      this.selectedOriginPlaceId.set(null);
+      this.locationStatus.set('idle');
+      this.visitorMarker?.remove();
+      this.visitorMarker = null;
+      this.straightDistanceKm.set(null);
+      this.scheduleOriginSearch(target.value.trim());
     }
   }
 
+  handleOriginKeydown(event: KeyboardEvent): void {
+    const suggestionCount = this.originSuggestions().length;
+    if (event.key === 'ArrowDown' && suggestionCount > 0) {
+      event.preventDefault();
+      this.activeOriginSuggestion.update((index) => (index >= suggestionCount - 1 ? 0 : index + 1));
+    } else if (event.key === 'ArrowUp' && suggestionCount > 0) {
+      event.preventDefault();
+      this.activeOriginSuggestion.update((index) => (index <= 0 ? suggestionCount - 1 : index - 1));
+    } else if (event.key === 'Enter' && this.activeOriginSuggestion() >= 0) {
+      event.preventDefault();
+      const suggestion = this.originSuggestions()[this.activeOriginSuggestion()];
+      if (suggestion) {
+        this.selectOrigin(suggestion);
+      }
+    } else if (event.key === 'Escape') {
+      this.closeOriginSuggestions();
+    }
+  }
+
+  selectOrigin(suggestion: OriginSuggestion): void {
+    this.manualOrigin.set(suggestion.text);
+    this.selectedOriginPlaceId.set(suggestion.placeId);
+    this.locationStatus.set('idle');
+    this.visitorMarker?.remove();
+    this.visitorMarker = null;
+    this.straightDistanceKm.set(null);
+    this.closeOriginSuggestions();
+  }
+
+  keepOriginInputFocused(event: MouseEvent): void {
+    event.preventDefault();
+  }
+
+  closeOriginSuggestions(): void {
+    this.clearOriginSearchTimer();
+    this.originSearchVersion += 1;
+    this.originSuggestions.set([]);
+    this.activeOriginSuggestion.set(-1);
+    this.originSearchStatus.set('idle');
+  }
+
   requestLocation(): void {
+    this.closeOriginSuggestions();
     const view = this.document.defaultView;
     if (!view?.isSecureContext || !view.navigator.geolocation || !this.map) {
       this.locationStatus.set('unsupported');
@@ -294,6 +461,7 @@ export class ContactMap {
       .setLngLat([longitude, latitude])
       .addTo(map);
     this.manualOrigin.set(`${latitude},${longitude}`);
+    this.selectedOriginPlaceId.set(null);
     const { latitude: officeLatitude, longitude: officeLongitude } = this.config();
     this.straightDistanceKm.set(
       this.distanceInKm(latitude, longitude, officeLatitude, officeLongitude),
@@ -316,6 +484,120 @@ export class ContactMap {
       this.locationStatus.set('timeout');
     } else {
       this.locationStatus.set('unavailable');
+    }
+  }
+
+  private scheduleOriginSearch(query: string): void {
+    this.clearOriginSearchTimer();
+    this.originSearchVersion += 1;
+    const version = this.originSearchVersion;
+    this.originSuggestions.set([]);
+    this.activeOriginSuggestion.set(-1);
+
+    if (query.length < 3) {
+      this.originSearchStatus.set('idle');
+      return;
+    }
+    if (!this.googlePlacesApiKey()) {
+      this.originSearchStatus.set('not-configured');
+      return;
+    }
+
+    this.originSearchStatus.set('loading');
+    this.originSearchTimer = setTimeout(() => {
+      void this.searchOrigins(query, version);
+    }, 300);
+  }
+
+  private async searchOrigins(query: string, version: number): Promise<void> {
+    try {
+      const places = await this.loadGooglePlaces();
+      const response = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
+        input: query,
+        language: 'pt',
+        region: 'ao',
+      });
+      if (version !== this.originSearchVersion) {
+        return;
+      }
+
+      const suggestions = readOriginSuggestions(response);
+      this.originSuggestions.set(suggestions);
+      this.activeOriginSuggestion.set(-1);
+      this.originSearchStatus.set(suggestions.length > 0 ? 'ready' : 'empty');
+    } catch {
+      if (version === this.originSearchVersion) {
+        this.originSuggestions.set([]);
+        this.activeOriginSuggestion.set(-1);
+        this.originSearchStatus.set('unavailable');
+      }
+    }
+  }
+
+  private loadGooglePlaces(): Promise<GooglePlacesLibrary> {
+    if (this.placesLibrary) {
+      return Promise.resolve(this.placesLibrary);
+    }
+    if (this.placesLibraryPromise) {
+      return this.placesLibraryPromise;
+    }
+
+    const apiKey = this.googlePlacesApiKey();
+    const view = this.document.defaultView;
+    if (!apiKey || !view) {
+      return Promise.reject(new Error('Google Places API key is not configured.'));
+    }
+
+    this.placesLibraryPromise = this.initializeGooglePlaces(view, apiKey).catch(
+      (error: unknown) => {
+        this.placesLibraryPromise = null;
+        throw error;
+      },
+    );
+    return this.placesLibraryPromise;
+  }
+
+  private async initializeGooglePlaces(view: Window, apiKey: string): Promise<GooglePlacesLibrary> {
+    if (!view.google?.maps?.importLibrary) {
+      await new Promise<void>((resolve, reject) => {
+        const script = view.document.createElement('script');
+        script.async = true;
+        script.referrerPolicy = 'strict-origin-when-cross-origin';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&v=weekly&loading=async`;
+        script.addEventListener('load', () => resolve(), { once: true });
+        script.addEventListener(
+          'error',
+          () => reject(new Error('Google Maps JavaScript API could not be loaded.')),
+          { once: true },
+        );
+        view.document.head.append(script);
+      });
+    }
+
+    const importLibrary = view.google?.maps?.importLibrary;
+    if (!importLibrary || !view.google?.maps) {
+      throw new Error('Google Maps Places library is unavailable.');
+    }
+    const library = await importLibrary.call(view.google.maps, 'places');
+    if (!isGooglePlacesLibrary(library)) {
+      throw new Error('Google Maps Places library returned an unexpected result.');
+    }
+    this.placesLibrary = library;
+    return library;
+  }
+
+  private googlePlacesApiKey(): string {
+    return (
+      this.document
+        .querySelector<HTMLMetaElement>('meta[name="google-maps-places-api-key"]')
+        ?.content.trim() ?? ''
+    );
+  }
+
+  private clearOriginSearchTimer(): void {
+    if (this.originSearchTimer !== null) {
+      clearTimeout(this.originSearchTimer);
+      this.originSearchTimer = null;
     }
   }
 

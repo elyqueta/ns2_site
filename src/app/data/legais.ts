@@ -27,6 +27,7 @@ export const legalDocuments = {
         title: '2. Dados que pode partilhar',
         paragraphs: [
           'O site não recolhe nem armazena dados pessoais em servidores próprios. Ao contactar-nos por WhatsApp ou email, pode escolher incluir dados como o nome, telefone, endereço de email, empresa e informação sobre o pedido.',
+          'Se usar as sugestões de ponto de partida no mapa, o texto que escrever é enviado directamente ao Google Maps Platform para apresentar resultados. A NS2 Innovation não o guarda; o tratamento pelo Google rege-se pelas políticas do próprio serviço.',
         ],
       },
       {
@@ -44,7 +45,7 @@ export const legalDocuments = {
       {
         title: '5. Serviços de terceiros',
         paragraphs: [
-          'A abertura do WhatsApp e do programa de email ocorre nos serviços escolhidos pelo visitante. Esses serviços têm as suas próprias políticas de privacidade.',
+          'As sugestões de locais e a abertura de rotas usam serviços do Google Maps Platform. A abertura do WhatsApp e do programa de email ocorre nos serviços escolhidos pelo visitante. Cada fornecedor aplica as suas próprias políticas de privacidade.',
         ],
       },
       {

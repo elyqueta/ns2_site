@@ -171,7 +171,7 @@ export const partnersPageContent = {
     pt: 'A marca que procura não está disponível nesta página.',
   } satisfies LocalizedText,
   allPartnersLabel: { pt: 'Ver todas as marcas' } satisfies LocalizedText,
-  contactWhatsappLabel: { pt: 'Falar connosco por WhatsApp' } satisfies LocalizedText,
+  contactWhatsappLabel: { pt: 'Falar connosco' } satisfies LocalizedText,
   contactPageLabel: { pt: 'Ver contacto' } satisfies LocalizedText,
   whatsappLabel: { pt: 'Pedir orçamento' } satisfies LocalizedText,
   contactLabel: { pt: 'Contactar' } satisfies LocalizedText,

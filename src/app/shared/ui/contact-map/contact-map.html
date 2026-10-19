@@ -91,17 +91,73 @@
         >
           {{ copy().locationButton }}
         </button>
-        <label class="grid gap-2 text-sm font-semibold text-fg" for="contact-map-origin">
-          {{ copy().originLabel }}
+        <div class="relative grid gap-2">
+          <label class="text-sm font-semibold text-fg" for="contact-map-origin">
+            {{ copy().originLabel }}
+          </label>
           <input
             id="contact-map-origin"
             class="min-h-11 rounded-xl border border-line bg-surface-2 px-4 py-3 font-normal text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
             type="text"
+            role="combobox"
+            aria-autocomplete="list"
+            autocomplete="off"
+            [attr.aria-controls]="originSuggestions().length ? 'contact-origin-suggestions' : null"
+            [attr.aria-expanded]="originSuggestions().length > 0"
+            [attr.aria-activedescendant]="activeOriginSuggestionId()"
             [placeholder]="copy().originPlaceholder"
             [value]="manualOrigin()"
             (input)="updateOrigin($event)"
+            (keydown)="handleOriginKeydown($event)"
+            (blur)="closeOriginSuggestions()"
           />
-        </label>
+          @if (originSuggestions().length > 0 || originSearchMessage()) {
+            <div
+              class="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-xl border border-line bg-surface shadow-xl"
+            >
+              @if (originSuggestions().length > 0) {
+                <ul
+                  id="contact-origin-suggestions"
+                  class="max-h-64 overflow-y-auto py-1"
+                  role="listbox"
+                >
+                  @for (
+                    suggestion of originSuggestions();
+                    track suggestion.placeId;
+                    let index = $index
+                  ) {
+                    <li role="presentation">
+                      <button
+                        [id]="'contact-origin-option-' + index"
+                        class="grid min-h-12 w-full gap-0.5 px-4 py-2 text-left text-sm text-fg transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-none"
+                        type="button"
+                        role="option"
+                        [attr.aria-selected]="activeOriginSuggestion() === index"
+                        (mousedown)="keepOriginInputFocused($event)"
+                        (click)="selectOrigin(suggestion)"
+                      >
+                        <span class="font-medium">{{ suggestion.mainText }}</span>
+                        @if (suggestion.secondaryText) {
+                          <span class="text-xs text-fg-muted">{{ suggestion.secondaryText }}</span>
+                        }
+                      </button>
+                    </li>
+                  }
+                </ul>
+              }
+              @if (originSearchMessage()) {
+                <p class="px-4 py-3 text-sm text-fg-muted" role="status" aria-live="polite">
+                  {{ originSearchMessage() }}
+                </p>
+              }
+              @if (originSuggestions().length > 0) {
+                <p class="border-t border-line px-4 py-2 text-right text-xs text-fg-muted">
+                  {{ copy().googleMapsAttribution }}
+                </p>
+              }
+            </div>
+          }
+        </div>
         <p class="text-xs leading-relaxed text-fg-muted">{{ copy().originHelp }}</p>
         <a
           class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 text-center font-semibold text-fg transition-colors hover:bg-surface-2 focus-visible:outline-offset-4"

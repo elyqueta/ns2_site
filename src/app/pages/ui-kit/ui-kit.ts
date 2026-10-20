@@ -1,15 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  OnDestroy,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AnimationService } from '../../core/animation.service';
+import { SeoService } from '../../core/seo.service';
 import { Accordion, AccordionItem } from '../../shared/ui/accordion/accordion';
 import { Badge } from '../../shared/ui/badge/badge';
 import { BreadcrumbItem } from '../../shared/ui/breadcrumb/breadcrumb';
@@ -98,8 +90,8 @@ interface PaletteToken {
   templateUrl: './ui-kit.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiKit implements OnInit, OnDestroy {
-  private readonly meta = inject(Meta);
+export class UiKit {
+  private readonly seo = inject(SeoService);
   private readonly whatsapp = inject(WhatsappService);
   readonly animation = inject(AnimationService);
 
@@ -240,10 +232,6 @@ export class UiKit implements OnInit, OnDestroy {
   readonly whatsappUrl = this.whatsapp.createWhatsappUrl(this.copy.ctaDescription);
 
   ngOnInit(): void {
-    this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
-  }
-
-  ngOnDestroy(): void {
-    this.meta.removeTag('name="robots"');
+    this.seo.setPage(pt.pages.uiKit, pt.seo.uiKit, { robots: 'noindex, nofollow' });
   }
 }

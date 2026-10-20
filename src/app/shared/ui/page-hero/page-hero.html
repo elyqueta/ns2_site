@@ -6,11 +6,29 @@
     @if (breadcrumbs().length > 0) {
       <app-breadcrumb [items]="breadcrumbs()" [current]="current()" [label]="breadcrumbLabel()" />
     }
-    <h1
-      class="mt-10 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight text-fg"
-    >
-      {{ title() }}
-    </h1>
+    @switch (headingLevel()) {
+      @case ('h1') {
+        <h1
+          class="mt-10 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight text-fg"
+        >
+          {{ title() }}
+        </h1>
+      }
+      @case ('h2') {
+        <h2
+          class="mt-10 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight text-fg"
+        >
+          {{ title() }}
+        </h2>
+      }
+      @case ('h3') {
+        <h3
+          class="mt-10 max-w-5xl font-display text-display font-semibold leading-[0.98] tracking-tight text-fg"
+        >
+          {{ title() }}
+        </h3>
+      }
+    }
     <p class="mt-6 max-w-[62ch] text-lead leading-relaxed text-fg-muted">{{ lead() }}</p>
   </div>
 </header>

@@ -1,8 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SeoService } from '../../core/seo.service';
+import { SITE_ORIGIN } from '../../core/site-origin';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { contactDetails, contactInterests, contactPageContent } from '../../data/contacto';
 import { contactMapConfig, contactMapContent } from '../../data/map.config';
@@ -10,6 +12,7 @@ import { webPacotes } from '../../data/web-pacotes';
 import { ContactMap } from '../../shared/ui/contact-map/contact-map';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
+import { pt } from '../../i18n/pt';
 
 type ContactField = 'name' | 'phone' | 'email' | 'interest' | 'message' | 'consent';
 
@@ -23,6 +26,7 @@ export class Contacto {
   private readonly formBuilder = inject(FormBuilder).nonNullable;
   private readonly route = inject(ActivatedRoute);
   private readonly document = inject(DOCUMENT);
+  private readonly seo = inject(SeoService);
   private readonly whatsapp = inject(WhatsappService);
   private readonly queryParams = toSignal(this.route.queryParamMap, {
     initialValue: this.route.snapshot.queryParamMap,
@@ -44,6 +48,14 @@ export class Contacto {
     interest: ['', Validators.required],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]],
     consent: [false, Validators.requiredTrue],
+  });
+  private readonly seoEffect = effect(() => {
+    this.seo.setPage(pt.pages.contact, contactPageContent.lead, {
+      breadcrumbs: [
+        { name: contactPageContent.homeLabel, url: `${SITE_ORIGIN}/` },
+        { name: pt.pages.contact, url: `${SITE_ORIGIN}/contacto` },
+      ],
+    });
   });
 
   constructor() {

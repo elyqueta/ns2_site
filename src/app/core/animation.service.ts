@@ -115,7 +115,11 @@ export class AnimationService {
     this.registrations.add(registration);
 
     if (this.runtime) {
-      this.activate(registration, this.currentMode());
+      afterNextRender(() => {
+        if (this.registrations.has(registration)) {
+          this.activate(registration, this.currentMode());
+        }
+      });
     }
 
     return () => {

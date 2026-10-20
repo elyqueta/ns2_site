@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SeoService } from '../../core/seo.service';
+import { SITE_ORIGIN } from '../../core/site-origin';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { partnersPageContent, parceiros } from '../../data/parceiros';
 import { pt } from '../../i18n/pt';
@@ -66,6 +67,15 @@ export class ParceiroDetalhe {
       return;
     }
 
-    this.seo.setPage(`${partner.nome} | ${pt.pages.partners} | NS2 Innovation`, partner.resumo.pt);
+    this.seo.setPage(`${partner.nome} | ${pt.pages.partners} | NS2 Innovation`, partner.resumo.pt, {
+      breadcrumbs: [
+        { name: partnersPageContent.homeLabel.pt, url: `${SITE_ORIGIN}/` },
+        {
+          name: partnersPageContent.title.pt,
+          url: `${SITE_ORIGIN}/parceiros`,
+        },
+        { name: partner.nome, url: `${SITE_ORIGIN}${partner.href}` },
+      ],
+    });
   });
 }

@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SeoService } from '../../core/seo.service';
+import { SITE_ORIGIN } from '../../core/site-origin';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { Servico, servicesPageContent, servicos } from '../../data/servicos';
 import { pt } from '../../i18n/pt';
@@ -68,7 +69,13 @@ export class ServicoDetalhe {
       return;
     }
 
-    this.seo.setPage(`${service.titulo.pt} | NS2 Innovation`, service.resumo.pt);
+    this.seo.setPage(`${service.titulo.pt} | NS2 Innovation`, service.resumo.pt, {
+      breadcrumbs: [
+        { name: this.copy.homeLabel.pt, url: `${SITE_ORIGIN}/` },
+        { name: this.copy.title.pt, url: `${SITE_ORIGIN}/servicos` },
+        { name: service.titulo.pt, url: `${SITE_ORIGIN}${service.href}` },
+      ],
+    });
     this.seo.setJsonLd('service-json-ld', this.serviceStructuredData(service));
   });
   private readonly cleanup = this.destroyRef.onDestroy(() =>
@@ -82,11 +89,11 @@ export class ServicoDetalhe {
       name: service.titulo.pt,
       description: service.resumo.pt,
       serviceType: service.titulo.pt,
-      url: `https://www.ns2innovation.com${service.href}`,
+      url: `${SITE_ORIGIN}${service.href}`,
       provider: {
         '@type': 'Organization',
         name: 'NS2 Innovation',
-        url: 'https://www.ns2innovation.com',
+        url: SITE_ORIGIN,
       },
     };
   }

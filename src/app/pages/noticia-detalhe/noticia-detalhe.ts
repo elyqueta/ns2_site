@@ -12,6 +12,7 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SeoService } from '../../core/seo.service';
+import { SITE_ORIGIN } from '../../core/site-origin';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { Noticia, newsPageContent, noticias } from '../../data/noticias';
 import { pt } from '../../i18n/pt';
@@ -84,7 +85,7 @@ export class NoticiaDetalhe {
     if (!article) {
       return '';
     }
-    const url = `https://www.ns2innovation.com${article.href}`;
+    const url = `${SITE_ORIGIN}${article.href}`;
     return this.whatsapp.createWhatsappUrl(`${article.titulo.pt} ${url}`);
   });
   readonly ctaWhatsappUrl = this.whatsapp.createWhatsappUrl(this.copy.quoteMessage.pt);
@@ -101,7 +102,14 @@ export class NoticiaDetalhe {
       return;
     }
 
-    this.seo.setPage(`${article.titulo.pt} | NS2 Innovation`, article.resumo.pt);
+    this.seo.setPage(`${article.titulo.pt} | NS2 Innovation`, article.resumo.pt, {
+      type: 'article',
+      breadcrumbs: [
+        { name: this.copy.homeLabel.pt, url: `${SITE_ORIGIN}/` },
+        { name: this.copy.title.pt, url: `${SITE_ORIGIN}/noticias` },
+        { name: article.titulo.pt, url: `${SITE_ORIGIN}${article.href}` },
+      ],
+    });
     this.seo.setJsonLd('article-json-ld', this.articleStructuredData(article));
   });
   private readonly cleanup = this.destroyRef.onDestroy(() =>
@@ -143,7 +151,7 @@ export class NoticiaDetalhe {
         '@type': 'Organization',
         name: 'NS2 Innovation',
       },
-      mainEntityOfPage: `https://www.ns2innovation.com${article.href}`,
+      mainEntityOfPage: `${SITE_ORIGIN}${article.href}`,
     };
   }
 }

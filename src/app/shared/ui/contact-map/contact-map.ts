@@ -13,39 +13,43 @@ import {
 } from '@angular/core';
 import type { Map as MapLibreMap, Marker as MapLibreMarker } from 'maplibre-gl';
 import { ContactMapConfig, mapWorkerUrl } from '../../../data/map.config';
+import { I18nService } from '../../../core/i18n.service';
 import { Icon } from '../icon/icon';
+import { LocalizedPipe } from '../../pipes/localized.pipe';
+import { LocalizedText } from '../../../i18n/types';
 
-export interface ContactMapCopy {
-  readonly sectionTitle: string;
-  readonly sectionLead: string;
-  readonly mapLabel: string;
-  readonly locationButton: string;
-  readonly locationButtonLabel: string;
-  readonly zoomIn: string;
-  readonly zoomOut: string;
-  readonly recenter: string;
-  readonly originLabel: string;
-  readonly originPlaceholder: string;
-  readonly originHelp: string;
-  readonly originSearchLoading: string;
-  readonly originSearchEmpty: string;
-  readonly originSearchUnavailable: string;
-  readonly originSearchNotConfigured: string;
-  readonly googleMapsAttribution: string;
-  readonly approximationNotice: string;
-  readonly googleMapsLabel: string;
-  readonly mapLoading: string;
-  readonly mapUnavailable: string;
-  readonly locationLoading: string;
-  readonly locationSuccess: string;
-  readonly permissionDenied: string;
-  readonly positionUnavailable: string;
-  readonly locationTimeout: string;
-  readonly geolocationUnavailable: string;
-  readonly officePopup: string;
-  readonly straightDistanceLabel: string;
-  readonly straightDistanceNote: string;
-}
+type ContactMapCopyKey =
+  | 'sectionTitle'
+  | 'sectionLead'
+  | 'mapLabel'
+  | 'locationButton'
+  | 'locationButtonLabel'
+  | 'zoomIn'
+  | 'zoomOut'
+  | 'recenter'
+  | 'originLabel'
+  | 'originPlaceholder'
+  | 'originHelp'
+  | 'originSearchLoading'
+  | 'originSearchEmpty'
+  | 'originSearchUnavailable'
+  | 'originSearchNotConfigured'
+  | 'googleMapsAttribution'
+  | 'approximationNotice'
+  | 'googleMapsLabel'
+  | 'mapLoading'
+  | 'mapUnavailable'
+  | 'locationLoading'
+  | 'locationSuccess'
+  | 'permissionDenied'
+  | 'positionUnavailable'
+  | 'locationTimeout'
+  | 'geolocationUnavailable'
+  | 'officePopup'
+  | 'straightDistanceLabel'
+  | 'straightDistanceNote';
+
+export type ContactMapCopy = Readonly<Record<ContactMapCopyKey, LocalizedText>>;
 
 type MapStatus = 'loading' | 'ready' | 'unavailable';
 type LocationStatus =
@@ -131,12 +135,13 @@ function readOriginSuggestions(response: unknown): readonly OriginSuggestion[] {
 
 @Component({
   selector: 'app-contact-map',
-  imports: [Icon],
+  imports: [Icon, LocalizedPipe],
   templateUrl: './contact-map.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMap {
   private readonly document = inject(DOCUMENT);
+  private readonly i18n = inject(I18nService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly mapElement = viewChild<ElementRef<HTMLElement>>('mapElement');
   private map: MapLibreMap | null = null;
@@ -163,13 +168,13 @@ export class ContactMap {
   readonly originSearchMessage = computed(() => {
     switch (this.originSearchStatus()) {
       case 'loading':
-        return this.copy().originSearchLoading;
+        return this.i18n.text(this.copy().originSearchLoading);
       case 'empty':
-        return this.copy().originSearchEmpty;
+        return this.i18n.text(this.copy().originSearchEmpty);
       case 'unavailable':
-        return this.copy().originSearchUnavailable;
+        return this.i18n.text(this.copy().originSearchUnavailable);
       case 'not-configured':
-        return this.copy().originSearchNotConfigured;
+        return this.i18n.text(this.copy().originSearchNotConfigured);
       default:
         return '';
     }
@@ -186,7 +191,8 @@ export class ContactMap {
     if (distance === null) {
       return '';
     }
-    const formatted = new Intl.NumberFormat('pt-AO', { maximumFractionDigits: 1 }).format(distance);
+    const locale = this.i18n.lang() === 'pt' ? 'pt-AO' : 'en-GB';
+    const formatted = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(distance);
     return `${formatted} km`;
   });
 
@@ -418,7 +424,7 @@ export class ContactMap {
     addressText.className = 'm-0 text-fg-muted';
     phoneLink.className = 'mt-1 inline-flex min-h-11 items-center font-semibold text-accent-bright';
     title.textContent = name;
-    addressText.textContent = address;
+    addressText.textContent = this.i18n.text(address);
     phoneLink.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
     phoneLink.textContent = phone;
     content.append(title, addressText, phoneLink);

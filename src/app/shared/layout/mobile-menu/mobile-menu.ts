@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
   effect,
   inject,
   input,
@@ -16,6 +17,7 @@ import { MobileMenuMotion } from '../../directives/mobile-menu-motion.directive'
 import { I18nService } from '../../../core/i18n.service';
 import { ScrollService } from '../../../core/scroll.service';
 import { Icon } from '../../ui/icon/icon';
+import { LanguageToggle } from '../../ui/language-toggle/language-toggle';
 import { ThemeToggle } from '../../ui/theme-toggle/theme-toggle';
 
 interface MobileNavigationItem {
@@ -26,7 +28,7 @@ interface MobileNavigationItem {
 
 @Component({
   selector: 'app-mobile-menu',
-  imports: [Icon, MobileMenuMotion, RouterLink, RouterLinkActive, ThemeToggle],
+  imports: [Icon, LanguageToggle, MobileMenuMotion, RouterLink, RouterLinkActive, ThemeToggle],
   templateUrl: './mobile-menu.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,8 +43,8 @@ export class MobileMenu {
   readonly panel = viewChild<ElementRef<HTMLElement>>('panel');
   readonly browserReady = signal(false);
   readonly rendered = signal(false);
-  readonly menuLabel = this.i18n.t('actions.mobileNavigation');
-  readonly closeLabel = this.i18n.t('actions.closeMenu');
+  readonly menuLabel = computed(() => this.i18n.t('actions.mobileNavigation'));
+  readonly closeLabel = computed(() => this.i18n.t('actions.closeMenu'));
 
   private readonly renderCallback = afterNextRender(() => this.browserReady.set(true));
   private readonly renderEffect = effect(() => {

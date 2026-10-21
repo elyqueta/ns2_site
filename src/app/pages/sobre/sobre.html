@@ -1,9 +1,9 @@
 <app-page-hero
-  [title]="copy.hero.title.pt"
-  [lead]="copy.hero.lead.pt"
-  [breadcrumbs]="breadcrumbs"
-  [current]="copy.hero.title.pt"
-  [breadcrumbLabel]="copy.hero.breadcrumbLabel.pt"
+  [title]="copy.hero.title | localized"
+  [lead]="copy.hero.lead | localized"
+  [breadcrumbs]="breadcrumbs()"
+  [current]="copy.hero.title | localized"
+  [breadcrumbLabel]="copy.hero.breadcrumbLabel | localized"
 />
 
 <main id="conteudo">
@@ -15,19 +15,19 @@
       <p
         class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
       >
-        {{ copy.story.index.pt }}
+        {{ copy.story.index | localized }}
       </p>
       <h2 id="about-story-title" class="font-display text-h2 font-semibold tracking-tight text-fg">
-        {{ copy.story.title.pt }}
+        {{ copy.story.title | localized }}
       </h2>
       @for (paragraph of copy.story.paragraphs; track paragraph.pt) {
-        <p class="mt-5 max-w-[62ch] leading-relaxed text-fg-muted">{{ paragraph.pt }}</p>
+        <p class="mt-5 max-w-[62ch] leading-relaxed text-fg-muted">{{ paragraph | localized }}</p>
       }
     </div>
     <div class="lg:col-span-6" appReveal appRevealDelay="0.12">
       <app-media-slot
-        [alt]="copy.story.imageAlt.pt"
-        [expectedFile]="copy.story.imageFile.pt"
+        [alt]="copy.story.imageAlt | localized"
+        [expectedFile]="copy.story.imageFile | localized"
         src="/images/equipa.jpeg"
         [width]="626"
         [height]="418"
@@ -41,13 +41,13 @@
         <p
           class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
         >
-          {{ copy.philosophy.index.pt }}
+          {{ copy.philosophy.index | localized }}
         </p>
         <blockquote class="font-display text-h2 font-medium leading-[1.15] tracking-tight text-fg">
-          “{{ copy.philosophy.quote.pt }}”
+          “{{ copy.philosophy.quote | localized }}”
         </blockquote>
         <p class="mt-8 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
-          {{ copy.philosophy.description.pt }}
+          {{ copy.philosophy.description | localized }}
         </p>
       </div>
     </div>
@@ -55,9 +55,12 @@
 
   <section
     class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
-    [attr.aria-label]="copy.values.title.pt"
+    [attr.aria-label]="copy.values.title | localized"
   >
-    <app-section-heading [index]="copy.values.index.pt" [title]="copy.values.title.pt" />
+    <app-section-heading
+      [index]="copy.values.index | localized"
+      [title]="copy.values.title | localized"
+    />
     <ol appRevealChildren class="mt-10 grid gap-x-8 gap-y-0 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
       @for (value of copy.values.items; track value.title.pt) {
         <li class="border-t border-line py-6 sm:py-8">
@@ -66,8 +69,10 @@
           >
             {{ value.order }}
           </p>
-          <h3 class="mt-4 font-display text-h3 font-semibold text-fg">{{ value.title.pt }}</h3>
-          <p class="mt-3 max-w-[44ch] text-fg-muted">{{ value.description.pt }}</p>
+          <h3 class="mt-4 font-display text-h3 font-semibold text-fg">
+            {{ value.title | localized }}
+          </h3>
+          <p class="mt-3 max-w-[44ch] text-fg-muted">{{ value.description | localized }}</p>
         </li>
       }
     </ol>
@@ -76,8 +81,8 @@
   <section class="border-y border-line bg-surface">
     <div class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
       <app-section-heading
-        [index]="copy.differentiators.index.pt"
-        [title]="copy.differentiators.title.pt"
+        [index]="copy.differentiators.index | localized"
+        [title]="copy.differentiators.title | localized"
       />
       <ul appRevealChildren class="mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
         @for (item of copy.differentiators.items; track item.title.pt) {
@@ -88,8 +93,10 @@
             >
               <app-icon [name]="item.icon" />
             </span>
-            <h3 class="mt-6 font-display text-h3 font-semibold text-fg">{{ item.title.pt }}</h3>
-            <p class="mt-3 leading-relaxed text-fg-muted">{{ item.description.pt }}</p>
+            <h3 class="mt-6 font-display text-h3 font-semibold text-fg">
+              {{ item.title | localized }}
+            </h3>
+            <p class="mt-3 leading-relaxed text-fg-muted">{{ item.description | localized }}</p>
           </li>
         }
       </ul>
@@ -98,13 +105,16 @@
 
   <section
     class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
-    [attr.aria-label]="copy.process.title.pt"
+    [attr.aria-label]="copy.process.title | localized"
   >
-    <app-section-heading [index]="copy.process.index.pt" [title]="copy.process.title.pt" />
+    <app-section-heading
+      [index]="copy.process.index | localized"
+      [title]="copy.process.title | localized"
+    />
     <div
       appProcessProgress
       class="relative mt-10 xl:mt-14"
-      [attr.aria-label]="copy.process.title.pt"
+      [attr.aria-label]="copy.process.title | localized"
       role="group"
     >
       <div
@@ -125,9 +135,11 @@
               {{ step.order }}
             </span>
             <div class="border-b border-line pb-7 sm:pb-9">
-              <h3 class="font-display text-h3 font-semibold text-fg">{{ step.title.pt }}</h3>
+              <h3 class="font-display text-h3 font-semibold text-fg">
+                {{ step.title | localized }}
+              </h3>
               <p class="mt-2 max-w-[62ch] leading-relaxed text-fg-muted">
-                {{ step.description.pt }}
+                {{ step.description | localized }}
               </p>
             </div>
           </li>
@@ -138,11 +150,11 @@
 
   <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
     <app-cta-band
-      [title]="copy.cta.title.pt"
-      [description]="copy.cta.description.pt"
-      [whatsappUrl]="whatsappUrl"
-      [whatsappLabel]="copy.cta.whatsappLabel.pt"
-      [contactLabel]="copy.cta.contactLabel.pt"
+      [title]="copy.cta.title | localized"
+      [description]="copy.cta.description | localized"
+      [whatsappUrl]="whatsappUrl()"
+      [whatsappLabel]="copy.cta.whatsappLabel | localized"
+      [contactLabel]="copy.cta.contactLabel | localized"
     />
   </section>
 </main>

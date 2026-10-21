@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { I18nService } from '../../core/i18n.service';
 import { pt } from '../../i18n/pt';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { homeContent } from '../../data/home';
+import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { HomeAboutPreview } from './about-preview/about-preview';
 import { HomeBrandStrip } from './brand-strip/brand-strip';
@@ -27,17 +29,20 @@ import { HomeWebPreview } from './web-preview/web-preview';
     HomeServicesPreview,
     HomeValuesPreview,
     HomeWebPreview,
+    LocalizedPipe,
   ],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
   private readonly seo = inject(SeoService);
+  private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
   readonly cta = homeContent.cta;
-  readonly whatsappUrl = this.whatsapp.createWhatsappUrl(this.cta.whatsappMessage.pt);
-
-  constructor() {
-    this.seo.setPage(pt.seo.homeTitle, pt.seo.home);
-  }
+  readonly whatsappUrl = computed(() =>
+    this.whatsapp.createWhatsappUrl(this.i18n.text(this.cta.whatsappMessage)),
+  );
+  private readonly seoEffect = effect(() =>
+    this.seo.setPage(this.i18n.t('seo.homeTitle'), this.i18n.t('seo.home')),
+  );
 }

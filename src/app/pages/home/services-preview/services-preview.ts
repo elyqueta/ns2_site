@@ -5,10 +5,11 @@ import { servicos } from '../../../data/servicos';
 import { HomeServicesPin } from '../../../shared/directives/home-services-pin.directive';
 import { Icon } from '../../../shared/ui/icon/icon';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
+import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 
 @Component({
   selector: 'app-home-services-preview',
-  imports: [HomeServicesPin, Icon, RouterLink, SectionHeading],
+  imports: [HomeServicesPin, Icon, LocalizedPipe, RouterLink, SectionHeading],
   templateUrl: './services-preview.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

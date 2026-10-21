@@ -1,23 +1,26 @@
 <app-page-hero
-  [title]="copy.title.pt"
-  [lead]="copy.lead.pt"
-  [breadcrumbs]="breadcrumbs"
-  [current]="copy.title.pt"
-  [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+  [title]="copy.title | localized"
+  [lead]="copy.lead | localized"
+  [breadcrumbs]="breadcrumbs()"
+  [current]="copy.title | localized"
+  [breadcrumbLabel]="copy.breadcrumbLabel | localized"
 />
 
 <main id="conteudo">
-  <section class="py-8 sm:py-10" [attr.aria-label]="copy.marqueeLabel.pt">
-    <app-marquee [items]="brands" [label]="copy.marqueeLabel.pt" />
+  <section class="py-8 sm:py-10" [attr.aria-label]="copy.marqueeLabel | localized">
+    <app-marquee [items]="brands" [label]="copy.marqueeLabel | localized" />
   </section>
 
   <section
     class="mx-auto max-w-[1440px] px-5 py-[clamp(4rem,8vw,8rem)] sm:px-8 lg:px-16"
-    [attr.aria-label]="copy.listTitle.pt"
+    [attr.aria-label]="copy.listTitle | localized"
   >
-    <app-section-heading [index]="copy.listIndex.pt" [title]="copy.listTitle.pt" />
+    <app-section-heading
+      [index]="copy.listIndex | localized"
+      [title]="copy.listTitle | localized"
+    />
     <ul class="mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
-      @for (partner of partners; track partner.title) {
+      @for (partner of partners(); track partner.title) {
         <li class="h-full">
           <app-partner-card [item]="partner" />
         </li>
@@ -27,11 +30,11 @@
 
   <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
     <app-cta-band
-      [title]="copy.partnerCtaTitle.pt"
-      [description]="copy.partnerCtaDescription.pt"
-      [whatsappUrl]="whatsappUrl"
-      [whatsappLabel]="copy.contactWhatsappLabel.pt"
-      [contactLabel]="copy.contactPageLabel.pt"
+      [title]="copy.partnerCtaTitle | localized"
+      [description]="copy.partnerCtaDescription | localized"
+      [whatsappUrl]="whatsappUrl()"
+      [whatsappLabel]="copy.contactWhatsappLabel | localized"
+      [contactLabel]="copy.contactPageLabel | localized"
     />
   </section>
 </main>

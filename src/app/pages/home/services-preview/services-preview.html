@@ -1,9 +1,9 @@
 <section class="border-y border-line bg-surface py-14 lg:py-16">
   <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
     <app-section-heading
-      [index]="copy.index.pt"
-      [title]="copy.title.pt"
-      [description]="copy.description.pt"
+      [index]="copy.index | localized"
+      [title]="copy.title | localized"
+      [description]="copy.description | localized"
     />
     <div appHomeServicesPin class="mt-8 overflow-hidden lg:mt-10">
       <div data-home-services-track class="flex flex-col gap-4 lg:flex-row lg:gap-6">
@@ -18,14 +18,14 @@
               <app-icon [name]="service.icone" class="text-accent-bright" />
             </div>
             <h3 class="mt-6 font-display text-h3 font-semibold text-fg">
-              {{ service.titulo.pt }}
+              {{ service.titulo | localized }}
             </h3>
-            <p class="mt-2 min-h-14 text-fg-muted">{{ service.resumo.pt }}</p>
+            <p class="mt-2 min-h-14 text-fg-muted">{{ service.resumo | localized }}</p>
             <a
               class="mt-4 inline-flex min-h-11 items-center gap-2 whitespace-nowrap font-semibold text-accent-bright focus-visible:outline-offset-4"
               [routerLink]="service.href"
             >
-              {{ copy.cardLinkLabel.pt }}
+              {{ copy.cardLinkLabel | localized }}
               <app-icon name="arrow" />
             </a>
           </article>
@@ -41,7 +41,7 @@
       class="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
       routerLink="/servicos"
     >
-      {{ copy.linkLabel.pt }}
+      {{ copy.linkLabel | localized }}
       <app-icon name="arrow" />
     </a>
   </div>

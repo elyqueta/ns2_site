@@ -1,9 +1,9 @@
 <app-page-hero
-  [title]="copy.title.pt"
-  [lead]="copy.lead.pt"
-  [breadcrumbs]="breadcrumbs"
-  [current]="copy.title.pt"
-  [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+  [title]="copy.title | localized"
+  [lead]="copy.lead | localized"
+  [breadcrumbs]="breadcrumbs()"
+  [current]="copy.title | localized"
+  [breadcrumbLabel]="copy.breadcrumbLabel | localized"
 />
 
 <main id="conteudo">
@@ -12,20 +12,20 @@
       <p
         class="mb-5 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
       >
-        {{ copy.latestLabel.pt }}
+        {{ copy.latestLabel | localized }}
       </p>
       <article
         class="grid overflow-hidden rounded-[2rem] border border-line bg-surface lg:grid-cols-2"
       >
         <a
           class="block focus-visible:outline-offset-4"
-          [routerLink]="featured.href"
-          [attr.aria-label]="featured.linkLabel"
+          [routerLink]="featured().href"
+          [attr.aria-label]="featured().linkLabel"
         >
           <app-media-slot
             class="block h-full min-h-64"
-            [alt]="featured.imageAlt"
-            [expectedFile]="featured.expectedFile"
+            [alt]="featured().imageAlt"
+            [expectedFile]="featured().expectedFile"
           />
         </a>
         <div class="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
@@ -33,26 +33,28 @@
             <p
               class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
             >
-              {{ featured.categoria.pt }}
+              {{ featured().categoria | localized }}
             </p>
-            <time class="text-sm text-fg-muted" [attr.datetime]="featured.data">
-              {{ featured.data | dataPt }}
+            <time class="text-sm text-fg-muted" [attr.datetime]="featured().data">
+              {{ featured().data | dataPt }}
             </time>
             <p class="text-sm text-fg-muted">
-              {{ featured.tempoLeitura }} {{ copy.minutesLabel.pt }}
+              {{ featured().tempoLeitura }} {{ copy.minutesLabel | localized }}
             </p>
           </div>
           <h2 class="mt-5 font-display text-h2 font-semibold leading-tight tracking-tight text-fg">
-            <a class="transition-colors hover:text-accent-bright" [routerLink]="featured.href">
-              {{ featured.titulo.pt }}
+            <a class="transition-colors hover:text-accent-bright" [routerLink]="featured().href">
+              {{ featured().titulo | localized }}
             </a>
           </h2>
-          <p class="mt-4 max-w-[62ch] leading-relaxed text-fg-muted">{{ featured.resumo.pt }}</p>
+          <p class="mt-4 max-w-[62ch] leading-relaxed text-fg-muted">
+            {{ featured().resumo | localized }}
+          </p>
           <a
             class="mt-6 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-accent-bright focus-visible:outline-offset-4"
-            [routerLink]="featured.href"
+            [routerLink]="featured().href"
           >
-            {{ copy.readLabel.pt }}
+            {{ copy.readLabel | localized }}
             <app-icon name="arrow" />
           </a>
         </div>
@@ -62,8 +64,12 @@
 
   <section class="border-y border-line bg-surface">
     <div class="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-16">
-      <h2 class="sr-only">{{ copy.categoryLabel.pt }}</h2>
-      <div class="flex flex-wrap gap-3" role="group" [attr.aria-label]="copy.categoryLabel.pt">
+      <h2 class="sr-only">{{ copy.categoryLabel | localized }}</h2>
+      <div
+        class="flex flex-wrap gap-3"
+        role="group"
+        [attr.aria-label]="copy.categoryLabel | localized"
+      >
         <button
           class="inline-flex min-h-11 items-center rounded-full border px-5 font-semibold transition-colors"
           [class.border-accent]="selectedCategory() === null"
@@ -75,21 +81,21 @@
           type="button"
           (click)="selectCategory(null)"
         >
-          {{ copy.allCategoriesLabel.pt }}
+          {{ copy.allCategoriesLabel | localized }}
         </button>
-        @for (category of categories; track category) {
+        @for (category of categories(); track category.value) {
           <button
             class="inline-flex min-h-11 items-center rounded-full border px-5 font-semibold transition-colors"
-            [class.border-accent]="selectedCategory() === category"
-            [class.bg-accent/10]="selectedCategory() === category"
-            [class.text-accent-bright]="selectedCategory() === category"
-            [class.border-line]="selectedCategory() !== category"
-            [class.text-fg-muted]="selectedCategory() !== category"
-            [attr.aria-pressed]="selectedCategory() === category"
+            [class.border-accent]="selectedCategory() === category.value"
+            [class.bg-accent/10]="selectedCategory() === category.value"
+            [class.text-accent-bright]="selectedCategory() === category.value"
+            [class.border-line]="selectedCategory() !== category.value"
+            [class.text-fg-muted]="selectedCategory() !== category.value"
+            [attr.aria-pressed]="selectedCategory() === category.value"
             type="button"
-            (click)="selectCategory(category)"
+            (click)="selectCategory(category.value)"
           >
-            {{ category }}
+            {{ category.label }}
           </button>
         }
       </div>
@@ -113,7 +119,7 @@
                     <p
                       class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
                     >
-                      {{ article.categoria.pt }}
+                      {{ article.categoria | localized }}
                     </p>
                     <time class="text-xs text-fg-muted" [attr.datetime]="article.data">
                       {{ article.data | dataPt }}
@@ -124,19 +130,19 @@
                       class="transition-colors hover:text-accent-bright"
                       [routerLink]="article.href"
                     >
-                      {{ article.titulo.pt }}
+                      {{ article.titulo | localized }}
                     </a>
                   </h3>
-                  <p class="mt-3 flex-1 text-fg-muted">{{ article.resumo.pt }}</p>
+                  <p class="mt-3 flex-1 text-fg-muted">{{ article.resumo | localized }}</p>
                   <div class="mt-6 flex items-center justify-between gap-4">
                     <p class="text-xs text-fg-muted">
-                      {{ article.tempoLeitura }} {{ copy.minutesLabel.pt }}
+                      {{ article.tempoLeitura }} {{ copy.minutesLabel | localized }}
                     </p>
                     <a
                       class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
                       [routerLink]="article.href"
                     >
-                      {{ copy.readLabel.pt }}
+                      {{ copy.readLabel | localized }}
                       <app-icon name="arrow" />
                     </a>
                   </div>
@@ -147,7 +153,7 @@
         </ul>
       } @else {
         <p class="mt-10 rounded-2xl border border-line bg-bg p-6 text-fg-muted" role="status">
-          {{ copy.emptyTitle.pt }}
+          {{ copy.emptyTitle | localized }}
         </p>
       }
     </div>

@@ -1,16 +1,16 @@
 @if (service(); as item) {
   <app-page-hero
-    [title]="item.titulo.pt"
-    [lead]="item.resumo.pt"
-    [breadcrumbs]="breadcrumbs"
-    [current]="item.titulo.pt"
-    [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+    [title]="item.titulo | localized"
+    [lead]="item.resumo | localized"
+    [breadcrumbs]="breadcrumbs()"
+    [current]="item.titulo | localized"
+    [breadcrumbLabel]="copy.breadcrumbLabel | localized"
   />
 
   <main id="conteudo">
     <section
       class="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-[clamp(4rem,8vw,8rem)] sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-16"
-      [attr.aria-label]="item.titulo.pt"
+      [attr.aria-label]="item.titulo | localized"
     >
       <div class="lg:col-span-5" appReveal>
         <span
@@ -21,14 +21,14 @@
         </span>
         @for (paragraph of item.descricao; track paragraph.pt) {
           <p class="mt-6 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
-            {{ paragraph.pt }}
+            {{ paragraph | localized }}
           </p>
         }
       </div>
       <div class="lg:col-span-7" appReveal appRevealDelay="0.1">
         <app-media-slot
-          [alt]="item.imagem.alt.pt"
-          [expectedFile]="item.imagem.ficheiroEsperado.pt"
+          [alt]="item.imagem.alt | localized"
+          [expectedFile]="item.imagem.ficheiroEsperado | localized"
         />
       </div>
     </section>
@@ -39,13 +39,13 @@
       >
         <div class="lg:col-span-7">
           <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
-            {{ copy.includesLabel.pt }}
+            {{ copy.includesLabel | localized }}
           </h2>
           <ul class="mt-8 grid gap-4 sm:grid-cols-2">
             @for (included of item.inclui; track included.pt) {
               <li class="flex items-start gap-3 border-t border-line py-4 text-fg-muted">
                 <app-icon name="check" class="mt-1 shrink-0 text-accent-bright" />
-                <span>{{ included.pt }}</span>
+                <span>{{ included | localized }}</span>
               </li>
             }
           </ul>
@@ -54,16 +54,16 @@
           <p
             class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
           >
-            {{ copy.audienceLabel.pt }}
+            {{ copy.audienceLabel | localized }}
           </p>
-          <p class="mt-4 text-lead leading-relaxed text-fg">{{ item.paraQuem.pt }}</p>
+          <p class="mt-4 text-lead leading-relaxed text-fg">{{ item.paraQuem | localized }}</p>
           <a
             class="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
             [href]="whatsappUrl()"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {{ copy.quoteLabel.pt }}
+            {{ copy.quoteLabel | localized }}
             <app-icon name="arrow-diagonal" />
           </a>
           @if (item.slug === 'sistemas-software') {
@@ -71,7 +71,7 @@
               class="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright"
               [routerLink]="['/desenvolvimento-web']"
             >
-              {{ copy.webCtaLabel.pt }}
+              {{ copy.webCtaLabel | localized }}
               <app-icon name="arrow" />
             </a>
           }
@@ -81,9 +81,9 @@
 
     <section class="mx-auto max-w-[1440px] px-5 py-[clamp(4rem,8vw,8rem)] sm:px-8 lg:px-16">
       <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
-        {{ copy.relatedLabel.pt }}
+        {{ copy.relatedLabel | localized }}
       </h2>
-      <nav class="mt-8 grid gap-4 sm:grid-cols-2" [attr.aria-label]="copy.relatedLabel.pt">
+      <nav class="mt-8 grid gap-4 sm:grid-cols-2" [attr.aria-label]="copy.relatedLabel | localized">
         @if (previous(); as previousService) {
           <a
             class="group rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-accent/50 hover:bg-surface-2 sm:p-8"
@@ -92,10 +92,10 @@
             <span
               class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
             >
-              {{ copy.previousLabel.pt }}
+              {{ copy.previousLabel | localized }}
             </span>
             <span class="mt-3 block font-display text-h3 font-semibold text-fg">
-              {{ previousService.titulo.pt }}
+              {{ previousService.titulo | localized }}
             </span>
           </a>
         }
@@ -107,10 +107,10 @@
             <span
               class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
             >
-              {{ copy.nextLabel.pt }}
+              {{ copy.nextLabel | localized }}
             </span>
             <span class="mt-3 block font-display text-h3 font-semibold text-fg">
-              {{ nextService.titulo.pt }}
+              {{ nextService.titulo | localized }}
             </span>
           </a>
         }
@@ -119,34 +119,34 @@
         class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright"
         routerLink="/servicos"
       >
-        {{ copy.allServicesLabel.pt }}
+        {{ copy.allServicesLabel | localized }}
         <app-icon name="arrow" />
       </a>
     </section>
 
     <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
       <app-cta-band
-        [title]="item.titulo.pt"
-        [description]="item.resumo.pt"
+        [title]="item.titulo | localized"
+        [description]="item.resumo | localized"
         [whatsappUrl]="whatsappUrl()"
-        [whatsappLabel]="copy.quoteLabel.pt"
-        [contactLabel]="copy.contactLabel.pt"
+        [whatsappLabel]="copy.quoteLabel | localized"
+        [contactLabel]="copy.contactLabel | localized"
       />
     </section>
   </main>
 } @else {
   <app-page-hero
-    [title]="copy.notFoundTitle.pt"
-    [lead]="copy.notFoundDescription.pt"
-    [current]="copy.notFoundTitle.pt"
-    [breadcrumbLabel]="copy.breadcrumbLabel.pt"
+    [title]="copy.notFoundTitle | localized"
+    [lead]="copy.notFoundDescription | localized"
+    [current]="copy.notFoundTitle | localized"
+    [breadcrumbLabel]="copy.breadcrumbLabel | localized"
   />
   <main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-16">
     <a
       class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright"
       routerLink="/servicos"
     >
-      {{ copy.allServicesLabel.pt }}
+      {{ copy.allServicesLabel | localized }}
       <app-icon name="arrow" />
     </a>
   </main>

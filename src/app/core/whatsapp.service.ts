@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { I18nService } from './i18n.service';
 
 export interface ContactMessageDetails {
   readonly name: string;
@@ -11,6 +12,7 @@ export interface ContactMessageDetails {
 
 @Injectable({ providedIn: 'root' })
 export class WhatsappService {
+  private readonly i18n = inject(I18nService);
   private readonly phoneNumber = '244924666323';
 
   createWhatsappUrl(message: string): string {
@@ -23,12 +25,16 @@ export class WhatsappService {
   }
 
   buildContactMessage(details: ContactMessageDetails, includeEmail = false): string {
+    const english = this.i18n.lang() === 'en';
     const company = details.company ? ` da empresa ${details.company}` : '';
+    const englishCompany = details.company ? ` at ${details.company}` : '';
     const emailLine = includeEmail && details.email ? [`Email: ${details.email}`] : [];
     return [
-      `Olá! Sou ${details.name}${company}.`,
-      `Interesse: ${details.interest}`,
-      `Telefone: ${details.phone}`,
+      english
+        ? `Hello! My name is ${details.name}${englishCompany}.`
+        : `Olá! Sou ${details.name}${company}.`,
+      `${english ? 'Interest' : 'Interesse'}: ${details.interest}`,
+      `${english ? 'Phone' : 'Telefone'}: ${details.phone}`,
       ...emailLine,
       details.message,
     ].join('\n');

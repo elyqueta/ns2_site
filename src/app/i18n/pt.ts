@@ -41,6 +41,9 @@ export const pt = {
     close: 'Fechar',
     previous: 'Anterior',
     next: 'Seguinte',
+    languageSelection: 'Idioma',
+    languagePortuguese: 'Português',
+    languageEnglish: 'Inglês',
   },
   pages: {
     home: 'Início',
@@ -215,6 +218,7 @@ export type TranslationKey =
   | `actions.${keyof typeof pt.actions}`
   | `pages.${keyof typeof pt.pages}`
   | `seo.${keyof typeof pt.seo}`
+  | `actions.${'languageSelection' | 'languagePortuguese' | 'languageEnglish'}`
   | `uiKit.${Exclude<keyof typeof pt.uiKit, 'icons'>}`
   | `uiKit.icons.${keyof typeof pt.uiKit.icons}`;
 

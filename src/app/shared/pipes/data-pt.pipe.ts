@@ -1,12 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { I18nService } from '../../core/i18n.service';
 
-@Pipe({ name: 'dataPt', standalone: true, pure: true })
+@Pipe({ name: 'dataPt', standalone: true, pure: false })
 export class DataPtPipe implements PipeTransform {
-  private readonly formatter = new Intl.DateTimeFormat('pt-AO', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  private readonly i18n = inject(I18nService);
 
   transform(value: Date | string | number): string {
     const date = value instanceof Date ? value : new Date(value);
@@ -14,11 +11,19 @@ export class DataPtPipe implements PipeTransform {
       throw new RangeError('The dataPt pipe requires a valid date.');
     }
 
-    return this.formatter
-      .format(date)
-      .replace(
-        /\b(janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\b/,
-        (month) => `${month[0].toLocaleUpperCase('pt-AO')}${month.slice(1)}`,
-      );
+    const language = this.i18n.lang();
+    const locale = language === 'pt' ? 'pt-AO' : 'en-GB';
+    const formatted = new Intl.DateTimeFormat(locale, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(date);
+
+    return language === 'pt'
+      ? formatted.replace(
+          /\b(janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\b/,
+          (month) => `${month[0].toLocaleUpperCase('pt-AO')}${month.slice(1)}`,
+        )
+      : formatted;
   }
 }

@@ -18,15 +18,15 @@
             height="689"
           />
         </a>
-        <p class="mt-5 max-w-sm text-fg-muted">{{ copy.description }}</p>
+        <p class="mt-5 max-w-sm text-fg-muted">{{ copy().description }}</p>
       </div>
 
-      <nav class="lg:col-span-2" [attr.aria-label]="copy.navigation">
+      <nav class="lg:col-span-2" [attr.aria-label]="copy().navigation">
         <h2 class="font-display text-sm font-semibold uppercase tracking-[0.08em]">
-          {{ copy.navigation }}
+          {{ copy().navigation }}
         </h2>
         <ul class="mt-5 grid gap-3">
-          @for (item of navigation; track item.href) {
+          @for (item of navigation(); track item.href) {
             <li>
               <a
                 class="inline-flex min-h-11 items-center text-sm text-fg-muted transition-colors hover:text-fg"
@@ -39,12 +39,12 @@
         </ul>
       </nav>
 
-      <nav class="lg:col-span-3" [attr.aria-label]="copy.services">
+      <nav class="lg:col-span-3" [attr.aria-label]="copy().services">
         <h2 class="font-display text-sm font-semibold uppercase tracking-[0.08em]">
-          {{ copy.services }}
+          {{ copy().services }}
         </h2>
         <ul class="mt-5 grid gap-3">
-          @for (item of services; track item.href) {
+          @for (item of services(); track item.href) {
             <li>
               <a
                 class="inline-flex min-h-11 items-center text-sm text-fg-muted transition-colors hover:text-fg"
@@ -62,11 +62,11 @@
           id="footer-contact-title"
           class="font-display text-sm font-semibold uppercase tracking-[0.08em]"
         >
-          {{ copy.contact }}
+          {{ copy().contact }}
         </h2>
         <div class="mt-5 grid gap-5 text-sm">
           <div>
-            <h3 class="font-semibold">{{ copy.phone }}</h3>
+            <h3 class="font-semibold">{{ copy().phone }}</h3>
             <ul class="mt-2 grid gap-1">
               @for (phone of contact.phones; track phone.href) {
                 <li>
@@ -78,7 +78,7 @@
             </ul>
           </div>
           <div>
-            <h3 class="font-semibold">{{ copy.email }}</h3>
+            <h3 class="font-semibold">{{ copy().email }}</h3>
             <a
               class="mt-2 inline-block text-fg-muted transition-colors hover:text-fg"
               [href]="contact.email.href"
@@ -87,8 +87,8 @@
             </a>
           </div>
           <div>
-            <h3 class="font-semibold">{{ copy.address }}</h3>
-            <p class="mt-2 text-fg-muted">{{ contact.address }}</p>
+            <h3 class="font-semibold">{{ copy().address }}</h3>
+            <p class="mt-2 text-fg-muted">{{ contactAddress() }}</p>
             <a
               class="mt-3 inline-flex min-h-11 items-center gap-2 text-accent-bright hover:text-fg"
               [href]="contact.mapUrl"
@@ -96,7 +96,7 @@
               rel="noopener noreferrer"
             >
               <app-icon name="pin" />
-              {{ copy.map }}
+              {{ copy().map }}
             </a>
           </div>
         </div>
@@ -108,9 +108,9 @@
     >
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         <span class="text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted">
-          {{ copy.legal }}
+          {{ copy().legal }}
         </span>
-        @for (item of legal; track item.href) {
+        @for (item of legal(); track item.href) {
           <a class="text-sm text-fg-muted transition-colors hover:text-fg" [routerLink]="item.href">
             {{ item.label }}
           </a>
@@ -121,7 +121,7 @@
         type="button"
         (click)="backToTop()"
       >
-        {{ copy.backToTop }}
+        {{ copy().backToTop }}
         <app-icon name="arrow" />
       </button>
     </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScrollService } from '../../../core/scroll.service';
 import { I18nService } from '../../../core/i18n.service';
@@ -15,7 +15,7 @@ import { Icon } from '../../ui/icon/icon';
 export class Footer {
   private readonly i18n = inject(I18nService);
   private readonly scroll = inject(ScrollService);
-  readonly copy = {
+  readonly copy = computed(() => ({
     description: this.i18n.t('actions.footerDescription'),
     navigation: this.i18n.t('actions.footerNavigation'),
     services: this.i18n.t('actions.footerServices'),
@@ -26,17 +26,27 @@ export class Footer {
     map: this.i18n.t('actions.openMap'),
     legal: this.i18n.t('actions.legalInformation'),
     backToTop: this.i18n.t('actions.backToTop'),
-  };
-  readonly navigation = primaryNavigation.map((item) => ({
-    href: item.href,
-    label: this.i18n.t(item.label),
   }));
-  readonly legal = legalNavigation.map((item) => ({
-    href: item.href,
-    label: this.i18n.t(item.label),
-  }));
-  readonly services = footerServices;
+  readonly navigation = computed(() =>
+    primaryNavigation.map((item) => ({
+      href: item.href,
+      label: this.i18n.t(item.label),
+    })),
+  );
+  readonly legal = computed(() =>
+    legalNavigation.map((item) => ({
+      href: item.href,
+      label: this.i18n.t(item.label),
+    })),
+  );
+  readonly services = computed(() =>
+    footerServices.map((item) => ({
+      href: item.href,
+      label: this.i18n.text(item.label),
+    })),
+  );
   readonly contact = contactDetails;
+  readonly contactAddress = computed(() => this.i18n.text(contactDetails.address));
 
   backToTop(): void {
     this.scroll.scrollTo(0, { duration: 0.7 });

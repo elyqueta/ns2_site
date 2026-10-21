@@ -1,5 +1,5 @@
 <section class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
-  <app-section-heading [index]="copy.index.pt" [title]="copy.title.pt" />
+  <app-section-heading [index]="copy.index | localized" [title]="copy.title | localized" />
   <div class="mt-10 grid gap-4 lg:grid-cols-3 xl:mt-14">
     @for (article of articles; track article.slug) {
       <article
@@ -9,19 +9,21 @@
           <p
             class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
           >
-            {{ article.categoria.pt }}
+            {{ article.categoria | localized }}
           </p>
-          <p class="text-xs text-fg-muted">{{ article.tempoLeitura }} {{ copy.minutesLabel.pt }}</p>
+          <p class="text-xs text-fg-muted">
+            {{ article.tempoLeitura }} {{ copy.minutesLabel | localized }}
+          </p>
         </div>
         <h3 class="mt-7 font-display text-h3 font-semibold leading-snug text-fg">
-          {{ article.titulo.pt }}
+          {{ article.titulo | localized }}
         </h3>
-        <p class="mt-3 grow text-fg-muted">{{ article.resumo.pt }}</p>
+        <p class="mt-3 grow text-fg-muted">{{ article.resumo | localized }}</p>
         <a
           class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
           [routerLink]="article.href"
         >
-          {{ copy.readLabel.pt }}
+          {{ copy.readLabel | localized }}
           <app-icon name="arrow" />
         </a>
       </article>
@@ -31,7 +33,7 @@
     class="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
     routerLink="/noticias"
   >
-    {{ copy.linkLabel.pt }}
+    {{ copy.linkLabel | localized }}
     <app-icon name="arrow" />
   </a>
 </section>

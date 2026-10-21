@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { homeContent } from '../../../data/home';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
+import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 
 @Component({
   selector: 'app-home-process-preview',
-  imports: [SectionHeading],
+  imports: [LocalizedPipe, SectionHeading],
   templateUrl: './process-preview.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

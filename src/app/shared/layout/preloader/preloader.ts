@@ -6,6 +6,7 @@ import {
   ErrorHandler,
   PLATFORM_ID,
   afterNextRender,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -26,7 +27,7 @@ export class Preloader {
   private readonly i18n = inject(I18nService);
   private readonly document = inject(DOCUMENT);
   readonly visible = signal(false);
-  readonly label = this.i18n.t('actions.preloaderLabel');
+  readonly label = computed(() => this.i18n.t('actions.preloaderLabel'));
   private fallbackTimer: number | undefined;
 
   private readonly renderCallback = afterNextRender(() => {

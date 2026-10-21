@@ -6,7 +6,7 @@
     <a
       class="inline-flex min-h-11 shrink-0 items-center"
       routerLink="/"
-      [attr.aria-label]="logoLabel"
+      [attr.aria-label]="logoLabel()"
     >
       <img
         class="h-9 w-auto dark:hidden"
@@ -24,8 +24,8 @@
       />
     </a>
 
-    <nav class="hidden items-center gap-5 xl:flex" [attr.aria-label]="navigationLabel">
-      @for (item of navigation; track item.href) {
+    <nav class="hidden items-center gap-5 xl:flex" [attr.aria-label]="navigationLabel()">
+      @for (item of navigation(); track item.href) {
         <a
           class="min-h-11 whitespace-nowrap content-center text-sm font-medium text-fg-muted transition-colors hover:text-fg"
           [routerLink]="item.href"
@@ -39,11 +39,12 @@
     </nav>
 
     <div class="flex items-center gap-2 sm:gap-3">
+      <app-language-toggle />
       <app-theme-toggle />
       <span class="hidden h-11 w-12 lg:block" aria-hidden="true"></span>
       <app-button
         class="hidden sm:inline-flex"
-        [label]="quoteLabel"
+        [label]="quoteLabel()"
         [href]="whatsappUrl"
         [external]="true"
         size="md"
@@ -68,7 +69,7 @@
 </header>
 <app-mobile-menu
   [open]="menuOpen()"
-  [items]="navigation"
+  [items]="navigation()"
   (close)="closeMenu()"
   (closed)="focusMenuTrigger()"
 />

@@ -40,29 +40,29 @@
       <p
         class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.16em] text-accent-bright"
       >
-        {{ copy.eyebrow.pt }}
+        {{ copy.eyebrow | localized }}
       </p>
       <h1
         appSplitText
         class="max-w-[12ch] font-display text-display font-semibold leading-[1.02] tracking-tight text-fg"
       >
-        {{ copy.titleBefore.pt }}
-        <span class="text-accent-bright">{{ copy.titleHighlight.pt }}</span>
-        {{ copy.titleAfter.pt }}
+        {{ copy.titleBefore | localized }}
+        <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>
+        {{ copy.titleAfter | localized }}
       </h1>
       <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-fg-muted sm:mt-9">
-        {{ copy.description.pt }}
+        {{ copy.description | localized }}
       </p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
         <app-button
-          [label]="copy.quoteLabel.pt"
-          [href]="whatsappUrl"
+          [label]="copy.quoteLabel | localized"
+          [href]="whatsappUrl()"
           [external]="true"
           size="lg"
           [showArrow]="true"
         />
         <app-button
-          [label]="copy.servicesLabel.pt"
+          [label]="copy.servicesLabel | localized"
           href="/servicos"
           variant="secondary"
           size="lg"
@@ -74,10 +74,10 @@
   <a
     class="absolute bottom-7 left-1/2 inline-flex min-h-11 -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-line bg-surface/80 px-4 text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted backdrop-blur transition-colors hover:text-fg focus-visible:outline-offset-4"
     href="#home-about"
-    [attr.aria-label]="copy.scrollLabel.pt"
+    [attr.aria-label]="copy.scrollLabel | localized"
     (click)="scrollToAbout($event)"
   >
-    {{ copy.scrollLabel.pt }}
+    {{ copy.scrollLabel | localized }}
     <app-icon name="arrow" class="rotate-90" />
   </a>
 </section>

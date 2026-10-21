@@ -8,7 +8,7 @@
     class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto overscroll-y-contain bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 xl:hidden"
     role="dialog"
     aria-modal="true"
-    [attr.aria-label]="menuLabel"
+    [attr.aria-label]="menuLabel()"
     (keydown)="handleKeydown($event)"
   >
     <div class="flex min-h-14 items-center justify-between">
@@ -27,11 +27,14 @@
         height="689"
       />
       <div class="flex items-center gap-2">
-        <app-theme-toggle />
+        <div class="flex items-center gap-2">
+          <app-language-toggle />
+          <app-theme-toggle />
+        </div>
         <button
           class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface"
           type="button"
-          [attr.aria-label]="closeLabel"
+          [attr.aria-label]="closeLabel()"
           (click)="close.emit()"
         >
           <app-icon name="close" />
@@ -39,7 +42,7 @@
       </div>
     </div>
 
-    <nav class="my-auto py-12" [attr.aria-label]="menuLabel">
+    <nav class="my-auto py-12" [attr.aria-label]="menuLabel()">
       <ul class="grid">
         @for (item of items(); track item.href) {
           <li>

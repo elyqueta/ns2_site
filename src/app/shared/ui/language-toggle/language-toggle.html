@@ -1,0 +1,30 @@
+<div
+  class="inline-flex min-h-11 items-center rounded-full border border-line bg-surface p-1"
+  role="group"
+  [attr.aria-label]="groupLabel()"
+>
+  <button
+    class="min-h-9 min-w-9 rounded-full px-2 text-xs font-semibold transition-colors"
+    [class.bg-accent]="lang() === 'pt'"
+    [class.text-on-accent]="lang() === 'pt'"
+    [class.text-fg-muted]="lang() !== 'pt'"
+    type="button"
+    [attr.aria-label]="portugueseLabel()"
+    [attr.aria-pressed]="lang() === 'pt'"
+    (click)="selectLanguage('pt')"
+  >
+    PT
+  </button>
+  <button
+    class="min-h-9 min-w-9 rounded-full px-2 text-xs font-semibold transition-colors"
+    [class.bg-accent]="lang() === 'en'"
+    [class.text-on-accent]="lang() === 'en'"
+    [class.text-fg-muted]="lang() !== 'en'"
+    type="button"
+    [attr.aria-label]="englishLabel()"
+    [attr.aria-pressed]="lang() === 'en'"
+    (click)="selectLanguage('en')"
+  >
+    EN
+  </button>
+</div>

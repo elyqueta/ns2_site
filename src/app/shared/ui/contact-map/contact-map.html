@@ -1,9 +1,9 @@
 <section class="contact-map-section" aria-labelledby="contact-map-title">
   <div class="mb-8">
     <h2 id="contact-map-title" class="font-display text-h2 font-semibold tracking-tight text-fg">
-      {{ copy().sectionTitle }}
+      {{ (copy().sectionTitle | localized) }}
     </h2>
-    <p class="mt-4 max-w-[62ch] text-fg-muted">{{ copy().sectionLead }}</p>
+    <p class="mt-4 max-w-[62ch] text-fg-muted">{{ (copy().sectionLead | localized) }}</p>
   </div>
 
   <div
@@ -14,13 +14,13 @@
         #mapElement
         class="h-[340px] w-full bg-surface-2 sm:h-[420px] lg:h-[520px]"
         role="application"
-        [attr.aria-label]="copy().mapLabel"
+        [attr.aria-label]="(copy().mapLabel | localized)"
       ></div>
       <div class="absolute right-3 top-3 z-10 grid gap-2">
         <button
           class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-xl font-semibold text-fg shadow-lg focus-visible:outline-offset-2"
           type="button"
-          [attr.aria-label]="copy().zoomIn"
+          [attr.aria-label]="(copy().zoomIn | localized)"
           (click)="zoomIn()"
         >
           +
@@ -28,7 +28,7 @@
         <button
           class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-xl font-semibold text-fg shadow-lg focus-visible:outline-offset-2"
           type="button"
-          [attr.aria-label]="copy().zoomOut"
+          [attr.aria-label]="(copy().zoomOut | localized)"
           (click)="zoomOut()"
         >
           −
@@ -36,7 +36,7 @@
         <button
           class="grid size-11 place-items-center rounded-xl border border-line bg-surface text-fg shadow-lg focus-visible:outline-offset-2"
           type="button"
-          [attr.aria-label]="copy().recenter"
+          [attr.aria-label]="(copy().recenter | localized)"
           (click)="recenter()"
         >
           <app-icon name="pin" />
@@ -47,14 +47,14 @@
           class="absolute bottom-3 left-3 rounded-full bg-surface px-4 py-2 text-sm text-fg shadow-lg"
           role="status"
         >
-          {{ copy().mapLoading }}
+          {{ (copy().mapLoading | localized) }}
         </p>
       } @else if (mapStatus() === 'unavailable') {
         <p
           class="absolute bottom-3 left-3 right-3 rounded-xl bg-surface px-4 py-3 text-sm text-danger shadow-lg"
           role="status"
         >
-          {{ copy().mapUnavailable }}
+          {{ (copy().mapUnavailable | localized) }}
         </p>
       }
     </div>
@@ -62,9 +62,9 @@
     <aside class="flex min-w-0 flex-col gap-5 p-4 sm:p-7">
       <div>
         <p class="font-display text-lg font-semibold text-fg">{{ config().name }}</p>
-        <p class="mt-2 text-sm leading-relaxed text-fg-muted">{{ config().address }}</p>
+        <p class="mt-2 text-sm leading-relaxed text-fg-muted">{{ (config().address | localized) }}</p>
         <p class="mt-2 text-xs leading-relaxed text-fg-muted">
-          {{ copy().approximationNotice }}
+          {{ (copy().approximationNotice | localized) }}
         </p>
         <a
           class="mt-3 inline-flex min-h-11 items-center font-semibold text-accent-bright focus-visible:outline-offset-4"
@@ -74,9 +74,9 @@
         </a>
         @if (straightDistanceKm() !== null) {
           <p class="mt-3 rounded-xl border border-line bg-surface-2 p-3 text-sm text-fg">
-            <span class="font-semibold">{{ copy().straightDistanceLabel }}:</span>
+            <span class="font-semibold">{{ (copy().straightDistanceLabel | localized) }}:</span>
             {{ straightDistanceLabel() }}
-            <span class="mt-1 block text-xs text-fg-muted">{{ copy().straightDistanceNote }}</span>
+            <span class="mt-1 block text-xs text-fg-muted">{{ (copy().straightDistanceNote | localized) }}</span>
           </p>
         }
       </div>
@@ -85,15 +85,15 @@
         <button
           class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 text-center font-semibold text-on-accent transition-colors hover:bg-accent-bright focus-visible:outline-offset-4 disabled:cursor-wait disabled:opacity-70"
           type="button"
-          [attr.aria-label]="copy().locationButtonLabel"
+          [attr.aria-label]="(copy().locationButtonLabel | localized)"
           [disabled]="locationStatus() === 'loading' || mapStatus() !== 'ready'"
           (click)="requestLocation()"
         >
-          {{ copy().locationButton }}
+          {{ (copy().locationButton | localized) }}
         </button>
         <div class="relative grid gap-2">
           <label class="text-sm font-semibold text-fg" for="contact-map-origin">
-            {{ copy().originLabel }}
+            {{ (copy().originLabel | localized) }}
           </label>
           <input
             id="contact-map-origin"
@@ -105,7 +105,7 @@
             [attr.aria-controls]="originSuggestions().length ? 'contact-origin-suggestions' : null"
             [attr.aria-expanded]="originSuggestions().length > 0"
             [attr.aria-activedescendant]="activeOriginSuggestionId()"
-            [placeholder]="copy().originPlaceholder"
+            [placeholder]="(copy().originPlaceholder | localized)"
             [value]="manualOrigin()"
             (input)="updateOrigin($event)"
             (keydown)="handleOriginKeydown($event)"
@@ -152,20 +152,20 @@
               }
               @if (originSuggestions().length > 0) {
                 <p class="border-t border-line px-4 py-2 text-right text-xs text-fg-muted">
-                  {{ copy().googleMapsAttribution }}
+                  {{ (copy().googleMapsAttribution | localized) }}
                 </p>
               }
             </div>
           }
         </div>
-        <p class="text-xs leading-relaxed text-fg-muted">{{ copy().originHelp }}</p>
+        <p class="text-xs leading-relaxed text-fg-muted">{{ (copy().originHelp | localized) }}</p>
         <a
           class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 text-center font-semibold text-fg transition-colors hover:bg-surface-2 focus-visible:outline-offset-4"
           [href]="googleMapsUrl()"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {{ copy().googleMapsLabel }}
+          {{ (copy().googleMapsLabel | localized) }}
           <app-icon name="arrow" />
         </a>
       </div>
@@ -178,22 +178,22 @@
         >
           @switch (locationStatus()) {
             @case ('loading') {
-              {{ copy().locationLoading }}
+              {{ (copy().locationLoading | localized) }}
             }
             @case ('success') {
-              {{ copy().locationSuccess }}
+              {{ (copy().locationSuccess | localized) }}
             }
             @case ('denied') {
-              {{ copy().permissionDenied }}
+              {{ (copy().permissionDenied | localized) }}
             }
             @case ('timeout') {
-              {{ copy().locationTimeout }}
+              {{ (copy().locationTimeout | localized) }}
             }
             @case ('unsupported') {
-              {{ copy().geolocationUnavailable }}
+              {{ (copy().geolocationUnavailable | localized) }}
             }
             @case ('unavailable') {
-              {{ copy().positionUnavailable }}
+              {{ (copy().positionUnavailable | localized) }}
             }
           }
         </p>

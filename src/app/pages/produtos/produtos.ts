@@ -4,6 +4,8 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
+  effect,
   inject,
   signal,
   viewChild,
@@ -14,9 +16,9 @@ import { filter, Subscription } from 'rxjs';
 import { AnimationService } from '../../core/animation.service';
 import { ScrollService } from '../../core/scroll.service';
 import { SeoService } from '../../core/seo.service';
+import { I18nService } from '../../core/i18n.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { productsPageContent, produtos } from '../../data/produtos';
-import { pt } from '../../i18n/pt';
 import { HeaderOffset } from '../../shared/directives/header-offset.directive';
 import { RevealChildren } from '../../shared/directives/reveal-children.directive';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
@@ -24,10 +26,20 @@ import { Icon } from '../../shared/ui/icon/icon';
 import { Marquee } from '../../shared/ui/marquee/marquee';
 import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
+import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 
 @Component({
   selector: 'app-produtos',
-  imports: [CtaBand, HeaderOffset, Icon, Marquee, MediaSlot, PageHero, RevealChildren],
+  imports: [
+    CtaBand,
+    HeaderOffset,
+    Icon,
+    LocalizedPipe,
+    Marquee,
+    MediaSlot,
+    PageHero,
+    RevealChildren,
+  ],
   templateUrl: './produtos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,23 +51,30 @@ export class Produtos {
   private readonly router = inject(Router);
   private readonly scroll = inject(ScrollService);
   private readonly seo = inject(SeoService);
+  private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
 
   readonly catalog = viewChild<ElementRef<HTMLElement>>('catalog');
   readonly copy = productsPageContent;
-  readonly categories = produtos.map((category) => ({
-    ...category,
-    ordemLabel: category.ordem.toString().padStart(2, '0'),
-    whatsappUrl: this.whatsapp.createWhatsappUrl(category.mensagemWhatsApp.pt),
-    destaques: category.destaques.map((item) => ({
-      ...item,
-      whatsappUrl: this.whatsapp.createWhatsappUrl(item.mensagemWhatsApp.pt),
+  readonly categories = computed(() =>
+    produtos.map((category) => ({
+      ...category,
+      ordemLabel: category.ordem.toString().padStart(2, '0'),
+      whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(category.mensagemWhatsApp)),
+      destaques: category.destaques.map((item) => ({
+        ...item,
+        whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),
+      })),
     })),
-  }));
-  readonly activeCategory = signal(this.categories[0].slug);
-  readonly breadcrumbs = [{ label: this.copy.homeLabel.pt, href: '/' }] as const;
+  );
+  readonly activeCategory = signal(produtos[0].slug);
+  readonly breadcrumbs = computed(() => [
+    { label: this.i18n.text(this.copy.homeLabel), href: '/' },
+  ]);
   readonly brands = productsPageContent.brands;
-  readonly generalWhatsappUrl = this.whatsapp.createWhatsappUrl(this.copy.whatsappMessage.pt);
+  readonly generalWhatsappUrl = computed(() =>
+    this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.whatsappMessage)),
+  );
   private readonly scrollTriggers: import('gsap/ScrollTrigger').ScrollTrigger[] = [];
   private stopScrollSpy: (() => void) | null = null;
   private fragmentScrollFrame: number | undefined;
@@ -79,7 +98,7 @@ export class Produtos {
       });
 
     this.stopScrollSpy = this.animation.whenReady((runtime) => {
-      for (const category of this.categories) {
+      for (const category of this.categories()) {
         const section = catalog.querySelector<HTMLElement>(`#${category.slug}`);
         if (!section) {
           continue;
@@ -110,9 +129,9 @@ export class Produtos {
     }
   });
 
-  constructor() {
-    this.seo.setPage(pt.pages.products, pt.seo.products);
-  }
+  private readonly seoEffect = effect(() =>
+    this.seo.setPage(this.i18n.t('pages.products'), this.i18n.t('seo.products')),
+  );
 
   scrollToCategory(event: MouseEvent, slug: string): void {
     event.preventDefault();
@@ -122,7 +141,7 @@ export class Produtos {
   }
 
   private scheduleFragmentScroll(fragment: string): void {
-    if (!this.categories.some((category) => category.slug === fragment)) {
+    if (!this.categories().some((category) => category.slug === fragment)) {
       return;
     }
 

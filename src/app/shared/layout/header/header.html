@@ -8,26 +8,26 @@
       routerLink="/"
       [attr.aria-label]="logoLabel()"
     >
-      <img
-        class="h-9 w-auto dark:hidden"
-        src="/brand/logo-horizontal.svg"
-        alt="NS2 Innovation"
-        width="1487"
-        height="689"
-      />
-      <img
-        class="hidden h-9 w-auto dark:block"
-        src="/brand/logo-horizontal-dark.svg"
-        alt="NS2 Innovation"
-        width="1487"
-        height="689"
-      />
+        <img
+          class="h-10 w-auto dark:hidden"
+          src="/brand/logo-horizontal.svg"
+          alt="NS2 Innovation"
+          width="1487"
+          height="689"
+        />
+        <img
+          class="hidden h-10 w-auto dark:block"
+          src="/brand/logo-horizontal-dark.svg"
+          alt="NS2 Innovation"
+          width="1487"
+          height="689"
+        />
     </a>
 
     <nav class="hidden items-center gap-5 xl:flex" [attr.aria-label]="navigationLabel()">
       @for (item of navigation(); track item.href) {
         <a
-          class="min-h-11 whitespace-nowrap content-center text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+          class="min-h-11 whitespace-nowrap content-center text-base font-medium text-fg-muted transition-colors hover:text-fg"
           [routerLink]="item.href"
           routerLinkActive="text-accent-bright"
           [routerLinkActiveOptions]="{ exact: item.href === '/' }"

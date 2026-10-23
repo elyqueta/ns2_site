@@ -40,10 +40,10 @@ export const homeContent = {
     } satisfies LocalizedText,
     linkLabel: { pt: 'Conheça a NS2', en: 'Get to know NS2' } satisfies LocalizedText,
     imageAlt: {
-      pt: 'Imagem de referência da NS2 Innovation',
-      en: 'NS2 Innovation reference image',
+      pt: 'Duas pessoas à secretária com um portátil, ligadas a parceiros especializados',
+      en: 'Two people at a desk with a laptop, connected to specialized partners',
     } satisfies LocalizedText,
-    expectedFile: { pt: 'public/images/og/og-default.png' } satisfies LocalizedText,
+    expectedFile: { pt: 'public/images/sobre/quem-somos.webp' } satisfies LocalizedText,
   },
   services: {
     index: { pt: '02 — O que fazemos', en: '02 — What we do' } satisfies LocalizedText,

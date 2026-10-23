@@ -138,3 +138,12 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`, `src/app/shared/ui/button/button.ts`
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
 - Pendências: nenhuma
+
+## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+- Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
+- O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
+- `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
+- `data/home.ts`: `imageAlt` atualizado para "Duas pessoas à secretária com um portátil, ligadas a parceiros especializados"; `expectedFile` atualizado para `public/images/sobre/quem-somos.webp`.
+- `media-slot.ts` / `media-slot.html`: adicionados inputs `loading` e `decoding` para controlar os atributos da imagem sem layout shift.
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).

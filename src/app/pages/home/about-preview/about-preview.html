@@ -20,10 +20,11 @@
     <app-media-slot
       [alt]="copy.imageAlt | localized"
       [expectedFile]="copy.expectedFile | localized"
-      src="/images/og/og-default.png"
-      [width]="626"
-      [height]="418"
-      objectPosition="left"
+      src="/images/sobre/quem-somos.webp"
+      [width]="1200"
+      [height]="800"
+      [loading]="'lazy'"
+      [decoding]="'async'"
     />
   </div>
 </section>

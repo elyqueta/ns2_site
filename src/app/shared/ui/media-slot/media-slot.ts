@@ -13,4 +13,5 @@ export class MediaSlot {
   readonly expectedFile = input.required<string>();
   readonly width = input(1200);
   readonly height = input(800);
+  readonly objectPosition = input<'left' | 'center' | 'right'>('center');
 }

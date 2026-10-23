@@ -1,5 +1,4 @@
-import { Directive, afterNextRender, effect, inject } from '@angular/core';
-import { I18nService } from '../../core/i18n.service';
+import { Directive } from '@angular/core';
 import { registerAnimationDirective } from './animation-directive';
 
 @Directive({
@@ -7,7 +6,8 @@ import { registerAnimationDirective } from './animation-directive';
   standalone: true,
 })
 export class SplitTextReveal {
-  private readonly i18n = inject(I18nService);
+  // O texto deste elemento NÃO pode mudar enquanto a directiva está activa.
+  // Quem a usa tem de recriar o elemento quando o texto mudar (ver HomeHero).
   private readonly registration = registerAnimationDirective((element, runtime, mode) => {
     if (mode.reducedMotion) {
       runtime.gsap.fromTo(element, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 });
@@ -30,15 +30,5 @@ export class SplitTextReveal {
       },
     );
     return () => split.revert();
-  });
-  private activeLanguage = this.i18n.lang();
-  private readonly languageEffect = effect(() => {
-    const language = this.i18n.lang();
-    if (language === this.activeLanguage) {
-      return;
-    }
-
-    this.activeLanguage = language;
-    afterNextRender(() => this.registration.animation.refreshElement(this.registration.element));
   });
 }

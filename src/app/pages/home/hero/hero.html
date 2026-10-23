@@ -42,14 +42,16 @@
       >
         {{ copy.eyebrow | localized }}
       </p>
-      <h1
-        appSplitText
-        class="max-w-[12ch] font-display text-display font-semibold leading-[1.02] tracking-tight text-fg"
-      >
-        {{ copy.titleBefore | localized }}
-        <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>
-        {{ copy.titleAfter | localized }}
-      </h1>
+      @for (key of languageKey(); track key) {
+        <h1
+          appSplitText
+          class="max-w-[12ch] font-display text-display font-semibold leading-[1.02] tracking-tight text-fg"
+        >
+          {{ copy.titleBefore | localized }}
+          <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>
+          {{ copy.titleAfter | localized }}
+        </h1>
+      }
       <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-fg-muted sm:mt-9">
         {{ copy.description | localized }}
       </p>

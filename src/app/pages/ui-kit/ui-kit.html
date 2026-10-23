@@ -257,7 +257,7 @@
           <p class="mt-3 max-w-[62ch] text-fg-muted">{{ copy.animationDescription }}</p>
         </div>
         <button
-          class="inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-2.5 font-semibold transition-colors hover:bg-surface-2"
+          class="inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-2.5 font-semibold transition-colors hover:bg-surface-2 cursor-pointer"
           type="button"
           [attr.aria-pressed]="animation.simulateReducedMotion()"
           (click)="toggleReducedMotionSimulation()"
@@ -318,7 +318,7 @@
         >
           <button
             appMagnetic
-            class="inline-flex min-h-11 items-center justify-center rounded-button bg-accent px-6 py-3 font-semibold text-on-accent"
+            class="inline-flex min-h-11 items-center justify-center rounded-button bg-accent px-6 py-3 font-semibold text-on-accent cursor-pointer"
             type="button"
           >
             {{ copy.magneticLabel }}

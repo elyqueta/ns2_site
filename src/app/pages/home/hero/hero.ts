@@ -16,6 +16,7 @@ import { Icon } from '../../../shared/ui/icon/icon';
 })
 export class HomeHero {
   readonly copy = homeContent.hero;
+  readonly languageKey = computed(() => [this.i18n.lang()] as const);
   private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
   readonly whatsappUrl = computed(() =>

@@ -73,6 +73,12 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
 - Pendências: Q5 (CTA final) não foi respondida pelo utilizador, mantida como está
 
+## Ajuste adicional (2026-10-23)
+- `MediaSlot`: adicionado input `objectPosition` (padrão `center`) para controlar o `object-position` da imagem.
+- `about-preview.html`: `objectPosition="left"` para o logo da empresa no lado esquerdo da imagem `og-default.png` ficar visível (não cortado pelo `object-cover` central).
+- Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/home/about-preview/about-preview.html`
+- Verificações feitas: `npm run build` passa; `npm test` sem regressão.
+
 ## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
 - Estado: concluída
 - Decisões do utilizador:

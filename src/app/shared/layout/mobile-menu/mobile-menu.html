@@ -36,6 +36,18 @@
       </button>
     </div>
 
+      <div class="flex items-center gap-2 pt-3 border-b border-line pb-3">
+        <app-language-toggle />
+        <app-theme-toggle />
+        <app-button
+          [extraClasses]="'ml-auto'"
+          [label]="quoteLabel()"
+          [href]="whatsappUrl"
+          [external]="true"
+          size="md"
+        />
+      </div>
+
     <nav class="my-auto py-12" [attr.aria-label]="menuLabel()">
       <ul class="grid">
         @for (item of items(); track item.href) {
@@ -57,18 +69,6 @@
           </li>
         }
       </ul>
-      <div class="flex items-center gap-2 pt-3 border-b border-line pb-3">
-        <app-language-toggle />
-        <app-theme-toggle />
-      </div>
-      <div class="mt-4">
-        <app-button
-          [label]="quoteLabel()"
-          [href]="whatsappUrl"
-          [external]="true"
-          size="md"
-        />
-      </div>
     </nav>
   </div>
 }

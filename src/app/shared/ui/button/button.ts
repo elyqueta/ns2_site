@@ -20,6 +20,7 @@ export class Button {
   readonly external = input(false);
   readonly showArrow = input(false);
   readonly ariaLabel = input<string | null>(null);
+  readonly extraClasses = input<string>('');
   readonly classes = computed(() => {
     const variantClasses: Record<ButtonVariant, string> = {
       primary: 'bg-accent text-on-accent hover:bg-accent-bright',
@@ -35,6 +36,7 @@ export class Button {
       'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-button font-semibold cursor-pointer transition-colors focus-visible:outline-offset-4',
       variantClasses[this.variant()],
       sizeClasses[this.size()],
+      this.extraClasses(),
     ].join(' ');
   });
 }

@@ -14,7 +14,7 @@ export class KzPipe implements PipeTransform {
     return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: 'AOA',
-      maximumFractionDigits: 2,
+      maximumFractionDigits: 0,
     }).format(value);
   }
 }

@@ -7,8 +7,11 @@ export interface PacoteWeb {
   readonly prazo: LocalizedText;
   readonly paginas: LocalizedText;
   readonly descricao: LocalizedText;
+  readonly idealPara: LocalizedText;
   readonly inclui: readonly LocalizedText[];
   readonly naoInclui: readonly LocalizedText[];
+  readonly extras: readonly LocalizedText[];
+  readonly wireframe: 'uma-secao' | 'varias-paginas' | 'com-blog';
   readonly destaque?: boolean;
   readonly href: string;
 }
@@ -53,8 +56,14 @@ export const webPacotes: readonly PacoteWeb[] = [
       pt: 'Página única focada em conversão.',
       en: 'A single page focused on conversion.',
     },
+    idealPara: {
+      pt: 'Lançamento rápido ou campanha pontual.',
+      en: 'Quick launch or one-off campaign.',
+    },
     inclui: incluiTodos,
     naoInclui: naoIncluiTodos,
+    extras: naoIncluiTodos,
+    wireframe: 'uma-secao',
     href: '/desenvolvimento-web',
   },
   {
@@ -67,8 +76,14 @@ export const webPacotes: readonly PacoteWeb[] = [
       pt: 'Presença online simples e profissional para apresentar a empresa, os serviços e os contactos.',
       en: 'A simple, professional online presence to present your company, services and contact details.',
     },
+    idealPara: {
+      pt: 'Apresentar a empresa e os serviços.',
+      en: 'Present your company and services.',
+    },
     inclui: [...incluiTodos, { pt: 'Animações simples', en: 'Simple animations' }],
     naoInclui: naoIncluiTodos,
+    extras: naoIncluiTodos,
+    wireframe: 'varias-paginas',
     href: '/desenvolvimento-web',
   },
   {
@@ -80,6 +95,10 @@ export const webPacotes: readonly PacoteWeb[] = [
     descricao: {
       pt: 'Design mais personalizado, animações e optimização para motores de pesquisa mais completa.',
       en: 'More tailored design, animations and more comprehensive search engine optimisation.',
+    },
+    idealPara: {
+      pt: 'Negócio em crescimento com conteúdo próprio.',
+      en: 'Growing business with its own content.',
     },
     inclui: [
       ...incluiTodos,
@@ -93,6 +112,8 @@ export const webPacotes: readonly PacoteWeb[] = [
       },
     ],
     naoInclui: naoIncluiTodos,
+    extras: naoIncluiTodos,
+    wireframe: 'com-blog',
     destaque: true,
     href: '/desenvolvimento-web',
   },
@@ -106,6 +127,10 @@ export const webPacotes: readonly PacoteWeb[] = [
       pt: 'Estrutura avançada, várias áreas, blog estático e optimização de desempenho.',
       en: 'An advanced structure with multiple sections, a static blog and performance optimisation.',
     },
+    idealPara: {
+      pt: 'Estrutura avançada e blog institucional.',
+      en: 'Advanced structure and institutional blog.',
+    },
     inclui: [
       ...incluiTodos,
       {
@@ -115,6 +140,8 @@ export const webPacotes: readonly PacoteWeb[] = [
       { pt: 'SEO técnico básico', en: 'Basic technical SEO' },
     ],
     naoInclui: naoIncluiTodos,
+    extras: naoIncluiTodos,
+    wireframe: 'com-blog',
     href: '/desenvolvimento-web',
   },
 ];

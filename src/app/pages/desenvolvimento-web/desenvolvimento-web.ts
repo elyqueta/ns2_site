@@ -43,6 +43,10 @@ export class DesenvolvimentoWeb {
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.hero.homeLabel), href: '/' },
   ]);
+  readonly maisEscolhido = computed(() => this.i18n.t('actions.maisEscolhido'));
+  readonly compararPacotes = computed(() => this.i18n.t('actions.compararPacotes'));
+  readonly extrasLabel = computed(() => this.i18n.t('actions.extrasLabel'));
+  readonly cardPackage = computed(() => this.i18n.t('uiKit.cardPackage'));
   readonly websitePackages = computed(() =>
     webPacotes.map((item) => ({
       ...item,

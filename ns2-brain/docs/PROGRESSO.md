@@ -194,3 +194,23 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Problema: os `<app-media-slot>` das notícias não recebiam `[src]`, então só mostravam o placeholder.
 - Correcção: adicionado `[src]` a todos os media-slot das notícias (listagem e detalhe).
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 07 (LEIA-ME) — Desenvolvimento web e pacotes (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: A) Destacar Site Profissional com borda e etiqueta "Mais escolhido"
+  - Q2: A) Mini-wireframe em CSS mostrando a escala de cada pacote
+  - Q3: B) "50 000 Kz" (espaço, sem ,00)
+  - Q4: A) "Ideal para..." + 3 a 5 itens incluídos + prazo estimado
+  - Q5: A) Linha própria "Extras" dentro de cada cartão
+  - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote
+  - Q7: B) Tabela comparativa sempre visível abaixo dos cartões
+- Implementação:
+  - `data/web-pacotes.ts`: adicionados campos `idealPara`, `extras`, `wireframe` a cada pacote; Site Profissional mantido com `destaque: true`
+  - `desenvolvimento-web.html`: cartões com altura igual (`align-items-stretch`); removido brilho radial (`bg-accent/5`); hover discreto (borda); etiqueta "Mais escolhido"; mini-wireframe CSS por tipo (uma-secao/varias-paginas/com-blog); preço via kz pipe (sem ,00); "Ideal para..."; extras como linha própria; CTA WhatsApp com nome do pacote; tabela comparativa sempre visível
+  - `desenvolvimento-web.ts`: adicionados computeds `maisEscolhido`, `compararPacotes`, `extrasLabel`, `cardPackage`
+  - `shared/pipes/kz.pipe.ts`: `maximumFractionDigits` alterado de 2 para 0
+  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.maisEscolhido`, `actions.compararPacotes`, `actions.extrasLabel`
+- Ficheiros alterados: `src/app/data/web-pacotes.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/shared/pipes/kz.pipe.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: nenhuma

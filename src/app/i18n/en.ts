@@ -56,6 +56,9 @@ export const en = {
     languageSelection: 'Language',
     languagePortuguese: 'Portuguese',
     languageEnglish: 'English',
+    maisEscolhido: 'Most popular',
+    compararPacotes: 'Compare packages',
+    extrasLabel: 'Extras',
   },
   pages: {
     home: 'Home',

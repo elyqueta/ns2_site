@@ -56,9 +56,22 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Os logótipos das sete marcas continuam pendentes; até serem fornecidos, os nomes são apresentados em tipografia.
 - A Fase 12 ainda precisa de resultados Lighthouse mobile em produção; a tentativa local com `npx lighthouse` terminou em `ETIMEDOUT` por falta de acesso à rede. A indexação efectiva só pode ser confirmada após o sitemap ser submetido na Google Search Console.
 
-## Imagens em falta
-
-(vazio — ver `assets.md`)
+## Fase 03 (LEIA-ME) — Home: estrutura e "Quem somos" (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: Imagem `@og-default.png` (usada na secção "Quem somos" em vez da fotografia de stock)
+  - Q2: B) Manter texto actual
+  - Q3: C) Hero com dois caminhos: "Web e sistemas" → /desenvolvimento-web e "TI e equipamentos" → /servicos
+  - Q4: A) Remover "Descer para explorar"
+- Implementação:
+  - `about-preview.html`: imagem alterada de `/images/equipa.jpeg` para `/images/og/og-default.png`
+  - `data/home.ts`: `imageAlt` e `expectedFile` atualizados para og-default.png
+  - `hero.html`: removida secção "Descer para explorar"; botões alterados para "Web e sistemas" e "TI e equipamentos" com traduções do dicionário i18n (`actions.heroWeb`, `actions.heroIt`)
+  - `hero.ts`: removido `ScrollService` e `scrollToAbout`; adicionados `heroWebLabel` e `heroItLabel` computeds; removido `Icon` import (não usado)
+  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.heroWeb` e `actions.heroIt`
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: Q5 (CTA final) não foi respondida pelo utilizador, mantida como está
 
 ## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
 - Estado: concluída

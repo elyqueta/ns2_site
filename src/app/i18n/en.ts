@@ -22,6 +22,8 @@ export const en = {
   },
   actions: {
     requestQuote: 'Request a quote',
+    heroWeb: 'Web and systems',
+    heroIt: 'IT and equipment',
     contact: 'Get in touch',
     whatsapp: 'WhatsApp',
     email: 'Email',

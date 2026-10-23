@@ -12,6 +12,8 @@ export const pt = {
   },
   actions: {
     requestQuote: 'Pedir orçamento',
+    heroWeb: 'Web e sistemas',
+    heroIt: 'TI e equipamentos',
     contact: 'Falar connosco',
     whatsapp: 'WhatsApp',
     email: 'Email',

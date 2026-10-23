@@ -326,7 +326,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa do serviço de construtoria.',
         en: 'Illustration representing Construtoria consulting.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/construtoria.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/consultoria.webp' },
     },
   },
   {
@@ -413,7 +413,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa do serviço de locação de equipamentos de TI.',
         en: 'Illustration representing IT equipment rental services.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos-ti.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos.webp' },
     },
   },
   {
@@ -446,7 +446,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa de websites e sistemas web.',
         en: 'Illustration representing websites and web systems.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/desenvolvimento-web.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/websites-sistemas-web.webp' },
     },
   },
 ];

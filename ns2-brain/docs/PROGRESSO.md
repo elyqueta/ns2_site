@@ -79,6 +79,28 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/home/about-preview/about-preview.html`
 - Verificações feitas: `npm run build` passa; `npm test` sem regressão.
 
+## Fase 04 (LEIA-ME) — Serviços: cartões (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: B) Carrossel → depois ajustado: manter template actual (grelha)
+  - Q2: C) Todos com imagem (a fornecer) → MediaSlot com placeholder em todos os cartões
+  - Q3: A) Remover números (01, 02…) → removido
+  - Q4: Não usar etiqueta de parceiros → não adicionado
+- Implementação:
+  - `servicos.html`: removido span do número (`ordemLabel`); adicionado `<app-media-slot>` com imagem em cada cartão; mantida grelha (`md:grid-cols-2 xl:grid-cols-3`)
+  - `servicos.ts`: removido `ordemLabel` do mapeamento; removido import `RevealChildren`; adicionado import `MediaSlot`
+  - `data/servicos.ts`: já tinha `imagem.ficheiroEsperado` definido para cada serviço (usado pelo MediaSlot)
+- Ficheiros alterados: `src/app/pages/servicos/servicos.html`, `src/app/pages/servicos/servicos.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: imagens reais de serviços em falta (registadas como `expectedFile` em `data/servicos.ts`)
+
+## Ajuste adicional (2026-10-23)
+- `data/servicos.ts`: caminhos das imagens atualizados para apontar aos ficheiros reais em `public/images/servicos/` (`consultoria.webp`, `locacao-equipamentos.webp`, `websites-sistemas-web.webp`)
+- `servicos.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para cada serviço
+- `servicos.html`: `<app-media-slot>` agora recebe `[src]="service.imagemSrc"` em vez de `null`, mostrando as imagens reais
+- Ficheiros alterados: `src/app/data/servicos.ts`, `src/app/pages/servicos/servicos.ts`, `src/app/pages/servicos/servicos.html`
+- Verificações feitas: `npm run build` passa; `npm test` sem regressão.
+
 ## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
 - Estado: concluída
 - Decisões do utilizador:

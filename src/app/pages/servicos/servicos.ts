@@ -6,16 +6,16 @@ import { WhatsappService } from '../../core/whatsapp.service';
 import { homeContent } from '../../data/home';
 import { servicesPageContent, servicos } from '../../data/servicos';
 import { pt } from '../../i18n/pt';
-import { RevealChildren } from '../../shared/directives/reveal-children.directive';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { Icon } from '../../shared/ui/icon/icon';
+import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 
 @Component({
   selector: 'app-servicos',
-  imports: [CtaBand, Icon, LocalizedPipe, PageHero, RevealChildren, RouterLink, SectionHeading],
+  imports: [CtaBand, Icon, LocalizedPipe, MediaSlot, PageHero, RouterLink, SectionHeading],
   templateUrl: './servicos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,7 +26,7 @@ export class Servicos {
   readonly copy = servicesPageContent;
   readonly services = servicos.map((service) => ({
     ...service,
-    ordemLabel: service.ordem.toString().padStart(2, '0'),
+    imagemSrc: `/images/servicos/${service.imagem.ficheiroEsperado.pt.split('/').pop()}`,
   }));
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.homeLabel), href: '/' },

@@ -10,7 +10,6 @@ import { Card } from '../../shared/ui/card/card';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { FormField, FormFieldOption } from '../../shared/ui/form-field/form-field';
 import { Icon, iconNames } from '../../shared/ui/icon/icon';
-import { LanguageToggle } from '../../shared/ui/language-toggle/language-toggle';
 import { LinkArrow } from '../../shared/ui/link-arrow/link-arrow';
 import { Marquee } from '../../shared/ui/marquee/marquee';
 import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
@@ -68,7 +67,6 @@ interface PaletteToken {
     FormField,
     Icon,
     KzPipe,
-    LanguageToggle,
     LinkArrow,
     Magnetic,
     MaskImage,

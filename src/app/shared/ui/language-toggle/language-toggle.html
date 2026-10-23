@@ -1,47 +1,30 @@
 <div
-  class="relative inline-flex items-center gap-2"
+  class="inline-flex min-h-11 items-center rounded-full border border-line bg-surface p-1"
   role="group"
   [attr.aria-label]="groupLabel()"
 >
   <button
-    class="inline-flex min-h-9 min-w-9 items-center justify-center gap-2 rounded-full border border-line bg-surface text-xs font-semibold transition-colors cursor-pointer"
-    [attr.aria-label]="languageAriaLabel()"
-    [attr.aria-expanded]="open()"
-    [attr.aria-haspopup]="true"
-    (click)="toggle()"
-    (keydown.escape)="close()"
+    class="min-h-9 min-w-9 rounded-full px-2 text-xs font-semibold transition-colors cursor-pointer"
+    [class.bg-accent]="lang() === 'pt'"
+    [class.text-on-accent]="lang() === 'pt'"
+    [class.text-fg-muted]="lang() !== 'pt'"
+    type="button"
+    [attr.aria-label]="portugueseLabel()"
+    [attr.aria-pressed]="lang() === 'pt'"
+    (click)="selectLanguage('pt')"
   >
-    <app-icon name="globe" class="size-4" aria-hidden="true" />
-    <span>{{ lang() === 'pt' ? 'PT' : 'EN' }}</span>
-    <app-icon name="arrow" class="size-3" aria-hidden="true" />
+    PT
   </button>
-
-  @if (open()) {
-    <div
-      class="absolute z-50 mt-1 w-[7rem] rounded-xl border border-line bg-surface shadow-xl"
-    >
-      <button
-        class="flex w-full items-center px-3 py-2 text-sm font-semibold text-fg transition-colors hover:bg-surface-2 cursor-pointer"
-        type="button"
-        (click)="selectLanguage('pt')"
-        (keydown.escape)="close()"
-      >
-        PT
-        @if (lang() === 'pt') {
-          <app-icon name="check" class="ml-auto size-4" />
-        }
-      </button>
-      <button
-        class="flex w-full items-center px-3 py-2 text-sm font-semibold text-fg transition-colors hover:bg-surface-2 cursor-pointer"
-        type="button"
-        (click)="selectLanguage('en')"
-        (keydown.escape)="close()"
-      >
-        EN
-        @if (lang() === 'en') {
-          <app-icon name="check" class="ml-auto size-4" />
-        }
-      </button>
-    </div>
-  }
+  <button
+    class="min-h-9 min-w-9 rounded-full px-2 text-xs font-semibold transition-colors cursor-pointer"
+    [class.bg-accent]="lang() === 'en'"
+    [class.text-on-accent]="lang() === 'en'"
+    [class.text-fg-muted]="lang() !== 'en'"
+    type="button"
+    [attr.aria-label]="englishLabel()"
+    [attr.aria-pressed]="lang() === 'en'"
+    (click)="selectLanguage('en')"
+  >
+    EN
+  </button>
 </div>

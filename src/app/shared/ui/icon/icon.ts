@@ -15,7 +15,6 @@ export const iconNames = [
   'accessory',
   'chair',
   'printer',
-  'globe',
   'whatsapp',
   'email',
   'phone',

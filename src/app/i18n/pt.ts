@@ -178,7 +178,6 @@ export const pt = {
       accessory: 'Acessório',
       chair: 'Cadeira',
       printer: 'Impressora',
-      globe: 'Globo',
       whatsapp: 'WhatsApp',
       email: 'Email',
       phone: 'Telefone',

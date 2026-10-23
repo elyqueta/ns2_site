@@ -29,6 +29,9 @@
         <app-media-slot
           [alt]="item.imagem.alt | localized"
           [expectedFile]="item.imagem.ficheiroEsperado | localized"
+          [src]="imagemSrc()"
+          [width]="626"
+          [height]="418"
         />
       </div>
     </section>

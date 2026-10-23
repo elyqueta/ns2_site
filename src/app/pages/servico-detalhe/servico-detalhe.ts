@@ -43,6 +43,13 @@ export class ServicoDetalhe {
     const slug = this.params().get('slug');
     return detailServices.find((item) => item.slug === slug) ?? null;
   });
+  readonly imagemSrc = computed(() => {
+    const service = this.service();
+    if (!service) {
+      return '';
+    }
+    return `/images/servicos/${service.imagem.ficheiroEsperado.pt.split('/').pop()}`;
+  });
   readonly position = computed(() => {
     const current = this.service();
     return current ? detailServices.indexOf(current) : -1;

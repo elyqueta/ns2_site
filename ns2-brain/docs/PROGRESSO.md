@@ -92,7 +92,15 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - `data/servicos.ts`: já tinha `imagem.ficheiroEsperado` definido para cada serviço (usado pelo MediaSlot)
 - Ficheiros alterados: `src/app/pages/servicos/servicos.html`, `src/app/pages/servicos/servicos.ts`
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
-- Pendências: imagens reais de serviços em falta (registadas como `expectedFile` em `data/servicos.ts`)
+- Pendências: nenhuma
+
+## Correcção: imagens nos detalhes de serviço (2026-10-23)
+- Problema: `<app-media-slot>` na página de detalhe de cada serviço não recebia `[src]`, então nunca mostrava a imagem (apenas o placeholder).
+- Correcção:
+  - `servico-detalhe.html`: adicionado `[src]="imagemSrc()"`, `[width]="626"`, `[height]="418"` ao `<app-media-slot>`
+  - `servico-detalhe.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para o serviço actual
+- Ficheiros alterados: `src/app/pages/servico-detalhe/servico-detalhe.html`, `src/app/pages/servico-detalhe/servico-detalhe.ts`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Ajuste adicional (2026-10-23)
 - `data/servicos.ts`: caminhos das imagens atualizados para apontar aos ficheiros reais em `public/images/servicos/` (`consultoria.webp`, `locacao-equipamentos.webp`, `websites-sistemas-web.webp`)

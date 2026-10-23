@@ -11,7 +11,6 @@ export interface PacoteWeb {
   readonly inclui: readonly LocalizedText[];
   readonly naoInclui: readonly LocalizedText[];
   readonly extras: readonly LocalizedText[];
-  readonly wireframe: 'uma-secao' | 'varias-paginas' | 'com-blog';
   readonly destaque?: boolean;
   readonly href: string;
 }
@@ -63,7 +62,6 @@ export const webPacotes: readonly PacoteWeb[] = [
     inclui: incluiTodos,
     naoInclui: naoIncluiTodos,
     extras: naoIncluiTodos,
-    wireframe: 'uma-secao',
     href: '/desenvolvimento-web',
   },
   {
@@ -83,7 +81,6 @@ export const webPacotes: readonly PacoteWeb[] = [
     inclui: [...incluiTodos, { pt: 'Animações simples', en: 'Simple animations' }],
     naoInclui: naoIncluiTodos,
     extras: naoIncluiTodos,
-    wireframe: 'varias-paginas',
     href: '/desenvolvimento-web',
   },
   {
@@ -113,7 +110,6 @@ export const webPacotes: readonly PacoteWeb[] = [
     ],
     naoInclui: naoIncluiTodos,
     extras: naoIncluiTodos,
-    wireframe: 'com-blog',
     destaque: true,
     href: '/desenvolvimento-web',
   },
@@ -141,7 +137,6 @@ export const webPacotes: readonly PacoteWeb[] = [
     ],
     naoInclui: naoIncluiTodos,
     extras: naoIncluiTodos,
-    wireframe: 'com-blog',
     href: '/desenvolvimento-web',
   },
 ];

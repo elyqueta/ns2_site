@@ -214,3 +214,9 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/data/web-pacotes.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/shared/pipes/kz.pipe.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma
+
+## Ajuste adicional: tabela comparativa de pacotes (2026-10-23)
+- Problema: colunas da tabela comparativa estavam em conflito de espaço (sem larguras definidas).
+- Correcção: adicionadas larguras fixas às colunas da tabela (`w-24`, `w-20`, `w-16`, `w-24`) para evitar quebra de layout.
+- Ficheiros alterados: `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).

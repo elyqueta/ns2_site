@@ -68,6 +68,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - Q3: Saltar (estratégia de tradução mantida)
   - Q4: A) Tema e idioma dentro do menu mobile; à vista só logótipo, CTA e menu
   - Q5: C) Até 480px usar só o símbolo logo-mark.svg
-- Ficheiros alterados: `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
+- Ajuste adicional (pedido do utilizador): botão "Pedir orçamento" movido para dentro do menu mobile (oculto no header em mobile via `hidden sm:inline-flex`, visível em desktop; renderizado no `mobile-menu` após os toggles de idioma/tema).
+- Ficheiros alterados: `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
 - Pendências: nenhuma

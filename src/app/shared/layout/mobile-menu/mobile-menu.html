@@ -75,6 +75,14 @@
         <app-language-toggle />
         <app-theme-toggle />
       </div>
+      <div class="mt-4">
+        <app-button
+          [label]="quoteLabel()"
+          [href]="whatsappUrl"
+          [external]="true"
+          size="md"
+        />
+      </div>
     </nav>
   </div>
 }

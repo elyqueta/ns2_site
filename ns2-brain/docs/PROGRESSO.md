@@ -60,6 +60,18 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 
 (vazio — ver `assets.md`)
 
+## Fase 02 (LEIA-ME) — Heros e imagens (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: C) Cidade em wireframe (home-c-cidade) — exige atribuição Freepik/Magnific
+  - Q2: A) Painel à direita recortado na diagonal da marca
+  - Q3: B) Versão clara diferente (overlay claro + imagem esbatida no modo claro)
+  - Q4: A) Reduzir H1 com clamp()
+  - Q5: A) Home primeiro; interiores numa segunda passagem
+- Ficheiros alterados: `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: nenhuma
+
 ## Fase 01 (LEIA-ME) — Navbar: tema, tradução e logótipo (2026-10-23)
 - Estado: concluída
 - Decisões do utilizador:

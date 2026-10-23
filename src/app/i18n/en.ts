@@ -187,6 +187,7 @@ export const en = {
       accessory: 'Accessory',
       chair: 'Chair',
       printer: 'Printer',
+      globe: 'Globe',
       whatsapp: 'WhatsApp',
       email: 'Email',
       phone: 'Phone',

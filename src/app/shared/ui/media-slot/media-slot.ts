@@ -16,4 +16,5 @@ export class MediaSlot {
   readonly objectPosition = input<'left' | 'center' | 'right'>('center');
   readonly loading = input<'eager' | 'lazy'>('lazy');
   readonly decoding = input<'async' | 'sync' | 'auto'>('async');
+  readonly aspectRatio = input<'3/2' | '16/9'>('3/2');
 }

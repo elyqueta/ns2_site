@@ -30,10 +30,6 @@ export class Noticias {
   readonly articles = computed(() =>
     noticias.map((article) => ({
       ...article,
-      imageAlt:
-        this.i18n.lang() === 'en'
-          ? `${this.i18n.text(article.titulo)} — cover image`
-          : `${this.i18n.text(article.titulo)} — imagem de capa`,
       expectedFile: `public/images/${article.imagem}`,
       linkLabel: `${this.i18n.text(this.copy.readLabel)}: ${this.i18n.text(article.titulo)}`,
     })),

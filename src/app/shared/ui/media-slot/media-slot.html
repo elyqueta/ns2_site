@@ -1,5 +1,7 @@
 <figure
-  class="relative aspect-[3/2] overflow-hidden rounded-image border border-line bg-surface-2"
+  class="relative overflow-hidden rounded-image border border-line bg-surface-2"
+  [class.aspect-[3/2]]="aspectRatio() === '3/2'"
+  [class.aspect-[16/9]]="aspectRatio() === '16/9'"
   [attr.aria-label]="alt()"
 >
   @if (src(); as imageSrc) {

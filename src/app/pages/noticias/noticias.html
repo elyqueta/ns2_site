@@ -24,8 +24,12 @@
         >
           <app-media-slot
             class="block h-full min-h-64"
-            [alt]="featured().imageAlt"
+            [alt]="''"
             [expectedFile]="featured().expectedFile"
+            aspectRatio="16/9"
+            [width]="1200"
+            [height]="675"
+            [loading]="'lazy'"
           />
         </a>
         <div class="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
@@ -112,7 +116,14 @@
                   [routerLink]="article.href"
                   [attr.aria-label]="article.linkLabel"
                 >
-                  <app-media-slot [alt]="article.imageAlt" [expectedFile]="article.expectedFile" />
+                  <app-media-slot
+                    [alt]="''"
+                    [expectedFile]="article.expectedFile"
+                    aspectRatio="16/9"
+                    [width]="1200"
+                    [height]="675"
+                    [loading]="'lazy'"
+                  />
                 </a>
                 <div class="flex flex-1 flex-col p-6 sm:p-8">
                   <div class="flex flex-wrap items-center justify-between gap-3">

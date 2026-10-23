@@ -13,33 +13,41 @@
   >
     <div class="flex min-h-14 items-center justify-between">
       <img
-        class="h-11 w-auto dark:hidden"
+        class="h-11 w-auto sm:block hidden dark:hidden"
         src="/brand/logo-horizontal.svg"
         alt="NS2 Innovation"
         width="1487"
         height="689"
       />
       <img
-        class="hidden h-11 w-auto dark:block"
+        class="h-11 w-auto sm:hidden dark:hidden"
+        src="/brand/logo-mark.svg"
+        alt="NS2 Innovation"
+        width="1487"
+        height="689"
+      />
+      <img
+        class="hidden h-11 w-auto sm:block dark:block"
         src="/brand/logo-horizontal-dark.svg"
         alt="NS2 Innovation"
         width="1487"
         height="689"
       />
-      <div class="flex items-center gap-2">
-        <div class="flex items-center gap-2">
-          <app-language-toggle />
-          <app-theme-toggle />
-        </div>
-        <button
-          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface cursor-pointer"
-          type="button"
-          [attr.aria-label]="closeLabel()"
-          (click)="close.emit()"
-        >
-          <app-icon name="close" />
-        </button>
-      </div>
+      <img
+        class="hidden h-11 w-auto sm:hidden dark:block"
+        src="/brand/logo-mark-dark.svg"
+        alt="NS2 Innovation"
+        width="1487"
+        height="689"
+      />
+      <button
+        class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface cursor-pointer"
+        type="button"
+        [attr.aria-label]="closeLabel()"
+        (click)="close.emit()"
+      >
+        <app-icon name="close" />
+      </button>
     </div>
 
     <nav class="my-auto py-12" [attr.aria-label]="menuLabel()">
@@ -63,6 +71,10 @@
           </li>
         }
       </ul>
+      <div class="flex items-center gap-2 pt-3 border-b border-line pb-3">
+        <app-language-toggle />
+        <app-theme-toggle />
+      </div>
     </nav>
   </div>
 }

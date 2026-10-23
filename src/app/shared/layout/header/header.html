@@ -9,14 +9,14 @@
       [attr.aria-label]="logoLabel()"
     >
       <img
-        class="h-11 w-auto dark:hidden"
+        class="h-9 w-auto dark:hidden"
         src="/brand/logo-horizontal.svg"
         alt="NS2 Innovation"
         width="1487"
         height="689"
       />
       <img
-        class="hidden h-11 w-auto dark:block"
+        class="hidden h-9 w-auto dark:block"
         src="/brand/logo-horizontal-dark.svg"
         alt="NS2 Innovation"
         width="1487"
@@ -39,15 +39,14 @@
     </nav>
 
     <div class="flex items-center gap-2 sm:gap-3">
-      <app-language-toggle class="hidden sm:inline-flex" />
-      <app-theme-toggle class="hidden sm:inline-flex" />
+      <app-language-toggle class="hidden xl:flex" />
       <app-button
-        class="inline-flex"
         [label]="quoteLabel()"
         [href]="whatsappUrl"
         [external]="true"
         size="md"
       />
+      <app-theme-toggle class="hidden xl:flex" />
       <button
         #menuTrigger
         class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg xl:hidden cursor-pointer"

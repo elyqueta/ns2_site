@@ -69,7 +69,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - Q4: A) Tema e idioma dentro do menu mobile; à vista só logótipo, CTA e menu
   - Q5: C) Até 480px usar só o símbolo logo-mark.svg
 - Ajustes adicionais (pedidos do utilizador):
-  1. Botão "Pedir orçamento" movido para dentro do menu mobile (oculto no header em mobile via `hidden sm:inline-flex`, visível em desktop).
+  1. Botão "Pedir orçamento" movido para dentro do menu mobile (oculto no header em mobile/tablet via `hidden lg:inline-flex`, visível apenas em desktop; renderizado no `mobile-menu` após os toggles de idioma/tema).
   2. Logo agora é apenas o símbolo sem "innovation" (`logo-mark.svg`/`logo-mark-dark.svg`) em qualquer tamanho de tela, tanto no header quanto no menu mobile (substituídos os logos horizontais).
 - Ficheiros alterados: `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)

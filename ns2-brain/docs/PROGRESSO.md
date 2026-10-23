@@ -102,23 +102,14 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/pages/servico-detalhe/servico-detalhe.html`, `src/app/pages/servico-detalhe/servico-detalhe.ts`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
-## Fase 06 (LEIA-ME) — Notícias: capas dos artigos (2026-10-23)
-- Estado: concluída
-- Decisões do utilizador:
-  - Q1: B) Capas tipográficas desenhadas (já em public/images/noticias/, 1200×675, 16:9)
-  - Q2: A) 16:9 (já resolvido)
-  - Q3: Não se aplica (já não há imagem gerada por IA)
-  - Q4: A) Sim, imagem de destaque no topo do artigo
-- Implementação:
-  - `media-slot.ts`: adicionado input `aspectRatio` ('3/2' padrão | '16/9')
-  - `media-slot.html`: classes dinâmicas `aspect-[3/2]` / `aspect-[16/9]` no figure
-  - `noticias.html`: ambos os `<app-media-slot>` (artigo em destaque e lista) usam `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa, título já na imagem)
-  - `noticias.ts`: removido `imageAlt` computed (não usado)
-  - `noticia-detalhe.html`: imagem de destaque usa `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa)
-  - `noticia-detalhe.ts`: `image` computed simplificado (só `expectedFile`)
-- Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/noticias/noticias.html`, `src/app/pages/noticias/noticias.ts`, `src/app/pages/noticia-detalhe/noticia-detalhe.html`, `src/app/pages/noticia-detalhe/noticia-detalhe.ts`
+## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+- Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
+- O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
+- `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
+- `data/home.ts`: `imageAlt` atualizado para "Duas pessoas à secretária com um portátil, ligadas a parceiros especializados"; `expectedFile` atualizado para `public/images/sobre/quem-somos.webp`.
+- `media-slot.ts` / `media-slot.html`: adicionados inputs `loading` e `decoding` para controlar os atributos da imagem sem layout shift.
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
-- Pendências: nenhuma
 
 ## Fase 05 (LEIA-ME) — Produtos: imagens e cartões (2026-10-23)
 - Estado: concluída
@@ -133,24 +124,6 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/pages/produtos/produtos.ts`, `src/app/pages/produtos/produtos.html`
 - Ficheiros criados: `docs/guia-fotografia-produtos.md`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
-
-## Fase 06 (LEIA-ME) — Notícias: capas dos artigos (2026-10-23)
-- Estado: concluída
-- Decisões do utilizador:
-  - Q1: B) Capas tipográficas desenhadas (já em public/images/noticias/, 1200×675, 16:9)
-  - Q2: A) 16:9 (já resolvido)
-  - Q3: Não se aplica (já não há imagem gerada por IA)
-  - Q4: A) Sim, imagem de destaque no topo do artigo
-- Implementação:
-  - `media-slot.ts`: adicionado input `aspectRatio` ('3/2' padrão | '16/9')
-  - `media-slot.html`: classes dinâmicas `aspect-[3/2]` / `aspect-[16/9]` no figure
-  - `noticias.html`: ambos os `<app-media-slot>` (artigo em destaque e lista) usam `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa, título já na imagem)
-  - `noticias.ts`: removido `imageAlt` computed (não usado)
-  - `noticia-detalhe.html`: imagem de destaque usa `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa)
-  - `noticia-detalhe.ts`: `image` computed simplificado (só `expectedFile`)
-- Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/noticias/noticias.html`, `src/app/pages/noticias/noticias.ts`, `src/app/pages/noticia-detalhe/noticia-detalhe.html`, `src/app/pages/noticia-detalhe/noticia-detalhe.ts`
-- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
-- Pendências: nenhuma
 - Pendências: todas as 6 imagens de produto são provisórias (ver `docs/guia-fotografia-produtos.md` para substituição)
 
 ## Ajuste adicional (2026-10-23)
@@ -209,10 +182,15 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Implementação:
   - `media-slot.ts`: adicionado input `aspectRatio` ('3/2' padrão | '16/9')
   - `media-slot.html`: classes dinâmicas `aspect-[3/2]` / `aspect-[16/9]` no figure
-  - `noticias.html`: ambos os `<app-media-slot>` (artigo em destaque e lista) usam `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa, título já na imagem)
-  - `noticias.ts`: removido `imageAlt` computed (não usado)
-  - `noticia-detalhe.html`: imagem de destaque usa `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]=""` (decorativa)
-  - `noticia-detalhe.ts`: `image` computed simplificado (só `expectedFile`)
+  - `noticias.html`: ambos os `<app-media-slot>` (artigo em destaque e lista) usam `src`, `[expectedFile]`, `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]="'decorative'"` (decorativa, título já na imagem)
+  - `noticias.ts`: adicionado `imageSrc` computed para cada artigo; removido `imageAlt` computed (não usado)
+  - `noticia-detalhe.html`: imagem de destaque usa `src`, `[expectedFile]`, `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]="'decorative'"`
+  - `noticia-detalhe.ts`: adicionado `imageSrc` computed; `image` computed simplificado (só `expectedFile`)
 - Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/noticias/noticias.html`, `src/app/pages/noticias/noticias.ts`, `src/app/pages/noticia-detalhe/noticia-detalhe.html`, `src/app/pages/noticia-detalhe/noticia-detalhe.ts`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma
+
+## Correcção: src dos media-slot nas notícias (2026-10-23)
+- Problema: os `<app-media-slot>` das notícias não recebiam `[src]`, então só mostravam o placeholder.
+- Correcção: adicionado `[src]` a todos os media-slot das notícias (listagem e detalhe).
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).

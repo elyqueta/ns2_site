@@ -77,6 +77,10 @@ export class NoticiaDetalhe {
     })),
   );
   readonly shareStatus = signal('');
+  readonly imageSrc = computed(() => {
+    const article = this.article();
+    return article ? `/images/${article.imagem}` : null;
+  });
   readonly image = computed(() => {
     const article = this.article();
     return article

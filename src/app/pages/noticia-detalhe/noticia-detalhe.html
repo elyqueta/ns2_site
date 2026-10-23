@@ -12,6 +12,7 @@
       @if (image(); as cover) {
         <app-media-slot
           [alt]="'decorative'"
+          [src]="imageSrc()"
           [expectedFile]="cover.expectedFile"
           aspectRatio="16/9"
           [width]="1200"

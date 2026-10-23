@@ -30,6 +30,7 @@ export class Noticias {
   readonly articles = computed(() =>
     noticias.map((article) => ({
       ...article,
+      imageSrc: `/images/${article.imagem}`,
       expectedFile: `public/images/${article.imagem}`,
       linkLabel: `${this.i18n.text(this.copy.readLabel)}: ${this.i18n.text(article.titulo)}`,
     })),

@@ -59,6 +59,7 @@ export const en = {
     maisEscolhido: 'Most popular',
     compararPacotes: 'Compare packages',
     extrasLabel: 'Extras',
+    idealPara: 'Ideal for',
   },
   pages: {
     home: 'Home',

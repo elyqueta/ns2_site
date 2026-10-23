@@ -47,6 +47,7 @@ export class DesenvolvimentoWeb {
   readonly compararPacotes = computed(() => this.i18n.t('actions.compararPacotes'));
   readonly extrasLabel = computed(() => this.i18n.t('actions.extrasLabel'));
   readonly cardPackage = computed(() => this.i18n.t('uiKit.cardPackage'));
+  readonly idealParaLabel = computed(() => this.i18n.t('actions.idealPara'));
   readonly websitePackages = computed(() =>
     webPacotes.map((item) => ({
       ...item,

@@ -49,6 +49,7 @@ export const pt = {
     maisEscolhido: 'Mais escolhido',
     compararPacotes: 'Comparar pacotes',
     extrasLabel: 'Extras',
+    idealPara: 'Ideal para',
   },
   pages: {
     home: 'Início',

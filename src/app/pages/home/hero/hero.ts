@@ -1,18 +1,17 @@
-import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { I18nService } from '../../../core/i18n.service';
 import { ScrollService } from '../../../core/scroll.service';
-import { ThemeService } from '../../../core/theme.service';
 import { homeContent } from '../../../data/home';
 import { WhatsappService } from '../../../core/whatsapp.service';
 import { SplitTextReveal } from '../../../shared/directives/split-text.directive';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { Button } from '../../../shared/ui/button/button';
 import { Icon } from '../../../shared/ui/icon/icon';
+import { HomeHeroSlider } from './hero-slider';
 
 @Component({
   selector: 'app-home-hero',
-  imports: [Button, Icon, LocalizedPipe, SplitTextReveal, NgOptimizedImage],
+  imports: [Button, Icon, LocalizedPipe, SplitTextReveal, HomeHeroSlider],
   templateUrl: './hero.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,8 +24,6 @@ export class HomeHero {
     this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.whatsappMessage)),
   );
   private readonly scroll = inject(ScrollService);
-  readonly theme = inject(ThemeService).theme;
-  readonly heroImageSrc = '/images/heros/home-c-cidade.webp';
 
   scrollToAbout(event: MouseEvent): void {
     event.preventDefault();

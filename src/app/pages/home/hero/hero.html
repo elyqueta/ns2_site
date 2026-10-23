@@ -2,6 +2,8 @@
   id="home-hero"
   class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line"
 >
+  <app-home-hero-slider />
+  <div class="absolute inset-0 -z-10 bg-surface/60" aria-hidden="true"></div>
   <div
     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_72%_38%,var(--accent-glow),transparent_48%)]"
     aria-hidden="true"
@@ -35,30 +37,7 @@
     aria-hidden="true"
   ></div>
 
-  <div
-    class="absolute inset-y-0 right-0 -z-10 w-[42%] lg:w-[35%] overflow-hidden hidden sm:block [clip-path:polygon(0_0,65%_0,100%_100%,0_100%)]"
-    [class.bg-surface-2]="theme() === 'light'"
-  >
-    <img
-      class="size-full object-cover object-position-right"
-      [class.grayscale-30]="theme() === 'light'"
-      [ngSrc]="heroImageSrc"
-      alt=""
-      width="1920"
-      height="1080"
-      sizes="(max-width: 768px) 100vw, 40vw"
-      priority
-    />
-    <div
-      class="absolute inset-0"
-      [class]="theme() === 'light' ? 'bg-bg/50' : 'bg-bg/90'"
-    ></div>
-    <p class="absolute bottom-2 right-2 text-[10px] text-fg-muted opacity-50">
-      Foto: Freepik/Magnific
-    </p>
-  </div>
-
-  <div class="mx-auto w-full max-w-[1440px] px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28 relative z-10">
+  <div class="mx-auto w-full max-w-[1440px] px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
     <div class="max-w-5xl">
       <p
         class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.16em] text-accent-bright"
@@ -68,7 +47,7 @@
       @for (key of languageKey(); track key) {
         <h1
           appSplitText
-          class="max-w-[12ch] font-display font-semibold leading-[1.02] tracking-tight text-fg text-[clamp(2rem,6vw,4.5rem)]"
+          class="max-w-[12ch] font-display text-display font-semibold leading-[1.02] tracking-tight text-fg"
         >
           {{ copy.titleBefore | localized }}
           <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>

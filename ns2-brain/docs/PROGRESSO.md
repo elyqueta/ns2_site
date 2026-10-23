@@ -60,14 +60,16 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 
 (vazio — ver `assets.md`)
 
-## Fase 02 (LEIA-ME) — Heros e imagens (2026-10-23)
+## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
 - Estado: concluída
 - Decisões do utilizador:
-  - Q1: C) Cidade em wireframe (home-c-cidade) — exige atribuição Freepik/Magnific
-  - Q2: A) Painel à direita recortado na diagonal da marca
-  - Q3: B) Versão clara diferente (overlay claro + imagem esbatida no modo claro)
-  - Q4: A) Reduzir H1 com clamp()
-  - Q5: A) Home primeiro; interiores numa segunda passagem
+  - Q1: Slider de imagens a cada 20s, muda apenas a imagem (pedido do utilizador, fora das opções da fase; implementado em `HomeHeroSlider`)
+  - Q2: B) Fundo a toda largura com overlay
+  - Q3: B) Versão clara: overlay claro e imagem esbatida (overlay `bg-surface/60`, token semântico)
+  - Q4: A) Reduzir com clamp() (já implementado via token `--text-display: clamp(3rem, 9vw, 8.5rem)`)
+  - Q5: Não aplicável (slider implementado diretamente no hero da home)
+- Implementação: novo componente `HomeHeroSlider` (`hero-slider.ts` + `hero-slider.html`) que rotaciona imagens de `public/images/heros/` com fade GSAP a cada 20s, respeita `prefers-reduced-motion`, primeira imagem com `fetchpriority="high"` e `loading="eager"`, restantes `loading="lazy"`, `object-fit: cover` com `object-position:center`. Integrado no hero da home com overlay `bg-surface/60` para contraste do texto nos dois temas.
+- Ficheiros criados: `src/app/pages/home/hero/hero-slider.ts`, `src/app/pages/home/hero/hero-slider.html`
 - Ficheiros alterados: `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`
 - Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
 - Pendências: nenhuma

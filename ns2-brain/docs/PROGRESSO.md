@@ -102,6 +102,21 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/pages/servico-detalhe/servico-detalhe.html`, `src/app/pages/servico-detalhe/servico-detalhe.ts`
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
+## Fase 05 (LEIA-ME) — Produtos: imagens e cartões (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: Usar todas as imagens sem placeholder
+  - Q2: Imagem no topo de cada cartão de categoria (espaço vazio da secção de produto)
+  - Q3: A) Criar `docs/guia-fotografia-produtos.md`
+- Implementação:
+  - `produtos.ts`: adicionado `imagemSrc` computed para cada categoria, montando o caminho `/images/produtos/<ficheiro>`
+  - `produtos.html`: `<app-media-slot>` de cada categoria agora recebe `[src]="category.imagemSrc"` (imagens reais em vez de placeholder)
+  - `docs/guia-fotografia-produtos.md`: criado com especificações técnicas e tabela de ficheiros esperados
+- Ficheiros alterados: `src/app/pages/produtos/produtos.ts`, `src/app/pages/produtos/produtos.html`
+- Ficheiros criados: `docs/guia-fotografia-produtos.md`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: todas as 6 imagens de produto são provisórias (ver `docs/guia-fotografia-produtos.md` para substituição)
+
 ## Ajuste adicional (2026-10-23)
 - `data/servicos.ts`: caminhos das imagens atualizados para apontar aos ficheiros reais em `public/images/servicos/` (`consultoria.webp`, `locacao-equipamentos.webp`, `websites-sistemas-web.webp`)
 - `servicos.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para cada serviço

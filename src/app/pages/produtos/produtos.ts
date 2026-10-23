@@ -61,6 +61,7 @@ export class Produtos {
       ...category,
       ordemLabel: category.ordem.toString().padStart(2, '0'),
       whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(category.mensagemWhatsApp)),
+      imagemSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
       destaques: category.destaques.map((item) => ({
         ...item,
         whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),

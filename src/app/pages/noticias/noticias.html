@@ -85,7 +85,7 @@
         </button>
         @for (category of categories(); track category.value) {
           <button
-            class="inline-flex min-h-11 items-center rounded-full border px-5 font-semibold transition-colors"
+            class="inline-flex min-h-11 items-center rounded-full border px-5 font-semibold transition-colors cursor-pointer"
             [class.border-accent]="selectedCategory() === category.value"
             [class.bg-accent/10]="selectedCategory() === category.value"
             [class.text-accent-bright]="selectedCategory() === category.value"

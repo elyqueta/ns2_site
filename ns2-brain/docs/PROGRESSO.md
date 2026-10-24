@@ -221,3 +221,24 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Correcção: adicionado `flex flex-col h-full` ao `app-card` (`card.html`) e `min-h-0` aos itens do `@for` no `web-preview.html`, forçando altura igual em todos os cards.
 - Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/shared/ui/card/card.html`
 - Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 08 (LEIA-ME) — Projectos e cartões "Brevemente" (2024-10-24)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: A) Gráfica Viva em destaque (largura total) + Foco + 2 cartões Brevemente
+  - Q2: A) 2 cartões com borda tracejada, tipo de projecto e estado "Em desenvolvimento"
+  - Q3: A) Desafio → Solução → Resultado, só com dados reais + tecnologias
+  - Q4: A) Trocar entre captura clara e escura consoante o tema (usando preview https://foco-umber-xi.vercel.app/)
+  - Q5: A) Substituir "PROJECTO CONFIRMADO" por "No ar"
+  - Q6: A) Mostrar os 2 projectos numa secção "Projectos" na home, depois dos pacotes
+- Implementação:
+  - `data/projectos.ts`: reescrito com interface `Project` e `ProjectPageContent`; inclui Gráfica Viva, Foco e 2 projetos "Em breve"; conteúdos Desafio→Solução→Resultado com tecnologias; imagens claro/escuro
+  - `projecto-detalhe.ts` / `projecto-detalhe.html`: novo componente de detalhe de projeto com hero, imagem, desafio/solução/resultado, tecnologias e CTA WhatsApp
+  - `projectos.html` / `projectos.ts`: layout com Gráfica Viva em destaque (iframe largura total) + cards dinâmicos (Foco + 2 Brevemente); etiqueta "No ar"; cards levam para `/projectos/:slug`
+  - `app.routes.ts` e `app.routes.server.ts`: rota `projectos/:slug` com prerender para os 4 projetos
+  - `pages/home/projects-preview/`: novo componente com secção Projectos na home (depois dos pacotes) com 2 cards
+  - `pages/home/home.html` / `home.ts`: adicionado `app-home-projects-preview`
+- Ficheiros criados: `src/app/pages/projecto-detalhe/projecto-detalhe.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.html`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/projects-preview/projects-preview.html`
+- Ficheiros alterados: `src/app/data/projectos.ts`, `src/app/pages/projectos/projectos.html`, `src/app/pages/projectos/projectos.ts`, `src/app/app.routes.ts`, `src/app/app.routes.server.ts`, `src/app/pages/home/home.html`, `src/app/pages/home/home.ts`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`)

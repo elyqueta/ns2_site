@@ -66,6 +66,15 @@ export const routes: Routes = [
     data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
   },
   {
+    path: 'projectos/:slug',
+    loadComponent: () =>
+      import('./pages/projecto-detalhe/projecto-detalhe').then(
+        (module) => module.ProjectoDetalhe,
+      ),
+    title: `${pt.pages.projects} | NS2 Innovation`,
+    data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
+  },
+  {
     path: 'noticias',
     pathMatch: 'full',
     loadComponent: () => import('./pages/noticias/noticias').then((module) => module.Noticias),

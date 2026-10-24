@@ -35,7 +35,16 @@ describe('partner content', () => {
         ['notebooks', 'acessorios'].includes(partner.categoriaProdutoSlug),
       ),
     ).toBe(true);
-    expect(parceiros.every((partner) => partner.logo !== undefined)).toBe(true);
+    // Logos existentes apenas para parceiros com imagem disponível
+    expect(parceiros.find((p) => p.slug === 'dell')?.logo).toBe('/images/parceiros/dell.webp');
+    expect(parceiros.find((p) => p.slug === 'lenovo')?.logo).toBe('/images/parceiros/lenovo.webp');
+    expect(parceiros.find((p) => p.slug === 'apple')?.logo).toBe('/images/parceiros/apple.webp');
+    expect(parceiros.find((p) => p.slug === 'samsung')?.logo).toBe('/images/parceiros/samsung.webp');
+    expect(parceiros.find((p) => p.slug === 'multilaser')?.logo).toBe(
+      '/images/parceiros/multilaser.webp',
+    );
+    expect(parceiros.find((p) => p.slug === 'hp')?.logo).toBeUndefined();
+    expect(parceiros.find((p) => p.slug === 'knup')?.logo).toBeUndefined();
   });
 
   it('não descreve as marcas fornecidas como parceiras oficiais', () => {

@@ -6,8 +6,10 @@ import {
   inject,
   signal,
   viewChild,
+  afterNextRender,
+  DestroyRef,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { I18nService } from '../../../core/i18n.service';
 import { headerNavigation } from '../../../data/navegacao';
 import { HeaderMotion } from '../../directives/header-motion.directive';
@@ -42,8 +44,11 @@ export interface HeaderNavItemRendered {
 })
 export class Header {
   private readonly i18n = inject(I18nService);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
   readonly menuOpen = signal(false);
   readonly menuTrigger = viewChild<ElementRef<HTMLButtonElement>>('menuTrigger');
+  readonly scrollY = signal(0);
   readonly navigation = computed(() => {
     let index = 0;
     return headerNavigation.map((item) => {
@@ -73,11 +78,27 @@ export class Header {
       };
     });
   });
+  readonly isHome = computed(() => this.router.url === '/');
+  readonly headerDark = computed(() => this.isHome() && this.scrollY() < 80);
   readonly menuLabel = computed(() =>
     this.i18n.t(this.menuOpen() ? 'actions.closeMenu' : 'actions.openMenu'),
   );
   readonly navigationLabel = computed(() => this.i18n.t('actions.navigation'));
   readonly logoLabel = computed(() => `NS2 Innovation — ${this.i18n.t('pages.home')}`);
+
+  constructor() {
+    afterNextRender(() => {
+      const view = window;
+      const onScroll = (): void => {
+        this.scrollY.set(view.scrollY);
+      };
+      onScroll();
+      view.addEventListener('scroll', onScroll, { passive: true });
+      this.destroyRef.onDestroy(() => {
+        view.removeEventListener('scroll', onScroll);
+      });
+    });
+  }
 
   toggleMenu(): void {
     this.menuOpen.update((open) => !open);

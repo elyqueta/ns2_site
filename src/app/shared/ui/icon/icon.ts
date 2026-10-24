@@ -28,6 +28,8 @@ export const iconNames = [
   'close',
   'check',
   'plus',
+  'pause',
+  'play',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

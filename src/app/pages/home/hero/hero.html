@@ -1,41 +1,38 @@
 <section
   id="home-hero"
-  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line"
+  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line dark"
 >
-  <app-home-hero-slider />
-  <div class="absolute inset-0 -z-10 bg-surface/60" aria-hidden="true"></div>
+  <video
+    appHeroVideo
+    class="absolute inset-0 size-full object-cover"
+    poster="/images/heros/home-poster.webp"
+    muted
+    playsinline
+    loop
+    preload="none"
+    aria-hidden="true"
+    tabindex="-1"
+    width="1280"
+    height="720"
+  ></video>
+
+  <div class="absolute inset-0 -z-10 bg-bg/40" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-bg/90 via-bg/65 to-bg/20" aria-hidden="true"></div>
   <div
-    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_72%_38%,var(--accent-glow),transparent_48%)]"
+    class="absolute inset-x-0 bottom-0 -z-10 h-[35%] bg-gradient-to-t from-bg via-bg/50 to-transparent"
     aria-hidden="true"
   ></div>
-  <div class="pointer-events-none absolute inset-0 -z-10 opacity-20" aria-hidden="true">
-    <svg class="h-full w-full text-accent-bright" viewBox="0 0 1440 900" fill="none">
-      <defs>
-        <pattern id="home-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M48 0H0V48" stroke="currentColor" stroke-opacity=".28" />
-        </pattern>
-        <linearGradient id="home-wire" x1="190" y1="165" x2="1230" y2="740">
-          <stop stop-color="currentColor" stop-opacity=".08" />
-          <stop offset=".52" stop-color="currentColor" stop-opacity=".72" />
-          <stop offset="1" stop-color="currentColor" stop-opacity=".08" />
-        </linearGradient>
-      </defs>
-      <path fill="url(#home-grid)" d="M0 0h1440v900H0z" />
-      <path
-        d="M100 725 358 478l166 89 264-287 178 135 349-304"
-        stroke="url(#home-wire)"
-        stroke-width="1.5"
-      />
-      <path d="M1036 0 580 900" stroke="currentColor" stroke-opacity=".2" />
-      <circle cx="1066" cy="294" r="185" stroke="currentColor" stroke-opacity=".28" />
-      <circle cx="1066" cy="294" r="226" stroke="currentColor" stroke-opacity=".13" />
-      <circle cx="1066" cy="294" r="267" stroke="currentColor" stroke-opacity=".08" />
-    </svg>
-  </div>
-  <div
-    class="pointer-events-none absolute -right-32 top-1/4 -z-10 size-[28rem] rounded-full bg-accent/15 blur-[100px] sm:size-[38rem]"
-    aria-hidden="true"
-  ></div>
+
+  @if (videoActive()) {
+    <button
+      class="absolute bottom-6 left-6 size-11 rounded-full border border-line bg-surface/90 text-fg transition-colors hover:text-accent-bright focus-visible:outline-offset-4 cursor-pointer"
+      [attr.aria-pressed]="videoPlaying()"
+      [attr.aria-label]="videoButtonLabel()"
+      (click)="videoToggle()"
+    >
+      <app-icon [name]="videoPlaying() ? 'pause' : 'play'" />
+    </button>
+  }
 
   <div class="mx-auto w-full max-w-[1440px] px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
     <div class="max-w-5xl">

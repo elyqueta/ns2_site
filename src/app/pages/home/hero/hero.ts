@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, viewChild } from '@angular/core';
 import { I18nService } from '../../../core/i18n.service';
 import { homeContent } from '../../../data/home';
 import { WhatsappService } from '../../../core/whatsapp.service';
 import { SplitTextReveal } from '../../../shared/directives/split-text.directive';
+import { HeroVideoDirective } from '../../../shared/directives/hero-video.directive';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { Button } from '../../../shared/ui/button/button';
-import { HomeHeroSlider } from './hero-slider';
+import { Icon } from '../../../shared/ui/icon/icon';
 
 @Component({
   selector: 'app-home-hero',
-  imports: [Button, LocalizedPipe, SplitTextReveal, HomeHeroSlider],
+  imports: [Button, LocalizedPipe, SplitTextReveal, HeroVideoDirective, Icon],
   templateUrl: './hero.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,4 +24,16 @@ export class HomeHero {
   readonly whatsappUrl = computed(() =>
     this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.whatsappMessage)),
   );
+
+  readonly videoDirective = viewChild(HeroVideoDirective);
+  readonly videoPlaying = computed(() => this.videoDirective()?.playing() ?? false);
+  readonly videoActive = computed(() => this.videoDirective()?.active() ?? false);
+
+  readonly videoButtonLabel = computed(() =>
+    this.videoPlaying() ? this.i18n.t('actions.pauseVideo') : this.i18n.t('actions.playVideo'),
+  );
+
+  videoToggle(): void {
+    this.videoDirective()?.toggle();
+  }
 }

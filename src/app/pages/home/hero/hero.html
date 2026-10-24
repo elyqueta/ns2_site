@@ -16,10 +16,10 @@
     height="720"
   ></video>
 
-  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/70" aria-hidden="true"></div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-bg/95 via-bg/80 to-bg/40" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/80" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/75 to-[#0a0e1a]/30" aria-hidden="true"></div>
   <div
-    class="absolute inset-x-0 bottom-0 -z-10 h-[40%] bg-gradient-to-t from-bg via-bg/60 to-transparent"
+    class="absolute inset-x-0 bottom-0 -z-10 h-[40%] bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/50 to-transparent"
     aria-hidden="true"
   ></div>
 
@@ -36,7 +36,7 @@
           class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
         >
           {{ copy.titleBefore | localized }}
-          <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>
+          <span class="block text-accent-bright">{{ copy.titleHighlight | localized }}</span>
           {{ copy.titleAfter | localized }}
         </h1>
       }

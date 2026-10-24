@@ -79,7 +79,7 @@ export class Header {
     });
   });
   readonly isHome = computed(() => this.router.url === '/');
-  readonly headerDark = computed(() => this.isHome() && this.scrollY() < 80);
+  readonly headerDark = computed(() => false);
   readonly menuLabel = computed(() =>
     this.i18n.t(this.menuOpen() ? 'actions.closeMenu' : 'actions.openMenu'),
   );

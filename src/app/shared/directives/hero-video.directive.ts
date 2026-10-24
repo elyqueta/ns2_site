@@ -42,6 +42,9 @@ export class HeroVideoDirective {
         return;
       }
 
+      this.injectSources();
+      this.play();
+
       const fadeIn = () => {
         if (this.element && this.element.style) {
           runtime.gsap.fromTo(this.element, { opacity: 0 }, { opacity: 1, duration: 0.6 });
@@ -112,11 +115,11 @@ export class HeroVideoDirective {
     }
 
     const webmSource = document.createElement('source');
-    webmSource.src = '/videos/home-hero.webm';
+    webmSource.src = '/images/heros/home-hero.webm';
     webmSource.type = 'video/webm; codecs="vp9"';
 
     const mp4Source = document.createElement('source');
-    mp4Source.src = '/videos/home-hero.mp4';
+    mp4Source.src = '/images/heros/home-hero.mp4';
     mp4Source.type = 'video/mp4';
 
     this.element.appendChild(webmSource);

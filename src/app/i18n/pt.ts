@@ -131,7 +131,7 @@ export const pt = {
     buttonPrimary: 'Pedir orçamento',
     buttonSecondary: 'Conhecer serviços',
     buttonGhost: 'Saber mais',
-    sectionIndex: '/ — Componentes',
+    sectionIndex: 'Componentes',
     headingPrefix: 'Tecnologia com',
     headingHighlight: 'propósito',
     headingDescription: 'Um sistema consistente ajuda a comunicar com clareza em cada página.',

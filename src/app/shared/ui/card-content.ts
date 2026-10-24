@@ -19,6 +19,7 @@ export interface PostCardData extends CardContent {
 
 export interface PartnerCardData extends CardContent {
   readonly type: 'partner';
+  readonly logo?: string;
 }
 
 export interface ProjectCardData extends CardContent {

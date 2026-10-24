@@ -18,7 +18,7 @@ export class HomeProjectsPreview {
   private readonly i18n = inject(I18nService);
 
   readonly copy = {
-    index: { pt: '/ — Projectos', en: '/ — Projects' } satisfies LocalizedText,
+    index: { pt: 'Projectos', en: 'Projects' } satisfies LocalizedText,
     title: { pt: 'Alguns dos nossos projectos', en: 'Some of our projects' } satisfies LocalizedText,
     description: {
       pt: 'Soluções web já no ar, desenvolvidas pela NS2 Innovation.',

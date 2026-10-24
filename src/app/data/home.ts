@@ -29,7 +29,7 @@ export const homeContent = {
     items: ['Dell', 'Lenovo', 'HP', 'Apple', 'Samsung', 'Knup', 'Multilaser'],
   },
   about: {
-    index: { pt: '/ — Quem somos', en: '/ — About us' } satisfies LocalizedText,
+    index: { pt: 'Quem somos', en: 'About us' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia com proximidade.',
       en: 'Technology, with a personal touch.',
@@ -46,7 +46,7 @@ export const homeContent = {
     expectedFile: { pt: 'public/images/sobre/quem-somos.webp' } satisfies LocalizedText,
   },
   services: {
-    index: { pt: '/ — O que fazemos', en: '/ — What we do' } satisfies LocalizedText,
+    index: { pt: 'O que fazemos', en: 'What we do' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia para cada desafio.',
       en: 'Technology for every challenge.',
@@ -59,7 +59,7 @@ export const homeContent = {
     cardLinkLabel: { pt: 'Saber mais', en: 'Learn more' } satisfies LocalizedText,
   },
   web: {
-    index: { pt: '/ — Desenvolvimento web', en: '/ — Web development' } satisfies LocalizedText,
+    index: { pt: 'Desenvolvimento web', en: 'Web development' } satisfies LocalizedText,
     title: {
       pt: 'Uma presença digital à sua medida.',
       en: 'A digital presence built around you.',
@@ -80,7 +80,7 @@ export const homeContent = {
     } satisfies LocalizedText,
   },
   products: {
-    index: { pt: '/ — Produtos', en: '/ — Products' } satisfies LocalizedText,
+    index: { pt: 'Produtos', en: 'Products' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia para si e para o seu negócio.',
       en: 'Technology for you and your business.',
@@ -96,7 +96,7 @@ export const homeContent = {
     cardLinkLabel: { pt: 'Saber mais', en: 'Learn more' } satisfies LocalizedText,
   },
   process: {
-    index: { pt: '/ — Como trabalhamos', en: '/ — How we work' } satisfies LocalizedText,
+    index: { pt: 'Como trabalhamos', en: 'How we work' } satisfies LocalizedText,
     title: { pt: 'Clareza em cada etapa.', en: 'Clarity at every step.' } satisfies LocalizedText,
     steps: [
       {
@@ -130,7 +130,7 @@ export const homeContent = {
     ],
   },
   values: {
-    index: { pt: '/ — Porquê a NS2', en: '/ — Why NS2' } satisfies LocalizedText,
+    index: { pt: 'Porquê a NS2', en: 'Why NS2' } satisfies LocalizedText,
     title: {
       pt: 'Uma relação feita para evoluir.',
       en: 'A relationship built to grow.',
@@ -174,7 +174,7 @@ export const homeContent = {
     ],
   },
   news: {
-    index: { pt: '/ — Notícias', en: '/ — News' } satisfies LocalizedText,
+    index: { pt: 'Notícias', en: 'News' } satisfies LocalizedText,
     title: {
       pt: 'Ideias para acompanhar a tecnologia.',
       en: 'Ideas to keep up with technology.',

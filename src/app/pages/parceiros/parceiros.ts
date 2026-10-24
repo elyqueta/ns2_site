@@ -31,6 +31,7 @@ export class Parceiros {
       description: this.i18n.text(partner.resumo),
       label: this.i18n.text(partner.categoria),
       href: partner.href,
+      logo: partner.logo,
     })),
   );
   readonly brands = parceiros.map((partner) => partner.nome);

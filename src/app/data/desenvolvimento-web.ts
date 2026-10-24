@@ -31,7 +31,7 @@ export const desenvolvimentoWebContent = {
   },
   sections: {
     websites: {
-      index: { pt: '/ — Websites', en: '/ — Websites' } satisfies LocalizedText,
+      index: { pt: 'Websites', en: 'Websites' } satisfies LocalizedText,
       title: {
         pt: 'Presença digital para cada etapa.',
         en: 'A digital presence for every stage.',
@@ -42,7 +42,7 @@ export const desenvolvimentoWebContent = {
       } satisfies LocalizedText,
     },
     shops: {
-      index: { pt: '/ — Lojas online', en: '/ — Online shops' } satisfies LocalizedText,
+      index: { pt: 'Lojas online', en: 'Online shops' } satisfies LocalizedText,
       title: {
         pt: 'Venda online, com uma base preparada para crescer.',
         en: 'Sell online with a foundation built to grow.',
@@ -57,7 +57,7 @@ export const desenvolvimentoWebContent = {
       } satisfies LocalizedText,
     },
     systems: {
-      index: { pt: '/ — Sistemas web', en: '/ — Web systems' } satisfies LocalizedText,
+      index: { pt: 'Sistemas web', en: 'Web systems' } satisfies LocalizedText,
       title: {
         pt: 'Sistemas web Full Stack.',
         en: 'Full-stack web systems.',
@@ -68,7 +68,7 @@ export const desenvolvimentoWebContent = {
       } satisfies LocalizedText,
     },
     maintenance: {
-      index: { pt: '/ — Manutenção', en: '/ — Maintenance' } satisfies LocalizedText,
+      index: { pt: 'Manutenção', en: 'Maintenance' } satisfies LocalizedText,
       title: {
         pt: 'Acompanhamento depois da entrega.',
         en: 'Support after delivery.',
@@ -84,7 +84,7 @@ export const desenvolvimentoWebContent = {
       startingPrice: 30000,
     },
     process: {
-      index: { pt: '/ — Como trabalhamos', en: '/ — How we work' } satisfies LocalizedText,
+      index: { pt: 'Como trabalhamos', en: 'How we work' } satisfies LocalizedText,
       title: {
         pt: 'Um processo claro, do primeiro contacto à entrega.',
         en: 'A clear process, from first contact to delivery.',
@@ -95,7 +95,7 @@ export const desenvolvimentoWebContent = {
       } satisfies LocalizedText,
     },
     diagnostic: {
-      index: { pt: '/ — Diagnóstico', en: '/ — Find the right solution' } satisfies LocalizedText,
+      index: { pt: 'Diagnóstico', en: 'Find the right solution' } satisfies LocalizedText,
       title: {
         pt: 'Qual é a solução certa para si?',
         en: 'Which solution is right for you?',
@@ -109,8 +109,8 @@ export const desenvolvimentoWebContent = {
     },
     faq: {
       index: {
-        pt: '/ — Perguntas frequentes',
-        en: '/ — Frequently asked questions',
+        pt: 'Perguntas frequentes',
+        en: 'Frequently asked questions',
       } satisfies LocalizedText,
       title: {
         pt: 'Dúvidas comuns sobre desenvolvimento web.',

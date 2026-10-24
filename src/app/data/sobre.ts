@@ -30,7 +30,7 @@ export const aboutPageContent = {
     } satisfies LocalizedText,
   },
   story: {
-    index: { pt: '/ — Quem somos', en: '/ — Who we are' } satisfies LocalizedText,
+    index: { pt: 'Quem somos', en: 'Who we are' } satisfies LocalizedText,
     title: {
       pt: 'Uma história de soluções e proximidade.',
       en: 'A story of solutions and personal service.',
@@ -52,7 +52,7 @@ export const aboutPageContent = {
     imageFile: { pt: 'public/images/equipa.jpeg' } satisfies LocalizedText,
   },
   philosophy: {
-    index: { pt: '/ — Filosofia', en: '/ — Our philosophy' } satisfies LocalizedText,
+    index: { pt: 'Filosofia', en: 'Our philosophy' } satisfies LocalizedText,
     quote: {
       pt: 'Acreditamos no resultado através do desenvolvimento das pessoas: o nosso crescimento e o dos nossos clientes são prioridade.',
       en: 'We believe results come from developing people: the growth of our team and our clients is a priority.',
@@ -63,7 +63,7 @@ export const aboutPageContent = {
     } satisfies LocalizedText,
   },
   values: {
-    index: { pt: '/ — Os nossos valores', en: '/ — Our values' } satisfies LocalizedText,
+    index: { pt: 'Os nossos valores', en: 'Our values' } satisfies LocalizedText,
     title: {
       pt: 'Princípios que orientam cada relação.',
       en: 'Principles that guide every relationship.',
@@ -173,7 +173,7 @@ export const aboutPageContent = {
     ] satisfies readonly Differentiator[],
   },
   process: {
-    index: { pt: '/ — Como trabalhamos', en: '/ — How we work' } satisfies LocalizedText,
+    index: { pt: 'Como trabalhamos', en: 'How we work' } satisfies LocalizedText,
     title: { pt: 'Clareza em cada etapa.', en: 'Clarity at every step.' } satisfies LocalizedText,
     steps: [
       {

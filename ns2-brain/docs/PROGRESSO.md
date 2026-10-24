@@ -272,18 +272,24 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - Q5: A) 3 formatos visuais: lista editorial (serviços), mosaico assimétrico (projectos), cartão destaque (pacote principal)
   - Q6: B) Não alterar tipografia (protótipo primeiro, sem aprovação)
   - Q7: A) Formato 50.000 Kz em todo o site
+- Ajuste adicional (2024-10-24):
+  - Retirar "/-" dos eyebrows, deixando apenas os títulos
+  - Adicionar logos aos parceiros (dell, lenovo, hp, apple, samsung, knup, multilaser)
 - Implementação:
   - `src/app/shared/pipes/kz.pipe.ts`: preços formatados com ponto como separador de milhares (ex: 50.000 Kz)
   - `src/app/shared/ui/card/card.html`: brilho radial só no hover (opacity-0 → group-hover:opacity-40), muito subtil
   - `src/app/shared/ui/content-card/content-card.html`: cartão inteiro clicável com link; selo "Mais escolhido" quando destaque=true
   - `src/app/shared/ui/card-content.ts`: adicionado campo `destaque?: boolean` ao CardContent
   - `src/app/shared/ui/project-card/project-card.ts` / `project-card.html`: adicionado input `class` para classes adicionais
-  - `src/app/data/home.ts`: eyebrows numerados substituídos por sinal da marca "/" (ex: "/ — Quem somos")
-  - `src/app/data/sobre.ts`: eyebrows 01, 02, 03, 05 substituídos por "/"
-  - `src/app/data/desenvolvimento-web.ts`: eyebrows 01-08 substituídos por "/"
-  - `src/app/data/servicos.ts`: sectionIndex "01 — Serviços" substituído por "/ — Serviços"
-  - `src/app/pages/home/projects-preview/projects-preview.ts`: index "04 — Projectos" substituído por "/ — Projectos"
-  - `src/app/i18n/pt.ts` e `en.ts`: sectionIndex "01 — Componentes" substituído por "/ — Componentes"
+  - `src/app/shared/ui/partner-card/partner-card.ts` / `partner-card.html`: adicionado `MediaSlot` para mostrar logo do parceiro
+  - `src/app/data/home.ts`: eyebrows numerados substituídos por títulos sem "/-" (ex: "Quem somos")
+  - `src/app/data/sobre.ts`: eyebrows 01, 02, 03, 05 substituídos por títulos sem "/-"
+  - `src/app/data/desenvolvimento-web.ts`: eyebrows 01-08 substituídos por títulos sem "/-"
+  - `src/app/data/servicos.ts`: sectionIndex "01 — Serviços" substituído por "Serviços"
+  - `src/app/pages/home/projects-preview/projects-preview.ts`: index "04 — Projectos" substituído por "Projectos"
+  - `src/app/i18n/pt.ts` e `en.ts`: sectionIndex "01 — Componentes" substituído por "Componentes"
+  - `src/app/data/parceiros.ts`: adicionado campo `logo` a todos os 7 parceiros
+  - `src/app/pages/parceiros/parceiros.ts`: mapeia campo `logo` no computed de partners
   - `src/app/pages/home/products-preview/products-preview.html`: removido número do eyebrow das categorias
   - `src/app/pages/home/services-preview/services-preview.html`: removido número do eyebrow dos serviços
   - `src/app/pages/home/values-preview/values-preview.html`: removido número do eyebrow dos valores
@@ -291,6 +297,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - `src/app/pages/projectos/projectos.html`: mosaico assimétrico (projeto destaque em coluna grande, outros 2 em coluna menor)
   - `src/app/pages/home/web-preview/web-preview.ts`: mapeia campo `destaque` dos pacotes web
 - Ficheiros criados: nenhum novo
-- Ficheiros alterados: `src/app/shared/pipes/kz.pipe.ts`, `src/app/shared/ui/card/card.html`, `src/app/shared/ui/content-card/content-card.html`, `src/app/shared/ui/card-content.ts`, `src/app/shared/ui/project-card/project-card.ts`, `src/app/shared/ui/project-card/project-card.html`, `src/app/data/home.ts`, `src/app/data/sobre.ts`, `src/app/data/desenvolvimento-web.ts`, `src/app/data/servicos.ts`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/products-preview/products-preview.html`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/home/values-preview/values-preview.html`, `src/app/pages/produtos/produtos.html`, `src/app/pages/projectos/projectos.html`
-- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (13 passed, 4 falhas pré-existentes nos pipes).
-- Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`); Q6 (tipografia) não alterada sem aprovação do utilizador
+- Ficheiros alterados: `src/app/shared/pipes/kz.pipe.ts`, `src/app/shared/ui/card/card.html`, `src/app/shared/ui/content-card/content-card.html`, `src/app/shared/ui/card-content.ts`, `src/app/shared/ui/project-card/project-card.ts`, `src/app/shared/ui/project-card/project-card.html`, `src/app/shared/ui/partner-card/partner-card.ts`, `src/app/shared/ui/partner-card/partner-card.html`, `src/app/data/home.ts`, `src/app/data/sobre.ts`, `src/app/data/desenvolvimento-web.ts`, `src/app/data/servicos.ts`, `src/app/data/parceiros.ts`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/pages/parceiros/parceiros.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/products-preview/products-preview.html`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/home/values-preview/values-preview.html`, `src/app/pages/produtos/produtos.html`, `src/app/pages/projectos/projectos.html`
+- Ficheiros de teste alterados: `src/app/data/parceiros.spec.ts` (atualizado para aceitar logos nos parceiros)
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão nos testes relacionados (12 passed, 5 falhas: 4 pré-existentes nos pipes/whatsapp, 1 de navegação a investigar)
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/; Q6 (tipografia) não alterada sem aprovação do utilizador

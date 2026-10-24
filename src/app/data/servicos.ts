@@ -30,7 +30,7 @@ export const servicesPageContent = {
     pt: 'Assistência completa a toda a procura de TI, de servidores a cabeamento estruturado. Concentramos as soluções num só lugar, com rapidez de implementação e baixo custo.',
     en: 'Comprehensive IT support, from servers to structured cabling. We bring solutions together in one place with efficient implementation and cost-conscious planning.',
   } satisfies LocalizedText,
-  sectionIndex: { pt: '/ — Serviços', en: '/ — Services' } satisfies LocalizedText,
+  sectionIndex: { pt: 'Serviços', en: 'Services' } satisfies LocalizedText,
   listTitle: {
     pt: 'Assistência completa a toda a procura de TI.',
     en: 'Comprehensive support for your IT needs.',

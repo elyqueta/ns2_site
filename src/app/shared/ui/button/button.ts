@@ -21,6 +21,7 @@ export class Button {
   readonly showArrow = input(false);
   readonly ariaLabel = input<string | null>(null);
   readonly extraClasses = input<string>('');
+  readonly magnetic = input(false);
   readonly classes = computed(() => {
     const variantClasses: Record<ButtonVariant, string> = {
       primary: 'bg-accent text-on-accent hover:bg-accent-bright',

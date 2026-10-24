@@ -1,5 +1,5 @@
 export const pt = {
-  nav: {
+    nav: {
     home: 'Início',
     about: 'Sobre',
     services: 'Serviços',
@@ -9,9 +9,10 @@ export const pt = {
     news: 'Notícias',
     partners: 'Parceiros',
     contact: 'Contacto',
+    solutions: 'Soluções',
+    work: 'Trabalho',
   },
-  actions: {
-    requestQuote: 'Pedir orçamento',
+    actions: {
     heroWeb: 'Web e sistemas',
     heroIt: 'TI e equipamentos',
     contact: 'Falar connosco',
@@ -60,6 +61,8 @@ export const pt = {
     compararPacotes: 'Comparar pacotes',
     extrasLabel: 'Extras',
     idealPara: 'Ideal para',
+    openSubmenu: 'Abrir submenu',
+    closeSubmenu: 'Fechar submenu',
   },
   pages: {
     home: 'Início',
@@ -201,6 +204,7 @@ export const pt = {
       pin: 'Localização',
       arrow: 'Seta',
       'arrow-diagonal': 'Seta diagonal',
+      'chevron-down': 'Seta para baixo',
       sun: 'Sol',
       moon: 'Lua',
       menu: 'Menu',

@@ -1,0 +1,43 @@
+<div
+  class="relative group"
+  [attr.id]="id()"
+>
+  <button
+    type="button"
+    class="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap px-3 text-[0.9375rem] font-medium text-fg-muted transition-colors hover:text-fg focus-visible:text-accent-bright"
+    [attr.aria-expanded]="open()"
+    [attr.aria-haspopup]="'true'"
+    [attr.aria-controls]="id()"
+    (click)="toggle()"
+    (keydown.arrowdown)="onArrowDown($event)"
+    (keydown.arrowup)="onArrowUp($event)"
+    (keydown.escape)="close()"
+  >
+    {{ label() }}
+    <app-icon
+      name="chevron-down"
+      class="size-4 shrink-0 transition-transform duration-200"
+      [class.rotate-180]="open()"
+    />
+  </button>
+
+  <div
+    data-dropdown-panel
+    class="absolute z-50 mt-1.5 min-w-60 rounded-card border border-line bg-surface shadow-lg overflow-hidden"
+    [class.hidden]="!open()"
+  >
+    <nav class="py-2" [attr.aria-labelledby]="id()">
+      @for (item of items(); track item.href) {
+        <a
+          [routerLink]="item.href"
+          routerLinkActive="text-accent-bright"
+          class="block px-4 py-3 text-[0.9375rem] text-fg transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-none"
+          (click)="close()"
+          [attr.tabindex]="0"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  </div>
+</div>

@@ -21,6 +21,7 @@ export const iconNames = [
   'pin',
   'arrow',
   'arrow-diagonal',
+  'chevron-down',
   'sun',
   'moon',
   'menu',

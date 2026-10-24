@@ -9,7 +9,7 @@ type WidenStrings<T> = T extends string
       : T;
 
 export const en = {
-  nav: {
+    nav: {
     home: 'Home',
     about: 'About',
     services: 'Services',
@@ -19,9 +19,10 @@ export const en = {
     news: 'News',
     partners: 'Brands',
     contact: 'Contact',
+    solutions: 'Solutions',
+    work: 'Work',
   },
   actions: {
-    requestQuote: 'Request a quote',
     heroWeb: 'Web and systems',
     heroIt: 'IT and equipment',
     contact: 'Get in touch',
@@ -70,6 +71,8 @@ export const en = {
     compararPacotes: 'Compare packages',
     extrasLabel: 'Extras',
     idealPara: 'Ideal for',
+    openSubmenu: 'Open submenu',
+    closeSubmenu: 'Close submenu',
   },
   pages: {
     home: 'Home',
@@ -210,6 +213,7 @@ export const en = {
       pin: 'Location',
       arrow: 'Arrow',
       'arrow-diagonal': 'Diagonal arrow',
+      'chevron-down': 'Chevron down',
       sun: 'Sun',
       moon: 'Moon',
       menu: 'Menu',

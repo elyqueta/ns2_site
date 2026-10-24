@@ -242,3 +242,22 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/data/projectos.ts`, `src/app/pages/projectos/projectos.html`, `src/app/pages/projectos/projectos.ts`, `src/app/app.routes.ts`, `src/app/app.routes.server.ts`, `src/app/pages/home/home.html`, `src/app/pages/home/home.ts`
 - Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`)
+
+## Correcção: escala tipográfica e navbar agrupada (2024-10-24)
+- Estado: concluída
+- Tipo: correcção transversal (não é fase nova)
+- Implementação:
+  - `src/styles.css`: tokens tipográficos revistos (`--text-display` reduzido, `--text-page` adicionado, `--text-h1`/`-h2`/`-h3` ajustados)
+  - `src/app/shared/ui/page-hero/page-hero.html`: h1/h2/h3 passam de `text-display`/`leading-[0.98]` para `text-page`/`leading-[1.08]`
+  - `src/app/pages/home/hero/hero.html`: h1 passa de `max-w-[12ch]`/`leading-[1.02]` para `max-w-[18ch]`/`leading-[1.05]`
+  - `src/app/pages/ui-kit/ui-kit.html`: h1 do cabeçalho passa a `text-page`/`leading-[1.08]`
+  - `src/app/data/navegacao.ts`: adicionada `headerNavigation` (6 entradas agrupadas: link/dropdown)
+  - `src/app/i18n/pt.ts` e `en.ts`: adicionadas `nav.solutions`, `nav.work`, `actions.openSubmenu`, `actions.closeSubmenu`; removida `actions.requestQuote` (não usada)
+  - `src/app/shared/layout/header/nav-dropdown/`: novo componente `NavDropdown` (ts + html + spec) com animação GSAP fade+translateY, acessível por teclado
+  - `src/app/shared/ui/icon/icon.ts` / `icon.html`: adicionado ícone `chevron-down` com tradução pt/en
+  - `src/app/shared/layout/header/header.ts` / `header.html`: navbar com 6 entradas (links + dropdowns), `lg:` breakpoint, botão "Pedir orçamento" removido
+  - `src/app/shared/layout/mobile-menu/mobile-menu.ts` / `.html`: estrutura agrupada com subtítulos "Soluções"/"Trabalho", botão "Pedir orçamento" removido, breakpoint `lg:`
+- Ficheiros criados: `docs/design-system.md`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.ts`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.html`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.spec.ts`, `src/app/data/navegacao.spec.ts`
+- Ficheiros alterados: `src/styles.css`, `src/app/shared/ui/page-hero/page-hero.html`, `src/app/pages/home/hero/hero.html`, `src/app/pages/ui-kit/ui-kit.html`, `src/app/data/navegacao.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (10 passed, 4 falhas pré-existentes nos pipes).
+- Pendências: nenhuma

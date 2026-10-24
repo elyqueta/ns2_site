@@ -15,26 +15,26 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MobileMenuMotion } from '../../directives/mobile-menu-motion.directive';
 import { I18nService } from '../../../core/i18n.service';
-import { WhatsappService } from '../../../core/whatsapp.service';
 import { Icon } from '../../ui/icon/icon';
-import { Button } from '../../ui/button/button';
 import { LanguageToggle } from '../../ui/language-toggle/language-toggle';
 import { ThemeToggle } from '../../ui/theme-toggle/theme-toggle';
 
-interface MobileNavigationItem {
-  readonly href: string;
+export interface MobileNavigationItem {
+  readonly kind: 'link' | 'group';
+  readonly href?: string;
   readonly label: string;
-  readonly index: string;
+  readonly id?: string;
+  readonly index?: string;
+  readonly children?: readonly MobileNavigationItem[];
 }
 
 @Component({
   selector: 'app-mobile-menu',
-  imports: [Icon, Button, LanguageToggle, MobileMenuMotion, RouterLink, RouterLinkActive, ThemeToggle],
+  imports: [Icon, LanguageToggle, MobileMenuMotion, RouterLink, RouterLinkActive, ThemeToggle],
   templateUrl: './mobile-menu.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileMenu {
-  private readonly whatsapp = inject(WhatsappService);
   private readonly i18n = inject(I18nService);
   private readonly destroyRef = inject(DestroyRef);
   readonly open = input(false);
@@ -44,10 +44,6 @@ export class MobileMenu {
   readonly panel = viewChild<ElementRef<HTMLElement>>('panel');
   readonly browserReady = signal(false);
   readonly rendered = signal(false);
-  readonly whatsappUrl = this.whatsapp.createWhatsappUrl(
-    'Olá! Vim pelo site da NS2 Innovation e gostaria de mais informações.',
-  );
-  readonly quoteLabel = computed(() => this.i18n.t('actions.requestQuote'));
   readonly menuLabel = computed(() => this.i18n.t('actions.mobileNavigation'));
   readonly closeLabel = computed(() => this.i18n.t('actions.closeMenu'));
 

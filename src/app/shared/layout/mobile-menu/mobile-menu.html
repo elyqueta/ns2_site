@@ -5,7 +5,7 @@
     (closed)="finishClosing()"
     id="mobile-navigation"
     data-lenis-prevent
-    class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto overscroll-y-contain bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 xl:hidden"
+    class="fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto overscroll-y-contain bg-bg px-6 pb-8 pt-6 text-fg sm:px-10 lg:hidden"
     role="dialog"
     aria-modal="true"
     [attr.aria-label]="menuLabel()"
@@ -36,37 +36,56 @@
       </button>
     </div>
 
-      <div class="flex items-center gap-2 pt-3 border-b border-line pb-3">
-        <app-language-toggle />
-        <app-theme-toggle />
-        <app-button
-          [extraClasses]="'ml-auto'"
-          [label]="quoteLabel()"
-          [href]="whatsappUrl"
-          [external]="true"
-          size="md"
-        />
-      </div>
+    <div class="flex items-center gap-2 pt-3 border-b border-line pb-3">
+      <app-language-toggle />
+      <app-theme-toggle />
+    </div>
 
     <nav class="my-auto py-12" [attr.aria-label]="menuLabel()">
       <ul class="grid">
-        @for (item of items(); track item.href) {
-          <li>
-            <a
-              data-menu-link
-              class="block whitespace-nowrap border-b border-line py-3 font-display text-[clamp(1.25rem,5.6vw,2.5rem)] font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
-              [routerLink]="item.href"
-              routerLinkActive="text-accent-bright"
-              [routerLinkActiveOptions]="{ exact: item.href === '/' }"
-              ariaCurrentWhenActive="page"
-              (click)="close.emit()"
-            >
-              <span class="mr-4 inline-block w-8 font-sans text-xs font-medium text-fg-muted">
-                {{ item.index }}
-              </span>
-              {{ item.label }}
-            </a>
-          </li>
+        @for (item of items(); track item.id ?? item.href) {
+          @if (item.kind === 'group') {
+            <li class="pt-4 border-t border-line first:border-t-0">
+              <p class="px-4 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted">
+                {{ item.label }}
+              </p>
+              @for (child of item.children; track child.href) {
+                <li>
+                  <a
+                    data-menu-link
+                    class="block whitespace-nowrap border-b border-line py-3 text-base font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
+                    [routerLink]="child.href"
+                    routerLinkActive="text-accent-bright"
+                    [routerLinkActiveOptions]="{ exact: child.href === '/' }"
+                    ariaCurrentWhenActive="page"
+                    (click)="close.emit()"
+                  >
+                    <span class="mr-4 inline-block w-8 font-sans text-xs font-medium text-fg-muted">
+                      {{ child.index }}
+                    </span>
+                    {{ child.label }}
+                  </a>
+                </li>
+              }
+            </li>
+          } @else {
+            <li>
+              <a
+                data-menu-link
+                class="block whitespace-nowrap border-b border-line py-3 text-base font-semibold tracking-tight text-fg transition-colors hover:text-accent-bright"
+                [routerLink]="item.href"
+                routerLinkActive="text-accent-bright"
+                [routerLinkActiveOptions]="{ exact: item.href === '/' }"
+                ariaCurrentWhenActive="page"
+                (click)="close.emit()"
+              >
+                <span class="mr-4 inline-block w-8 font-sans text-xs font-medium text-fg-muted">
+                  {{ item.index }}
+                </span>
+                {{ item.label }}
+              </a>
+            </li>
+          }
         }
       </ul>
     </nav>

@@ -47,6 +47,7 @@ export class DesenvolvimentoWeb {
   readonly maisEscolhido = computed(() => this.i18n.t('actions.maisEscolhido'));
   readonly extrasLabel = computed(() => this.i18n.t('actions.extrasLabel'));
   readonly idealParaLabel = computed(() => this.i18n.t('actions.idealPara'));
+  readonly learnMoreLabel = computed(() => this.i18n.t('actions.learnMore'));
   readonly websitePackages = computed(() =>
     webPacotes.map((item) => ({
       ...item,

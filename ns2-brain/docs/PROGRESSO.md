@@ -195,7 +195,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Correcção: adicionado `[src]` a todos os media-slot das notícias (listagem e detalhe).
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
-## Fase 07 (LEIA-ME) — Desenvolvimento web e pacotes (2026-10-23)
+## Fase 07 (LEIA-ME) — Desenvolvimento web e pacotes (2026-10-24)
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: A) Destacar Site Profissional com borda e etiqueta "Mais escolhido"
@@ -205,16 +205,11 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - Q5: A) Linha própria "Extras" dentro de cada cartão (removido do card, movido para detalhe)
   - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote (mantido no card e no detalhe)
   - Q7: Não usar tabela comparativa (removida por decisão do utilizador)
-- Implementação:
-  - `data/web-pacotes.ts`: campos `idealPara`, `extras` mantidos para uso na página de detalhe; Site Profissional com `destaque: true`
-  - `desenvolvimento-web.html`: cards simplificados (apenas nome, preço, páginas, prazo, inclui, CTA); fonte maior; espaçamento aumentado; link do CTA aponta para a página de detalhe do pacote
-  - `desenvolvimento-web.ts`: adicionado `RouterLink` às imports; `sectionUrl` aponta para `/desenvolvimento-web/${slug}`
-  - `src/app/pages/web-pacote-detalhe/`: novo componente com página de detalhe completa (ideal para, inclui, não inclui, entregas, CTA WhatsApp)
-  - `src/app/data/web-pacote-detalhe.ts`: novo ficheiro com conteúdo detalhado de cada pacote
-  - `app.routes.ts` e `app.routes.server.ts`: rota `desenvolvimento-web/:slug` com prerender para os 4 pacotes
-  - `shared/pipes/kz.pipe.ts`: `maximumFractionDigits` alterado de 2 para 0
-  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.requestQuoteTitle`, `actions.requestQuoteDescription`, `actions.whatsappLabel`, `actions.contactLabel`, `actions.startingAt`, `actions.entregasLabel`, `actions.includesLabel`, `actions.pagesLabel`, `actions.termLabel`, `pages.notFoundDescription`
-- Ficheiros alterados: `src/app/data/web-pacotes.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/shared/pipes/kz.pipe.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/app.routes.ts`, `src/app/app.routes.server.ts`
-- Ficheiros criados: `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/data/web-pacote-detalhe.ts`
+- Implementação (2024-10-24):
+  - `desenvolvimento-web.html`: botão dos cards alterado de "Pedir orçamento" para "Saber mais" (leva à página de detalhe do pacote); removido botão secundário "Fale connosco" dos cards; cada card leva à sua respetiva página de detalhe (`/desenvolvimento-web/:slug`); cards com altura e largura iguais (`align-items-stretch`, `p-8 sm:p-10`); "A partir de" alinhado à esquerda
+  - `web-pacote-detalhe.html`: removido botão "Fale connosco"/"Voltar" da página de detalhe; removido botão do estado 404
+  - `desenvolvimento-web.ts`: adicionado `learnMoreLabel` computed
+  - `web-pacote-detalhe.ts`: removido `RouterLink` dos imports (não usado no template)
+- Ficheiros alterados: `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
 - Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma

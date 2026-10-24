@@ -69,21 +69,13 @@
               </div>
 
               <div class="mt-auto pt-10">
-                <div class="flex flex-col gap-4 sm:flex-row">
-                  <a
-                    class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-button bg-accent px-6 py-3.5 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
-                    [routerLink]="package.sectionUrl"
-                  >
-                    <app-icon name="arrow-diagonal" />
-                    {{ copy.labels.quoteLabel | localized }}
-                  </a>
-                  <a
-                    class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-button border border-line px-6 py-3.5 font-semibold text-fg transition-colors hover:bg-surface-2"
-                    [href]="package.contactUrl"
-                  >
-                    {{ copy.labels.contactLabel | localized }}
-                  </a>
-                </div>
+                <a
+                  class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-button bg-accent px-6 py-3.5 font-semibold text-on-accent transition-colors hover:bg-accent-bright w-full sm:w-auto"
+                  [routerLink]="package.sectionUrl"
+                >
+                  <app-icon name="arrow-diagonal" />
+                  {{ learnMoreLabel() }}
+                </a>
               </div>
             </article>
           </li>

@@ -18,12 +18,6 @@
             {{ item.aPartirDe | kz }}
           </p>
         </div>
-        <a
-          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
-          routerLink="/desenvolvimento-web"
-        >
-          ← {{ contactLabel() }}
-        </a>
       </div>
       <p class="mt-6 max-w-[62ch] leading-relaxed text-fg-muted">
         {{ item.descricao | localized }}
@@ -128,12 +122,8 @@
     [breadcrumbLabel]="'Navegação estrutural'"
   />
   <main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-16">
-    <a
-      class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
-      routerLink="/desenvolvimento-web"
-    >
-      {{ contactLabel() }}
-      <app-icon name="arrow" />
-    </a>
+    <p class="text-center text-fg-muted">
+      {{ notFoundDescription() }}
+    </p>
   </main>
 }

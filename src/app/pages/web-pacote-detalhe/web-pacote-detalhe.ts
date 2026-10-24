@@ -5,7 +5,7 @@ import {
   effect,
   inject,
 } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
@@ -21,7 +21,7 @@ import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 @Component({
   selector: 'app-web-pacote-detalhe',
   standalone: true,
-  imports: [CtaBand, Icon, KzPipe, LocalizedPipe, PageHero, RouterLink],
+  imports: [CtaBand, Icon, KzPipe, LocalizedPipe, PageHero],
   templateUrl: './web-pacote-detalhe.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

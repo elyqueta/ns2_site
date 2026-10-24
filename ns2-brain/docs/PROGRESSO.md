@@ -205,11 +205,13 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
   - Q5: A) Linha própria "Extras" dentro de cada cartão (removido do card, movido para detalhe)
   - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote (mantido no card e no detalhe)
   - Q7: Não usar tabela comparativa (removida por decisão do utilizador)
-- Implementação (2024-10-24):
-  - `desenvolvimento-web.html`: botão dos cards alterado de "Pedir orçamento" para "Saber mais" (leva à página de detalhe do pacote); removido botão secundário "Fale connosco" dos cards; cada card leva à sua respetiva página de detalhe (`/desenvolvimento-web/:slug`); cards com altura e largura iguais (`align-items-stretch`, `p-8 sm:p-10`); "A partir de" alinhado à esquerda
-  - `web-pacote-detalhe.html`: removido botão "Fale connosco"/"Voltar" da página de detalhe; removido botão do estado 404
+- Implementação:
+  - `web-pacote-detalhe.html`: removida secção repetitiva entre hero e "Ideal para" (título, preço e descrição já aparecem no hero); mantidos "Ideal para", inclui/não inclui, entregas e CTA WhatsApp
+  - `web-preview.ts`: `href` dos cards aponta para `/desenvolvimento-web/${slug}` em vez de `/desenvolvimento-web` (leva à página de detalhe de cada pacote)
+  - `web-preview.html`: grid com `align-items-stretch` para altura igual nos cards da home
+  - `desenvolvimento-web.html`: cards simplificados (apenas nome, preço, páginas, prazo, inclui, CTA "Saber mais"); fonte maior; espaçamento aumentado; "A partir de" alinhado à esquerda
   - `desenvolvimento-web.ts`: adicionado `learnMoreLabel` computed
   - `web-pacote-detalhe.ts`: removido `RouterLink` dos imports (não usado no template)
-- Ficheiros alterados: `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
+- Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
 - Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma

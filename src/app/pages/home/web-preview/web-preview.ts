@@ -21,7 +21,7 @@ export class HomeWebPreview {
       type: 'package' as const,
       title: this.i18n.text(item.nome),
       description: this.i18n.text(item.descricao),
-      href: item.href,
+      href: `/desenvolvimento-web/${item.slug}`,
       label: this.i18n.text(this.copy.packageLabel),
       priceFrom: item.aPartirDe,
       priceLabel: this.i18n.text(this.copy.startingAt),

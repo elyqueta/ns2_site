@@ -8,29 +8,13 @@
   />
 
   <main id="conteudo">
-    <section class="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-16">
-      <div class="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
-            {{ item.nome | localized }}
-          </h2>
-          <p class="mt-2 text-sm font-semibold text-accent-bright">
-            {{ item.aPartirDe | kz }}
-          </p>
-        </div>
-      </div>
-      <p class="mt-6 max-w-[62ch] leading-relaxed text-fg-muted">
-        {{ item.descricao | localized }}
-      </p>
-    </section>
-
     <section class="border-y border-line bg-surface">
       <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
         <div class="grid gap-8 lg:grid-cols-3">
           <div class="lg:col-span-2">
-          <h3 class="font-display text-h3 font-semibold text-fg mb-4">
-            {{ idealParaLabel() }}
-          </h3>
+            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+              {{ idealParaLabel() }}
+            </h3>
             <p class="text-fg-muted leading-relaxed">
               {{ item.quemDeveEscolher | localized }}
             </p>
@@ -62,26 +46,26 @@
             {{ includesLabel() }}
           </h3>
           <ul class="space-y-3">
-            @for (item of item.inclui; track item) {
+            @for (incluir of item.inclui; track incluir) {
               <li class="flex items-start gap-3">
                 <app-icon
                   name="check"
                   class="mt-0.5 shrink-0 text-accent-bright"
                 />
-                <span class="text-fg-muted leading-relaxed">{{ item }}</span>
+                <span class="text-fg-muted leading-relaxed">{{ incluir }}</span>
               </li>
             }
           </ul>
         </div>
         <div>
-            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
-              {{ notIncludedLabel() }}
-            </h3>
+          <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+            {{ notIncludedLabel() }}
+          </h3>
           <ul class="space-y-3">
-            @for (item of item.naoInclui; track item) {
+            @for (naoIncluir of item.naoInclui; track naoIncluir) {
               <li class="flex items-start gap-3">
                 <span class="mt-0.5 shrink-0 text-xs text-fg-muted">✕</span>
-                <span class="text-fg-muted leading-relaxed">{{ item }}</span>
+                <span class="text-fg-muted leading-relaxed">{{ naoIncluir }}</span>
               </li>
             }
           </ul>

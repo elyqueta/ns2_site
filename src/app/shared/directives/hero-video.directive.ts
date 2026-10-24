@@ -93,7 +93,7 @@ export class HeroVideoDirective {
       return false;
     }
 
-    if (this.animation.reducedMotion() || !this.animation.desktop()) {
+    if (this.animation.reducedMotion()) {
       return false;
     }
 

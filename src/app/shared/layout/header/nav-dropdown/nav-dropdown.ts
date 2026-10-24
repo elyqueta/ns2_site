@@ -1,11 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   effect,
   inject,
   input,
+  PLATFORM_ID,
   signal,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { registerAnimationDirective } from '../../../directives/animation-directive';
 import { AnimationService } from '../../../../core/animation.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -31,8 +34,11 @@ export class NavDropdown {
   readonly open = signal(false);
 
   private readonly animationService = inject(AnimationService);
+  private readonly document = inject(DOCUMENT);
+  private readonly platformId = inject(PLATFORM_ID);
   private panelElement: HTMLElement | null = null;
   private gsapRef: typeof import('gsap').gsap | null = null;
+  private documentClickListener: ((event: MouseEvent) => void) | null = null;
 
   constructor() {
     registerAnimationDirective((element, runtime, mode) => {
@@ -60,6 +66,7 @@ export class NavDropdown {
           display: 'block',
           overwrite: true,
         });
+        this.addDocumentClickListener();
       } else {
         this.gsapRef.to(this.panelElement, {
           autoAlpha: 0,
@@ -68,8 +75,36 @@ export class NavDropdown {
           display: 'none',
           overwrite: true,
         });
+        this.removeDocumentClickListener();
       }
     });
+  }
+
+  private addDocumentClickListener(): void {
+    if (this.documentClickListener || !isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    this.documentClickListener = (event: MouseEvent): void => {
+      if (!this.open() || !this.panelElement) {
+        return;
+      }
+
+      const target = event.target as Node | null;
+      if (!this.panelElement.contains(target)) {
+        this.close();
+        this.removeDocumentClickListener();
+      }
+    };
+
+    this.document.addEventListener('click', this.documentClickListener);
+  }
+
+  private removeDocumentClickListener(): void {
+    if (this.documentClickListener && isPlatformBrowser(this.platformId)) {
+      this.document.removeEventListener('click', this.documentClickListener);
+      this.documentClickListener = null;
+    }
   }
 
   toggle(): void {

@@ -171,7 +171,12 @@ export const pt = {
     breadcrumbHome: 'Início',
     breadcrumbServices: 'Serviços',
     breadcrumbCurrent: 'Infra-estrutura de TI',
-    marqueeItems: ['Tecnologia', 'Inovação', 'Confiança', 'Angola'],
+    marqueeItems: [
+      { type: 'text', text: 'Tecnologia' },
+      { type: 'text', text: 'Inovação' },
+      { type: 'text', text: 'Confiança' },
+      { type: 'text', text: 'Angola' },
+    ],
     ctaTitle: 'Precisa de soluções de TI?',
     ctaDescription: 'Partilhe o seu desafio com a nossa equipa.',
     pageHeroTitle: 'Tecnologia para avançar',

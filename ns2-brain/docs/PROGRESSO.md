@@ -301,3 +301,14 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros de teste alterados: `src/app/data/parceiros.spec.ts` (atualizado para aceitar logos nos parceiros)
 - Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão nos testes relacionados (12 passed, 5 falhas: 4 pré-existentes nos pipes/whatsapp, 1 de navegação a investigar)
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/; Q6 (tipografia) não alterada sem aprovação do utilizador
+
+## Ajuste adicional: logos no carrossel da página de parceiros (2024-10-24)
+- Problema: o carrossel infinito (marquee) da página de parceiros mostrava apenas títulos de texto em vez de logos.
+- Correcção:
+  - `src/app/shared/ui/marquee/marquee.ts` e `.html`: componente agora aceita `MarqueeItem[]` com type 'text' ou 'image', renderizando `` para imagens e texto para texto.
+  - `src/app/pages/parceiros/parceiros.ts`: `brands` agora mapeia logos (`{ type: 'image', src, alt }`) em vez de títulos de texto.
+  - `src/app/i18n/pt.ts` e `en.ts`: `uiKit.marqueeItems` convertido para `MarqueeItem[]` com type 'text'.
+  - `src/app/data/produtos.ts`: `brands` convertido para `MarqueeItem[]` com type 'text'.
+- Ficheiros alterados: `src/app/shared/ui/marquee/marquee.ts`, `src/app/shared/ui/marquee/marquee.html`, `src/app/pages/parceiros/parceiros.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/data/produtos.ts`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (12 passed, 5 falhas pré-existentes).
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/.

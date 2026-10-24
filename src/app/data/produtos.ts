@@ -479,7 +479,15 @@ export const productsPageContent = {
     pt: 'Marcas de produtos referidas pela NS2 Innovation',
     en: 'Product brands mentioned by NS2 Innovation',
   } satisfies LocalizedText,
-  brands: ['Dell', 'Lenovo', 'HP', 'Apple', 'Samsung', 'Knup', 'Multilaser'],
+  brands: [
+    { type: 'text', text: 'Dell' },
+    { type: 'text', text: 'Lenovo' },
+    { type: 'text', text: 'HP' },
+    { type: 'text', text: 'Apple' },
+    { type: 'text', text: 'Samsung' },
+    { type: 'text', text: 'Knup' },
+    { type: 'text', text: 'Multilaser' },
+  ],
   notFoundTitle: {
     pt: 'Não encontra o que procura?',
     en: 'Can’t find what you are looking for?',

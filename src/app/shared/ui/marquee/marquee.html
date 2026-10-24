@@ -5,7 +5,7 @@
   role="region"
 >
   <div data-marquee-track class="flex w-max">
-    <div class="flex w-max">
+    <div class="flex w-max flex-nowrap items-center gap-8 pr-8">
       @for (copy of copies; track copy) {
         <ul
           class="flex w-max flex-nowrap items-center gap-8 pr-8"
@@ -13,7 +13,21 @@
           [attr.aria-hidden]="copy > 0 ? 'true' : null"
         >
           @for (item of items(); track item) {
-            <li class="shrink-0">{{ item }}</li>
+            <li class="shrink-0">
+              @if (item.type === 'image' && item.src && item.alt) {
+                <img
+                  [src]="item.src"
+                  [alt]="item.alt"
+                  width="200"
+                  height="100"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-10 w-auto object-contain"
+                />
+              } @else {
+                {{ item.text }}
+              }
+            </li>
           }
         </ul>
       }
@@ -22,7 +36,21 @@
       @for (copy of copies; track copy) {
         <ul class="flex w-max flex-nowrap items-center gap-8 pr-8">
           @for (item of items(); track item) {
-            <li class="shrink-0">{{ item }}</li>
+            <li class="shrink-0">
+              @if (item.type === 'image' && item.src && item.alt) {
+                <img
+                  [src]="item.src"
+                  [alt]="item.alt"
+                  width="200"
+                  height="100"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-10 w-auto object-contain"
+                />
+              } @else {
+                {{ item.text }}
+              }
+            </li>
           }
         </ul>
       }

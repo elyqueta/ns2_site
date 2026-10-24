@@ -180,7 +180,12 @@ export const en = {
     breadcrumbHome: 'Home',
     breadcrumbServices: 'Services',
     breadcrumbCurrent: 'IT infrastructure',
-    marqueeItems: ['Technology', 'Innovation', 'Trust', 'Angola'],
+    marqueeItems: [
+      { type: 'text', text: 'Technology' },
+      { type: 'text', text: 'Innovation' },
+      { type: 'text', text: 'Trust' },
+      { type: 'text', text: 'Angola' },
+    ],
     ctaTitle: 'Need technology solutions?',
     ctaDescription: 'Tell us about your challenge.',
     pageHeroTitle: 'Technology to move forward',

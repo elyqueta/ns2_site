@@ -15,6 +15,6 @@ export class KzPipe implements PipeTransform {
       style: 'currency',
       currency: 'AOA',
       maximumFractionDigits: 0,
-    }).format(value);
+    }).format(value).replace(/\u202f/g, '.').replace(/ /g, '.');
   }
 }

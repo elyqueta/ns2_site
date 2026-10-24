@@ -25,6 +25,7 @@ export class HomeWebPreview {
       label: this.i18n.text(this.copy.packageLabel),
       priceFrom: item.aPartirDe,
       priceLabel: this.i18n.text(this.copy.startingAt),
+      destaque: item.destaque,
     })),
   );
 }

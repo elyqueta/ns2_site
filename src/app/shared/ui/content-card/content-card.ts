@@ -11,6 +11,7 @@ export interface CardContent {
   readonly label?: string;
   readonly priceFrom?: number;
   readonly priceLabel?: string;
+  readonly destaque?: boolean;
 }
 
 @Component({

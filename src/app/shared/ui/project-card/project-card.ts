@@ -10,4 +10,5 @@ import { ProjectCardData } from '../card-content';
 })
 export class ProjectCard {
   readonly item = input.required<ProjectCardData>();
+  readonly class = input<string>('');
 }

@@ -140,7 +140,7 @@ export const en = {
     buttonPrimary: 'Request a quote',
     buttonSecondary: 'Explore services',
     buttonGhost: 'Learn more',
-    sectionIndex: '01 — Components',
+    sectionIndex: '/ — Components',
     headingPrefix: 'Technology with',
     headingHighlight: 'purpose',
     headingDescription: 'A consistent system helps us communicate clearly on every page.',

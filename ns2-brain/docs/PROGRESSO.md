@@ -261,3 +261,36 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/styles.css`, `src/app/shared/ui/page-hero/page-hero.html`, `src/app/pages/home/hero/hero.html`, `src/app/pages/ui-kit/ui-kit.html`, `src/app/data/navegacao.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
 - Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (10 passed, 4 falhas pré-existentes nos pipes).
 - Pendências: nenhuma
+
+## Fase 10 (LEIA-ME) — Cartões, números e padrões (2024-10-24)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: C) Substituir número por sinal da marca (diagonal) nos eyebrows
+  - Q2: A) Remover números em todos os cartões, exceto 'Como trabalhamos'
+  - Q3: B) Brilho radial azul só no hover, muito subtil
+  - Q4: A) Cartão inteiro clicável com seta única
+  - Q5: A) 3 formatos visuais: lista editorial (serviços), mosaico assimétrico (projectos), cartão destaque (pacote principal)
+  - Q6: B) Não alterar tipografia (protótipo primeiro, sem aprovação)
+  - Q7: A) Formato 50.000 Kz em todo o site
+- Implementação:
+  - `src/app/shared/pipes/kz.pipe.ts`: preços formatados com ponto como separador de milhares (ex: 50.000 Kz)
+  - `src/app/shared/ui/card/card.html`: brilho radial só no hover (opacity-0 → group-hover:opacity-40), muito subtil
+  - `src/app/shared/ui/content-card/content-card.html`: cartão inteiro clicável com link; selo "Mais escolhido" quando destaque=true
+  - `src/app/shared/ui/card-content.ts`: adicionado campo `destaque?: boolean` ao CardContent
+  - `src/app/shared/ui/project-card/project-card.ts` / `project-card.html`: adicionado input `class` para classes adicionais
+  - `src/app/data/home.ts`: eyebrows numerados substituídos por sinal da marca "/" (ex: "/ — Quem somos")
+  - `src/app/data/sobre.ts`: eyebrows 01, 02, 03, 05 substituídos por "/"
+  - `src/app/data/desenvolvimento-web.ts`: eyebrows 01-08 substituídos por "/"
+  - `src/app/data/servicos.ts`: sectionIndex "01 — Serviços" substituído por "/ — Serviços"
+  - `src/app/pages/home/projects-preview/projects-preview.ts`: index "04 — Projectos" substituído por "/ — Projectos"
+  - `src/app/i18n/pt.ts` e `en.ts`: sectionIndex "01 — Componentes" substituído por "/ — Componentes"
+  - `src/app/pages/home/products-preview/products-preview.html`: removido número do eyebrow das categorias
+  - `src/app/pages/home/services-preview/services-preview.html`: removido número do eyebrow dos serviços
+  - `src/app/pages/home/values-preview/values-preview.html`: removido número do eyebrow dos valores
+  - `src/app/pages/produtos/produtos.html`: removido número do eyebrow das categorias de produto
+  - `src/app/pages/projectos/projectos.html`: mosaico assimétrico (projeto destaque em coluna grande, outros 2 em coluna menor)
+  - `src/app/pages/home/web-preview/web-preview.ts`: mapeia campo `destaque` dos pacotes web
+- Ficheiros criados: nenhum novo
+- Ficheiros alterados: `src/app/shared/pipes/kz.pipe.ts`, `src/app/shared/ui/card/card.html`, `src/app/shared/ui/content-card/content-card.html`, `src/app/shared/ui/card-content.ts`, `src/app/shared/ui/project-card/project-card.ts`, `src/app/shared/ui/project-card/project-card.html`, `src/app/data/home.ts`, `src/app/data/sobre.ts`, `src/app/data/desenvolvimento-web.ts`, `src/app/data/servicos.ts`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/products-preview/products-preview.html`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/home/values-preview/values-preview.html`, `src/app/pages/produtos/produtos.html`, `src/app/pages/projectos/projectos.html`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (13 passed, 4 falhas pré-existentes nos pipes).
+- Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`); Q6 (tipografia) não alterada sem aprovação do utilizador

@@ -10,6 +10,7 @@ export interface ProductCardData extends CardContent {
 
 export interface PackageCardData extends CardContent {
   readonly type: 'package';
+  readonly destaque?: boolean;
 }
 
 export interface PostCardData extends CardContent {

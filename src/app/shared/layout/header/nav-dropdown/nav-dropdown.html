@@ -4,7 +4,7 @@
 >
   <button
     type="button"
-    class="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap px-3 text-[0.9375rem] font-medium text-fg-muted transition-colors hover:text-fg focus-visible:text-accent-bright"
+    class="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap px-3 text-base font-medium text-fg-muted transition-colors hover:text-fg cursor-pointer focus-visible:text-accent-bright"
     [attr.aria-expanded]="open()"
     [attr.aria-haspopup]="'true'"
     [attr.aria-controls]="id()"
@@ -31,7 +31,7 @@
         <a
           [routerLink]="item.href"
           routerLinkActive="text-accent-bright"
-          class="block px-4 py-3 text-[0.9375rem] text-fg transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-none"
+          class="block px-4 py-3 text-base text-fg transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-none"
           (click)="close()"
           [attr.tabindex]="0"
         >

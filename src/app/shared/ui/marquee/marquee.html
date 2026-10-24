@@ -1,6 +1,6 @@
 <div
   [appMarquee]="32"
-  class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
+  class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted bg-white"
   [attr.aria-label]="label()"
   role="region"
 >
@@ -15,7 +15,7 @@
           @for (item of items(); track item) {
             <li class="shrink-0">
               @if (item.src) {
-                <div class="rounded-card border border-line bg-surface p-2">
+                <div class="rounded-md border border-line bg-[#111827] p-2">
                   <img
                     [src]="item.src"
                     [alt]="item.alt"
@@ -40,7 +40,7 @@
           @for (item of items(); track item) {
             <li class="shrink-0">
               @if (item.src) {
-                <div class="rounded-card border border-line bg-surface p-2">
+                <div class="rounded-md border border-line bg-[#111827] p-2">
                   <img
                     [src]="item.src"
                     [alt]="item.alt"

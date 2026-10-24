@@ -28,7 +28,7 @@
       @for (item of navigation(); track item.id ?? item.href) {
         @if (item.kind === 'link') {
           <a
-            class="min-h-11 whitespace-nowrap content-center text-base font-medium text-fg-muted transition-colors hover:text-fg"
+            class="min-h-11 whitespace-nowrap content-center text-lg font-medium text-fg-muted transition-colors hover:text-fg"
             [routerLink]="item.href"
             routerLinkActive="text-accent-bright"
             [routerLinkActiveOptions]="{ exact: item.href === '/' }"

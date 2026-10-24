@@ -44,6 +44,14 @@
               [class.bg-bg]="!package.destaque"
             >
               <div class="flex flex-wrap items-start justify-between gap-5 mb-8">
+                <div class="shrink-0 text-left">
+                  <p class="text-sm font-medium text-fg-muted uppercase tracking-wider">
+                    {{ copy.labels.startingAt | localized }}
+                  </p>
+                  <p class="mt-2 font-display text-3xl font-semibold text-fg">
+                    {{ package.aPartirDe | kz }}
+                  </p>
+                </div>
                 <div>
                   @if (package.destaque) {
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line text-sm font-semibold text-accent-bright">
@@ -56,14 +64,6 @@
                   </h3>
                   <p class="mt-4 max-w-[60ch] text-base text-fg-muted leading-relaxed">
                     {{ package.descricao | localized }}
-                  </p>
-                </div>
-                <div class="shrink-0 text-right">
-                  <p class="text-sm font-medium text-fg-muted uppercase tracking-wider">
-                    {{ copy.labels.startingAt | localized }}
-                  </p>
-                  <p class="mt-2 font-display text-3xl font-semibold text-fg">
-                    {{ package.aPartirDe | kz }}
                   </p>
                 </div>
               </div>

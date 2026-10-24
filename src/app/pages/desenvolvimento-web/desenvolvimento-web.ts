@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
+import { RouterLink } from '@angular/router';
 import {
   desenvolvimentoWebContent,
   desenvolvimentoWebFaq,
@@ -30,7 +31,7 @@ interface PackageView {
 
 @Component({
   selector: 'app-desenvolvimento-web',
-  imports: [Accordion, CtaBand, Icon, KzPipe, LocalizedPipe, PageHero, RevealChildren],
+  imports: [Accordion, CtaBand, Icon, KzPipe, LocalizedPipe, PageHero, RevealChildren, RouterLink],
   templateUrl: './desenvolvimento-web.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -44,9 +45,7 @@ export class DesenvolvimentoWeb {
     { label: this.i18n.text(this.copy.hero.homeLabel), href: '/' },
   ]);
   readonly maisEscolhido = computed(() => this.i18n.t('actions.maisEscolhido'));
-  readonly compararPacotes = computed(() => this.i18n.t('actions.compararPacotes'));
   readonly extrasLabel = computed(() => this.i18n.t('actions.extrasLabel'));
-  readonly cardPackage = computed(() => this.i18n.t('uiKit.cardPackage'));
   readonly idealParaLabel = computed(() => this.i18n.t('actions.idealPara'));
   readonly websitePackages = computed(() =>
     webPacotes.map((item) => ({
@@ -124,7 +123,7 @@ export class DesenvolvimentoWeb {
       name,
       quoteUrl: this.whatsapp.createWhatsappUrl(`Olá! Gostaria de um orçamento para ${name}.`),
       contactUrl: `/contacto?servico=${encodeURIComponent(slug)}`,
-      sectionUrl: `/desenvolvimento-web#${slug}`,
+      sectionUrl: `/desenvolvimento-web/${slug}`,
     };
   }
 

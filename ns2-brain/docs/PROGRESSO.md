@@ -199,24 +199,22 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: A) Destacar Site Profissional com borda e etiqueta "Mais escolhido"
-  - Q2: A) Mini-wireframe em CSS mostrando a escala de cada pacote
+  - Q2: Não usar wireframe CSS (removido por decisão do utilizador)
   - Q3: B) "50 000 Kz" (espaço, sem ,00)
-  - Q4: A) "Ideal para..." + 3 a 5 itens incluídos + prazo estimado
-  - Q5: A) Linha própria "Extras" dentro de cada cartão
-  - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote
-  - Q7: B) Tabela comparativa sempre visível abaixo dos cartões
+  - Q4: A) "Ideal para..." + 3 a 5 itens incluídos + prazo estimado (movido para página de detalhe)
+  - Q5: A) Linha própria "Extras" dentro de cada cartão (removido do card, movido para detalhe)
+  - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote (mantido no card e no detalhe)
+  - Q7: Não usar tabela comparativa (removida por decisão do utilizador)
 - Implementação:
-  - `data/web-pacotes.ts`: adicionados campos `idealPara`, `extras`, `wireframe` a cada pacote; Site Profissional mantido com `destaque: true`
-  - `desenvolvimento-web.html`: cartões com altura igual (`align-items-stretch`); removido brilho radial (`bg-accent/5`); hover discreto (borda); etiqueta "Mais escolhido"; mini-wireframe CSS por tipo (uma-secao/varias-paginas/com-blog); preço via kz pipe (sem ,00); "Ideal para..."; extras como linha própria; CTA WhatsApp com nome do pacote; tabela comparativa sempre visível
-  - `desenvolvimento-web.ts`: adicionados computeds `maisEscolhido`, `compararPacotes`, `extrasLabel`, `cardPackage`
+  - `data/web-pacotes.ts`: campos `idealPara`, `extras` mantidos para uso na página de detalhe; Site Profissional com `destaque: true`
+  - `desenvolvimento-web.html`: cards simplificados (apenas nome, preço, páginas, prazo, inclui, CTA); fonte maior; espaçamento aumentado; link do CTA aponta para a página de detalhe do pacote
+  - `desenvolvimento-web.ts`: adicionado `RouterLink` às imports; `sectionUrl` aponta para `/desenvolvimento-web/${slug}`
+  - `src/app/pages/web-pacote-detalhe/`: novo componente com página de detalhe completa (ideal para, inclui, não inclui, entregas, CTA WhatsApp)
+  - `src/app/data/web-pacote-detalhe.ts`: novo ficheiro com conteúdo detalhado de cada pacote
+  - `app.routes.ts` e `app.routes.server.ts`: rota `desenvolvimento-web/:slug` com prerender para os 4 pacotes
   - `shared/pipes/kz.pipe.ts`: `maximumFractionDigits` alterado de 2 para 0
-  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.maisEscolhido`, `actions.compararPacotes`, `actions.extrasLabel`
-- Ficheiros alterados: `src/app/data/web-pacotes.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/shared/pipes/kz.pipe.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`
-- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.requestQuoteTitle`, `actions.requestQuoteDescription`, `actions.whatsappLabel`, `actions.contactLabel`, `actions.startingAt`, `actions.entregasLabel`, `actions.includesLabel`, `actions.pagesLabel`, `actions.termLabel`, `pages.notFoundDescription`
+- Ficheiros alterados: `src/app/data/web-pacotes.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/shared/pipes/kz.pipe.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/app.routes.ts`, `src/app/app.routes.server.ts`
+- Ficheiros criados: `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/data/web-pacote-detalhe.ts`
+- Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma
-
-## Ajuste adicional: tabela comparativa de pacotes (2026-10-23)
-- Problema: colunas da tabela comparativa estavam em conflito de espaço (sem larguras definidas).
-- Correcção: adicionadas larguras fixas às colunas da tabela (`w-24`, `w-20`, `w-16`, `w-24`) para evitar quebra de layout.
-- Ficheiros alterados: `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`
-- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).

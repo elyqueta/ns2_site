@@ -15,6 +15,16 @@ export const pt = {
     heroWeb: 'Web e sistemas',
     heroIt: 'TI e equipamentos',
     contact: 'Falar connosco',
+    notIncludedLabel: 'Não inclui',
+    whatsappLabel: 'Falar no WhatsApp',
+    contactLabel: 'Ver contactos',
+    startingAt: 'A partir de',
+    entregasLabel: 'O que entregamos',
+    includesLabel: 'Inclui',
+    pagesLabel: 'Páginas',
+    termLabel: 'Prazo estimado',
+    requestQuoteTitle: 'Vamos construir o seu projeto?',
+    requestQuoteDescription: 'Partilhe o que pretende e conversamos sobre a solução adequada.',
     whatsapp: 'WhatsApp',
     email: 'Email',
     learnMore: 'Saber mais',
@@ -67,6 +77,7 @@ export const pt = {
     privacy: 'Política de privacidade',
     terms: 'Termos e condições',
     notFound: 'Página não encontrada',
+    notFoundDescription: 'A página que procura não existe.',
     uiKit: 'UI kit',
   },
   uiKit: {
@@ -222,6 +233,7 @@ export const pt = {
 export type TranslationKey =
   | `nav.${keyof typeof pt.nav}`
   | `actions.${keyof typeof pt.actions}`
+  | `actions.${'requestQuoteTitle' | 'requestQuoteDescription'}`
   | `pages.${keyof typeof pt.pages}`
   | `seo.${keyof typeof pt.seo}`
   | `actions.${'languageSelection' | 'languagePortuguese' | 'languageEnglish'}`

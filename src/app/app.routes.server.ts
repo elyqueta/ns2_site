@@ -2,6 +2,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 import { noticias } from './data/noticias';
 import { parceiros } from './data/parceiros';
 import { servicos } from './data/servicos';
+import { webPacotesDetalhe } from './data/web-pacote-detalhe';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -25,6 +26,13 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
       return parceiros.map((partner) => ({ slug: partner.slug }));
+    },
+  },
+  {
+    path: 'desenvolvimento-web/:slug',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      return webPacotesDetalhe.map((item) => ({ slug: item.slug }));
     },
   },
   {

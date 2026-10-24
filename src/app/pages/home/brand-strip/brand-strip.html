@@ -5,15 +5,17 @@
         @for (brand of copy.items; track brand.src) {
           <li class="shrink-0">
             @if (brand.src) {
-              <img
-                [src]="brand.src"
-                [alt]="brand.alt"
-                width="200"
-                height="100"
-                loading="lazy"
-                decoding="async"
-                class="h-10 w-auto object-contain"
-              />
+              <div class="rounded-card border border-line bg-surface p-2">
+                <img
+                  [src]="brand.src"
+                  [alt]="brand.alt"
+                  width="200"
+                  height="100"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-10 w-auto object-contain"
+                />
+              </div>
             } @else {
               {{ brandText(brand) }}
             }
@@ -33,15 +35,17 @@
           @for (brand of copy.items; track brand.src) {
             <li class="shrink-0 snap-start">
               @if (brand.src) {
-                <img
-                  [src]="brand.src"
-                  [alt]="brand.alt"
-                  width="200"
-                  height="100"
-                  loading="lazy"
-                  decoding="async"
-                  class="h-10 w-auto object-contain"
-                />
+                <div class="rounded-card border border-line bg-surface p-2">
+                  <img
+                    [src]="brand.src"
+                    [alt]="brand.alt"
+                    width="200"
+                    height="100"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-10 w-auto object-contain"
+                  />
+                </div>
               } @else {
                 {{ brandText(brand) }}
               }

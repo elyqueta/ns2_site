@@ -215,3 +215,9 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
 - Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 - Pendências: nenhuma
+
+## Ajuste adicional: altura igual nos cards da home (2024-10-24)
+- Problema: os cards de pacotes na home tinham alturas diferentes (o primeiro sempre menor).
+- Correcção: adicionado `flex flex-col h-full` ao `app-card` (`card.html`) e `min-h-0` aos itens do `@for` no `web-preview.html`, forçando altura igual em todos os cards.
+- Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/shared/ui/card/card.html`
+- Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).

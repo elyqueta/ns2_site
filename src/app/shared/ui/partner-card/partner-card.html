@@ -1,12 +1,1 @@
-@if (item().logo; as logo) {
-  <app-media-slot
-    [src]="logo"
-    [alt]="item().title"
-    [expectedFile]="logo"
-    [width]="200"
-    [height]="100"
-    class="mb-4"
-    [loading]="'eager'"
-  />
-}
 <app-content-card [item]="item()" />

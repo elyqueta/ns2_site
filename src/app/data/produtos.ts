@@ -480,13 +480,11 @@ export const productsPageContent = {
     en: 'Product brands mentioned by NS2 Innovation',
   } satisfies LocalizedText,
   brands: [
-    { type: 'text', text: 'Dell' },
-    { type: 'text', text: 'Lenovo' },
-    { type: 'text', text: 'HP' },
-    { type: 'text', text: 'Apple' },
-    { type: 'text', text: 'Samsung' },
-    { type: 'text', text: 'Knup' },
-    { type: 'text', text: 'Multilaser' },
+    { type: 'image', src: '/images/parceiros/dell.webp', alt: 'Dell' },
+    { type: 'image', src: '/images/parceiros/lenovo.webp', alt: 'Lenovo' },
+    { type: 'image', src: '/images/parceiros/apple.webp', alt: 'Apple' },
+    { type: 'image', src: '/images/parceiros/samsung.webp', alt: 'Samsung' },
+    { type: 'image', src: '/images/parceiros/multilaser.webp', alt: 'Multilaser' },
   ],
   notFoundTitle: {
     pt: 'Não encontra o que procura?',

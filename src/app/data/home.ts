@@ -1,4 +1,5 @@
 import { LocalizedText } from '../i18n/types';
+import { MarqueeItem } from '../shared/ui/marquee/marquee';
 
 export const homeContent = {
   hero: {
@@ -21,13 +22,19 @@ export const homeContent = {
       en: 'Hello! I would like to request a quote.',
     } satisfies LocalizedText,
   },
-  brands: {
-    label: {
-      pt: 'Marcas de produtos referidas pela NS2 Innovation',
-      en: 'Product brands mentioned by NS2 Innovation',
-    } satisfies LocalizedText,
-    items: ['Dell', 'Lenovo', 'HP', 'Apple', 'Samsung', 'Knup', 'Multilaser'],
-  },
+    brands: {
+      label: {
+        pt: 'Marcas de produtos referidas pela NS2 Innovation',
+        en: 'Product brands mentioned by NS2 Innovation',
+      } satisfies LocalizedText,
+      items: [
+        { type: 'image', src: '/images/parceiros/dell.webp', alt: 'Dell' },
+        { type: 'image', src: '/images/parceiros/lenovo.webp', alt: 'Lenovo' },
+        { type: 'image', src: '/images/parceiros/apple.webp', alt: 'Apple' },
+        { type: 'image', src: '/images/parceiros/samsung.webp', alt: 'Samsung' },
+        { type: 'image', src: '/images/parceiros/multilaser.webp', alt: 'Multilaser' },
+      ] satisfies readonly MarqueeItem[],
+    },
   about: {
     index: { pt: 'Quem somos', en: 'About us' } satisfies LocalizedText,
     title: {

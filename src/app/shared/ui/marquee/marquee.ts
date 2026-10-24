@@ -23,4 +23,6 @@ export class Marquee {
   readonly items = input.required<readonly MarqueeItem[]>();
   readonly label = input.required<string>();
   readonly copies = [0, 1, 2, 3] as const;
+
+  readonly itemText = (item: MarqueeItem) => item.text;
 }

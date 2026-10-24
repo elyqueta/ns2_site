@@ -24,7 +24,7 @@ export class HeroVideoDirective {
   private readonly animation = inject(AnimationService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly elementRef = inject(ElementRef<HTMLVideoElement>);
+  private readonly elementRef = inject<ElementRef<HTMLVideoElement>>(ElementRef);
   private readonly element = this.elementRef.nativeElement;
 
   readonly playing = signal(false);
@@ -43,13 +43,17 @@ export class HeroVideoDirective {
       }
 
       const fadeIn = () => {
-        runtime.gsap.fromTo(this.element, { opacity: 0 }, { opacity: 1, duration: 0.6 });
+        if (this.element && this.element.style) {
+          runtime.gsap.fromTo(this.element, { opacity: 0 }, { opacity: 1, duration: 0.6 });
+        }
       };
 
       this.element.addEventListener('canplay', fadeIn, { once: true });
 
       return () => {
-        this.element.removeEventListener('canplay', fadeIn);
+        if (this.element) {
+          this.element.removeEventListener('canplay', fadeIn);
+        }
       };
     });
 
@@ -76,7 +80,9 @@ export class HeroVideoDirective {
 
   pause(): void {
     this.userPaused = true;
-    this.element.pause();
+    if (this.element && typeof this.element.pause === 'function') {
+      this.element.pause();
+    }
   }
 
   private shouldPlay(): boolean {
@@ -168,8 +174,10 @@ export class HeroVideoDirective {
       this.visibilityListener = null;
     }
 
-    if (this.element) {
+    if (this.element && typeof this.element.pause === 'function') {
       this.element.pause();
+    }
+    if (this.element) {
       this.element.removeAttribute('src');
       while (this.element.firstChild) {
         this.element.removeChild(this.element.firstChild);

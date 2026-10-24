@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo: cartões de serviços (estilo vidro)</title>
+<!-- DEMO DE REFERÊNCIA. Não vai para produção. O agente deve copiar o CSS/estrutura
+     para os componentes reais do projecto, usando os tokens do /ui-kit. -->
+<style>
+:root{
+  --font-title: Sora, "DM Sans", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --card-w: clamp(240px, 78vw, 300px);
+  --card-ratio: 300 / 440;
+  --card-radius: 22px;
+  --gap: 28px;
+  --lift: 22px;            /* quanto o cartão central sobe */
+  --stage-bg: radial-gradient(1100px 520px at 50% 0%, #10203f 0%, #070b16 55%, #05070d 100%);
+  --ink: #eaf1fd;
+  --ink-soft: rgb(234 241 253 / .72);
+  --base-dark: 5 7 13;     /* cor para escurecer o fundo do cartão */
+}
+[data-theme="light"]{
+  --stage-bg: linear-gradient(180deg, #f4f7fc 0%, #e3e9f3 100%);
+  --ink: #0b1220;
+  --ink-soft: rgb(11 18 32 / .7);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font-body);background:var(--stage-bg);min-height:100vh;color:var(--ink)}
+.stage{padding:72px 0 96px}
+.stage h2{font:700 clamp(28px,4vw,44px)/1.1 var(--font-title);letter-spacing:-.02em;margin:0 8vw 8px}
+.stage p.lead{margin:0 8vw 36px;color:var(--ink-soft);max-width:52ch}
+
+/* ---------- pista (no site real: o elemento que o efeito pin desloca) ---------- */
+.svc-track{
+  display:flex; gap:var(--gap);
+  padding:56px 8vw 96px;               /* espaço para o cartão subir e para a sombra */
+  overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+}
+.svc-track::-webkit-scrollbar{display:none}
+
+/* ---------- cartão ---------- */
+.svc-card{
+  --tint-rgb: 63 111 181;              /* cor do cartão (R G B). Muda por cartão */
+  --focus: 0;                          /* 0 a 1: calculado pelo JS conforme a posição */
+  position:relative; flex:0 0 var(--card-w); aspect-ratio:var(--card-ratio);
+  border-radius:var(--card-radius); overflow:hidden; isolation:isolate;
+  color:#fff; text-decoration:none; scroll-snap-align:center;
+  background:linear-gradient(180deg, rgb(var(--tint-rgb) / .55) 0%, rgb(var(--tint-rgb) / .92) 62%, rgb(var(--base-dark)) 100%);
+  transform:translateY(calc(var(--focus) * var(--lift) * -1)) scale(calc(1 + var(--focus) * .04));
+  box-shadow:
+    0 calc(22px + var(--focus) * 14px) calc(44px + var(--focus) * 18px) -16px rgb(var(--tint-rgb) / calc(.30 + var(--focus) * .30)),
+    inset 0 0 0 1px rgb(255 255 255 / .10);
+  transition:box-shadow .3s ease;
+  will-change:transform;
+}
+.svc-card:focus-visible{outline:3px solid #9cc0f5;outline-offset:4px}
+
+/* imagem: ocupa o topo e dissolve-se na cor do cartão */
+.svc-media{position:absolute; inset:0 0 34% 0; z-index:-1}
+.svc-media img{
+  width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;
+  filter:saturate(calc(.85 + var(--focus) * .25)) brightness(calc(.86 + var(--focus) * .14));
+  -webkit-mask-image:linear-gradient(180deg,#000 58%,transparent 100%);
+          mask-image:linear-gradient(180deg,#000 58%,transparent 100%);
+}
+
+/* vidro na metade inferior */
+.svc-glass{
+  position:absolute; inset:auto 0 0 0; height:62%; z-index:-1;
+  background:linear-gradient(180deg, transparent 0%, rgb(var(--tint-rgb) / .50) 34%, rgb(var(--base-dark) / .62) 100%);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15); backdrop-filter:blur(14px) saturate(1.15);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 38%);
+          mask-image:linear-gradient(180deg,transparent 0,#000 38%);
+}
+
+.svc-body{position:absolute; inset:auto 0 0 0; padding:0 18px 18px; display:flex; flex-direction:column; gap:8px}
+.svc-head{display:flex; align-items:center; gap:10px}
+.svc-chip{
+  flex:0 0 auto; width:30px; height:30px; border-radius:10px; display:grid; place-items:center;
+  background:rgb(255 255 255 / .14); border:1px solid rgb(255 255 255 / .22);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.svc-chip svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.svc-title{margin:0; font:700 22px/1.12 var(--font-title); letter-spacing:-.015em; text-shadow:0 1px 14px rgb(0 0 0 / .35);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.svc-meta{margin:0; font-size:13px; line-height:1.45; color:rgb(255 255 255 / .74);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.svc-cta{
+  margin-top:8px; display:flex; align-items:center; justify-content:space-between;
+  padding:13px 14px; border-radius:14px; font:500 15px var(--font-body); color:rgb(255 255 255 / .92);
+  background:rgb(var(--base-dark) / .30); border:1px solid rgb(255 255 255 / .14);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  transition:background .2s ease, border-color .2s ease;
+}
+.svc-cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.svc-card:hover .svc-cta,.svc-card:focus-visible .svc-cta{background:rgb(255 255 255 / .16);border-color:rgb(255 255 255 / .28)}
+.svc-card:hover .svc-cta svg,.svc-card:focus-visible .svc-cta svg{transform:translateX(3px)}
+
+/* etiqueta opcional "Com parceiros" (só nos serviços terceirizados) */
+.svc-badge{position:absolute; top:14px; left:14px; padding:6px 11px; border-radius:999px; font:500 12px var(--font-body);
+  letter-spacing:.02em; color:#fff; background:rgb(var(--base-dark) / .38); border:1px solid rgb(255 255 255 / .18);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px)}
+
+/* progresso (o do site já existe; aqui só para a demo) */
+.svc-progress{margin:0 8vw;height:3px;border-radius:3px;background:rgb(127 150 190 / .25);overflow:hidden}
+.svc-progress i{display:block;height:100%;width:20%;background:#4f86d6;border-radius:3px}
+
+/* 320px a 480px: cartão mais compacto, menos blur (desempenho) */
+@media (max-width:480px){
+  :root{--gap:16px;--lift:14px}
+  .svc-title{font-size:20px}
+  .svc-glass{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .svc-card{transform:none!important;transition:none}
+  .svc-cta svg{transition:none}
+}
+</style>
+</head>
+<body>
+<section class="stage">
+  <h2>Tecnologia para cada desafio.</h2>
+  <p class="lead">Assistência completa a toda a procura de TI, dos servidores ao cabeamento estruturado.</p>
+
+  <div class="svc-track" id="track">
+    <a class="svc-card" href="#" style="--tint-rgb:63 111 181">
+      <div class="svc-media"><img src="img/infraestrutura-redes-servidores.webp" alt="" width="1200" height="750"></div>
+      <div class="svc-glass"></div>
+      <div class="svc-body">
+        <div class="svc-head"><span class="svc-chip"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01"/></svg></span><h3 class="svc-title">Redes e servidores</h3></div>
+        <p class="svc-meta">Ligações estáveis e seguras para a sua empresa funcionar sem falhas.</p>
+        <div class="svc-cta"><span>Saber mais</span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+    <a class="svc-card" href="#" style="--tint-rgb:84 94 214">
+      <div class="svc-media"><img src="img/suporte-remoto.webp" alt="" width="1200" height="750"></div>
+      <div class="svc-glass"></div>
+      <div class="svc-body">
+        <div class="svc-head"><span class="svc-chip"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></span><h3 class="svc-title">Suporte remoto</h3></div>
+        <p class="svc-meta">Resolvemos à distância, sem que tenha de parar o trabalho.</p>
+        <div class="svc-cta"><span>Saber mais</span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+    <a class="svc-card" href="#" style="--tint-rgb:36 140 156">
+      <span class="svc-badge">Com parceiros</span>
+      <div class="svc-media"><img src="img/manutencao-equipamentos.webp" alt="" width="1200" height="750"></div>
+      <div class="svc-glass"></div>
+      <div class="svc-body">
+        <div class="svc-head"><span class="svc-chip"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0 5 5L9 22l-4-4L14.7 6.3z"/></svg></span><h3 class="svc-title">Manutenção de equipamentos</h3></div>
+        <p class="svc-meta">Manutenção preventiva e correctiva de computadores, telemóveis e tablets.</p>
+        <div class="svc-cta"><span>Saber mais</span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+    <a class="svc-card" href="#" style="--tint-rgb:120 82 200">
+      <div class="svc-media"><img src="img/sistemas-software.webp" alt="" width="1200" height="750"></div>
+      <div class="svc-glass"></div>
+      <div class="svc-body">
+        <div class="svc-head"><span class="svc-chip"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><h3 class="svc-title">Sistemas e software</h3></div>
+        <p class="svc-meta">Software para gerir documentos, processos, utilizadores e pedidos.</p>
+        <div class="svc-cta"><span>Saber mais</span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+    <a class="svc-card" href="#" style="--tint-rgb:46 125 168">
+      <div class="svc-media"><img src="img/websites-sistemas-web.webp" alt="" width="1200" height="750"></div>
+      <div class="svc-glass"></div>
+      <div class="svc-body">
+        <div class="svc-head"><span class="svc-chip"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><h3 class="svc-title">Websites e sistemas web</h3></div>
+        <p class="svc-meta">Do site institucional ao sistema de gestão, rápidos e seguros.</p>
+        <div class="svc-cta"><span>Saber mais</span><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+  </div>
+  <div class="svc-progress"><i id="bar"></i></div>
+</section>
+
+<script>
+/* "foco" contínuo: 1 no cartão mais próximo do centro do ecrã, 0 a partir de 1 largura de distância.
+   No site real, chamar isto dentro do callback do efeito pin que já desloca a pista (sem novo listener de scroll). */
+(function(){
+  var track=document.getElementById('track'), bar=document.getElementById('bar');
+  var cards=[].slice.call(track.querySelectorAll('.svc-card'));
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking=false;
+  function update(){
+    ticking=false;
+    var cx=window.innerWidth/2;
+    cards.forEach(function(c){
+      var r=c.getBoundingClientRect();
+      var d=Math.abs((r.left+r.width/2)-cx)/r.width;
+      c.style.setProperty('--focus', reduce?0:Math.max(0,1-d).toFixed(3));
+    });
+    var max=track.scrollWidth-track.clientWidth;
+    bar.style.width=(20+80*(max?track.scrollLeft/max:0))+'%';
+  }
+  function req(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
+  track.addEventListener('scroll',req,{passive:true});
+  window.addEventListener('resize',req);
+  var q=new URLSearchParams(location.search);
+  if(q.get('theme')) document.documentElement.dataset.theme=q.get('theme');
+  var i=parseInt(q.get('i')||'0',10);
+  if(cards[i]){ track.scrollLeft=cards[i].offsetLeft-(track.clientWidth-cards[i].offsetWidth)/2; }
+  update();
+})();
+</script>
+</body>
+</html>

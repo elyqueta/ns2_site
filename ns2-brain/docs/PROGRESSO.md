@@ -317,13 +317,13 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Estado: concluída
 - Tipo: correcção transversal (não é fase nova)
 - Implementação:
-  - `src/app/shared/directives/hero-video.directive.ts`: nova directiva `appHeroVideo` usando `registerAnimationDirective` + `AnimationService`. Controla injeção de `<source>` (webm primeiro, depois mp4), reprodução automática apenas em desktop sem reduced-motion e sem save-data/2g/3g, fade-in via GSAP no `canplay`, pausa por IntersectionObserver e `visibilitychange`, limpeza completa no destroy. Expõe `playing`, `active` e `toggle()`.
-  - `src/app/shared/ui/icon/icon.ts` / `icon.html`: adicionados ícones `pause` e `play` com traduções em `uiKit.icons` (pt/en).
-  - `src/app/i18n/pt.ts` e `en.ts`: adicionadas chaves `actions.pauseVideo` e `actions.playVideo`.
-  - `src/app/pages/home/hero/hero.html`: `<video appHeroVideo>` com poster, muted, playsinline, loop, preload="none", aria-hidden, tabindex="-1", width="1280", height="720", classes absolutas. `<section id="home-hero">` com classe `dark`. Camadas decorativas: velo `bg-bg/40`, gradiente horizontal para texto, gradiente vertical para botões. Botão pausar/reproduzir no canto inferior esquerdo, visível apenas quando `active()` é true.
-  - `src/app/pages/home/hero/hero.ts`: adicionados `videoDirective` (viewChild), `videoPlaying`, `videoActive`, `videoButtonLabel` e `videoToggle()`.
+  - `src/app/shared/directives/hero-video.directive.ts`: directiva `appHeroVideo` com `registerAnimationDirective` + `AnimationService`. Controla injeção de `<source>` (webm primeiro, depois mp4), reprodução automática apenas em desktop sem `prefers-reduced-motion` e sem `save-data`/2g/3g, fade-in via GSAP no `canplay`, pausa por `IntersectionObserver` e `visibilitychange`, limpeza completa no destroy. Expõe `playing`, `active` e `toggle()`. Protegido contra erros de `pause` em elementos não-vídeo.
+  - `src/app/pages/home/hero/hero.html`: vídeo de fundo com poster, muted, playsinline, loop, preload="none", aria-hidden, tabindex="-1", width="1280", height="720", classes absolutas. `<section id="home-hero">` com classe `dark`. Camadas decorativas: velo `bg-[#0a0e1a]/70`, gradiente horizontal `from-bg/95 via-bg/80 to-bg/40`, gradiente vertical `from-bg via-bg/60 to-transparent` ocupando ~40% da altura inferior. Removido botão de play/pause por solicitação do utilizador.
+  - `src/app/pages/home/hero/hero.ts`: removido `viewChild`, computeds e métodos relacionados ao botão de vídeo (não há mais botão no hero).
   - `src/app/shared/layout/header/header.ts` / `header.html`: header ganha classe `dark` quando está na rota home (`/`) e `scrollY < 80`, injetando `Router` e rastreando scroll via `afterNextRender`.
+  - `src/app/shared/ui/icon/icon.ts` / `icon.html`: ícones `pause` e `play` mantidos (podem ser usados futuramente).
+  - `src/app/i18n/pt.ts` e `en.ts`: chaves `actions.pauseVideo` e `actions.playVideo` mantidas (podem ser usadas futuramente).
 - Ficheiros criados: `src/app/shared/directives/hero-video.directive.ts`
 - Ficheiros alterados: `src/app/shared/directives/hero-video.directive.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`
-- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (14 passed, 4 falhas pré-existentes nos pipes/whatsapp/navegação).
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings; orçamento inicial 500.07 kB - 67 bytes acima do alvo de 500 kB); `npm test` sem regressão (14 passed, 4 falhas pré-existentes nos pipes/whatsapp/navegação).
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/ (pendentes desde Fase 10).

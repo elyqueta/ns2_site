@@ -113,7 +113,6 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in HP products.',
     },
     oficial: false,
-    logo: '/images/parceiros/hp.webp',
   },
   {
     slug: 'apple',
@@ -188,7 +187,6 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Knup accessories.',
     },
     oficial: false,
-    logo: '/images/parceiros/knup.webp',
   },
   {
     slug: 'multilaser',

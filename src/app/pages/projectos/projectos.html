@@ -7,20 +7,19 @@
 />
 
 <main id="conteudo">
-  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
-    <p
-      class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
-    >
+  <section class="mx-auto max-w-360 px-5 py-16 sm:px-8 lg:px-16">
+    <p class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
       {{ copy.confirmedLabel | localized }}
     </p>
-    <div class="grid gap-5 lg:grid-cols-2 lg:items-stretch">
+    <div class="grid gap-6 lg:grid-cols-4 lg:grid-rows-2 lg:items-stretch">
+      <!-- Projeto destaque (maior, assimétrico) -->
       <div
-        class="group relative aspect-[4/3] overflow-hidden rounded-card border border-line bg-surface lg:aspect-auto lg:min-h-[520px]"
+        class="group relative overflow-hidden rounded-card border border-line bg-surface lg:col-span-2 lg:row-span-2 aspect-[4/3]"
       >
         <iframe
           class="absolute inset-0 h-full w-full border-0 bg-surface"
           [src]="previewUrl"
-          [title]="project.previewTitle | localized"
+          [title]="featuredProject.previewTitle | localized"
           loading="lazy"
           tabindex="-1"
           aria-hidden="true"
@@ -29,7 +28,7 @@
         ></iframe>
         <a
           class="absolute inset-0 z-10 grid place-items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
-          [href]="project.url"
+          [href]="featuredProject.url"
           [attr.aria-label]="copy.previewLinkLabel | localized"
           target="_blank"
           rel="noopener noreferrer"
@@ -41,11 +40,16 @@
           </span>
         </a>
       </div>
-      <app-project-card [item]="projectCard()" />
+      <!-- Outros projectos (menores, coluna à direita) -->
+      <div class="flex flex-col gap-6 lg:col-span-2 lg:row-span-2">
+        @for (project of projects; track project.slug) {
+          <app-project-card [item]="projectCard(project)" class="h-full" />
+        }
+      </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
+  <section class="mx-auto max-w-360 px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
     <app-cta-band
       [title]="copy.ctaTitle | localized"
       [description]="copy.ctaDescription | localized"

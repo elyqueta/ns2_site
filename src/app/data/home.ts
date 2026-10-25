@@ -1,4 +1,5 @@
 import { LocalizedText } from '../i18n/types';
+import { MarqueeItem } from '../shared/ui/marquee/marquee';
 
 export const homeContent = {
   hero: {
@@ -21,15 +22,21 @@ export const homeContent = {
       en: 'Hello! I would like to request a quote.',
     } satisfies LocalizedText,
   },
-  brands: {
-    label: {
-      pt: 'Marcas de produtos referidas pela NS2 Innovation',
-      en: 'Product brands mentioned by NS2 Innovation',
-    } satisfies LocalizedText,
-    items: ['Dell', 'Lenovo', 'HP', 'Apple', 'Samsung', 'Knup', 'Multilaser'],
-  },
+    brands: {
+      label: {
+        pt: 'Marcas de produtos referidas pela NS2 Innovation',
+        en: 'Product brands mentioned by NS2 Innovation',
+      } satisfies LocalizedText,
+      items: [
+        { type: 'image', src: '/images/parceiros/dell.webp', alt: 'Dell' },
+        { type: 'image', src: '/images/parceiros/lenovo.webp', alt: 'Lenovo' },
+        { type: 'image', src: '/images/parceiros/apple.webp', alt: 'Apple' },
+        { type: 'image', src: '/images/parceiros/samsung.webp', alt: 'Samsung' },
+        { type: 'image', src: '/images/parceiros/multilaser.webp', alt: 'Multilaser' },
+      ] satisfies readonly MarqueeItem[],
+    },
   about: {
-    index: { pt: '01 — Quem somos', en: '01 — About us' } satisfies LocalizedText,
+    index: { pt: 'Quem somos', en: 'About us' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia com proximidade.',
       en: 'Technology, with a personal touch.',
@@ -40,13 +47,13 @@ export const homeContent = {
     } satisfies LocalizedText,
     linkLabel: { pt: 'Conheça a NS2', en: 'Get to know NS2' } satisfies LocalizedText,
     imageAlt: {
-      pt: 'Equipa a colaborar em frente a computadores num ambiente de trabalho.',
-      en: 'People collaborating in front of computers in a workplace.',
+      pt: 'Duas pessoas à secretária com um portátil, ligadas a parceiros especializados',
+      en: 'Two people at a desk with a laptop, connected to specialized partners',
     } satisfies LocalizedText,
-    expectedFile: { pt: 'public/images/equipa.jpeg' } satisfies LocalizedText,
+    expectedFile: { pt: 'public/images/sobre/quem-somos.webp' } satisfies LocalizedText,
   },
   services: {
-    index: { pt: '02 — O que fazemos', en: '02 — What we do' } satisfies LocalizedText,
+    index: { pt: 'O que fazemos', en: 'What we do' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia para cada desafio.',
       en: 'Technology for every challenge.',
@@ -59,7 +66,7 @@ export const homeContent = {
     cardLinkLabel: { pt: 'Saber mais', en: 'Learn more' } satisfies LocalizedText,
   },
   web: {
-    index: { pt: '03 — Desenvolvimento web', en: '03 — Web development' } satisfies LocalizedText,
+    index: { pt: 'Desenvolvimento web', en: 'Web development' } satisfies LocalizedText,
     title: {
       pt: 'Uma presença digital à sua medida.',
       en: 'A digital presence built around you.',
@@ -80,7 +87,7 @@ export const homeContent = {
     } satisfies LocalizedText,
   },
   products: {
-    index: { pt: '04 — Produtos', en: '04 — Products' } satisfies LocalizedText,
+    index: { pt: 'Produtos', en: 'Products' } satisfies LocalizedText,
     title: {
       pt: 'Tecnologia para si e para o seu negócio.',
       en: 'Technology for you and your business.',
@@ -96,7 +103,7 @@ export const homeContent = {
     cardLinkLabel: { pt: 'Saber mais', en: 'Learn more' } satisfies LocalizedText,
   },
   process: {
-    index: { pt: '05 — Como trabalhamos', en: '05 — How we work' } satisfies LocalizedText,
+    index: { pt: 'Como trabalhamos', en: 'How we work' } satisfies LocalizedText,
     title: { pt: 'Clareza em cada etapa.', en: 'Clarity at every step.' } satisfies LocalizedText,
     steps: [
       {
@@ -130,7 +137,7 @@ export const homeContent = {
     ],
   },
   values: {
-    index: { pt: '06 — Porquê a NS2', en: '06 — Why NS2' } satisfies LocalizedText,
+    index: { pt: 'Porquê a NS2', en: 'Why NS2' } satisfies LocalizedText,
     title: {
       pt: 'Uma relação feita para evoluir.',
       en: 'A relationship built to grow.',
@@ -174,7 +181,7 @@ export const homeContent = {
     ],
   },
   news: {
-    index: { pt: '07 — Notícias', en: '07 — News' } satisfies LocalizedText,
+    index: { pt: 'Notícias', en: 'News' } satisfies LocalizedText,
     title: {
       pt: 'Ideias para acompanhar a tecnologia.',
       en: 'Ideas to keep up with technology.',

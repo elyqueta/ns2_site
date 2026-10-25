@@ -21,12 +21,15 @@ export const iconNames = [
   'pin',
   'arrow',
   'arrow-diagonal',
+  'chevron-down',
   'sun',
   'moon',
   'menu',
   'close',
   'check',
   'plus',
+  'pause',
+  'play',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

@@ -1,11 +1,11 @@
 <div
   [appMarquee]="32"
-  class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted"
+  class="overflow-hidden border-y border-line py-5 text-sm font-semibold uppercase tracking-[0.08em] text-fg-muted bg-[#111827]"
   [attr.aria-label]="label()"
   role="region"
 >
   <div data-marquee-track class="flex w-max">
-    <div class="flex w-max">
+    <div class="flex w-max flex-nowrap items-center gap-8 pr-8">
       @for (copy of copies; track copy) {
         <ul
           class="flex w-max flex-nowrap items-center gap-8 pr-8"
@@ -13,7 +13,23 @@
           [attr.aria-hidden]="copy > 0 ? 'true' : null"
         >
           @for (item of items(); track item) {
-            <li class="shrink-0">{{ item }}</li>
+            <li class="shrink-0">
+              @if (item.src) {
+                <div class="rounded-md border border-line bg-[#111827] p-2">
+                  <img
+                    [src]="item.src"
+                    [alt]="item.alt"
+                    width="200"
+                    height="100"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-10 w-auto object-contain"
+                  />
+                </div>
+              } @else {
+                {{ itemText(item) }}
+              }
+            </li>
           }
         </ul>
       }
@@ -22,7 +38,23 @@
       @for (copy of copies; track copy) {
         <ul class="flex w-max flex-nowrap items-center gap-8 pr-8">
           @for (item of items(); track item) {
-            <li class="shrink-0">{{ item }}</li>
+            <li class="shrink-0">
+              @if (item.src) {
+                <div class="rounded-md border border-line bg-[#111827] p-2">
+                  <img
+                    [src]="item.src"
+                    [alt]="item.alt"
+                    width="200"
+                    height="100"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-10 w-auto object-contain"
+                  />
+                </div>
+              } @else {
+                {{ itemText(item) }}
+              }
+            </li>
           }
         </ul>
       }

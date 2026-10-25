@@ -11,10 +11,13 @@
     <section class="mx-auto max-w-[1440px] px-5 pt-10 sm:px-8 lg:px-16">
       @if (image(); as cover) {
         <app-media-slot
-          [alt]="cover.alt"
+          [alt]="'decorative'"
+          [src]="imageSrc()"
           [expectedFile]="cover.expectedFile"
-          [width]="1600"
-          [height]="900"
+          aspectRatio="16/9"
+          [width]="1200"
+          [height]="675"
+          [loading]="'lazy'"
         />
       }
       <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-fg-muted">

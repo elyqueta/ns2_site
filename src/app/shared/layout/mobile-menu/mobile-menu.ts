@@ -15,15 +15,17 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MobileMenuMotion } from '../../directives/mobile-menu-motion.directive';
 import { I18nService } from '../../../core/i18n.service';
-import { ScrollService } from '../../../core/scroll.service';
 import { Icon } from '../../ui/icon/icon';
 import { LanguageToggle } from '../../ui/language-toggle/language-toggle';
 import { ThemeToggle } from '../../ui/theme-toggle/theme-toggle';
 
-interface MobileNavigationItem {
-  readonly href: string;
+export interface MobileNavigationItem {
+  readonly kind: 'link' | 'group';
+  readonly href?: string;
   readonly label: string;
-  readonly index: string;
+  readonly id?: string;
+  readonly index?: string;
+  readonly children?: readonly MobileNavigationItem[];
 }
 
 @Component({
@@ -33,7 +35,6 @@ interface MobileNavigationItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileMenu {
-  private readonly scroll = inject(ScrollService);
   private readonly i18n = inject(I18nService);
   private readonly destroyRef = inject(DestroyRef);
   readonly open = input(false);
@@ -55,18 +56,6 @@ export class MobileMenu {
     this.rendered.set(true);
     queueMicrotask(() => this.panel()?.nativeElement.querySelector<HTMLElement>('a')?.focus());
   });
-  private readonly scrollEffect = effect(() => {
-    if (!this.browserReady()) {
-      return;
-    }
-
-    if (this.rendered()) {
-      this.scroll.stop();
-    } else {
-      this.scroll.start();
-    }
-  });
-  private readonly destroyCallback = this.destroyRef.onDestroy(() => this.scroll.start());
 
   finishClosing(): void {
     if (this.open()) {

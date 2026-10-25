@@ -15,6 +15,7 @@ import { HomeProductsPreview } from './products-preview/products-preview';
 import { HomeServicesPreview } from './services-preview/services-preview';
 import { HomeValuesPreview } from './values-preview/values-preview';
 import { HomeWebPreview } from './web-preview/web-preview';
+import { HomeProjectsPreview } from './projects-preview/projects-preview';
 
 @Component({
   selector: 'app-home',
@@ -29,8 +30,10 @@ import { HomeWebPreview } from './web-preview/web-preview';
     HomeServicesPreview,
     HomeValuesPreview,
     HomeWebPreview,
+    HomeProjectsPreview,
     LocalizedPipe,
-  ],
+    HomeProjectsPreview
+],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

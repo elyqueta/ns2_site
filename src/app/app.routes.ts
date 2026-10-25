@@ -51,8 +51,26 @@ export const routes: Routes = [
     data: { headingKey: 'pages.web', seo: { description: pt.seo.web } },
   },
   {
+    path: 'desenvolvimento-web/:slug',
+    loadComponent: () =>
+      import('./pages/web-pacote-detalhe/web-pacote-detalhe').then(
+        (module) => module.WebPacoteDetalhe,
+      ),
+    title: `${pt.pages.web} | NS2 Innovation`,
+    data: { headingKey: 'pages.web', seo: { description: pt.seo.web } },
+  },
+  {
     path: 'projectos',
     loadComponent: () => import('./pages/projectos/projectos').then((module) => module.Projectos),
+    title: `${pt.pages.projects} | NS2 Innovation`,
+    data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
+  },
+  {
+    path: 'projectos/:slug',
+    loadComponent: () =>
+      import('./pages/projecto-detalhe/projecto-detalhe').then(
+        (module) => module.ProjectoDetalhe,
+      ),
     title: `${pt.pages.projects} | NS2 Innovation`,
     data: { headingKey: 'pages.projects', seo: { description: pt.seo.projects } },
   },

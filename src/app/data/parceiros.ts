@@ -47,6 +47,7 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Dell products.',
     },
     oficial: false,
+    logo: '/images/parceiros/dell.webp',
   },
   {
     slug: 'lenovo',
@@ -81,6 +82,7 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Lenovo products.',
     },
     oficial: false,
+    logo: '/images/parceiros/lenovo.webp',
   },
   {
     slug: 'hp',
@@ -142,6 +144,7 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Apple products.',
     },
     oficial: false,
+    logo: '/images/parceiros/apple.webp',
   },
   {
     slug: 'samsung',
@@ -165,6 +168,7 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Samsung accessories.',
     },
     oficial: false,
+    logo: '/images/parceiros/samsung.webp',
   },
   {
     slug: 'knup',
@@ -201,6 +205,7 @@ export const parceiros: readonly Parceiro[] = [
       en: 'Hello! I am interested in Multilaser accessories.',
     },
     oficial: false,
+    logo: '/images/parceiros/multilaser.webp',
   },
 ];
 

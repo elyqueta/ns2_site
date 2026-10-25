@@ -4,9 +4,11 @@
     [title]="copy.title | localized"
     [description]="copy.description | localized"
   />
-  <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:mt-14 xl:grid-cols-4">
+  <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:mt-14 xl:grid-cols-4 align-items-stretch">
     @for (item of packages(); track item.title) {
-      <app-package-card [item]="item" />
+      <li class="min-h-0">
+        <app-package-card [item]="item" />
+      </li>
     }
   </div>
   <p class="mt-6 max-w-[80ch] text-sm leading-relaxed text-fg-muted">

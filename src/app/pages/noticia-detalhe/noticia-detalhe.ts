@@ -77,14 +77,14 @@ export class NoticiaDetalhe {
     })),
   );
   readonly shareStatus = signal('');
+  readonly imageSrc = computed(() => {
+    const article = this.article();
+    return article ? `/images/${article.imagem}` : null;
+  });
   readonly image = computed(() => {
     const article = this.article();
     return article
       ? {
-          alt:
-            this.i18n.lang() === 'en'
-              ? `${this.i18n.text(article.titulo)} — cover image`
-              : `${this.i18n.text(article.titulo)} — imagem de capa`,
           expectedFile: `public/images/${article.imagem}`,
         }
       : null;

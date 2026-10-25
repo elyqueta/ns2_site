@@ -34,90 +34,48 @@
         </p>
       </div>
 
-      <ul class="mt-10 grid gap-5 lg:grid-cols-2">
+      <ul class="mt-10 grid gap-6 lg:grid-cols-2 align-items-stretch">
         @for (package of websitePackages(); track package.slug) {
-          <li [id]="package.slug">
+          <li [id]="package.slug" class="flex flex-col min-h-0">
             <article
-              class="flex h-full flex-col rounded-card border p-6 sm:p-8"
+              class="flex h-full flex-col rounded-card border p-8 sm:p-10"
               [class.border-accent]="package.destaque"
-              [class.bg-accent/5]="package.destaque"
               [class.border-line]="!package.destaque"
               [class.bg-bg]="!package.destaque"
             >
-              <div class="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <h3 class="font-display text-h3 font-semibold text-fg">
-                    {{ package.nome | localized }}
-                  </h3>
-                  <p class="mt-3 max-w-[55ch] text-fg-muted">{{ package.descricao | localized }}</p>
-                </div>
-                <div class="shrink-0 text-right">
-                  <p class="text-xs font-medium text-fg-muted">
+              <div class="flex flex-wrap items-start justify-between gap-5 mb-8">
+                <div class="shrink-0 text-left">
+                  <p class="text-sm font-medium text-fg-muted uppercase tracking-wider">
                     {{ copy.labels.startingAt | localized }}
                   </p>
-                  <p class="mt-1 font-display text-xl font-semibold text-fg">
+                  <p class="mt-2 font-display text-3xl font-semibold text-fg">
                     {{ package.aPartirDe | kz }}
                   </p>
                 </div>
-              </div>
-
-              <dl class="mt-6 grid grid-cols-2 gap-4 rounded-2xl bg-surface p-4">
                 <div>
-                  <dt class="text-xs font-medium text-fg-muted">
-                    {{ copy.labels.pagesLabel | localized }}
-                  </dt>
-                  <dd class="mt-1 font-semibold text-fg">{{ package.paginas | localized }}</dd>
-                </div>
-                <div>
-                  <dt class="text-xs font-medium text-fg-muted">
-                    {{ copy.labels.termLabel | localized }}
-                  </dt>
-                  <dd class="mt-1 font-semibold text-fg">{{ package.prazo | localized }}</dd>
-                </div>
-              </dl>
-
-              <div class="mt-6 grid gap-6 sm:grid-cols-2">
-                <div>
-                  <h4 class="font-semibold text-fg">{{ copy.labels.includesLabel | localized }}</h4>
-                  <ul class="mt-3 space-y-2 text-sm text-fg-muted">
-                    @for (item of package.inclui; track item.pt) {
-                      <li class="flex gap-2">
-                        <app-icon class="mt-0.5 shrink-0 text-accent-bright" name="check" />
-                        <span>{{ item | localized }}</span>
-                      </li>
-                    }
-                  </ul>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-fg">
-                    {{ copy.labels.notIncludedLabel | localized }}
-                  </h4>
-                  <ul class="mt-3 space-y-2 text-sm text-fg-muted">
-                    @for (item of package.naoInclui; track item.pt) {
-                      <li>{{ item | localized }}</li>
-                    }
-                  </ul>
+                  @if (package.destaque) {
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line text-sm font-semibold text-accent-bright">
+                      {{ maisEscolhido() }}
+                      <app-icon name="check" class="mt-0.5 shrink-0 text-accent-bright" />
+                    </span>
+                  }
+                  <h3 class="mt-3 font-display text-h2 font-semibold tracking-tight text-fg">
+                    {{ package.nome | localized }}
+                  </h3>
+                  <p class="mt-4 max-w-[60ch] text-base text-fg-muted leading-relaxed">
+                    {{ package.descricao | localized }}
+                  </p>
                 </div>
               </div>
 
-              <div class="mt-auto pt-7">
-                <div class="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-5 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
-                    [href]="package.quoteUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <app-icon name="whatsapp" />
-                    {{ copy.labels.quoteLabel | localized }}
-                  </a>
-                  <a
-                    class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-line px-5 py-3 font-semibold text-fg transition-colors hover:bg-surface-2"
-                    [href]="package.contactUrl"
-                  >
-                    {{ copy.labels.contactLabel | localized }}
-                  </a>
-                </div>
+              <div class="mt-auto pt-10">
+                <a
+                  class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-button bg-accent px-6 py-3.5 font-semibold text-on-accent transition-colors hover:bg-accent-bright w-full sm:w-auto"
+                  [routerLink]="package.sectionUrl"
+                >
+                  <app-icon name="arrow-diagonal" />
+                  {{ learnMoreLabel() }}
+                </a>
               </div>
             </article>
           </li>

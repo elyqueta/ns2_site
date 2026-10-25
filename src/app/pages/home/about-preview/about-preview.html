@@ -20,9 +20,11 @@
     <app-media-slot
       [alt]="copy.imageAlt | localized"
       [expectedFile]="copy.expectedFile | localized"
-      src="/images/equipa.jpeg"
-      [width]="626"
-      [height]="418"
+      src="/images/sobre/quem-somos.webp"
+      [width]="1200"
+      [height]="800"
+      [loading]="'lazy'"
+      [decoding]="'async'"
     />
   </div>
 </section>

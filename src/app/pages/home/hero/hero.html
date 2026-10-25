@@ -1,41 +1,29 @@
 <section
   id="home-hero"
-  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line"
+  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line dark:bg-[#0a0e1a]"
 >
-  <div
-    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_72%_38%,var(--accent-glow),transparent_48%)]"
+  <video
+    appHeroVideo
+    class="absolute inset-0 -z-10 size-full object-cover"
+    poster="/images/heros/home-poster.webp"
+    muted
+    playsinline
+    loop
+    preload="none"
     aria-hidden="true"
-  ></div>
-  <div class="pointer-events-none absolute inset-0 -z-10 opacity-20" aria-hidden="true">
-    <svg class="h-full w-full text-accent-bright" viewBox="0 0 1440 900" fill="none">
-      <defs>
-        <pattern id="home-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M48 0H0V48" stroke="currentColor" stroke-opacity=".28" />
-        </pattern>
-        <linearGradient id="home-wire" x1="190" y1="165" x2="1230" y2="740">
-          <stop stop-color="currentColor" stop-opacity=".08" />
-          <stop offset=".52" stop-color="currentColor" stop-opacity=".72" />
-          <stop offset="1" stop-color="currentColor" stop-opacity=".08" />
-        </linearGradient>
-      </defs>
-      <path fill="url(#home-grid)" d="M0 0h1440v900H0z" />
-      <path
-        d="M100 725 358 478l166 89 264-287 178 135 349-304"
-        stroke="url(#home-wire)"
-        stroke-width="1.5"
-      />
-      <path d="M1036 0 580 900" stroke="currentColor" stroke-opacity=".2" />
-      <circle cx="1066" cy="294" r="185" stroke="currentColor" stroke-opacity=".28" />
-      <circle cx="1066" cy="294" r="226" stroke="currentColor" stroke-opacity=".13" />
-      <circle cx="1066" cy="294" r="267" stroke="currentColor" stroke-opacity=".08" />
-    </svg>
-  </div>
+    tabindex="-1"
+    width="1280"
+    height="720"
+  ></video>
+
+  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/10 dark:bg-[#0a0e1a]/60" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#0a0e1a]/20 dark:from-[#0a0e1a]/60 via-[#0a0e1a]/10 dark:via-[#0a0e1a]/50 to-[#0a0e1a]/10 dark:to-[#0a0e1a]/30" aria-hidden="true"></div>
   <div
-    class="pointer-events-none absolute -right-32 top-1/4 -z-10 size-[28rem] rounded-full bg-accent/15 blur-[100px] sm:size-[38rem]"
+    class="absolute inset-x-0 bottom-0 -z-10 h-[30%] bg-gradient-to-t from-[#0a0e1a] dark:from-[#000000] via-[#0a0e1a]/30 dark:via-[#000000]/50 to-transparent dark:to-transparent"
     aria-hidden="true"
   ></div>
 
-  <div class="mx-auto w-full max-w-[1440px] px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
+  <div class="mx-auto w-full max-w-[1440px] relative z-10 px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
     <div class="max-w-5xl">
       <p
         class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.16em] text-accent-bright"
@@ -45,41 +33,31 @@
       @for (key of languageKey(); track key) {
         <h1
           appSplitText
-          class="max-w-[12ch] font-display text-display font-semibold leading-[1.02] tracking-tight text-fg"
+          class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
         >
           {{ copy.titleBefore | localized }}
-          <span class="text-accent-bright">{{ copy.titleHighlight | localized }}</span>
+          <span class="block text-accent-bright">{{ copy.titleHighlight | localized }}</span>
           {{ copy.titleAfter | localized }}
         </h1>
       }
-      <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-fg-muted sm:mt-9">
+      <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-white sm:mt-9">
         {{ copy.description | localized }}
       </p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
         <app-button
-          [label]="copy.quoteLabel | localized"
-          [href]="whatsappUrl()"
-          [external]="true"
+          [label]="heroWebLabel()"
+          href="/desenvolvimento-web"
           size="lg"
           [showArrow]="true"
         />
         <app-button
-          [label]="copy.servicesLabel | localized"
+          [label]="heroItLabel()"
           href="/servicos"
           variant="secondary"
           size="lg"
+          [extraClasses]="heroItButtonClasses()"
         />
       </div>
+      </div>
     </div>
-  </div>
-
-  <a
-    class="absolute bottom-7 left-1/2 inline-flex min-h-11 -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-line bg-surface/80 px-4 text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted backdrop-blur transition-colors hover:text-fg focus-visible:outline-offset-4"
-    href="#home-about"
-    [attr.aria-label]="copy.scrollLabel | localized"
-    (click)="scrollToAbout($event)"
-  >
-    {{ copy.scrollLabel | localized }}
-    <app-icon name="arrow" class="rotate-90" />
-  </a>
-</section>
+  </section>

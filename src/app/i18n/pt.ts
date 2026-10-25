@@ -1,5 +1,5 @@
 export const pt = {
-  nav: {
+    nav: {
     home: 'Início',
     about: 'Sobre',
     services: 'Serviços',
@@ -9,10 +9,23 @@ export const pt = {
     news: 'Notícias',
     partners: 'Parceiros',
     contact: 'Contacto',
+    solutions: 'Soluções',
+    work: 'Trabalho',
   },
-  actions: {
-    requestQuote: 'Pedir orçamento',
+    actions: {
+    heroWeb: 'Web e sistemas',
+    heroIt: 'TI e equipamentos',
     contact: 'Falar connosco',
+    notIncludedLabel: 'Não inclui',
+    whatsappLabel: 'Falar no WhatsApp',
+    contactLabel: 'Ver contactos',
+    startingAt: 'A partir de',
+    entregasLabel: 'O que entregamos',
+    includesLabel: 'Inclui',
+    pagesLabel: 'Páginas',
+    termLabel: 'Prazo estimado',
+    requestQuoteTitle: 'Vamos construir o seu projeto?',
+    requestQuoteDescription: 'Partilhe o que pretende e conversamos sobre a solução adequada.',
     whatsapp: 'WhatsApp',
     email: 'Email',
     learnMore: 'Saber mais',
@@ -44,6 +57,14 @@ export const pt = {
     languageSelection: 'Idioma',
     languagePortuguese: 'Português',
     languageEnglish: 'Inglês',
+    maisEscolhido: 'Mais escolhido',
+    compararPacotes: 'Comparar pacotes',
+    extrasLabel: 'Extras',
+    idealPara: 'Ideal para',
+    openSubmenu: 'Abrir submenu',
+    closeSubmenu: 'Fechar submenu',
+    pauseVideo: 'Pausar vídeo de fundo',
+    playVideo: 'Reproduzir vídeo de fundo',
   },
   pages: {
     home: 'Início',
@@ -61,6 +82,7 @@ export const pt = {
     privacy: 'Política de privacidade',
     terms: 'Termos e condições',
     notFound: 'Página não encontrada',
+    notFoundDescription: 'A página que procura não existe.',
     uiKit: 'UI kit',
   },
   uiKit: {
@@ -111,7 +133,7 @@ export const pt = {
     buttonPrimary: 'Pedir orçamento',
     buttonSecondary: 'Conhecer serviços',
     buttonGhost: 'Saber mais',
-    sectionIndex: '01 — Componentes',
+    sectionIndex: 'Componentes',
     headingPrefix: 'Tecnologia com',
     headingHighlight: 'propósito',
     headingDescription: 'Um sistema consistente ajuda a comunicar com clareza em cada página.',
@@ -151,7 +173,12 @@ export const pt = {
     breadcrumbHome: 'Início',
     breadcrumbServices: 'Serviços',
     breadcrumbCurrent: 'Infra-estrutura de TI',
-    marqueeItems: ['Tecnologia', 'Inovação', 'Confiança', 'Angola'],
+    marqueeItems: [
+      { type: 'text', text: 'Tecnologia' },
+      { type: 'text', text: 'Inovação' },
+      { type: 'text', text: 'Confiança' },
+      { type: 'text', text: 'Angola' },
+    ],
     ctaTitle: 'Precisa de soluções de TI?',
     ctaDescription: 'Partilhe o seu desafio com a nossa equipa.',
     pageHeroTitle: 'Tecnologia para avançar',
@@ -184,12 +211,15 @@ export const pt = {
       pin: 'Localização',
       arrow: 'Seta',
       'arrow-diagonal': 'Seta diagonal',
+      'chevron-down': 'Seta para baixo',
       sun: 'Sol',
       moon: 'Lua',
-      menu: 'Menu',
-      close: 'Fechar',
-      check: 'Confirmação',
-      plus: 'Adicionar',
+    menu: 'Menu',
+    close: 'Fechar',
+    check: 'Confirmação',
+    plus: 'Adicionar',
+    pause: 'Pausar',
+    play: 'Reproduzir',
     },
   },
   seo: {
@@ -216,6 +246,7 @@ export const pt = {
 export type TranslationKey =
   | `nav.${keyof typeof pt.nav}`
   | `actions.${keyof typeof pt.actions}`
+  | `actions.${'requestQuoteTitle' | 'requestQuoteDescription'}`
   | `pages.${keyof typeof pt.pages}`
   | `seo.${keyof typeof pt.seo}`
   | `actions.${'languageSelection' | 'languagePortuguese' | 'languageEnglish'}`

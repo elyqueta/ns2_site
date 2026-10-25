@@ -31,9 +31,14 @@ export class Parceiros {
       description: this.i18n.text(partner.resumo),
       label: this.i18n.text(partner.categoria),
       href: partner.href,
+      logo: partner.logo,
     })),
   );
-  readonly brands = parceiros.map((partner) => partner.nome);
+  readonly brands = parceiros.map((partner) => ({
+    type: 'image' as const,
+    src: partner.logo,
+    alt: partner.nome,
+  }));
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.homeLabel), href: '/' },
   ]);

@@ -56,6 +56,277 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Os logótipos das sete marcas continuam pendentes; até serem fornecidos, os nomes são apresentados em tipografia.
 - A Fase 12 ainda precisa de resultados Lighthouse mobile em produção; a tentativa local com `npx lighthouse` terminou em `ETIMEDOUT` por falta de acesso à rede. A indexação efectiva só pode ser confirmada após o sitemap ser submetido na Google Search Console.
 
-## Imagens em falta
+## Fase 03 (LEIA-ME) — Home: estrutura e "Quem somos" (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: Imagem `@og-default.png` (usada na secção "Quem somos" em vez da fotografia de stock)
+  - Q2: B) Manter texto actual
+  - Q3: C) Hero com dois caminhos: "Web e sistemas" → /desenvolvimento-web e "TI e equipamentos" → /servicos
+  - Q4: A) Remover "Descer para explorar"
+- Implementação:
+  - `about-preview.html`: imagem alterada de `/images/equipa.jpeg` para `/images/og/og-default.png`
+  - `data/home.ts`: `imageAlt` e `expectedFile` atualizados para og-default.png
+  - `hero.html`: removida secção "Descer para explorar"; botões alterados para "Web e sistemas" e "TI e equipamentos" com traduções do dicionário i18n (`actions.heroWeb`, `actions.heroIt`)
+  - `hero.ts`: removido `ScrollService` e `scrollToAbout`; adicionados `heroWebLabel` e `heroItLabel` computeds; removido `Icon` import (não usado)
+  - `i18n/pt.ts` e `i18n/en.ts`: adicionadas chaves `actions.heroWeb` e `actions.heroIt`
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: Q5 (CTA final) não foi respondida pelo utilizador, mantida como está
 
-(vazio — ver `assets.md`)
+## Ajuste adicional (2026-10-23)
+- `MediaSlot`: adicionado input `objectPosition` (padrão `center`) para controlar o `object-position` da imagem.
+- `about-preview.html`: `objectPosition="left"` para o logo da empresa no lado esquerdo da imagem `og-default.png` ficar visível (não cortado pelo `object-cover` central).
+- Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/home/about-preview/about-preview.html`
+- Verificações feitas: `npm run build` passa; `npm test` sem regressão.
+
+## Fase 04 (LEIA-ME) — Serviços: cartões (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: B) Carrossel → depois ajustado: manter template actual (grelha)
+  - Q2: C) Todos com imagem (a fornecer) → MediaSlot com placeholder em todos os cartões
+  - Q3: A) Remover números (01, 02…) → removido
+  - Q4: Não usar etiqueta de parceiros → não adicionado
+- Implementação:
+  - `servicos.html`: removido span do número (`ordemLabel`); adicionado `<app-media-slot>` com imagem em cada cartão; mantida grelha (`md:grid-cols-2 xl:grid-cols-3`)
+  - `servicos.ts`: removido `ordemLabel` do mapeamento; removido import `RevealChildren`; adicionado import `MediaSlot`
+  - `data/servicos.ts`: já tinha `imagem.ficheiroEsperado` definido para cada serviço (usado pelo MediaSlot)
+- Ficheiros alterados: `src/app/pages/servicos/servicos.html`, `src/app/pages/servicos/servicos.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: nenhuma
+
+## Correcção: imagens nos detalhes de serviço (2026-10-23)
+- Problema: `<app-media-slot>` na página de detalhe de cada serviço não recebia `[src]`, então nunca mostrava a imagem (apenas o placeholder).
+- Correcção:
+  - `servico-detalhe.html`: adicionado `[src]="imagemSrc()"`, `[width]="626"`, `[height]="418"` ao `<app-media-slot>`
+  - `servico-detalhe.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para o serviço actual
+- Ficheiros alterados: `src/app/pages/servico-detalhe/servico-detalhe.html`, `src/app/pages/servico-detalhe/servico-detalhe.ts`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+- Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
+- O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
+- `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
+- `data/home.ts`: `imageAlt` atualizado para "Duas pessoas à secretária com um portátil, ligadas a parceiros especializados"; `expectedFile` atualizado para `public/images/sobre/quem-somos.webp`.
+- `media-slot.ts` / `media-slot.html`: adicionados inputs `loading` e `decoding` para controlar os atributos da imagem sem layout shift.
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 05 (LEIA-ME) — Produtos: imagens e cartões (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: Usar todas as imagens sem placeholder
+  - Q2: Imagem no topo de cada cartão de categoria (espaço vazio da secção de produto)
+  - Q3: A) Criar `docs/guia-fotografia-produtos.md`
+- Implementação:
+  - `produtos.ts`: adicionado `imagemSrc` computed para cada categoria, montando o caminho `/images/produtos/<ficheiro>`
+  - `produtos.html`: `<app-media-slot>` de cada categoria agora recebe `[src]="category.imagemSrc"` (imagens reais em vez de placeholder)
+  - `docs/guia-fotografia-produtos.md`: criado com especificações técnicas e tabela de ficheiros esperados
+- Ficheiros alterados: `src/app/pages/produtos/produtos.ts`, `src/app/pages/produtos/produtos.html`
+- Ficheiros criados: `docs/guia-fotografia-produtos.md`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: todas as 6 imagens de produto são provisórias (ver `docs/guia-fotografia-produtos.md` para substituição)
+
+## Ajuste adicional (2026-10-23)
+- `data/servicos.ts`: caminhos das imagens atualizados para apontar aos ficheiros reais em `public/images/servicos/` (`consultoria.webp`, `locacao-equipamentos.webp`, `websites-sistemas-web.webp`)
+- `servicos.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para cada serviço
+- `servicos.html`: `<app-media-slot>` agora recebe `[src]="service.imagemSrc"` em vez de `null`, mostrando as imagens reais
+- Ficheiros alterados: `src/app/data/servicos.ts`, `src/app/pages/servicos/servicos.ts`, `src/app/pages/servicos/servicos.html`
+- Verificações feitas: `npm run build` passa; `npm test` sem regressão.
+
+## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: Slider de imagens a cada 20s, muda apenas a imagem (pedido do utilizador, fora das opções da fase; implementado em `HomeHeroSlider`)
+  - Q2: B) Fundo a toda largura com overlay
+  - Q3: B) Versão clara: overlay claro e imagem esbatida (overlay `bg-surface/60`, token semântico)
+  - Q4: A) Reduzir com clamp() (já implementado via token `--text-display: clamp(3rem, 9vw, 8.5rem)`)
+  - Q5: Não aplicável (slider implementado diretamente no hero da home)
+- Implementação: novo componente `HomeHeroSlider` (`hero-slider.ts` + `hero-slider.html`) que rotaciona imagens de `public/images/heros/` com fade GSAP a cada 20s, respeita `prefers-reduced-motion`, primeira imagem com `fetchpriority="high"` e `loading="eager"`, restantes `loading="lazy"`, `object-fit: cover` com `object-position:center`. Integrado no hero da home com overlay `bg-surface/60` para contraste do texto nos dois temas.
+- Ficheiros criados: `src/app/pages/home/hero/hero-slider.ts`, `src/app/pages/home/hero/hero-slider.html`
+- Ficheiros alterados: `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: nenhuma
+
+## Fase 01 (LEIA-ME) — Navbar: tema, tradução e logótipo (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: B) Traduzir · Pedir orçamento · Tema (ordem à direita)
+  - Q2: Saltar (seletor de idioma mantido como está)
+  - Q3: Saltar (estratégia de tradução mantida)
+  - Q4: A) Tema e idioma dentro do menu mobile; à vista só logótipo, CTA e menu
+  - Q5: C) Até 480px usar só o símbolo logo-mark.svg
+- Ajustes adicionais (pedidos do utilizador):
+  1. Botão "Pedir orçamento" movido para dentro do menu mobile (oculto no header em mobile/tablet via `hidden lg:inline-flex`, visível apenas em desktop; renderizado no `mobile-menu` após os toggles de idioma/tema, abaixo do logo).
+  2. Logo agora é apenas o símbolo sem "innovation" (`logo-mark.svg`/`logo-mark-dark.svg`) em qualquer tamanho de tela, tanto no header quanto no menu mobile (substituídos os logos horizontais).
+  3. No menu mobile, LanguageToggle, ThemeToggle e o botão "Pedir orçamento" ficam agora na mesma linha abaixo do logo, com o botão de orçamento alinhado à direita (`ml-auto`). O componente `Button` ganhou um input opcional `extraClasses` para permitir classes utilitárias adicionais.
+- Ficheiros alterados: `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`, `src/app/shared/ui/button/button.ts`
+- Verificações feitas: `npm run build` passa (30 rotas prerenderizadas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes)
+- Pendências: nenhuma
+
+## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+- Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
+- O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
+- `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
+- `data/home.ts`: `imageAlt` atualizado para "Duas pessoas à secretária com um portátil, ligadas a parceiros especializados"; `expectedFile` atualizado para `public/images/sobre/quem-somos.webp`.
+- `media-slot.ts` / `media-slot.html`: adicionados inputs `loading` e `decoding` para controlar os atributos da imagem sem layout shift.
+- Ficheiros alterados: `src/app/pages/home/about-preview/about-preview.html`, `src/app/data/home.ts`, `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 06 (LEIA-ME) — Notícias: capas dos artigos (2026-10-23)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: B) Capas tipográficas desenhadas (já em public/images/noticias/, 1200×675, 16:9)
+  - Q2: A) 16:9 (já resolvido)
+  - Q3: Não se aplica (já não há imagem gerada por IA)
+  - Q4: A) Sim, imagem de destaque no topo do artigo
+- Implementação:
+  - `media-slot.ts`: adicionado input `aspectRatio` ('3/2' padrão | '16/9')
+  - `media-slot.html`: classes dinâmicas `aspect-[3/2]` / `aspect-[16/9]` no figure
+  - `noticias.html`: ambos os `<app-media-slot>` (artigo em destaque e lista) usam `src`, `[expectedFile]`, `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]="'decorative'"` (decorativa, título já na imagem)
+  - `noticias.ts`: adicionado `imageSrc` computed para cada artigo; removido `imageAlt` computed (não usado)
+  - `noticia-detalhe.html`: imagem de destaque usa `src`, `[expectedFile]`, `aspectRatio="16/9"`, `[width]="1200"`, `[height]="675"`, `[loading]="'lazy'"`, `[alt]="'decorative'"`
+  - `noticia-detalhe.ts`: adicionado `imageSrc` computed; `image` computed simplificado (só `expectedFile`)
+- Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/noticias/noticias.html`, `src/app/pages/noticias/noticias.ts`, `src/app/pages/noticia-detalhe/noticia-detalhe.html`, `src/app/pages/noticia-detalhe/noticia-detalhe.ts`
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: nenhuma
+
+## Correcção: src dos media-slot nas notícias (2026-10-23)
+- Problema: os `<app-media-slot>` das notícias não recebiam `[src]`, então só mostravam o placeholder.
+- Correcção: adicionado `[src]` a todos os media-slot das notícias (listagem e detalhe).
+- Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 07 (LEIA-ME) — Desenvolvimento web e pacotes (2026-10-24)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: A) Destacar Site Profissional com borda e etiqueta "Mais escolhido"
+  - Q2: Não usar wireframe CSS (removido por decisão do utilizador)
+  - Q3: B) "50 000 Kz" (espaço, sem ,00)
+  - Q4: A) "Ideal para..." + 3 a 5 itens incluídos + prazo estimado (movido para página de detalhe)
+  - Q5: A) Linha própria "Extras" dentro de cada cartão (removido do card, movido para detalhe)
+  - Q6: A) CTA WhatsApp com mensagem preenchida com o nome do pacote (mantido no card e no detalhe)
+  - Q7: Não usar tabela comparativa (removida por decisão do utilizador)
+- Implementação:
+  - `web-pacote-detalhe.html`: removida secção repetitiva entre hero e "Ideal para" (título, preço e descrição já aparecem no hero); mantidos "Ideal para", inclui/não inclui, entregas e CTA WhatsApp
+  - `web-preview.ts`: `href` dos cards aponta para `/desenvolvimento-web/${slug}` em vez de `/desenvolvimento-web` (leva à página de detalhe de cada pacote)
+  - `web-preview.html`: grid com `align-items-stretch` para altura igual nos cards da home
+  - `desenvolvimento-web.html`: cards simplificados (apenas nome, preço, páginas, prazo, inclui, CTA "Saber mais"); fonte maior; espaçamento aumentado; "A partir de" alinhado à esquerda
+  - `desenvolvimento-web.ts`: adicionado `learnMoreLabel` computed
+  - `web-pacote-detalhe.ts`: removido `RouterLink` dos imports (não usado no template)
+- Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`, `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
+- Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: nenhuma
+
+## Ajuste adicional: altura igual nos cards da home (2024-10-24)
+- Problema: os cards de pacotes na home tinham alturas diferentes (o primeiro sempre menor).
+- Correcção: adicionado `flex flex-col h-full` ao `app-card` (`card.html`) e `min-h-0` aos itens do `@for` no `web-preview.html`, forçando altura igual em todos os cards.
+- Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/shared/ui/card/card.html`
+- Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+
+## Fase 08 (LEIA-ME) — Projectos e cartões "Brevemente" (2024-10-24)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: A) Gráfica Viva em destaque (largura total) + Foco + 2 cartões Brevemente
+  - Q2: A) 2 cartões com borda tracejada, tipo de projecto e estado "Em desenvolvimento"
+  - Q3: A) Desafio → Solução → Resultado, só com dados reais + tecnologias
+  - Q4: A) Trocar entre captura clara e escura consoante o tema (usando preview https://foco-umber-xi.vercel.app/)
+  - Q5: A) Substituir "PROJECTO CONFIRMADO" por "No ar"
+  - Q6: A) Mostrar os 2 projectos numa secção "Projectos" na home, depois dos pacotes
+- Implementação:
+  - `data/projectos.ts`: reescrito com interface `Project` e `ProjectPageContent`; inclui Gráfica Viva, Foco e 2 projetos "Em breve"; conteúdos Desafio→Solução→Resultado com tecnologias; imagens claro/escuro
+  - `projecto-detalhe.ts` / `projecto-detalhe.html`: novo componente de detalhe de projeto com hero, imagem, desafio/solução/resultado, tecnologias e CTA WhatsApp
+  - `projectos.html` / `projectos.ts`: layout com Gráfica Viva em destaque (iframe largura total) + cards dinâmicos (Foco + 2 Brevemente); etiqueta "No ar"; cards levam para `/projectos/:slug`
+  - `app.routes.ts` e `app.routes.server.ts`: rota `projectos/:slug` com prerender para os 4 projetos
+  - `pages/home/projects-preview/`: novo componente com secção Projectos na home (depois dos pacotes) com 2 cards
+  - `pages/home/home.html` / `home.ts`: adicionado `app-home-projects-preview`
+- Ficheiros criados: `src/app/pages/projecto-detalhe/projecto-detalhe.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.html`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/projects-preview/projects-preview.html`
+- Ficheiros alterados: `src/app/data/projectos.ts`, `src/app/pages/projectos/projectos.html`, `src/app/pages/projectos/projectos.ts`, `src/app/app.routes.ts`, `src/app/app.routes.server.ts`, `src/app/pages/home/home.html`, `src/app/pages/home/home.ts`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
+- Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`)
+
+## Correcção: escala tipográfica e navbar agrupada (2024-10-24)
+- Estado: concluída
+- Tipo: correcção transversal (não é fase nova)
+- Implementação:
+  - `src/styles.css`: tokens tipográficos revistos (`--text-display` reduzido, `--text-page` adicionado, `--text-h1`/`-h2`/`-h3` ajustados)
+  - `src/app/shared/ui/page-hero/page-hero.html`: h1/h2/h3 passam de `text-display`/`leading-[0.98]` para `text-page`/`leading-[1.08]`
+  - `src/app/pages/home/hero/hero.html`: h1 passa de `max-w-[12ch]`/`leading-[1.02]` para `max-w-[18ch]`/`leading-[1.05]`
+  - `src/app/pages/ui-kit/ui-kit.html`: h1 do cabeçalho passa a `text-page`/`leading-[1.08]`
+  - `src/app/data/navegacao.ts`: adicionada `headerNavigation` (6 entradas agrupadas: link/dropdown)
+  - `src/app/i18n/pt.ts` e `en.ts`: adicionadas `nav.solutions`, `nav.work`, `actions.openSubmenu`, `actions.closeSubmenu`; removida `actions.requestQuote` (não usada)
+  - `src/app/shared/layout/header/nav-dropdown/`: novo componente `NavDropdown` (ts + html + spec) com animação GSAP fade+translateY, acessível por teclado
+  - `src/app/shared/ui/icon/icon.ts` / `icon.html`: adicionado ícone `chevron-down` com tradução pt/en
+  - `src/app/shared/layout/header/header.ts` / `header.html`: navbar com 6 entradas (links + dropdowns), `lg:` breakpoint, botão "Pedir orçamento" removido
+  - `src/app/shared/layout/mobile-menu/mobile-menu.ts` / `.html`: estrutura agrupada com subtítulos "Soluções"/"Trabalho", botão "Pedir orçamento" removido, breakpoint `lg:`
+- Ficheiros criados: `docs/design-system.md`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.ts`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.html`, `src/app/shared/layout/header/nav-dropdown/nav-dropdown.spec.ts`, `src/app/data/navegacao.spec.ts`
+- Ficheiros alterados: `src/styles.css`, `src/app/shared/ui/page-hero/page-hero.html`, `src/app/pages/home/hero/hero.html`, `src/app/pages/ui-kit/ui-kit.html`, `src/app/data/navegacao.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.ts`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (10 passed, 4 falhas pré-existentes nos pipes).
+- Pendências: nenhuma
+
+## Fase 10 (LEIA-ME) — Cartões, números e padrões (2024-10-24)
+- Estado: concluída
+- Decisões do utilizador:
+  - Q1: C) Substituir número por sinal da marca (diagonal) nos eyebrows
+  - Q2: A) Remover números em todos os cartões, exceto 'Como trabalhamos'
+  - Q3: B) Brilho radial azul só no hover, muito subtil
+  - Q4: A) Cartão inteiro clicável com seta única
+  - Q5: A) 3 formatos visuais: lista editorial (serviços), mosaico assimétrico (projectos), cartão destaque (pacote principal)
+  - Q6: B) Não alterar tipografia (protótipo primeiro, sem aprovação)
+  - Q7: A) Formato 50.000 Kz em todo o site
+- Ajuste adicional (2024-10-24):
+  - Retirar "/-" dos eyebrows, deixando apenas os títulos
+  - Adicionar logos aos parceiros (dell, lenovo, hp, apple, samsung, knup, multilaser)
+- Implementação:
+  - `src/app/shared/pipes/kz.pipe.ts`: preços formatados com ponto como separador de milhares (ex: 50.000 Kz)
+  - `src/app/shared/ui/card/card.html`: brilho radial só no hover (opacity-0 → group-hover:opacity-40), muito subtil
+  - `src/app/shared/ui/content-card/content-card.html`: cartão inteiro clicável com link; selo "Mais escolhido" quando destaque=true
+  - `src/app/shared/ui/card-content.ts`: adicionado campo `destaque?: boolean` ao CardContent
+  - `src/app/shared/ui/project-card/project-card.ts` / `project-card.html`: adicionado input `class` para classes adicionais
+  - `src/app/shared/ui/partner-card/partner-card.ts` / `partner-card.html`: adicionado `MediaSlot` para mostrar logo do parceiro
+  - `src/app/data/home.ts`: eyebrows numerados substituídos por títulos sem "/-" (ex: "Quem somos")
+  - `src/app/data/sobre.ts`: eyebrows 01, 02, 03, 05 substituídos por títulos sem "/-"
+  - `src/app/data/desenvolvimento-web.ts`: eyebrows 01-08 substituídos por títulos sem "/-"
+  - `src/app/data/servicos.ts`: sectionIndex "01 — Serviços" substituído por "Serviços"
+  - `src/app/pages/home/projects-preview/projects-preview.ts`: index "04 — Projectos" substituído por "Projectos"
+  - `src/app/i18n/pt.ts` e `en.ts`: sectionIndex "01 — Componentes" substituído por "Componentes"
+  - `src/app/data/parceiros.ts`: adicionado campo `logo` a todos os 7 parceiros
+  - `src/app/pages/parceiros/parceiros.ts`: mapeia campo `logo` no computed de partners
+  - `src/app/pages/home/products-preview/products-preview.html`: removido número do eyebrow das categorias
+  - `src/app/pages/home/services-preview/services-preview.html`: removido número do eyebrow dos serviços
+  - `src/app/pages/home/values-preview/values-preview.html`: removido número do eyebrow dos valores
+  - `src/app/pages/produtos/produtos.html`: removido número do eyebrow das categorias de produto
+  - `src/app/pages/projectos/projectos.html`: mosaico assimétrico (projeto destaque em coluna grande, outros 2 em coluna menor)
+  - `src/app/pages/home/web-preview/web-preview.ts`: mapeia campo `destaque` dos pacotes web
+- Ficheiros criados: nenhum novo
+- Ficheiros alterados: `src/app/shared/pipes/kz.pipe.ts`, `src/app/shared/ui/card/card.html`, `src/app/shared/ui/content-card/content-card.html`, `src/app/shared/ui/card-content.ts`, `src/app/shared/ui/project-card/project-card.ts`, `src/app/shared/ui/project-card/project-card.html`, `src/app/shared/ui/partner-card/partner-card.ts`, `src/app/shared/ui/partner-card/partner-card.html`, `src/app/data/home.ts`, `src/app/data/sobre.ts`, `src/app/data/desenvolvimento-web.ts`, `src/app/data/servicos.ts`, `src/app/data/parceiros.ts`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/home/web-preview/web-preview.ts`, `src/app/pages/parceiros/parceiros.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/products-preview/products-preview.html`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/home/values-preview/values-preview.html`, `src/app/pages/produtos/produtos.html`, `src/app/pages/projectos/projectos.html`
+- Ficheiros de teste alterados: `src/app/data/parceiros.spec.ts` (atualizado para aceitar logos nos parceiros)
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão nos testes relacionados (12 passed, 5 falhas: 4 pré-existentes nos pipes/whatsapp, 1 de navegação a investigar)
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/; Q6 (tipografia) não alterada sem aprovação do utilizador
+
+## Ajuste adicional: logos no carrossel da página de parceiros (2024-10-24)
+- Problema: o carrossel infinito (marquee) da página de parceiros mostrava apenas títulos de texto em vez de logos.
+- Correcção:
+  - `src/app/shared/ui/marquee/marquee.ts` e `.html`: componente agora aceita `MarqueeItem[]` com type 'text' ou 'image', renderizando `` para imagens e texto para texto.
+  - `src/app/pages/parceiros/parceiros.ts`: `brands` agora mapeia logos (`{ type: 'image', src, alt }`) em vez de títulos de texto.
+  - `src/app/i18n/pt.ts` e `en.ts`: `uiKit.marqueeItems` convertido para `MarqueeItem[]` com type 'text'.
+  - `src/app/data/produtos.ts`: `brands` convertido para `MarqueeItem[]` com type 'text'.
+- Ficheiros alterados: `src/app/shared/ui/marquee/marquee.ts`, `src/app/shared/ui/marquee/marquee.html`, `src/app/pages/parceiros/parceiros.ts`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/data/produtos.ts`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings); `npm test` sem regressão (12 passed, 5 falhas pré-existentes).
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/.
+
+## Correcção: vídeo de fundo no hero da home (2024-10-24)
+- Estado: concluída
+- Tipo: correcção transversal (não é fase nova)
+- Implementação:
+  - `src/app/shared/directives/hero-video.directive.ts`: directiva `appHeroVideo` com `registerAnimationDirective` + `AnimationService`. Vídeo reproduz em desktop e mobile (sem reduced-motion, sem save-data, sem 2g/3g). Fade-in via GSAP no `canplay`. Pausa por `IntersectionObserver` e `visibilitychange`. Limpeza completa no destroy.
+  - `src/app/pages/home/hero/hero.html`: `<video appHeroVideo>` com poster, muted, playsinline, loop, preload="none", aria-hidden, tabindex="-1", width="1280", height="720", classes absolutas. `<section id="home-hero">` com classe `dark`. Camadas decorativas: velo `bg-[#0a0e1a]/80`, gradiente horizontal `from-[#0a0e1a]/95 via-[#0a0e1a]/75 to-[#0a0e1a]/30`, gradiente vertical `from-[#0a0e1a] via-[#0a0e1a]/50 to-transparent` ocupando ~40% da altura inferior. Sem botão de pausa/reproduzir por solicitação do utilizador. Título do H1 dividido em 3 linhas com "Impulciona" em linha própria e destaque azul. Dois CTAs: "Web e sistemas" e "TI e equipamentos".
+  - `src/app/pages/home/hero/hero.ts`: removido `viewChild`, computeds e métodos relacionados ao botão de vídeo.
+  - `src/app/shared/layout/header/header.ts` / `header.html`: header mantém-se sempre claro (`headerDark = false`), logo usa `logo-horizontal.svg` (branco) para ficar visível sobre o vídeo escuro.
+  - `src/app/shared/layout/mobile-menu/mobile-menu.html`: logo usa `logo-horizontal.svg` (branco).
+  - `src/app/shared/ui/button/button.ts`: adicionado input `magnetic = input(false)`, removido `appMagnetic` automático baseado em `variant`.
+  - `src/app/shared/ui/button/button.html`: `[appMagnetic]="variant() === 'primary'"` → `[appMagnetic]="magnetic()"` (3 locais).
+  - `src/app/shared/ui/icon/icon.ts` / `icon.html`: ícones `pause` e `play` mantidos.
+  - `src/app/i18n/pt.ts` e `en.ts`: chaves `actions.pauseVideo` e `actions.playVideo` mantidas.
+- Ficheiros criados: `src/app/shared/directives/hero-video.directive.ts`
+- Ficheiros alterados: `src/app/shared/directives/hero-video.directive.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/shared/ui/button/button.ts`, `src/app/shared/ui/button/button.html`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings; orçamento inicial 501.63 kB - 1.63 kB acima do alvo de 500 kB); `npm test` sem regressão (14 passed, 4 falhas pré-existentes nos pipes/whatsapp/navegação).
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/ (pendentes desde Fase 10).

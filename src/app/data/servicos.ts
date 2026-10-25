@@ -30,7 +30,7 @@ export const servicesPageContent = {
     pt: 'Assistência completa a toda a procura de TI, de servidores a cabeamento estruturado. Concentramos as soluções num só lugar, com rapidez de implementação e baixo custo.',
     en: 'Comprehensive IT support, from servers to structured cabling. We bring solutions together in one place with efficient implementation and cost-conscious planning.',
   } satisfies LocalizedText,
-  sectionIndex: { pt: '01 — Serviços', en: '01 — Services' } satisfies LocalizedText,
+  sectionIndex: { pt: 'Serviços', en: 'Services' } satisfies LocalizedText,
   listTitle: {
     pt: 'Assistência completa a toda a procura de TI.',
     en: 'Comprehensive support for your IT needs.',
@@ -326,7 +326,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa do serviço de construtoria.',
         en: 'Illustration representing Construtoria consulting.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/construtoria.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/consultoria.webp' },
     },
   },
   {
@@ -413,7 +413,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa do serviço de locação de equipamentos de TI.',
         en: 'Illustration representing IT equipment rental services.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos-ti.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos.webp' },
     },
   },
   {
@@ -446,7 +446,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Imagem representativa de websites e sistemas web.',
         en: 'Illustration representing websites and web systems.',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/desenvolvimento-web.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/websites-sistemas-web.webp' },
     },
   },
 ];

@@ -1,0 +1,12 @@
+<section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16 lg:pb-28">
+  <app-section-heading
+    [index]="copy.index | localized"
+    [title]="copy.title | localized"
+    [description]="copy.description | localized"
+  />
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2 align-items-stretch">
+    @for (project of projects(); track project.title) {
+      <app-project-card [item]="project" />
+    }
+  </div>
+</section>

@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from '../../core/seo.service';
 import { I18nService } from '../../core/i18n.service';
 import { WhatsappService } from '../../core/whatsapp.service';
-import { projectos, projectosPageContent } from '../../data/projectos';
+import { projectos, projectosPageContent, Project } from '../../data/projectos';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
@@ -23,17 +23,21 @@ export class Projectos {
   private readonly whatsapp = inject(WhatsappService);
 
   readonly copy = projectosPageContent;
-  readonly project = projectos[0];
-  readonly previewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.project.url);
+  readonly projects = projectos.filter((p) => !p.brevemente);
+  readonly featuredProject = projectos[0];
+  readonly previewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.featuredProject.url);
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.homeLabel), href: '/' },
   ]);
-  readonly projectCard = computed<ProjectCardData>(() => ({
-    type: 'project',
-    title: this.i18n.text(this.project.nome),
-    description: this.i18n.text(this.project.descricao),
-    label: this.i18n.text(this.project.tipo),
-  }));
+  projectCard(project: Project): ProjectCardData {
+    return {
+      type: 'project',
+      title: this.i18n.text(project.nome),
+      description: this.i18n.text(project.descricao),
+      label: this.i18n.text(project.tipo),
+      href: project.url,
+    };
+  }
   readonly whatsappUrl = computed(() =>
     this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.whatsappMessage)),
   );

@@ -1,5 +1,6 @@
 <header
   appHeaderMotion
+  [class.dark]="headerDark()"
   class="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent transition-[background-color,border-color,backdrop-filter] duration-300"
 >
   <div class="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-16">
@@ -9,49 +10,43 @@
       [attr.aria-label]="logoLabel()"
     >
       <img
-        class="h-9 w-auto dark:hidden"
-        src="/brand/logo-horizontal.svg"
-        alt="NS2 Innovation"
-        width="1487"
-        height="689"
-      />
-      <img
-        class="hidden h-9 w-auto dark:block"
-        src="/brand/logo-horizontal-dark.svg"
+        class="h-9 w-auto"
+        src="/brand/logo-mark.svg"
         alt="NS2 Innovation"
         width="1487"
         height="689"
       />
     </a>
 
-    <nav class="hidden items-center gap-5 xl:flex" [attr.aria-label]="navigationLabel()">
-      @for (item of navigation(); track item.href) {
-        <a
-          class="min-h-11 whitespace-nowrap content-center text-sm font-medium text-fg-muted transition-colors hover:text-fg"
-          [routerLink]="item.href"
-          routerLinkActive="text-accent-bright"
-          [routerLinkActiveOptions]="{ exact: item.href === '/' }"
-          ariaCurrentWhenActive="page"
-        >
-          {{ item.label }}
-        </a>
+    <nav class="hidden items-center gap-8 lg:flex" [attr.aria-label]="navigationLabel()">
+      @for (item of navigation(); track item.id ?? item.href) {
+        @if (item.kind === 'link') {
+          <a
+            class="min-h-11 whitespace-nowrap content-center text-lg font-medium text-fg-muted transition-colors hover:text-fg"
+            [routerLink]="item.href"
+            routerLinkActive="text-accent-bright"
+            [routerLinkActiveOptions]="{ exact: item.href === '/' }"
+            ariaCurrentWhenActive="page"
+          >
+            {{ item.label }}
+          </a>
+        }
+        @if (item.kind === 'group') {
+          <app-nav-dropdown
+            [label]="item.label"
+            [items]="item.children"
+            [id]="item.id"
+          />
+        }
       }
     </nav>
 
     <div class="flex items-center gap-2 sm:gap-3">
-      <app-language-toggle />
-      <app-theme-toggle />
-      <span class="hidden h-11 w-12 lg:block" aria-hidden="true"></span>
-      <app-button
-        class="hidden sm:inline-flex"
-        [label]="quoteLabel()"
-        [href]="whatsappUrl"
-        [external]="true"
-        size="md"
-      />
+      <app-language-toggle class="hidden lg:flex" />
+      <app-theme-toggle class="hidden lg:flex" />
       <button
         #menuTrigger
-        class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg xl:hidden cursor-pointer"
+        class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg lg:hidden cursor-pointer"
         type="button"
         [attr.aria-label]="menuLabel()"
         [attr.aria-expanded]="menuOpen()"

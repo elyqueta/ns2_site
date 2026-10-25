@@ -1,0 +1,113 @@
+@if (pacote(); as item) {
+  <app-page-hero
+    [title]="item.nome | localized"
+    [lead]="item.descricao | localized"
+    [breadcrumbs]="breadcrumbs()"
+    [current]="item.nome | localized"
+    [breadcrumbLabel]="'Navegação estrutural'"
+  />
+
+  <main id="conteudo">
+    <section class="border-y border-line bg-surface">
+      <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+        <div class="grid gap-8 lg:grid-cols-3">
+          <div class="lg:col-span-2">
+            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+              {{ idealParaLabel() }}
+            </h3>
+            <p class="text-fg-muted leading-relaxed">
+              {{ item.quemDeveEscolher | localized }}
+            </p>
+          </div>
+          <div class="lg:col-span-1">
+            <div class="rounded-2xl border border-line bg-surface p-6">
+                <p class="text-xs font-medium text-fg-muted uppercase tracking-wider mb-2">
+                  {{ startingAtLabel() }}
+                </p>
+              <p class="font-display text-2xl font-semibold text-fg">
+                {{ item.aPartirDe | kz }}
+              </p>
+              <p class="mt-2 text-xs text-fg-muted">
+                {{ item.prazo | localized }}
+              </p>
+              <p class="mt-1 text-xs text-fg-muted">
+                {{ item.paginas | localized }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <div>
+          <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+            {{ includesLabel() }}
+          </h3>
+          <ul class="space-y-3">
+            @for (incluir of item.inclui; track incluir) {
+              <li class="flex items-start gap-3">
+                <app-icon
+                  name="check"
+                  class="mt-0.5 shrink-0 text-accent-bright"
+                />
+                <span class="text-fg-muted leading-relaxed">{{ incluir | localized }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+            {{ notIncludedLabel() }}
+          </h3>
+          <ul class="space-y-3">
+            @for (naoIncluir of item.naoInclui; track naoIncluir) {
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 shrink-0 text-xs text-fg-muted">✕</span>
+                <span class="text-fg-muted leading-relaxed">{{ naoIncluir | localized }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-line bg-surface">
+      <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+        <h3 class="font-display text-h3 font-semibold text-fg mb-6">
+          {{ entregasLabel() }}
+        </h3>
+        <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          @for (entrega of item.entregas; track entrega) {
+            <li class="rounded-xl border border-line bg-surface p-5">
+              <span class="text-fg-muted leading-relaxed">{{ entrega | localized }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+      <app-cta-band
+        [title]="requestQuoteTitle()"
+        [description]="requestQuoteDescription()"
+        [whatsappUrl]="whatsappUrl()"
+        [whatsappLabel]="whatsappLabel()"
+        [contactLabel]="contactLabel()"
+      />
+    </section>
+  </main>
+} @else {
+  <app-page-hero
+    [title]="notFoundTitle()"
+    [lead]="notFoundDescription()"
+    [current]="notFoundTitle()"
+    [breadcrumbLabel]="'Navegação estrutural'"
+  />
+  <main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-16">
+    <p class="text-center text-fg-muted">
+      {{ notFoundDescription() }}
+    </p>
+  </main>
+}

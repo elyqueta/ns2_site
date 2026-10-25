@@ -1,0 +1,117 @@
+@if (project(); as item) {
+  <app-page-hero
+    [title]="item.nome | localized"
+    [lead]="item.descricao | localized"
+    [breadcrumbs]="breadcrumbs()"
+    [current]="item.nome | localized"
+    [breadcrumbLabel]="copy.breadcrumbLabel | localized"
+  />
+
+  <main id="conteudo">
+    <section class="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-16">
+      <app-media-slot
+        [alt]="item.imagem.alt | localized"
+        [expectedFile]="item.imagem.claro | localized"
+        [src]="item.imagem.claro | localized"
+        [width]="1200"
+        [height]="800"
+        objectPosition="center"
+        [loading]="'eager'"
+        [decoding]="'async'"
+      />
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+            {{ item.nome | localized }}
+          </h2>
+          <p class="mt-2 text-sm font-semibold text-accent-bright uppercase tracking-wider">
+            {{ item.tipo | localized }}
+          </p>
+        </div>
+        @if (item.url && item.url !== '#') {
+          <a
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3.5 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+            [href]="item.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <app-icon name="arrow-diagonal" />
+            {{ copy.verProjetoLabel | localized }}
+          </a>
+        }
+      </div>
+      <p class="mt-6 max-w-[62ch] leading-relaxed text-fg-muted">
+        {{ item.descricao | localized }}
+      </p>
+    </section>
+
+    <section class="border-y border-line bg-surface">
+      <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+        <div class="grid gap-12 lg:grid-cols-3">
+          <div class="lg:col-span-2">
+            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+              {{ copy.desafioLabel | localized }}
+            </h3>
+            <p class="text-fg-muted leading-relaxed">
+              {{ item.desafio | localized }}
+            </p>
+          </div>
+          <div class="lg:col-span-1">
+            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+              {{ copy.solucaoLabel | localized }}
+            </h3>
+            <p class="text-fg-muted leading-relaxed">
+              {{ item.solucao | localized }}
+            </p>
+          </div>
+          <div class="lg:col-span-1">
+            <h3 class="font-display text-h3 font-semibold text-fg mb-4">
+              {{ copy.resultadoLabel | localized }}
+            </h3>
+            <p class="text-fg-muted leading-relaxed">
+              {{ item.resultado | localized }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+      <h3 class="font-display text-h3 font-semibold text-fg mb-6">
+        {{ copy.tecnologiasLabel | localized }}
+      </h3>
+      <ul class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        @for (tech of item.tecnologias; track tech.pt) {
+          <li class="rounded-xl border border-line bg-surface p-5 text-center">
+            <span class="text-sm font-semibold text-fg">{{ tech | localized }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">
+      <app-cta-band
+        [title]="copy.ctaTitle | localized"
+        [description]="copy.ctaDescription | localized"
+        [whatsappUrl]="whatsappUrl()"
+        [whatsappLabel]="copy.whatsappLabel | localized"
+        [contactLabel]="copy.contactLabel | localized"
+      />
+    </section>
+  </main>
+} @else {
+  <app-page-hero
+    [title]="notFoundTitle()"
+    [lead]="notFoundDescription()"
+    [current]="notFoundTitle()"
+    [breadcrumbLabel]="copy.breadcrumbLabel | localized"
+  />
+  <main id="conteudo" class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-16">
+    <p class="text-center text-fg-muted">
+      {{ notFoundDescription() }}
+    </p>
+  </main>
+}

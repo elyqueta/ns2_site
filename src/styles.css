@@ -156,7 +156,9 @@
     --tint-rgb: 63 111 181;
     --focus: 0;
     position: relative;
-    flex: 0 0 var(--svc-card-w);
+    flex: 0 0 var(--svc-card-w) !important;
+    width: var(--svc-card-w) !important;
+    min-width: var(--svc-card-w) !important;
     aspect-ratio: var(--svc-card-ratio);
     border-radius: var(--svc-card-radius);
     overflow: hidden;
@@ -164,7 +166,7 @@
     color: #fff;
     text-decoration: none;
     scroll-snap-align: center;
-    display: block;
+    display: block !important;
     background: linear-gradient(
       180deg,
       rgb(var(--tint-rgb) / 0.55) 0%,

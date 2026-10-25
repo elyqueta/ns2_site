@@ -104,6 +104,9 @@ export const en = {
     sectionButtons: 'Buttons and links',
     sectionHeadings: 'Section headings',
     sectionCards: 'Cards',
+    sectionServicoVidro: 'Service cards (glass)',
+    servicoVidroDescription:
+      'Tinted glass card with continuous focus effect, used in the home services section.',
     sectionBadges: 'Badges',
     sectionIcons: 'Icons',
     sectionMedia: 'Media placeholders',

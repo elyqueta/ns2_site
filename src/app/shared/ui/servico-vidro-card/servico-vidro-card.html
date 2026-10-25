@@ -1,0 +1,31 @@
+<a
+  class="svc-card"
+  [routerLink]="item().href"
+  [style.--tint-rgb]="item().tintRgb"
+>
+  @if (item().badge) {
+    <span class="svc-badge">Com parceiros</span>
+  }
+  <div class="svc-media">
+    <img
+      [src]="item().imagemSrc"
+      alt=""
+      width="1200"
+      height="750"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="svc-glass"></div>
+  <div class="svc-body">
+    <div class="svc-head">
+      <span class="svc-chip"><app-icon [name]="item().icone" /></span>
+      <h3 class="svc-title">{{ item().titulo | localized }}</h3>
+    </div>
+    <p class="svc-meta">{{ item().resumo | localized }}</p>
+    <div class="svc-cta">
+      <span>{{ item().ctaLabel | localized }}</span>
+      <app-icon name="arrow" />
+    </div>
+  </div>
+</a>

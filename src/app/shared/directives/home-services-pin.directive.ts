@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { registerAnimationDirective } from './animation-directive';
 
 @Directive({
@@ -19,6 +19,17 @@ export class HomeServicesPin {
       return;
     }
 
+    const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
+    const cx = () => window.innerWidth / 2;
+    const updateFocus = () => {
+      const centerX = cx();
+      for (const card of cards()) {
+        const r = card.getBoundingClientRect();
+        const d = Math.abs((r.left + r.width / 2) - centerX) / r.width;
+        card.style.setProperty('--focus', Math.max(0, 1 - d).toFixed(3));
+      }
+    };
+
     runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
     const setProgress = runtime.gsap.quickSetter(progress, 'scaleX');
     runtime.gsap.to(track, {
@@ -33,8 +44,17 @@ export class HomeServicesPin {
         scrub: 0.6,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: (self) => setProgress(self.progress),
+        onUpdate: (self) => {
+          setProgress(self.progress);
+          updateFocus();
+        },
       },
     });
+
+    updateFocus();
+    window.addEventListener('resize', updateFocus, { passive: true });
+    return () => {
+      window.removeEventListener('resize', updateFocus);
+    };
   });
 }

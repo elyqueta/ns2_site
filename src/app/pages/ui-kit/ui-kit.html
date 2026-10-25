@@ -133,6 +133,19 @@
       </div>
     </section>
 
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="servico-vidro-title">
+      <h2 id="servico-vidro-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionServicoVidro }}
+      </h2>
+      <div class="mt-7 flex flex-col gap-8 sm:flex-row sm:items-start">
+        <app-servico-vidro-card [item]="servicoVidroItem()" />
+        <app-servico-vidro-card [item]="servicoVidroItemComBadge()" />
+      </div>
+      <p class="mt-4 max-w-[62ch] text-sm text-fg-muted">
+        {{ copy.servicoVidroDescription }}
+      </p>
+    </section>
+
     <section class="border-t border-line py-12 sm:py-16" aria-labelledby="badges-title">
       <h2 id="badges-title" class="font-display text-h2 font-semibold">{{ copy.sectionBadges }}</h2>
       <div class="mt-7 flex flex-wrap gap-3 rounded-2xl border border-line bg-surface p-5 sm:p-8">

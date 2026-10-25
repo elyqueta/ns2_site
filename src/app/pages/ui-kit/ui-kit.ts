@@ -21,6 +21,7 @@ import { ProductCard } from '../../shared/ui/product-card/product-card';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
 import { ServiceCard } from '../../shared/ui/service-card/service-card';
+import { ServicoVidroCard, ServicoVidroCardData } from '../../shared/ui/servico-vidro-card/servico-vidro-card';
 import { ThemeToggle } from '../../shared/ui/theme-toggle/theme-toggle';
 import { DataPtPipe } from '../../shared/pipes/data-pt.pipe';
 import { KzPipe } from '../../shared/pipes/kz.pipe';
@@ -79,6 +80,7 @@ interface PaletteToken {
     PostCard,
     ProductCard,
     ProjectCard,
+    ServicoVidroCard,
     SectionHeading,
     ServiceCard,
     Reveal,
@@ -206,6 +208,36 @@ export class UiKit {
     title: this.copy.cardTitle,
     description: this.copy.cardDescription,
     label: this.copy.cardProject,
+  }));
+
+  readonly servicoVidroItem = computed<ServicoVidroCardData>(() => ({
+    tintRgb: '63 111 181',
+    titulo: { pt: 'Redes e servidores', en: 'Network and servers' },
+    resumo: {
+      pt: 'Projecto, instalação e manutenção da rede e dos servidores da sua empresa.',
+      en: 'Design, installation and maintenance of your company’s network and servers.',
+    },
+    icone: 'network',
+    href: '/servicos/infraestrutura-redes-servidores',
+    imagemSrc: '/images/servicos/infraestrutura-redes-servidores.webp',
+    imagemAlt: { pt: 'Imagem do serviço de redes e servidores', en: 'Network and server infrastructure image' },
+    ctaLabel: { pt: this.copy.cardService, en: this.copy.cardService },
+    badge: false,
+  }));
+
+  readonly servicoVidroItemComBadge = computed<ServicoVidroCardData>(() => ({
+    tintRgb: '84 94 214',
+    titulo: { pt: 'Suporte remoto', en: 'Remote support' },
+    resumo: {
+      pt: 'Atendimento rápido por telefone, email e WhatsApp, com acesso remoto.',
+      en: 'Responsive support by phone, email and WhatsApp, including remote access.',
+    },
+    icone: 'support',
+    href: '/servicos/suporte-remoto',
+    imagemSrc: '/images/servicos/suporte-remoto.webp',
+    imagemAlt: { pt: 'Imagem do serviço de suporte remoto', en: 'Remote support image' },
+    ctaLabel: { pt: this.copy.cardService, en: this.copy.cardService },
+    badge: true,
   }));
 
   readonly breadcrumbs: readonly BreadcrumbItem[] = [

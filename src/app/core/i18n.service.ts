@@ -2,7 +2,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 import { en } from '../i18n/en';
 import { pt, TranslationKey } from '../i18n/pt';
-import { LocalizedText } from '../i18n/types';
+import { LocalizedText, LocalizedWords } from '../i18n/types';
 
 export type Language = 'pt' | 'en';
 
@@ -45,6 +45,10 @@ export class I18nService {
 
   text(value: LocalizedText): string {
     return this.lang() === 'en' ? (value.en ?? value.pt) : value.pt;
+  }
+
+  words(value: LocalizedWords): string[] {
+    return this.lang() === 'en' ? [...(value.en ?? value.pt)] : [...value.pt];
   }
 
   setLanguage(language: Language): void {

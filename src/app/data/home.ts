@@ -1,4 +1,4 @@
-import { LocalizedText } from '../i18n/types';
+import { LocalizedText, LocalizedWords } from '../i18n/types';
 import { MarqueeItem } from '../shared/ui/marquee/marquee';
 
 export const homeContent = {
@@ -8,7 +8,10 @@ export const homeContent = {
       en: 'Technology and computer products.',
     } satisfies LocalizedText,
     titleBefore: { pt: 'Tecnologia que', en: 'Technology that' } satisfies LocalizedText,
-    titleHighlight: { pt: 'impulsiona', en: 'moves' } satisfies LocalizedText,
+    titleHighlightWords: {
+      pt: ['impulsiona', 'movimenta', 'acelera', 'potencia'],
+      en: ['moves', 'propels', 'drives', 'powers'],
+    } satisfies LocalizedWords,
     titleAfter: { pt: 'o seu negócio.', en: 'your business forward.' } satisfies LocalizedText,
     description: {
       pt: 'Infraestrutura de redes, suporte de TI, equipamentos informáticos, websites e sistemas web. Tudo num só parceiro, em Luanda.',

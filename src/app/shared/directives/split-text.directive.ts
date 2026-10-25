@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, input } from '@angular/core';
 import { registerAnimationDirective } from './animation-directive';
 
 @Directive({
@@ -6,6 +6,7 @@ import { registerAnimationDirective } from './animation-directive';
   standalone: true,
 })
 export class SplitTextReveal {
+  readonly aria = input<'auto' | 'none' | 'hidden'>('auto', { alias: 'appSplitTextAria' });
   // O texto deste elemento NÃO pode mudar enquanto a directiva está activa.
   // Quem a usa tem de recriar o elemento quando o texto mudar (ver HomeHero).
   private readonly registration = registerAnimationDirective((element, runtime, mode) => {
@@ -17,7 +18,7 @@ export class SplitTextReveal {
     const split = runtime.SplitText.create(element, {
       type: 'lines',
       mask: 'lines',
-      aria: 'auto',
+      aria: this.aria(),
     });
     runtime.gsap.fromTo(
       split.lines,

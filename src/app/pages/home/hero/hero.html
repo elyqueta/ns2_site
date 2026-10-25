@@ -33,10 +33,17 @@
       @for (key of languageKey(); track key) {
         <h1
           appSplitText
+          appSplitTextAria="auto"
           class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
         >
           {{ copy.titleBefore | localized }}
-          <span class="block text-accent-bright">{{ copy.titleHighlight | localized }}</span>
+          <span class="block" appTypewriter [appTypewriter]="{ pt: ['impulsiona', 'movimenta', 'acelera', 'potencia'], en: ['moves', 'propels', 'drives', 'powers'] }" aria-hidden="true"></span>
+          <span
+            class="ml-1 inline-block h-[0.85em] w-[0.06em] translate-y-[0.08em] bg-accent-bright"
+            data-typewriter-cursor
+            aria-hidden="true"
+          ></span>
+          <span class="sr-only">{{ staticHighlight() }}</span>
           {{ copy.titleAfter | localized }}
         </h1>
       }

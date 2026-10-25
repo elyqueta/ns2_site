@@ -143,8 +143,11 @@
     display: flex;
     gap: var(--svc-gap);
     padding: 56px var(--svc-track-pad) var(--svc-track-pad-bottom) var(--svc-track-pad);
-    width: 100%;
-    overflow-x: hidden;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
@@ -158,6 +161,8 @@
     --focus: 0;
     position: relative;
     flex: 0 0 var(--svc-card-w);
+    width: var(--svc-card-w, 300px);
+    min-width: var(--svc-card-w, 300px);
     aspect-ratio: var(--svc-card-ratio);
     border-radius: var(--svc-card-radius);
     overflow: hidden;

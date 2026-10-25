@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { I18nService } from '../../../core/i18n.service';
+import { ThemeService } from '../../../core/theme.service';
 import { headerNavigation } from '../../../data/navegacao';
 import { HeaderMotion } from '../../directives/header-motion.directive';
 import { Icon } from '../../ui/icon/icon';
@@ -44,6 +45,7 @@ export interface HeaderNavItemRendered {
 })
 export class Header {
   private readonly i18n = inject(I18nService);
+  private readonly theme = inject(ThemeService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   readonly menuOpen = signal(false);
@@ -79,7 +81,7 @@ export class Header {
     });
   });
   readonly isHome = computed(() => this.router.url === '/');
-  readonly headerDark = computed(() => false);
+  readonly headerDark = computed(() => this.theme.theme() === 'dark');
   readonly menuLabel = computed(() =>
     this.i18n.t(this.menuOpen() ? 'actions.closeMenu' : 'actions.openMenu'),
   );

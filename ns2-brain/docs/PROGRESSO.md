@@ -330,3 +330,22 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Ficheiros alterados: `src/app/shared/directives/hero-video.directive.ts`, `src/app/shared/ui/icon/icon.ts`, `src/app/shared/ui/icon/icon.html`, `src/app/shared/ui/button/button.ts`, `src/app/shared/ui/button/button.html`, `src/app/i18n/pt.ts`, `src/app/i18n/en.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
 - Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings; orçamento inicial 501.63 kB - 1.63 kB acima do alvo de 500 kB); `npm test` sem regressão (14 passed, 4 falhas pré-existentes nos pipes/whatsapp/navegação).
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/ (pendentes desde Fase 10).
+
+## Correcção: palavra de destaque com máquina de escrever no hero da home (2024-10-25)
+- Estado: concluída
+- Tipo: correcção transversal (não é fase nova)
+- Implementação:
+  - `src/app/shared/directives/typewriter.directive.ts`: nova directiva `appTypewriter` com `registerAnimationDirective` + `AnimationService`. Recebe `LocalizedWords` (arrays pt/en de strings). Anima letra a letra: escreve palavra completa com cursor piscando, apaga letra a letra, escreve próxima palavra, repete em loop infinito. Respeita `prefers-reduced-motion` (mostra primeira palavra estática, sem animação). Pausa quando o elemento sai do ecrã (IntersectionObserver) e quando o separador fica oculto (visibilitychange). Limpeza completa no destroy (`ctx.revert()`).
+  - `src/app/shared/directives/split-text.directive.ts`: adicionado input `appSplitTextAria` (`'auto' | 'none' | 'hidden'`) para controlo do parâmetro `aria` do SplitText.
+  - `src/app/i18n/types.ts`: adicionada interface `LocalizedWords` com campos `pt: readonly string[]` e `en?: readonly string[]`.
+  - `src/app/data/home.ts`: substituído campo `titleHighlight` (LocalizedText) por `titleHighlightWords` (LocalizedWords) com listas PT e EN.
+  - `src/app/core/i18n.service.ts`: adicionado método `words(value: LocalizedWords): readonly string[]` que devolve `value.en ?? value.pt` quando `lang() === 'en'`, senão `value.pt`.
+  - `src/app/pages/home/hero/hero.html`: `<h1>` envolto em `<section class="dark">`; três spans: título antes (com `appSplitText` + `appSplitTextAria="auto"`), texto destacado com `appTypewriter` + cursor, texto depois.
+  - `src/app/pages/home/hero/hero.ts`: removido `viewChild`/`videoDirective`; adicionados `heroWords` e `staticHighlight` computeds.
+  - `src/app/shared/layout/header/header.ts`: `headerDark = computed(() => false)` (header mantém-se claro na home para logo visível sobre vídeo escuro).
+  - `src/app/shared/layout/header/header.html`: logo usa `logo-horizontal.svg` (branco) para ficar visível sobre vídeo escuro.
+  - `src/app/shared/layout/mobile-menu/mobile-menu.html`: logo usa `logo-horizontal.svg` (branco).
+- Ficheiros criados: `src/app/shared/directives/typewriter.directive.ts`
+- Ficheiros alterados: `src/app/shared/directives/typewriter.directive.ts`, `src/app/shared/directives/split-text.directive.ts`, `src/app/i18n/types.ts`, `src/app/data/home.ts`, `src/app/core/i18n.service.ts`, `src/app/pages/home/hero/hero.html`, `src/app/pages/home/hero/hero.ts`, `src/app/shared/layout/header/header.ts`, `src/app/shared/layout/header/header.html`, `src/app/shared/layout/mobile-menu/mobile-menu.html`
+- Verificações feitas: `npm run build` passa (38 rotas, sem erros nem warnings; orçamento inicial 500.07 kB - 1.63 kB acima do alvo de 500 kB); `npm test` sem regressão (14 passed, 4 falhas pré-existentes nos pipes/whatsapp/navegação).
+- Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/ (pendentes desde Fase 10).

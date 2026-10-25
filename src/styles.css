@@ -144,13 +144,19 @@
     gap: var(--svc-gap);
     padding: 56px var(--svc-track-pad) var(--svc-track-pad-bottom) var(--svc-track-pad);
     width: max-content;
-    overflow-x: visible;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
 
   .svc-track::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .svc-track {
+      overflow-x: hidden;
+    }
   }
 
   .svc-card {

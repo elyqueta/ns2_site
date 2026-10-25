@@ -27,35 +27,6 @@ export class HomeServicesPin {
 
     const scrollLength = () => Math.max(track.scrollWidth - window.innerWidth, 0);
 
-    let animation: gsap.core.Tween | null = null;
-
-    const createAnimation = (xInicial: number) => {
-      runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
-      const setProgress = runtime.gsap.quickSetter(progress, 'scaleX');
-      animation = runtime.gsap.fromTo(
-        track,
-        { x: xInicial },
-        {
-          x: () => -scrollLength(),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: element,
-            start: 'top top+=112',
-            end: () => `+=${scrollLength()}`,
-            pin: true,
-            pinSpacing: true,
-            scrub: 0.6,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              setProgress(self.progress);
-              updateFocus();
-            },
-          },
-        },
-      );
-    };
-
     const ready = async () => {
       await document.fonts.ready;
       await Promise.all(
@@ -70,19 +41,38 @@ export class HomeServicesPin {
         ),
       );
 
+      // Posiciona o 1.º card centrado no ecrã ao entrar na secção
       const firstCard = cards()[0];
       if (firstCard) {
-        const rect = firstCard.getBoundingClientRect();
-        const xInicial = window.innerWidth / 2 - rect.left - rect.width / 2;
-        runtime.gsap.set(track, { x: xInicial });
-        createAnimation(xInicial);
-      } else {
-        createAnimation(0);
+        const pad = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+        const initialX = -(pad + firstCard.offsetWidth / 2 - window.innerWidth / 2);
+        runtime.gsap.set(track, { x: initialX });
       }
 
       updateFocus();
       runtime.ScrollTrigger.refresh();
     };
+
+    runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
+    const setProgress = runtime.gsap.quickSetter(progress, 'scaleX');
+    runtime.gsap.to(track, {
+      x: () => -scrollLength(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: element,
+        start: 'top top+=112',
+        end: () => `+=${scrollLength()}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          setProgress(self.progress);
+          updateFocus();
+        },
+      },
+    });
 
     ready().then(() => {
       runtime.ScrollTrigger.refresh();
@@ -97,7 +87,6 @@ export class HomeServicesPin {
 
     updateFocus();
     return () => {
-      animation?.kill();
       window.removeEventListener('resize', updateFocus);
       observer.disconnect();
     };

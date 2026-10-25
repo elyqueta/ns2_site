@@ -15,16 +15,7 @@ export class HomeServicesPin {
 
     const viewport = track.parentElement ?? element;
     const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
-    const cardWidth = () => cards()[0]?.getBoundingClientRect().width ?? 0;
     const cx = () => window.innerWidth / 2;
-
-    const setTrackPad = () => {
-      const pad = Math.max(0, (viewport.clientWidth - cardWidth()) / 2);
-      track.style.setProperty('--svc-track-pad', `${pad}px`);
-    };
-
-    const scrollLength = () =>
-      Math.max(track.scrollWidth - viewport.clientWidth - parseFloat(track.style.getPropertyValue('--svc-track-pad') || '0'), 0);
 
     const updateFocus = () => {
       const centerX = cx();
@@ -35,10 +26,7 @@ export class HomeServicesPin {
       }
     };
 
-    const recalc = () => {
-      setTrackPad();
-      updateFocus();
-    };
+    const scrollLength = () => Math.max(track.scrollWidth - viewport.clientWidth, 0);
 
     const ready = async () => {
       await document.fonts.ready;
@@ -53,7 +41,8 @@ export class HomeServicesPin {
                 }),
         ),
       );
-      recalc();
+      updateFocus();
+      runtime.gsap.to(track, { x: () => -scrollLength(), duration: 0 });
     };
 
     runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
@@ -78,18 +67,14 @@ export class HomeServicesPin {
     });
 
     ready().then(() => {
-      recalc();
       runtime.gsap.to(track, { x: () => -scrollLength(), duration: 0 });
     });
 
-    window.addEventListener('resize', recalc, { passive: true });
-    const observer = new MutationObserver(() => recalc());
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', updateFocus, { passive: true });
 
     updateFocus();
     return () => {
-      window.removeEventListener('resize', recalc);
-      observer.disconnect();
+      window.removeEventListener('resize', updateFocus);
     };
   });
 }

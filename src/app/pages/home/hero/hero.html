@@ -16,10 +16,10 @@
     height="720"
   ></video>
 
-  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/10 dark:bg-[#0a0e1a]/60" aria-hidden="true"></div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#0a0e1a]/20 dark:from-[#0a0e1a]/60 via-[#0a0e1a]/10 dark:via-[#0a0e1a]/50 to-[#0a0e1a]/10 dark:to-[#0a0e1a]/30" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/80" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/75 to-[#0a0e1a]/30" aria-hidden="true"></div>
   <div
-    class="absolute inset-x-0 bottom-0 -z-10 h-[30%] bg-gradient-to-t from-[#0a0e1a] dark:from-[#000000] via-[#0a0e1a]/30 dark:via-[#000000]/50 to-transparent dark:to-transparent"
+    class="absolute inset-x-0 bottom-0 -z-10 h-[40%] bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/30 to-transparent"
     aria-hidden="true"
   ></div>
 
@@ -30,23 +30,25 @@
       >
         {{ copy.eyebrow | localized }}
       </p>
-      @for (key of languageKey(); track key) {
-        <h1
+      <h1
+        class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
+      >
+        <span
+          class="block"
           appSplitText
           appSplitTextAria="auto"
-          class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
+          >{{ copy.titleBefore | localized }}</span
         >
-          {{ copy.titleBefore | localized }}
-          <span class="block" appTypewriter [appTypewriter]="{ pt: ['impulsiona', 'movimenta', 'acelera', 'potencia'], en: ['moves', 'propels', 'drives', 'powers'] }" aria-hidden="true"></span>
-          <span
-            class="ml-1 inline-block h-[0.85em] w-[0.06em] translate-y-[0.08em] bg-accent-bright"
-            data-typewriter-cursor
-            aria-hidden="true"
-          ></span>
-          <span class="sr-only">{{ staticHighlight() }}</span>
+        <span
+          class="block"
+          appTypewriter
+          [appTypewriter]="copy.titleHighlightWords"
+          aria-hidden="true"
+        ></span>
+        <span class="block" appSplitText appSplitTextAria="auto">
           {{ copy.titleAfter | localized }}
-        </h1>
-      }
+        </span>
+      </h1>
       <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-white sm:mt-9">
         {{ copy.description | localized }}
       </p>
@@ -65,6 +67,6 @@
           [extraClasses]="heroItButtonClasses()"
         />
       </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>

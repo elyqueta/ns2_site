@@ -18,7 +18,7 @@ export class HomeHero {
   readonly languageKey = computed(() => [this.i18n.lang()] as const);
   readonly heroWebLabel = computed(() => this.i18n.t('actions.heroWeb'));
   readonly heroItLabel = computed(() => this.i18n.t('actions.heroIt'));
-  readonly heroItButtonClasses = computed(() => 'dark:bg-white/10 bg-black/10');
+  readonly heroItButtonClasses = computed(() => 'dark:bg-white/10 bg-black/5');
   private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
   readonly whatsappUrl = computed(() =>

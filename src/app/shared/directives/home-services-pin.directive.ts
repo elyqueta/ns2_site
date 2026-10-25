@@ -13,7 +13,6 @@ export class HomeServicesPin {
       return;
     }
 
-    const viewport = track.parentElement ?? element;
     const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
     const cx = () => window.innerWidth / 2;
 
@@ -26,7 +25,7 @@ export class HomeServicesPin {
       }
     };
 
-    const scrollLength = () => Math.max(track.scrollWidth - viewport.clientWidth, 0);
+    const scrollLength = () => Math.max(track.scrollWidth - window.innerWidth, 0);
 
     const ready = async () => {
       await document.fonts.ready;
@@ -43,6 +42,7 @@ export class HomeServicesPin {
       );
       updateFocus();
       runtime.gsap.to(track, { x: () => -scrollLength(), duration: 0 });
+      runtime.ScrollTrigger.refresh();
     };
 
     runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
@@ -68,10 +68,10 @@ export class HomeServicesPin {
 
     ready().then(() => {
       runtime.gsap.to(track, { x: () => -scrollLength(), duration: 0 });
+      runtime.ScrollTrigger.refresh();
     });
 
     window.addEventListener('resize', updateFocus, { passive: true });
-
     updateFocus();
     return () => {
       window.removeEventListener('resize', updateFocus);

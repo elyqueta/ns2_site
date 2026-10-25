@@ -1,4 +1,4 @@
-<section class="border-y border-line bg-svc-stage py-14 lg:pt-16 lg:pb-12">
+<section class="border-y border-line bg-svc-stage py-14 lg:pt-16 lg:pb-12 overflow-x-clip">
   <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
     <app-section-heading
       [index]="copy.index | localized"
@@ -6,7 +6,7 @@
       [description]="copy.description | localized"
     />
     <div appHomeServicesPin class="mt-8 lg:mt-10">
-      <div class="relative left-[50%] -mx-[50vw] w-[100vw]">
+      <div class="relative left-[50%] -mx-[50vw] w-[100vw] overflow-x-hidden">
         <div
           data-home-services-track
           class="svc-track"

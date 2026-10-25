@@ -72,9 +72,16 @@ export class HomeServicesPin {
     });
 
     window.addEventListener('resize', updateFocus, { passive: true });
+    const observer = new MutationObserver(() => {
+      updateFocus();
+      runtime.ScrollTrigger.refresh();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     updateFocus();
     return () => {
       window.removeEventListener('resize', updateFocus);
+      observer.disconnect();
     };
   });
 }

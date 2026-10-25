@@ -75,6 +75,8 @@
   --svc-lift: 22px;
   --svc-base-dark: 5 7 13;
   --svc-stage-bg: linear-gradient(180deg, #f4f7fc 0%, #e3e9f3 100%);
+  --svc-track-pad: 4vw;
+  --svc-track-pad-bottom: 60px;
 }
 
 .dark {
@@ -140,12 +142,11 @@
   .svc-track {
     display: flex;
     gap: var(--svc-gap);
-    padding: 56px 0 96px;
+    padding: 56px var(--svc-track-pad) var(--svc-track-pad-bottom) var(--svc-track-pad);
+    width: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
   }
 
   .svc-track::-webkit-scrollbar {

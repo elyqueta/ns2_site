@@ -14,13 +14,18 @@ export class HomeServicesPin {
     }
 
     const viewport = track.parentElement ?? element;
-    const scrollLength = () => Math.max(track.scrollWidth - viewport.clientWidth, 0);
-    if (scrollLength() === 0) {
-      return;
-    }
-
     const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
+    const cardWidth = () => cards()[0]?.getBoundingClientRect().width ?? 0;
     const cx = () => window.innerWidth / 2;
+
+    const setTrackPad = () => {
+      const pad = Math.max(0, (viewport.clientWidth - cardWidth()) / 2);
+      track.style.setProperty('--svc-track-pad', `${pad}px`);
+    };
+
+    const scrollLength = () =>
+      Math.max(track.scrollWidth - viewport.clientWidth - parseFloat(track.style.getPropertyValue('--svc-track-pad') || '0'), 0);
+
     const updateFocus = () => {
       const centerX = cx();
       for (const card of cards()) {
@@ -28,6 +33,27 @@ export class HomeServicesPin {
         const d = Math.abs((r.left + r.width / 2) - centerX) / r.width;
         card.style.setProperty('--focus', Math.max(0, 1 - d).toFixed(3));
       }
+    };
+
+    const recalc = () => {
+      setTrackPad();
+      updateFocus();
+    };
+
+    const ready = async () => {
+      await document.fonts.ready;
+      await Promise.all(
+        Array.from(track.querySelectorAll<HTMLImageElement>('img')).map(
+          (img) =>
+            img.complete
+              ? Promise.resolve()
+              : new Promise<void>((resolve) => {
+                  img.addEventListener('load', () => resolve(), { once: true });
+                  img.addEventListener('error', () => resolve(), { once: true });
+                }),
+        ),
+      );
+      recalc();
     };
 
     runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
@@ -51,10 +77,19 @@ export class HomeServicesPin {
       },
     });
 
+    ready().then(() => {
+      recalc();
+      runtime.gsap.to(track, { x: () => -scrollLength(), duration: 0 });
+    });
+
+    window.addEventListener('resize', recalc, { passive: true });
+    const observer = new MutationObserver(() => recalc());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     updateFocus();
-    window.addEventListener('resize', updateFocus, { passive: true });
     return () => {
-      window.removeEventListener('resize', updateFocus);
+      window.removeEventListener('resize', recalc);
+      observer.disconnect();
     };
   });
 }

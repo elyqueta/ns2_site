@@ -63,7 +63,7 @@ export class HeroVideoDirective {
       };
     });
 
-    this.setupScrollAndVisibility();
+    this.setupVisibility();
     this.destroyRef.onDestroy(() => this.cleanup());
   }
 
@@ -132,7 +132,7 @@ export class HeroVideoDirective {
     this.sourcesInjected = true;
   }
 
-  private setupScrollAndVisibility(): void {
+  private setupVisibility(): void {
     if (!isPlatformBrowser(this.platformId) || !this.element) {
       return;
     }
@@ -147,34 +147,9 @@ export class HeroVideoDirective {
 
     this.visibilityListener = handleVisibilityChange;
     document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry) {
-          return;
-        }
-
-        if (entry.isIntersecting) {
-          if (!this.userPaused && this.active()) {
-            this.play();
-          }
-        } else {
-          this.pause();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    this.intersectionObserver.observe(this.element);
   }
 
   private cleanup(): void {
-    if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-      this.intersectionObserver = null;
-    }
-
     if (this.visibilityListener) {
       document.removeEventListener('visibilitychange', this.visibilityListener);
       this.visibilityListener = null;

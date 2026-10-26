@@ -87,3 +87,11 @@
   - `src/app/pages/home/hero/hero.html` — botão primário ganha `[magnetic]="true"`.
 
 - **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (4 falhas pré-existentes não relacionadas; `nav-dropdown.spec.ts` verde).
+
+---
+
+## Correcção: vídeo de fundo não pausa ao rolar
+
+- **Causa raiz:** `HeroVideoDirective` usava um `IntersectionObserver` que chamava `pause()` sempre que o vídeo saía do viewport (rolagem da página), interrompendo o `loop`.
+- **Ficheiro alterado:** `src/app/shared/directives/hero-video.directive.ts` — removido o `IntersectionObserver` (`setupScrollAndVisibility`); mantido apenas o `visibilitychange` (pausa/retoma ao mudar de aba) e o `prefers-reduced-motion`. O `<video>` já tem `loop`+`autoplay` no HTML.
+- **Verificações:** `npm run build` passa; `npm test` sem regressões novas.

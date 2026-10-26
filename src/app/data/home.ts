@@ -217,7 +217,7 @@ export const homeContent = {
       } satisfies HomeMetric,
       {
         prefix: null,
-        value: 95,
+        value: 99,
         suffix: '%',
         description: { pt: 'de satisfação dos clientes', en: 'client satisfaction' } satisfies LocalizedText,
       } satisfies HomeMetric,

@@ -23,15 +23,17 @@
 
   <div
     data-dropdown-panel
-    class="absolute z-50 mt-1.5 min-w-60 rounded-card border border-line bg-surface shadow-lg overflow-hidden"
+    class="absolute z-50 mt-2 min-w-64 overflow-hidden rounded-card border border-white/60 bg-surface/95 p-1.5 shadow-[0_24px_60px_-18px_rgb(15_23_42/0.35)] ring-1 ring-inset ring-white/50 supports-[backdrop-filter]:bg-surface/55 supports-[backdrop-filter]:backdrop-blur-2xl supports-[backdrop-filter]:backdrop-saturate-150 dark:border-white/10 dark:bg-surface/95 dark:shadow-[0_28px_70px_-20px_rgb(0_0_0/0.75)] dark:ring-white/10 dark:supports-[backdrop-filter]:bg-surface/50 contrast-more:border-line contrast-more:bg-surface contrast-more:backdrop-blur-none"
     [class.hidden]="!open()"
   >
-    <nav class="py-2" [attr.aria-labelledby]="id()">
+    <span class="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/50 to-transparent dark:from-white/10" aria-hidden="true"></span>
+
+    <nav class="relative py-0.5" [attr.aria-labelledby]="id()">
       @for (item of items(); track item.href) {
         <a
           [routerLink]="item.href"
-          routerLinkActive="text-accent-bright"
-          class="block px-4 py-3 text-base text-fg transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-none"
+          routerLinkActive="text-accent-bright bg-accent/10"
+          class="block rounded-xl px-4 py-3 text-base font-medium text-fg transition-colors hover:bg-fg/5 focus-visible:bg-fg/10 focus-visible:outline-none dark:hover:bg-white/10"
           (click)="close()"
           [attr.tabindex]="0"
         >

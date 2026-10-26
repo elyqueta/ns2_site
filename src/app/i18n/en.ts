@@ -146,6 +146,9 @@ export const en = {
     buttonSecondary: 'Explore services',
     buttonGhost: 'Learn more',
     buttonGlass: 'Glass',
+    sectionDropdownGlass: 'Glassmorphism dropdown',
+    dropdownGlassDescription:
+      'Translucent glass dropdown panel that blurs the content behind, in both themes.',
     sectionIndex: 'Components',
     headingPrefix: 'Technology with',
     headingHighlight: 'purpose',

@@ -90,7 +90,46 @@
           <app-button [label]="copy.buttonGhost" variant="ghost" />
           <app-button [label]="copy.buttonGlass" variant="glass" />
         </div>
-        <div class="flex flex-wrap items-center gap-3">
+
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="dropdown-glass-title">
+      <h2 id="dropdown-glass-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionDropdownGlass }}
+      </h2>
+      <p class="mt-3 max-w-[62ch] text-fg-muted">{{ copy.dropdownGlassDescription }}</p>
+      <div class="mt-8 rounded-2xl border border-line bg-surface p-6 sm:p-10 relative overflow-hidden">
+        <div
+          class="absolute inset-0 -z-10 bg-[url('/images/heros/home-poster.webp')] bg-cover bg-center opacity-60 dark:opacity-40"
+          aria-hidden="true"
+        ></div>
+        <div class="relative z-10 flex max-w-sm flex-col gap-3">
+          <div
+            data-dropdown-panel
+            class="absolute z-50 mt-2 min-w-64 overflow-hidden rounded-card border border-white/60 bg-surface/95 p-1.5 shadow-[0_24px_60px_-18px_rgb(15_23_42/0.35)] ring-1 ring-inset ring-white/50 supports-[backdrop-filter]:bg-surface/55 supports-[backdrop-filter]:backdrop-blur-2xl supports-[backdrop-filter]:backdrop-saturate-150 dark:border-white/10 dark:bg-surface/95 dark:shadow-[0_28px_70px_-20px_rgb(0_0_0/0.75)] dark:ring-white/10 dark:supports-[backdrop-filter]:bg-surface/50"
+          >
+            <span class="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/50 to-transparent dark:from-white/10" aria-hidden="true"></span>
+            <nav class="relative py-0.5">
+              <a
+                class="block rounded-xl px-4 py-3 text-base font-medium text-fg transition-colors hover:bg-fg/5 dark:hover:bg-white/10"
+              >
+                Serviços
+              </a>
+              <a
+                class="block rounded-xl px-4 py-3 text-base font-medium text-fg transition-colors hover:bg-fg/5 dark:hover:bg-white/10"
+              >
+                Produtos
+              </a>
+              <a
+                class="block rounded-xl px-4 py-3 text-base font-medium text-fg transition-colors hover:bg-fg/5 dark:hover:bg-white/10"
+              >
+                Desenvolvimento web
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex flex-wrap items-center gap-3">
           <app-button [label]="copy.buttonPrimary" size="lg" [showArrow]="true" />
           <app-button
             [label]="copy.buttonSecondary"

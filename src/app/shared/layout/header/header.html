@@ -1,8 +1,13 @@
 <header
   appHeaderMotion
   [class.dark]="headerDark()"
-  class="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent transition-[background-color,border-color,backdrop-filter] duration-300"
+  class="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent transition-[border-color] duration-300"
 >
+  <div
+    data-header-surface
+    class="pointer-events-none absolute inset-0 -z-10 transition-[background-color,backdrop-filter] duration-300"
+    aria-hidden="true"
+  ></div>
   <div class="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-16">
     <a
       class="inline-flex min-h-11 shrink-0 items-center"

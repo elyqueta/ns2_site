@@ -137,6 +137,9 @@ export const pt = {
     buttonSecondary: 'Conhecer serviços',
     buttonGhost: 'Saber mais',
     buttonGlass: 'Vidro',
+    sectionDropdownGlass: 'Dropdown com glassmorphism',
+    dropdownGlassDescription:
+      'Painel de dropdown em vidro translúcido que desfoca o conteúdo por trás, em ambos os temas.',
     sectionIndex: 'Componentes',
     headingPrefix: 'Tecnologia com',
     headingHighlight: 'propósito',

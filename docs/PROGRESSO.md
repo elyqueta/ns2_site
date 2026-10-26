@@ -56,3 +56,18 @@
   - `src/app/i18n/pt.ts` + `src/app/i18n/en.ts` — chave `buttonGlass` adicionada.
 
 - **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (falhas pré-existentes em pipes/whatsapp/navegação). Sem `any`, sem `#hex` no `hero.html`, sem `text-white`, sem `console.log`.
+
+---
+
+## Correcção: Dropdowns com glassmorphism e blur do header numa camada própria
+
+- **Causa raiz:** O `<header>` levava `backdrop-blur-xl`, tornando-se "backdrop root". O painel do dropdown (filho) com `backdrop-filter` não via o conteúdo da página por baixo — o efeito de vidro desaparecia com a página rolada.
+- **Solução:** mover `bg-bg/85` + `backdrop-blur-xl` do `<header>` para uma camada irmã (`[data-header-surface]`, primeiro filho do header, `-z-10`), deixando o header sem `backdrop-filter`. Assim o dropdown pode desfocar a página livremente.
+- **Ficheiros alterados:**
+  - `src/app/shared/layout/header/header.html` — camada `[data-header-surface]` como primeiro filho; `<header>` fica apenas com `transition-[border-color]`.
+  - `src/app/shared/directives/header-motion.directive.ts` — constante `SURFACE_CLASSES = ['bg-bg/85', 'backdrop-blur-xl']` aplicada à camada surface (nos 3 sítios de scroll + limpeza); `border-line` continua no header.
+  - `src/app/shared/layout/header/nav-dropdown/nav-dropdown.html` — painel glass (`bg-surface/55` claro / `bg-surface/50` escuro, `backdrop-blur-2xl`, borda `white/60` / `white/10`, anel inset, brilho superior, fallback opaco em `contrast-more`/sem `supports-[backdrop-filter]`).
+  - `src/app/pages/ui-kit/ui-kit.html` — amostra estática do painel glass sobre imagem de fundo, nos dois temas.
+  - `src/app/i18n/pt.ts` + `src/app/i18n/en.ts` — chaves `sectionDropdownGlass`, `dropdownGlassDescription`.
+
+- **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (falhas pré-existentes inalteradas; `nav-dropdown.spec.ts` verde). Sem `#hex`, sem `any`, sem `console.log`.

@@ -1,10 +1,10 @@
 <div
-  class="relative group"
+  class="relative group inline-flex"
   [attr.id]="id()"
 >
   <button
     type="button"
-    class="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap px-3 text-lg font-medium text-fg-muted transition-colors hover:text-fg cursor-pointer focus-visible:text-accent-bright"
+    class="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap px-3 text-lg font-medium text-fg-muted transition-colors hover:text-fg cursor-pointer focus-visible:text-accent-bright"
     [attr.aria-expanded]="open()"
     [attr.aria-haspopup]="'true'"
     [attr.aria-controls]="id()"
@@ -16,14 +16,14 @@
     {{ label() }}
     <app-icon
       name="chevron-down"
-      class="size-4 shrink-0 transition-transform duration-200"
+      class="size-4 shrink-0 -mr-1 transition-transform duration-200"
       [class.rotate-180]="open()"
     />
   </button>
 
   <div
     data-dropdown-panel
-    class="absolute z-50 mt-2 min-w-64 overflow-hidden rounded-card border border-white/60 bg-surface/95 p-1.5 shadow-[0_24px_60px_-18px_rgb(15_23_42/0.35)] ring-1 ring-inset ring-white/50 supports-[backdrop-filter]:bg-surface/55 supports-[backdrop-filter]:backdrop-blur-2xl supports-[backdrop-filter]:backdrop-saturate-150 dark:border-white/10 dark:bg-surface/95 dark:shadow-[0_28px_70px_-20px_rgb(0_0_0/0.75)] dark:ring-white/10 dark:supports-[backdrop-filter]:bg-surface/50 contrast-more:border-line contrast-more:bg-surface contrast-more:backdrop-blur-none"
+    class="absolute left-0 z-50 mt-2 min-w-64 overflow-hidden rounded-card border border-white/60 bg-surface/95 p-1.5 shadow-[0_24px_60px_-18px_rgb(15_23_42/0.35)] ring-1 ring-inset ring-white/50 supports-[backdrop-filter]:bg-surface/55 supports-[backdrop-filter]:backdrop-blur-2xl supports-[backdrop-filter]:backdrop-saturate-150 dark:border-white/10 dark:bg-surface/95 dark:shadow-[0_28px_70px_-20px_rgb(0_0_0/0.75)] dark:ring-white/10 dark:supports-[backdrop-filter]:bg-surface/50 contrast-more:border-line contrast-more:bg-surface contrast-more:backdrop-blur-none"
     [class.hidden]="!open()"
   >
     <span class="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/50 to-transparent dark:from-white/10" aria-hidden="true"></span>

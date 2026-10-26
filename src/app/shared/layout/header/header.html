@@ -8,9 +8,9 @@
     class="pointer-events-none absolute inset-0 -z-10 transition-[background-color,backdrop-filter] duration-300"
     aria-hidden="true"
   ></div>
-  <div class="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-16">
+  <div class="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-16">
     <a
-      class="inline-flex min-h-11 shrink-0 items-center"
+      class="inline-flex min-h-11 shrink-0 items-center lg:justify-self-start"
       routerLink="/"
       [attr.aria-label]="logoLabel()"
     >
@@ -18,11 +18,11 @@
       <img class="hidden h-9 w-auto dark:block" src="/brand/logo-mark-dark.svg" alt="" aria-hidden="true" width="655" height="689" />
     </a>
 
-    <nav class="hidden items-center gap-8 lg:flex" [attr.aria-label]="navigationLabel()">
+    <nav class="hidden items-center gap-2 lg:flex" [attr.aria-label]="navigationLabel()">
       @for (item of navigation(); track item.id ?? item.href) {
         @if (item.kind === 'link') {
           <a
-            class="min-h-11 whitespace-nowrap content-center text-lg font-medium text-fg-muted transition-colors hover:text-fg"
+            class="inline-flex items-center min-h-11 whitespace-nowrap px-3 text-lg font-medium text-fg-muted transition-colors hover:text-fg"
             [routerLink]="item.href"
             routerLinkActive="text-accent-bright"
             [routerLinkActiveOptions]="{ exact: item.href === '/' }"
@@ -41,7 +41,7 @@
       }
     </nav>
 
-    <div class="flex items-center gap-2 sm:gap-3">
+    <div class="flex items-center gap-2 sm:gap-3 lg:justify-self-end">
       <app-language-toggle class="hidden lg:flex" />
       <app-theme-toggle class="hidden lg:flex" />
       <button

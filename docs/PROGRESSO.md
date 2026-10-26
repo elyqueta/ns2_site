@@ -71,3 +71,19 @@
   - `src/app/i18n/pt.ts` + `src/app/i18n/en.ts` — chaves `sectionDropdownGlass`, `dropdownGlassDescription`.
 
 - **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (falhas pré-existentes inalteradas; `nav-dropdown.spec.ts` verde). Sem `#hex`, sem `any`, sem `console.log`.
+
+---
+
+## Correcção: Navbar alinhada/centrada + botão magnético do hero
+
+- **Causas raiz:**
+  1. Links simples do header não tinham padding horizontal (`px-3`); os triggers dos dropdowns tinham `px-3` + `gap-2` com chevron, criando intervalos desiguais entre textos do menu.
+  2. O contentor usava `flex justify-between` com logo estreito à esquerda e toggles largos à direita, descentrando o menu da página.
+  3. O botão primário do hero não passava `[magnetic]="true"`, então não seguia o cursor.
+
+- **Ficheiros alterados:**
+  - `src/app/shared/layout/header/header.html` — `<nav>` `gap-8` → `gap-2`; links simples ganham `px-3` + `inline-flex items-center` (sem `content-center`); container ganha `lg:grid lg:grid-cols-[1fr_auto_1fr]` com logo `lg:justify-self-start` e bloco direito `lg:justify-self-end` (menu centrado na página abaixo de `lg` nada muda).
+  - `src/app/shared/layout/header/nav-dropdown/nav-dropdown.html` — wrapper `relative group` → `inline-flex`; trigger `gap-2` → `gap-1.5`, `px-3` mantido (igual aos links); chevron `-mr-1`; painel ganha `left-0` (alinhado ao início do trigger).
+  - `src/app/pages/home/hero/hero.html` — botão primário ganha `[magnetic]="true"`.
+
+- **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (4 falhas pré-existentes não relacionadas; `nav-dropdown.spec.ts` verde).

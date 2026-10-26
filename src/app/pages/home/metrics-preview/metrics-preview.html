@@ -1,0 +1,19 @@
+<section class="border-b border-line bg-surface" [attr.aria-label]="copy.label | localized">
+  <div class="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-16">
+    <ul appRevealChildren class="grid gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line">
+      @for (item of copy.items; track item.description.pt) {
+        <li class="flex flex-col sm:px-8 sm:first:pl-0 sm:last:pr-0">
+          @if (item.prefix; as prefix) {
+            <span class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-fg-muted min-h-4">
+              {{ prefix | localized }}
+            </span>
+          }
+          <p class="font-display text-display font-semibold leading-none tracking-tight text-fg mt-3">
+            <span [appCountUp]="item.value">{{ item.value }}</span><span class="text-accent-bright">{{ item.suffix }}</span>
+          </p>
+          <p class="mt-3 max-w-[28ch] text-fg-muted">{{ item.description | localized }}</p>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

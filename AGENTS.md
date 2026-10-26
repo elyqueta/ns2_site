@@ -80,6 +80,7 @@ Dependências a acrescentar (e só estas, salvo aprovação): `gsap` (inclui Scr
 - O conteúdo oficial está em `docs/conteudo/*.md` (já convertido a partir dos PDF; **não tentes ler os PDF**). Português de **Angola**, ver `docs/conteudo/00-regras-de-escrita.md`.
 - **Nunca publiques informação interna** do preçário (margens, custos de fornecedores, estratégia de reajuste, provedores cloud/IA/WhatsApp, fórmulas, "preço promocional" como estratégia interna). Só se mostra o que está em `docs/conteudo/desenvolvimento-web.md`, e **apenas como "a partir de"**.
 - O texto do logo contém um erro ("Técnologia"). **Em texto do site escreve sempre "Tecnologia".** Não uses as variantes `logo-full*` (que incluem a linha com o erro); usa `logo-horizontal*` e `logo-mark*` (ver `docs/assets.md`).
+- **Excepção: as métricas da Home (`homeContent.metrics`) foram fornecidas e confirmadas pelo utilizador; não remover nem alterar sem ordem dele.**
 
 ### 4.5.1 Contacto
 - **WhatsApp é o canal principal**, email o alternativo. Botão flutuante de WhatsApp em todas as páginas. Formulário de contacto/orçamento: gera mensagem pré-preenchida para `wa.me` e oferece alternativa `mailto:`. Sem envio para servidores. Ver `docs/conteudo/contacto-e-legal.md`.

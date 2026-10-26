@@ -1,6 +1,13 @@
 import { LocalizedText, LocalizedWords } from '../i18n/types';
 import { MarqueeItem } from '../shared/ui/marquee/marquee';
 
+export interface HomeMetric {
+  readonly prefix: LocalizedText | null;
+  readonly value: number;
+  readonly suffix: string;
+  readonly description: LocalizedText;
+}
+
 export const homeContent = {
   hero: {
     eyebrow: {
@@ -192,6 +199,29 @@ export const homeContent = {
     linkLabel: { pt: 'Ver todas as notícias', en: 'View all news' } satisfies LocalizedText,
     readLabel: { pt: 'Ler artigo', en: 'Read article' } satisfies LocalizedText,
     minutesLabel: { pt: 'min de leitura', en: 'min read' } satisfies LocalizedText,
+  },
+  metrics: {
+    label: { pt: 'A NS2 em números', en: 'NS2 in numbers' } satisfies LocalizedText,
+    items: [
+      {
+        prefix: { pt: 'Mais de', en: 'Over' } satisfies LocalizedText,
+        value: 2,
+        suffix: '',
+        description: { pt: 'anos de experiência', en: 'years of experience' } satisfies LocalizedText,
+      } satisfies HomeMetric,
+      {
+        prefix: { pt: 'Mais de', en: 'Over' } satisfies LocalizedText,
+        value: 10,
+        suffix: '',
+        description: { pt: 'empresas confiaram em nós', en: 'companies have trusted us' } satisfies LocalizedText,
+      } satisfies HomeMetric,
+      {
+        prefix: null,
+        value: 95,
+        suffix: '%',
+        description: { pt: 'de satisfação dos clientes', en: 'client satisfaction' } satisfies LocalizedText,
+      } satisfies HomeMetric,
+    ] satisfies readonly HomeMetric[],
   },
   cta: {
     title: {

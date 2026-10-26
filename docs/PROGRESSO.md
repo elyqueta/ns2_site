@@ -95,3 +95,21 @@
 - **Causa raiz:** `HeroVideoDirective` usava um `IntersectionObserver` que chamava `pause()` sempre que o vídeo saía do viewport (rolagem da página), interrompendo o `loop`.
 - **Ficheiro alterado:** `src/app/shared/directives/hero-video.directive.ts` — removido o `IntersectionObserver` (`setupScrollAndVisibility`); mantido apenas o `visibilitychange` (pausa/retoma ao mudar de aba) e o `prefers-reduced-motion`. O `<video>` já tem `loop`+`autoplay` no HTML.
 - **Verificações:** `npm run build` passa; `npm test` sem regressões novas.
+
+---
+
+## Adição: Métricas da Home
+
+- **Valores:** fornecidos e confirmados pelo utilizador (mais de 2 anos de experiência; mais de 10 empresas; 95% de satisfação dos clientes). Excepção expressa à regra de não inventar estatística (`AGENTS.md` §4.5).
+- **Ficheiros alterados:**
+  - `src/app/data/home.ts` — interface `HomeMetric` + `homeContent.metrics` (label + 3 itens com prefix/value/suffix/description, tipados com `satisfies HomeMetric`).
+  - `src/app/pages/home/home.ts` — importa `HomeMetricsPreview` e adiciona a `imports`; remove `HomeProjectsPreview` duplicado.
+  - `src/app/pages/home/home.html` — `<app-home-metrics-preview />` imediatamente após `<app-home-hero />`.
+  - `src/app/shared/directives/count-up.directive.ts` — reposõe texto a 0 antes do `ScrollTrigger` (sem piscar), restaura valor final no `onComplete` e na limpeza; `prefers-reduced-motion` mantém o valor final (apenas fade curto).
+  - `AGENTS.md` §4.5 — linha de exceção para as métricas da Home.
+- **Ficheiros criados:**
+  - `src/app/pages/home/metrics-preview/metrics-preview.ts`
+  - `src/app/pages/home/metrics-preview/metrics-preview.html`
+  - `docs/conteudo/empresa.md`
+- **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (4 falhas pré-existentes não relacionadas). Sem `#hex`, sem `any`, sem texto hardcoded no `.html`.
+

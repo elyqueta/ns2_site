@@ -1,16 +1,5 @@
-import {
-  Directive,
-  DestroyRef,
-  ElementRef,
-  effect,
-  inject,
-  Input,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Directive, effect, inject, input } from '@angular/core';
 import { registerAnimationDirective } from './animation-directive';
-import { AnimationService } from '../../core/animation.service';
 import { I18nService } from '../../core/i18n.service';
 import { LocalizedWords } from '../../i18n/types';
 
@@ -19,176 +8,98 @@ import { LocalizedWords } from '../../i18n/types';
   standalone: true,
 })
 export class TypeWriterDirective {
-  @Input() appTypewriter: any;
-
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly element = this.elementRef.nativeElement;
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly platformId = inject(PLATFORM_ID);
+  readonly words = input<LocalizedWords>({ pt: [] });
   private readonly i18n = inject(I18nService);
 
-  private timeline: gsap.core.Timeline | null = null;
-  private cursorTween: gsap.core.Tween | null = null;
-  private intersectionObserver: IntersectionObserver | null = null;
-  private visibilityListener: (() => void) | null = null;
-
-  private shown = '';
-
-  constructor() {
-    registerAnimationDirective((element, runtime, mode) => {
-      const ctxEl = element as HTMLElement;
-      const cursorEl = ctxEl.parentElement?.querySelector<HTMLElement>('[data-typewriter-cursor]');
-
-      const wordsArray: string[] = this.i18n.words(this.appTypewriter);
-
-      if (mode.reducedMotion) {
-        if (wordsArray.length > 0) {
-          ctxEl.textContent = wordsArray[0];
-          this.shown = wordsArray[0];
-        }
-        if (cursorEl) {
-          runtime.gsap.set(cursorEl, { autoAlpha: 1 });
-        }
-        return;
-      }
-
-      if (!cursorEl) return;
-
-      this.cursorTween = runtime.gsap.to(cursorEl, {
-        autoAlpha: 0,
-        duration: 0.5,
-        yoyo: true,
-        repeat: -1,
-        paused: true,
-      });
-
-      const writeWord = (word: string) => {
-        return runtime.gsap.to(
-          { n: 0 },
-          {
-            n: word.length,
-            duration: word.length * 0.08,
-            snap: { n: 1 },
-            onUpdate: () => {
-              ctxEl.textContent = word.slice(0, Math.round((ctxEl as any).n));
-            },
-            onComplete: () => {
-              ctxEl.textContent = word;
-            },
-          },
-        );
-      };
-
-      const eraseWord = (word: string) => {
-        return runtime.gsap.to(
-          { n: word.length },
-          {
-            n: 0,
-            duration: word.length * 0.045,
-            snap: { n: 1 },
-            onUpdate: () => {
-              ctxEl.textContent = word.slice(0, Math.round((ctxEl as any).n));
-            },
-            onComplete: () => {
-              ctxEl.textContent = '';
-            },
-          },
-        );
-      };
-
-      let currentWordIndex = 0;
-
-      if (wordsArray.length > 0) {
-        ctxEl.textContent = wordsArray[0];
-        this.shown = wordsArray[0];
-      }
-
-      const tl = runtime.gsap.timeline({ repeat: -1 });
-
-      tl.eventCallback('onStart', () => {
-        this.cursorTween?.pause();
-      });
-
-      tl.to({}, { duration: 1.8 }).eventCallback('onComplete', () => {
-        this.cursorTween?.play();
-      });
-
-      tl.to({}, { duration: 0.35 }).eventCallback('onComplete', () => {
-        this.cursorTween?.pause();
-        eraseWord(this.shown).eventCallback('onComplete', () => {
-          currentWordIndex = (currentWordIndex + 1) % wordsArray.length;
-          const nextWord = wordsArray[currentWordIndex];
-          writeWord(nextWord).eventCallback('onComplete', () => {
-            this.shown = nextWord;
-            this.cursorTween?.play();
-          });
-        });
-      });
-
-      this.timeline = tl;
-
-      return () => {
-        if (this.timeline) {
-          this.timeline.kill();
-          this.timeline = null;
-        }
-        if (this.cursorTween) {
-          this.cursorTween.kill();
-          this.cursorTween = null;
-        }
-      };
-    });
-
-    this.setupScrollAndVisibility();
-    this.destroyRef.onDestroy(() => this.cleanup());
-  }
-
-  private setupScrollAndVisibility(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+  private readonly registration = registerAnimationDirective((element, runtime, mode) => {
+    const list = this.i18n.words(this.words());
+    if (list.length === 0) {
       return;
     }
 
-    const handleVisibilityChange = (): void => {
-      if (document.hidden) {
-        this.timeline?.pause();
-      } else {
-        this.timeline?.play();
+    element.textContent = list[0];
+    if (mode.reducedMotion || list.length < 2) {
+      return;
+    }
+
+    const cursor =
+      element.parentElement?.querySelector<HTMLElement>('[data-typewriter-cursor]') ?? null;
+    const gsap = runtime.gsap;
+    const state = { n: 0 };
+
+    const blink = cursor
+      ? gsap.to(cursor, { autoAlpha: 0, duration: 0.5, ease: 'steps(1)', repeat: -1, yoyo: true, paused: true })
+      : null;
+    const cursorSolid = (): void => {
+      blink?.pause();
+      if (cursor) {
+        gsap.set(cursor, { autoAlpha: 1 });
       }
     };
 
-    this.visibilityListener = handleVisibilityChange;
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    const timeline = gsap.timeline({ repeat: -1 });
+    list.forEach((word, index) => {
+      const next = list[(index + 1) % list.length];
+      timeline
+        .call(() => blink?.restart())
+        .to({}, { duration: 1.8 })
+        .call(cursorSolid)
+        .fromTo(
+          state,
+          { n: word.length },
+          {
+            n: 0,
+            duration: Math.max(word.length * 0.045, 0.2),
+            ease: 'none',
+            onUpdate: () => {
+              element.textContent = word.slice(0, Math.round(state.n));
+            },
+          },
+        )
+        .to({}, { duration: 0.35 })
+        .fromTo(
+          state,
+          { n: 0 },
+          {
+            n: next.length,
+            duration: Math.max(next.length * 0.08, 0.2),
+            ease: 'none',
+            onUpdate: () => {
+              element.textContent = next.slice(0, Math.round(state.n));
+            },
+          },
+        );
+    });
 
-    this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry) return;
-        if (entry.isIntersecting) {
-          this.timeline?.play();
-        } else {
-          this.timeline?.pause();
-        }
-      },
+    const view = element.ownerDocument.defaultView;
+    const observer = new IntersectionObserver(
+      ([entry]) => (entry?.isIntersecting ? timeline.play() : timeline.pause()),
       { threshold: 0.1 },
     );
+    observer.observe(element);
+    const onVisibility = (): void => {
+      if (element.ownerDocument.hidden) {
+        timeline.pause();
+      } else {
+        timeline.play();
+      }
+    };
+    element.ownerDocument.addEventListener('visibilitychange', onVisibility);
 
-    this.intersectionObserver.observe(this.element);
-  }
+    return () => {
+      observer.disconnect();
+      element.ownerDocument.removeEventListener('visibilitychange', onVisibility);
+      timeline.kill();
+      blink?.kill();
+      if (view) {
+        element.textContent = list[0];
+      }
+    };
+  });
 
-  private cleanup(): void {
-    if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-      this.intersectionObserver = null;
-    }
-    if (this.visibilityListener) {
-      document.removeEventListener('visibilitychange', this.visibilityListener);
-      this.visibilityListener = null;
-    }
-    if (this.timeline) {
-      this.timeline.kill();
-    }
-    if (this.cursorTween) {
-      this.cursorTween.kill();
-    }
-  }
+  private readonly refreshOnChange = effect(() => {
+    this.words();
+    this.i18n.lang();
+    this.registration.animation.refreshElement(this.registration.element);
+  });
 }

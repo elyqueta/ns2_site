@@ -136,6 +136,7 @@ export const pt = {
     buttonPrimary: 'Pedir orçamento',
     buttonSecondary: 'Conhecer serviços',
     buttonGhost: 'Saber mais',
+    buttonGlass: 'Vidro',
     sectionIndex: 'Componentes',
     headingPrefix: 'Tecnologia com',
     headingHighlight: 'propósito',

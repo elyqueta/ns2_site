@@ -1,6 +1,6 @@
 <section
   id="home-hero"
-  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line dark:bg-[#0a0e1a]"
+  class="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden border-b border-line bg-bg"
 >
   <video
     appHeroVideo
@@ -17,56 +17,48 @@
     height="720"
   ></video>
 
-  <div class="absolute inset-0 -z-10 bg-[#0a0e1a]/80" aria-hidden="true"></div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/75 to-[#0a0e1a]/30" aria-hidden="true"></div>
+  <!-- Véus: usam o token --bg, por isso mudam sozinhos com o tema -->
+  <div class="absolute inset-0 -z-10 bg-bg/55 dark:bg-bg/30" aria-hidden="true"></div>
   <div
-    class="absolute inset-x-0 bottom-0 -z-10 h-[40%] bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/30 to-transparent"
+    class="absolute inset-0 -z-10 bg-gradient-to-r from-bg/95 via-bg/70 to-bg/10 dark:from-bg/85 dark:via-bg/45 dark:to-transparent"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-bg/70 to-transparent dark:from-bg/60"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-x-0 bottom-0 -z-10 h-[40%] bg-gradient-to-t from-bg via-bg/40 to-transparent dark:via-bg/25"
     aria-hidden="true"
   ></div>
 
-  <div class="mx-auto w-full max-w-[1440px] relative z-10 px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
+  <div class="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-24 pt-20 sm:px-8 lg:px-16 lg:pb-28">
     <div class="max-w-5xl">
-      <p
-        class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.16em] text-accent-bright"
-      >
+      <p class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.16em] text-accent-bright">
         {{ copy.eyebrow | localized }}
       </p>
-      <h1
-        class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg"
-      >
-        <span
-          class="block"
-          appSplitText
-          appSplitTextAria="auto"
-          >{{ copy.titleBefore | localized }}</span
-        >
-        <span
-          class="block"
-          appTypewriter
-          [appTypewriter]="copy.titleHighlightWords"
-          aria-hidden="true"
-        ></span>
-        <span class="block" appSplitText appSplitTextAria="auto">
-          {{ copy.titleAfter | localized }}
-        </span>
-      </h1>
-      <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-white sm:mt-9">
+
+      @for (lang of languageKey(); track lang) {
+        <h1 class="max-w-[18ch] font-display text-display font-semibold leading-[1.05] tracking-tight text-fg">
+          <span class="block" appSplitText appSplitTextAria="auto">{{ copy.titleBefore | localized }}</span>
+          <span class="sr-only">{{ firstHighlight() }}</span>
+          <span class="block min-h-[1.05em] whitespace-nowrap text-accent-bright" aria-hidden="true">
+            <span appTypewriter [words]="heroWords">{{ firstHighlight() }}</span><span
+              data-typewriter-cursor
+              class="ml-1 inline-block h-[0.85em] w-[0.06em] translate-y-[0.08em] bg-accent-bright align-baseline"
+            ></span>
+          </span>
+          <span class="block" appSplitText appSplitTextAria="auto">{{ copy.titleAfter | localized }}</span>
+        </h1>
+      }
+
+      <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-fg sm:mt-9">
         {{ copy.description | localized }}
       </p>
+
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-        <app-button
-          [label]="heroWebLabel()"
-          href="/desenvolvimento-web"
-          size="lg"
-          [showArrow]="true"
-        />
-        <app-button
-          [label]="heroItLabel()"
-          href="/servicos"
-          variant="secondary"
-          size="lg"
-          [extraClasses]="heroItButtonClasses()"
-        />
+        <app-button [label]="heroWebLabel()" href="/desenvolvimento-web" size="lg" [showArrow]="true" />
+        <app-button [label]="heroItLabel()" href="/servicos" variant="glass" size="lg" />
       </div>
     </div>
   </div>

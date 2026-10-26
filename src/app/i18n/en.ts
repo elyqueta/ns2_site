@@ -145,6 +145,7 @@ export const en = {
     buttonPrimary: 'Request a quote',
     buttonSecondary: 'Explore services',
     buttonGhost: 'Learn more',
+    buttonGlass: 'Glass',
     sectionIndex: 'Components',
     headingPrefix: 'Technology with',
     headingHighlight: 'purpose',

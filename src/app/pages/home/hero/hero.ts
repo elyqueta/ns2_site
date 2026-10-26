@@ -7,6 +7,7 @@ import { HeroVideoDirective } from '../../../shared/directives/hero-video.direct
 import { TypeWriterDirective } from '../../../shared/directives/typewriter.directive';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { Button } from '../../../shared/ui/button/button';
+import { LocalizedWords } from '../../../i18n/types';
 
 @Component({
   selector: 'app-home-hero',
@@ -15,18 +16,15 @@ import { Button } from '../../../shared/ui/button/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeHero {
-  readonly copy = homeContent.hero;
+  readonly copy: typeof homeContent.hero = homeContent.hero;
+  readonly heroWords: LocalizedWords = homeContent.hero.titleHighlightWords;
+  readonly i18n = inject(I18nService);
   readonly languageKey = computed(() => [this.i18n.lang()] as const);
   readonly heroWebLabel = computed(() => this.i18n.t('actions.heroWeb'));
   readonly heroItLabel = computed(() => this.i18n.t('actions.heroIt'));
-  readonly heroItButtonClasses = computed(() => 'dark:bg-white/20 bg-white/20');
-  readonly i18n = inject(I18nService);
+  readonly firstHighlight = computed(() => this.i18n.words(this.copy.titleHighlightWords)[0] ?? '');
   private readonly whatsapp = inject(WhatsappService);
   readonly whatsappUrl = computed(() =>
     this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.whatsappMessage)),
   );
-
-  readonly heroWords: string[] = ['impulsiona', 'movimenta', 'acelera', 'potencia'];
-
-  readonly staticHighlight = computed(() => this.heroWords[0]);
 }

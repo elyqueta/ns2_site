@@ -82,3 +82,34 @@ Aplica movimento de vídeo de fundo ao hero da home. Segue o padrão do repo (`r
 - `appPageTransitionMotion` — cortina de transição entre rotas
 - `appMaskImage` — máscara de imagem
 - `appSpotlight` — luz de destaque
+- `appTypewriter` — efeito máquina de escrever palavra por palavra (animação de texto)
+
+### Directiva `appTypewriter`
+
+Ficheiro: `src/app/shared/directives/typewriter.directive.ts`
+
+Aplica animação de máquina de escrever a texto. Segue o padrão do repo (`registerAnimationDirective` + `AnimationService`).
+
+### Funcionalidades
+
+- **Entrada:** `@Input() words: LocalizedWords` — recebe objeto com campos `pt: readonly string[]` e `en?: readonly string[]`.
+- **Comportamento:** escreve a primeira palavra completa, depois apaga letra a letra, escreve a seguinte palavra letra a letra, repete em loop infinito.
+- **Tempos:** escrever ~80 ms/letra, apagar ~45 ms/letra, pausa com palavra completa ~1,8 s, pausa com palavra vazia ~0,35 s.
+- **Cursor:** visível enquanto escreve e apaga; pisca (autoAlpha 1↔0, ~0,5 s, yoyo) apenas nas pausas.
+- **`prefers-reduced-motion: reduce`:** mostra a primeira palavra estática, sem animação, cursor fixo.
+- **Pausa inteligente:** `IntersectionObserver` pausa quando o elemento sai do ecrã; `visibilitychange` pausa com o separador oculto e retoma ao voltar.
+- **Estado exposto:** `playing` (signal), `active` (signal, true se o texto está a ser animado) e `toggle()`.
+- **Limpeza:** `gsap.context()` + `ctx.revert()` e `ScrollTrigger.kill()` em `ngOnDestroy`/`DestroyRef`.
+
+### Seletor CSS
+
+`[appTypewriter]` — aplicado a um elemento `<span>` dentro de um `<h1>`.
+
+### Exemplo de uso
+
+```html
+<span class="block" appTypewriter [appTypewriter]="copy.titleHighlightWords" aria-hidden="true"></span>
+```
+
+---
+

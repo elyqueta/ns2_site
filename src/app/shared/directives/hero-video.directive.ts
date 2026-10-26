@@ -43,12 +43,15 @@ export class HeroVideoDirective {
       }
 
       this.injectSources();
-      this.play();
+      this.element.play().catch(() => {
+        // Silenciosamente mantém o poster em caso de erro
+      });
 
       const fadeIn = () => {
         if (this.element && this.element.style) {
           runtime.gsap.fromTo(this.element, { opacity: 0 }, { opacity: 1, duration: 0.6 });
         }
+        this.play();
       };
 
       this.element.addEventListener('canplay', fadeIn, { once: true });

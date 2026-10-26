@@ -1,32 +1,20 @@
-<section class="border-y border-line bg-surface py-14 lg:py-16">
+<section class="border-y border-line bg-svc-stage py-14 lg:pt-16 lg:pb-12 overflow-x-clip">
   <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16">
     <app-section-heading
       [index]="copy.index | localized"
       [title]="copy.title | localized"
       [description]="copy.description | localized"
     />
-    <div appHomeServicesPin class="mt-8 overflow-hidden lg:mt-10">
-      <div data-home-services-track class="flex flex-col gap-4 lg:flex-row lg:gap-6">
-        @for (service of services; track service.slug) {
-          <article
-            class="group relative min-w-0 rounded-card border border-line bg-bg p-6 transition-colors hover:border-accent/50 hover:bg-surface-2 lg:w-[min(28rem,42vw)] lg:shrink-0"
-          >
-            <div class="flex items-start justify-between gap-4">
-              <app-icon [name]="service.icone" class="text-accent-bright" />
-            </div>
-            <h3 class="mt-6 font-display text-h3 font-semibold text-fg">
-              {{ service.titulo | localized }}
-            </h3>
-            <p class="mt-2 min-h-14 text-fg-muted">{{ service.resumo | localized }}</p>
-            <a
-              class="mt-4 inline-flex min-h-11 items-center gap-2 whitespace-nowrap font-semibold text-accent-bright focus-visible:outline-offset-4"
-              [routerLink]="service.href"
-            >
-              {{ copy.cardLinkLabel | localized }}
-              <app-icon name="arrow" />
-            </a>
-          </article>
-        }
+    <div appHomeServicesPin class="mt-8 lg:mt-10">
+      <div class="relative left-[50%] -mx-[50vw] w-[100vw] overflow-x-auto lg:overflow-hidden">
+        <div
+          data-home-services-track
+          class="svc-track"
+        >
+          @for (service of servicosVidro(); track service.titulo.pt) {
+            <app-servico-vidro-card [item]="service" />
+          }
+        </div>
       </div>
       <div
         data-home-services-progress

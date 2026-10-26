@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { registerAnimationDirective } from './animation-directive';
 
 @Directive({
@@ -13,11 +13,45 @@ export class HomeServicesPin {
       return;
     }
 
-    const viewport = track.parentElement ?? element;
-    const scrollLength = () => Math.max(track.scrollWidth - viewport.clientWidth, 0);
-    if (scrollLength() === 0) {
-      return;
-    }
+    const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
+    const cx = () => window.innerWidth / 2;
+
+    const updateFocus = () => {
+      const centerX = cx();
+      for (const card of cards()) {
+        const r = card.getBoundingClientRect();
+        const d = Math.abs((r.left + r.width / 2) - centerX) / r.width;
+        card.style.setProperty('--focus', Math.max(0, 1 - d).toFixed(3));
+      }
+    };
+
+    const scrollLength = () => Math.max(track.scrollWidth - window.innerWidth, 0);
+
+    const ready = async () => {
+      await document.fonts.ready;
+      await Promise.all(
+        Array.from(track.querySelectorAll<HTMLImageElement>('img')).map(
+          (img) =>
+            img.complete
+              ? Promise.resolve()
+              : new Promise<void>((resolve) => {
+                  img.addEventListener('load', () => resolve(), { once: true });
+                  img.addEventListener('error', () => resolve(), { once: true });
+                }),
+        ),
+      );
+
+      // Posiciona o 1.º card centrado no ecrã ao entrar na secção
+      const firstCard = cards()[0];
+      if (firstCard) {
+        const pad = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+        const initialX = -(pad + firstCard.offsetWidth / 2 - window.innerWidth / 2);
+        runtime.gsap.set(track, { x: initialX });
+      }
+
+      updateFocus();
+      runtime.ScrollTrigger.refresh();
+    };
 
     runtime.gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
     const setProgress = runtime.gsap.quickSetter(progress, 'scaleX');
@@ -33,8 +67,28 @@ export class HomeServicesPin {
         scrub: 0.6,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: (self) => setProgress(self.progress),
+        onUpdate: (self) => {
+          setProgress(self.progress);
+          updateFocus();
+        },
       },
     });
+
+    ready().then(() => {
+      runtime.ScrollTrigger.refresh();
+    });
+
+    window.addEventListener('resize', updateFocus, { passive: true });
+    const observer = new MutationObserver(() => {
+      updateFocus();
+      runtime.ScrollTrigger.refresh();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    updateFocus();
+    return () => {
+      window.removeEventListener('resize', updateFocus);
+      observer.disconnect();
+    };
   });
 }

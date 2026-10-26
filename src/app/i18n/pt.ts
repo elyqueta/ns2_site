@@ -94,6 +94,9 @@ export const pt = {
     sectionButtons: 'Botões e ligações',
     sectionHeadings: 'Títulos de secção',
     sectionCards: 'Cartões',
+    sectionServicoVidro: 'Cartões de serviços (vidro)',
+    servicoVidroDescription:
+      'Cartão de vidro tingido com efeito de foco contínuo, usado na secção de serviços da home.',
     sectionBadges: 'Etiquetas',
     sectionIcons: 'Ícones',
     sectionMedia: 'Espaços de imagem',

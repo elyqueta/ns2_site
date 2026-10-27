@@ -190,6 +190,26 @@ export const homeContent = {
       },
     ],
   },
+  testimonials: {
+    index: { pt: 'Testemunhos', en: 'Testimonials' } satisfies LocalizedText,
+    title: {
+      pt: 'Relações que merecem ser ouvidas.',
+      en: 'Relationships worth hearing about.',
+    } satisfies LocalizedText,
+    description: {
+      pt: 'Estamos a reunir os testemunhos aprovados de pessoas que já estiveram connosco.',
+      en: 'We are gathering approved testimonials from people who have worked with us.',
+    } satisfies LocalizedText,
+    pendingLabel: {
+      pt: 'Conteúdo pendente de aprovação',
+      en: 'Content pending approval',
+    } satisfies LocalizedText,
+    items: [
+      { name: 'Oswaldo Bravo', role: { pt: 'TODO(conteúdo): confirmar função', en: 'TODO(content): confirm role' } satisfies LocalizedText },
+      { name: 'Matheus Sassapa', role: { pt: 'Comercial', en: 'Commercial' } satisfies LocalizedText },
+      { name: 'Elisandra Queta', role: { pt: 'Empreendedora', en: 'Entrepreneur' } satisfies LocalizedText },
+    ],
+  },
   news: {
     index: { pt: 'Notícias', en: 'News' } satisfies LocalizedText,
     title: {

@@ -1,5 +1,15 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: categorias visuais e testemunhos pendentes
+
+- **Estado:** concluída
+- **Decisões tomadas:**
+  - A navegação de categorias de `/desenvolvimento-web` usa cartões verticais de largura total, com imagens locais, estado activo e chevron à direita.
+  - Foram adicionados os ícones `chevron-left` e `chevron-right`; a navegação deixou de usar a seta com linha.
+  - As secções inferiores da página receberam hierarquia visual adicional através de superfícies, sombras e estados de hover, sem alterar o conteúdo oficial.
+  - A home passou a incluir uma secção de testemunhos com Oswaldo Bravo, Matheus Sassapa e Elisandra Queta. Os textos não foram inventados: os cartões estão marcados como conteúdo pendente de aprovação.
+- **Pendências:** fornecer e aprovar as frases exactas dos testemunhos; confirmar a função de Oswaldo Bravo.
+
 ## Refactor: catálogo de desenvolvimento web
 
 - **Estado:** concluída

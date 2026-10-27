@@ -248,6 +248,8 @@ export const en = {
       arrow: 'Arrow',
       'arrow-diagonal': 'Diagonal arrow',
       'chevron-down': 'Chevron down',
+      'chevron-left': 'Chevron left',
+      'chevron-right': 'Chevron right',
       sun: 'Sun',
       moon: 'Moon',
     menu: 'Menu',

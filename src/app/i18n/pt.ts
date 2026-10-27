@@ -239,6 +239,8 @@ export const pt = {
       arrow: 'Seta',
       'arrow-diagonal': 'Seta diagonal',
       'chevron-down': 'Seta para baixo',
+      'chevron-left': 'Seta para a esquerda',
+      'chevron-right': 'Seta para a direita',
       sun: 'Sol',
       moon: 'Lua',
     menu: 'Menu',

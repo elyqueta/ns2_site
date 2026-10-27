@@ -40,6 +40,7 @@ interface CatalogCategory {
   readonly id: string;
   readonly title: string;
   readonly description: string;
+  readonly imageSrc: string;
   readonly packages: readonly CatalogPackage[];
   readonly comingSoon: boolean;
 }
@@ -94,6 +95,7 @@ export class DesenvolvimentoWeb {
       id: 'websites',
       title: this.i18n.text(this.copy.sections.websites.index),
       description: this.i18n.text(this.copy.sections.websites.description),
+      imageSrc: '/images/servicos/websites-sistemas-web.webp',
       packages: webPacotes,
       comingSoon: false,
     },
@@ -101,6 +103,7 @@ export class DesenvolvimentoWeb {
       id: 'lojas',
       title: this.i18n.text(this.copy.sections.shops.index),
       description: this.i18n.text(this.copy.sections.shops.description),
+      imageSrc: '/images/heros/desenvolvimento-web.webp',
       packages: lojaPacotes,
       comingSoon: false,
     },
@@ -108,6 +111,7 @@ export class DesenvolvimentoWeb {
       id: 'sistemas',
       title: this.i18n.text(this.copy.sections.systems.index),
       description: this.i18n.text(this.copy.sections.systems.description),
+      imageSrc: '/images/servicos/sistemas-software.webp',
       packages: sistemaPacotes,
       comingSoon: false,
     },
@@ -115,6 +119,7 @@ export class DesenvolvimentoWeb {
       id: 'ia-automacao',
       title: this.i18n.t('webCatalog.aiCategory'),
       description: this.i18n.t('webCatalog.aiDescription'),
+      imageSrc: '/images/servicos/sistemas-software.webp',
       packages: [],
       comingSoon: true,
     },

@@ -1,0 +1,30 @@
+<section class="border-y border-line bg-surface">
+  <div class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
+    <app-section-heading
+      [index]="copy.index | localized"
+      [title]="copy.title | localized"
+      [description]="copy.description | localized"
+    />
+    <ul class="mt-10 grid gap-4 lg:grid-cols-3 xl:mt-14">
+      @for (item of copy.items; track item.name) {
+        <li
+          class="relative flex min-h-56 flex-col justify-between overflow-hidden rounded-card border border-line bg-bg p-6 shadow-lg sm:p-8"
+        >
+          <span
+            class="pointer-events-none absolute -right-3 -top-8 font-display text-[9rem] leading-none text-accent/10"
+            aria-hidden="true"
+          >
+            “
+          </span>
+          <p class="relative max-w-[24ch] text-sm font-semibold uppercase tracking-[0.08em] text-accent-bright">
+            {{ copy.pendingLabel | localized }}
+          </p>
+          <div class="relative mt-10">
+            <p class="font-display text-xl font-semibold text-fg">{{ item.name }}</p>
+            <p class="mt-2 text-sm text-fg-muted">{{ item.role | localized }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

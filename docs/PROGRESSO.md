@@ -5,6 +5,7 @@
 - **Estado:** concluída (refinamento visual)
 - **Decisões tomadas:**
   - A área principal de `/desenvolvimento-web` segue a nova referência: pesquisa no topo, banner horizontal em destaque com navegação e cartões de categorias em grelha responsiva.
+  - Os cartões de categorias foram estreitados em altura e passaram para proporção panorâmica `16:9`, evitando o aspecto quadrado e aproximando-se dos cartões largos da referência.
   - Cada categoria mantém imagens locais, estado activo e chevron, e a selecção continua a controlar o catálogo de pacotes abaixo.
   - Foram adicionados os ícones `chevron-left` e `chevron-right`; a navegação deixou de usar a seta com linha.
   - As secções inferiores da página receberam hierarquia visual adicional através de superfícies, sombras e estados de hover, sem alterar o conteúdo oficial.

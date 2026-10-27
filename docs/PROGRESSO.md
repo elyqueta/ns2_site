@@ -4,6 +4,7 @@
 
 - **Estado:** concluída
 - O preview de projectos da Home passou a permitir navegar entre os projectos confirmados através de chevrons acessíveis, mantendo cada cartão ligado à sua página interna de detalhe.
+- O card de projecto acima da pesquisa em `/desenvolvimento-web` usa agora os mesmos chevrons, projectos confirmados, links internos e fundos locais do preview da Home.
 - Os fundos do carrossel usam apenas assets locais existentes: websites para a Gráfica Viva e sistemas/software para o projecto Foco. Não foi usada a URL externa que constava no registo do Foco.
 - O banner de destaque de `/desenvolvimento-web` passou a actualizar imagem, título e descrição de acordo com a categoria seleccionada, mantendo o catálogo de pacotes sincronizado.
 - **Pendências:** substituir os fundos provisórios pelos assets específicos dos projectos quando forem fornecidos.

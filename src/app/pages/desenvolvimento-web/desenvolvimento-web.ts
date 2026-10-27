@@ -11,6 +11,7 @@ import {
   processoDesenvolvimentoWeb,
   sistemaPacotes,
 } from '../../data/desenvolvimento-web';
+import { projectos } from '../../data/projectos';
 import { lojaPacotes, NivelWeb } from '../../data/desenvolvimento-web';
 import { notaLegalPacotes, PacoteWeb, webPacotes } from '../../data/web-pacotes';
 import { RevealChildren } from '../../shared/directives/reveal-children.directive';
@@ -69,6 +70,12 @@ export class DesenvolvimentoWeb {
   readonly catalogClearSearch = computed(() => this.i18n.t('webCatalog.clearSearch'));
   readonly catalogPrevious = computed(() => this.i18n.t('webCatalog.previousCategory'));
   readonly catalogNext = computed(() => this.i18n.t('webCatalog.nextCategory'));
+  readonly projectPrevious = computed(() =>
+    this.i18n.lang() === 'en' ? 'Previous project' : 'Projecto anterior',
+  );
+  readonly projectNext = computed(() =>
+    this.i18n.lang() === 'en' ? 'Next project' : 'Projecto seguinte',
+  );
   readonly catalogComingSoon = computed(() => this.i18n.t('webCatalog.comingSoon'));
   readonly catalogAiEmpty = computed(() => this.i18n.t('webCatalog.aiEmpty'));
   readonly catalogNoResults = computed(() => this.i18n.t('webCatalog.noResults'));
@@ -89,6 +96,22 @@ export class DesenvolvimentoWeb {
     ),
   );
   readonly searchTerm = signal('');
+  private readonly projectImages = [
+    '/images/servicos/websites-sistemas-web.webp',
+    '/images/servicos/sistemas-software.webp',
+  ] as const;
+  readonly featuredProjects = projectos
+    .filter((project) => !project.brevemente)
+    .map((project, index) => ({
+      ...project,
+      imageSrc: this.projectImages[index % this.projectImages.length],
+    }));
+  readonly activeProjectIndex = signal(0);
+  readonly activeProject = computed(() => this.featuredProjects[this.activeProjectIndex()]);
+  readonly hasPreviousProject = computed(() => this.activeProjectIndex() > 0);
+  readonly hasNextProject = computed(
+    () => this.activeProjectIndex() < this.featuredProjects.length - 1,
+  );
   readonly activeCategoryIndex = signal(0);
   readonly catalogCategories = computed<readonly CatalogCategory[]>(() => [
     {
@@ -235,6 +258,16 @@ export class DesenvolvimentoWeb {
 
   previousCategory(): void {
     this.activeCategoryIndex.update((index) => Math.max(index - 1, 0));
+  }
+
+  previousProject(): void {
+    this.activeProjectIndex.update((index) => Math.max(index - 1, 0));
+  }
+
+  nextProject(): void {
+    this.activeProjectIndex.update((index) =>
+      Math.min(index + 1, this.featuredProjects.length - 1),
+    );
   }
 
   nextCategory(): void {

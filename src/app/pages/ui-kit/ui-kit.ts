@@ -259,6 +259,17 @@ export class UiKit {
     }),
   );
 
+  readonly bentoPacotes = computed(() =>
+    webPacotes.map((item) => ({
+      ...criarPacoteVidro(item, (v) => v.pt, {
+        startingAt: pt.actions.startingAt,
+        mostChosen: pt.actions.maisEscolhido,
+        learnMore: pt.actions.learnMore,
+      }),
+      bento: true,
+    })),
+  );
+
   readonly breadcrumbs: readonly BreadcrumbItem[] = [
     { label: pt.uiKit.breadcrumbHome, href: '/' },
     { label: pt.nav.services, href: '/servicos' },

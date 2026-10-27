@@ -537,6 +537,11 @@
     }
   }
 
+  .pkg-card-bento {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
   @media (max-width: 480px) {
     :root {
       --svc-gap: 16px;

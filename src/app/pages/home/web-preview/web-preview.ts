@@ -18,12 +18,13 @@ export class HomeWebPreview {
   private readonly i18n = inject(I18nService);
   readonly copy = homeContent.web;
   readonly packages = computed(() =>
-    webPacotes.map((item) =>
-      criarPacoteVidro(item, (v) => this.i18n.text(v), {
+    webPacotes.map((item) => ({
+      ...criarPacoteVidro(item, (v) => this.i18n.text(v), {
         startingAt: this.i18n.text(this.copy.startingAt),
         mostChosen: this.i18n.t('actions.maisEscolhido'),
         learnMore: this.i18n.t('actions.learnMore'),
       }),
-    ),
+      bento: true,
+    })),
   );
 }

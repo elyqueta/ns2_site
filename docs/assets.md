@@ -34,6 +34,15 @@
 
 > **Pendência:** imagens hp.webp e knup.webp em falta. Registadas em `PROGRESSO.md`.
 
+## Imagens de pacotes web (mosaico da home)
+
+- `public/images/pacotes/landing-page.webp` (2000×800, 2,5:1) — **em falta**
+- `public/images/pacotes/site-profissional.webp` (1200×1400, 0,85:1) — **em falta**
+- `public/images/pacotes/site-institucional.webp` (1000×1000, 1:1) — **em falta**
+- `public/images/pacotes/site-empresarial.webp` (1400×1000, 1,4:1) — **em falta**
+
+> **Pendência:** fotografias dos pacotes web em falta. Enquanto não existirem, o cartão mostra gradiente na cor do pacote.
+
 ## Imagens de conteúdo
 
 - `public/images/sobre/quem-somos.webp` — secção "Quem somos" da home

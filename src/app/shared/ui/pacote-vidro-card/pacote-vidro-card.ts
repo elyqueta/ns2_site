@@ -15,6 +15,9 @@ export interface PacoteVidroCardData {
   readonly ctaLabel: string;
   readonly destaque: boolean;
   readonly destaqueLabel: string;
+  readonly objectPosition: string;
+  readonly gridPosition: string;
+  readonly bento: boolean;
 }
 
 @Component({
@@ -25,4 +28,5 @@ export interface PacoteVidroCardData {
 })
 export class PacoteVidroCard {
   readonly item = input.required<PacoteVidroCardData>();
+  readonly bento = input(false);
 }

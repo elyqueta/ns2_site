@@ -100,6 +100,9 @@ export const pt = {
     sectionPacoteVidro: 'Pacotes de web (vidro)',
     pacoteVidroDescription:
       'Cartão de vidro tingido para pacotes de desenvolvimento web, com preço a partir de e selo de destaque.',
+    sectionPacoteMosaico: 'Mosaico de pacotes web',
+    pacoteMosaicoDescription:
+      'Disposição bento dos pacotes de desenvolvimento web, apenas em ecrãs grandes.',
     sectionBadges: 'Etiquetas',
     sectionIcons: 'Ícones',
     sectionMedia: 'Espaços de imagem',

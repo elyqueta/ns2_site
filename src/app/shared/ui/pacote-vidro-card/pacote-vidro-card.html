@@ -1,10 +1,10 @@
-<a class="pkg-card" [routerLink]="item().href" [style.--tint-rgb]="item().tintRgb">
+<a class="pkg-card" [class.pkg-card-bento]="bento()" [routerLink]="item().href" [style.--tint-rgb]="item().tintRgb">
   @if (item().destaque) {
     <span class="svc-badge">{{ item().destaqueLabel }}</span>
   }
   @if (item().imagemSrc; as src) {
     <div class="pkg-media">
-      <img [src]="src" alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+      <img [src]="src" [style.object-position]="item().objectPosition" alt="" width="1200" height="1500" loading="lazy" decoding="async" />
     </div>
   }
   <div class="pkg-scrim"></div>

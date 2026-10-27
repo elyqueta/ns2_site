@@ -110,6 +110,9 @@ export const en = {
     sectionPacoteVidro: 'Web packages (glass)',
     pacoteVidroDescription:
       'Tinted glass card for web development packages, with starting price and featured badge.',
+    sectionPacoteMosaico: 'Web package mosaic',
+    pacoteMosaicoDescription:
+      'Bento layout of web development packages, large screens only.',
     sectionBadges: 'Badges',
     sectionIcons: 'Icons',
     sectionMedia: 'Media placeholders',

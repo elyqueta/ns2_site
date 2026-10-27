@@ -199,6 +199,22 @@
       </p>
     </section>
 
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="pacote-mosaico-title">
+      <h2 id="pacote-mosaico-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionPacoteMosaico }}
+      </h2>
+      <ul class="mt-7 grid grid-cols-2 gap-6 lg:grid lg:grid-cols-12 lg:grid-rows-2 lg:gap-6 lg:auto-rows-[clamp(260px,22vw,320px)]">
+        @for (card of bentoPacotes(); track card.titulo) {
+          <li class="w-full {{ card.gridPosition }}">
+            <app-pacote-vidro-card [item]="card" [bento]="true" />
+          </li>
+        }
+      </ul>
+      <p class="mt-4 max-w-[62ch] text-sm text-fg-muted">
+        {{ copy.pacoteMosaicoDescription }}
+      </p>
+    </section>
+
     <section class="border-t border-line py-12 sm:py-16" aria-labelledby="badges-title">
       <h2 id="badges-title" class="font-display text-h2 font-semibold">{{ copy.sectionBadges }}</h2>
       <div class="mt-7 flex flex-wrap gap-3 rounded-2xl border border-line bg-surface p-5 sm:p-8">

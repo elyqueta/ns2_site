@@ -464,19 +464,19 @@
         <p class="mt-4 font-semibold text-fg">
           {{ copy.sections.maintenance.priceLabel | localized }} {{ maintenancePrice | kz }}/mês
         </p>
+        <a
+          class="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright"
+          [href]="maintenanceWhatsappUrl()"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <app-icon name="whatsapp" />
+          {{ copy.labels.quoteLabel | localized }}
+        </a>
         <p class="mt-4 max-w-[62ch] leading-relaxed text-fg-muted">
           {{ copy.sections.maintenance.description | localized }}
         </p>
       </div>
-      <a
-        class="mt-7 inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-button bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-bright lg:mt-0"
-        [href]="maintenanceWhatsappUrl()"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <app-icon name="whatsapp" />
-        {{ copy.labels.quoteLabel | localized }}
-      </a>
     </article>
   </section>
 

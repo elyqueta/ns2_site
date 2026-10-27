@@ -1,5 +1,11 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: CTA de manutenção e overflow horizontal da Home
+
+- **Estado:** concluída
+- O botão “Pedir orçamento” da faixa de manutenção foi movido para o lado esquerdo, entre o preço e o último parágrafo, seguindo a referência visual.
+- A raiz do template da Home passou a recortar overflow horizontal dos componentes full-bleed, removendo a scrollbar horizontal causada pelas pistas de serviços/testemunhos.
+
 ## Correcção: falhas da suite de testes
 
 - **Estado:** concluída

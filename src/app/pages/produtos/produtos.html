@@ -63,11 +63,9 @@
               <span class="sr-only">{{ category.titulo | localized }}</span>
             </a>
           </div>
-          <app-media-slot
+          <app-product-category-card
             class="lg:col-span-5"
-            [alt]="category.imagem.alt | localized"
-            [expectedFile]="category.imagem.ficheiroEsperado | localized"
-            [src]="category.imagemSrc"
+            [item]="category.productCard"
           />
         </div>
 

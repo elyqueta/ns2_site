@@ -1,0 +1,29 @@
+<a
+  class="group relative isolate flex min-h-72 overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:min-h-80"
+  [routerLink]="item().href"
+>
+  <img
+    class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+    [src]="item().imageSrc"
+    [alt]="item().imageAlt | localized"
+  />
+  <span class="absolute inset-0 bg-linear-to-t from-bg via-bg/55 to-bg/5" aria-hidden="true"></span>
+  <span
+    class="absolute inset-x-0 bottom-0 flex flex-col p-5 transition-transform duration-500 sm:p-6 lg:translate-y-16 lg:group-hover:translate-y-0 lg:group-focus-within:translate-y-0"
+  >
+    <span class="font-display text-xl font-semibold text-fg sm:text-2xl">
+      {{ item().title | localized }}
+    </span>
+    <span
+      class="mt-3 max-w-[42ch] text-sm leading-relaxed text-fg-muted transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100"
+    >
+      {{ item().description | localized }}
+    </span>
+    <span
+      class="mt-4 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-accent-bright transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100"
+    >
+      {{ item().actionLabel | localized }}
+      <app-icon name="arrow" />
+    </span>
+  </span>
+</a>

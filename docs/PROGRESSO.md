@@ -1,5 +1,13 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: cartões de produtos com estado hover
+
+- **Estado:** concluída
+- Criado o componente reutilizável `ProductCategoryCard`, com imagem local de categoria, título visível no estado normal e descrição/acção reveladas em hover ou foco no desktop.
+- Em mobile e tablet, a informação permanece visível sem depender de hover.
+- A mesma UI foi aplicada à secção de produtos da Home e aos cartões de categoria da página `/produtos`, mantendo os links, dados e imagens existentes.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas.
+
 ## Correcção: CTA de manutenção e overflow horizontal da Home
 
 - **Estado:** concluída

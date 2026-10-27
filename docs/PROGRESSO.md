@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: proporções e transições dos cards de produtos
+
+- **Estado:** concluída
+- Os cards de destaque dos produtos passaram a ter uma altura mínima uniforme de `28rem`, com área visual superior ampliada e conteúdo distribuído de forma consistente.
+- O estado normal recebeu espaçamento, sombra e fallback visual mais equilibrados, mantendo os tokens dos temas claro e escuro e sem alterar dados ou funcionalidades.
+- O hover/foco desktop passou a usar uma transição coordenada de `400ms`, com curva suave, expansão visual por transformação, overlay gradual e barra de acção estável, sem alterar a altura da grelha.
+- Mobile e tablet continuam a apresentar todo o conteúdo sem depender de hover; a redução de movimento mantém as transições desactivadas quando solicitada pelo sistema.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas. O aviso do orçamento inicial permanece pré-existente.
+
 ## Correcção: cards de destaque de produtos com hover imersivo
 
 - **Estado:** concluída

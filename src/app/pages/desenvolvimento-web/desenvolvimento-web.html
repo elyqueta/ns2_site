@@ -77,7 +77,7 @@
           <div class="relative min-h-64 overflow-hidden sm:min-h-80">
             <img
               class="absolute inset-0 size-full object-cover"
-              src="/images/heros/desenvolvimento-web.webp"
+              [src]="activeCategory()?.imageSrc ?? '/images/heros/desenvolvimento-web.webp'"
               alt=""
               aria-hidden="true"
             />
@@ -88,13 +88,13 @@
             <div class="relative flex min-h-64 items-end justify-between gap-5 p-6 sm:min-h-80 sm:p-10">
               <div class="max-w-xl">
                 <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-                  {{ copy.sections.websites.index | localized }}
+                  {{ activeCategory()?.title }}
                 </p>
                 <h2 class="mt-4 font-display text-2xl font-semibold tracking-tight text-fg sm:text-4xl">
-                  {{ copy.sections.websites.title | localized }}
+                  {{ activeCategory()?.title }}
                 </h2>
                 <p class="mt-3 max-w-[52ch] text-sm leading-relaxed text-fg-muted sm:text-base">
-                  {{ copy.sections.websites.description | localized }}
+                  {{ activeCategory()?.description }}
                 </p>
               </div>
               <div class="flex shrink-0 gap-2">

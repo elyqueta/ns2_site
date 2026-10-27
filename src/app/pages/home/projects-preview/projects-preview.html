@@ -5,33 +5,57 @@
     [description]="copy.description | localized"
   />
   <div class="mt-10 xl:mt-14">
-    <a
-      class="group relative block min-h-72 overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:min-h-96"
-      [href]="'/projectos/' + featuredProject.slug"
-    >
+    @if (featuredProject(); as project) {
+    <div class="relative">
       <img
-        class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
-        [src]="featuredProject.imagem.escuro.pt.replace('public/', '/')"
-        [alt]="featuredProject.imagem.alt | localized"
+        class="absolute inset-0 size-full rounded-card object-cover"
+        [src]="project.imageSrc"
+        [alt]="project.imagem.alt | localized"
       />
-      <span class="absolute inset-0 bg-linear-to-r from-bg/95 via-bg/55 to-transparent"></span>
-      <span class="relative flex min-h-72 items-end p-6 sm:min-h-96 sm:p-10">
-        <span class="max-w-xl">
-          <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-            {{ featuredProject.tipo | localized }}
-          </span>
-          <span class="mt-4 block font-display text-3xl font-semibold text-fg sm:text-5xl">
-            {{ featuredProject.nome | localized }}
-          </span>
-          <span class="mt-4 block max-w-[52ch] text-fg-muted">
-            {{ featuredProject.descricao | localized }}
-          </span>
-          <span class="mt-6 inline-flex items-center gap-2 font-semibold text-accent-bright">
-            {{ copy.title | localized }}
-            <app-icon name="chevron-right" />
+      <a
+        class="group relative block min-h-72 overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:min-h-96"
+        [href]="'/projectos/' + project.slug"
+      >
+        <span class="absolute inset-0 bg-linear-to-r from-bg/95 via-bg/55 to-transparent"></span>
+        <span class="relative flex min-h-72 items-end p-6 sm:min-h-96 sm:p-10">
+          <span class="max-w-xl">
+            <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+              {{ project.tipo | localized }}
+            </span>
+            <span class="mt-4 block font-display text-3xl font-semibold text-fg sm:text-5xl">
+              {{ project.nome | localized }}
+            </span>
+            <span class="mt-4 block max-w-[52ch] text-fg-muted">
+              {{ project.descricao | localized }}
+            </span>
+            <span class="mt-6 inline-flex items-center gap-2 font-semibold text-accent-bright">
+              {{ copy.title | localized }}
+              <app-icon name="chevron-right" />
+            </span>
           </span>
         </span>
-      </span>
-    </a>
+      </a>
+      <div class="absolute right-4 top-4 z-10 flex gap-2 sm:right-6 sm:top-6">
+        <button
+          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg backdrop-blur transition-colors hover:border-accent hover:text-accent-bright disabled:cursor-not-allowed disabled:opacity-40"
+          type="button"
+          [attr.aria-label]="copy.previous | localized"
+          [disabled]="!hasPreviousProject()"
+          (click)="previousProject()"
+        >
+          <app-icon name="chevron-left" />
+        </button>
+        <button
+          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg backdrop-blur transition-colors hover:border-accent hover:text-accent-bright disabled:cursor-not-allowed disabled:opacity-40"
+          type="button"
+          [attr.aria-label]="copy.next | localized"
+          [disabled]="!hasNextProject()"
+          (click)="nextProject()"
+        >
+          <app-icon name="chevron-right" />
+        </button>
+      </div>
+    </div>
+    }
   </div>
 </section>

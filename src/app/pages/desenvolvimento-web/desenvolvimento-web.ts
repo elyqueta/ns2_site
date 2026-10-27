@@ -17,6 +17,8 @@ import { RevealChildren } from '../../shared/directives/reveal-children.directiv
 import { Accordion, AccordionItem } from '../../shared/ui/accordion/accordion';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { Icon } from '../../shared/ui/icon/icon';
+import { PacoteVidroCard } from '../../shared/ui/pacote-vidro-card/pacote-vidro-card';
+import { criarPacoteVidro } from '../../shared/ui/pacote-vidro-card/pacote-vidro.mapper';
 import { KzPipe } from '../../shared/pipes/kz.pipe';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
@@ -31,7 +33,7 @@ interface PackageView {
 
 @Component({
   selector: 'app-desenvolvimento-web',
-  imports: [Accordion, CtaBand, Icon, KzPipe, LocalizedPipe, PageHero, RevealChildren, RouterLink],
+  imports: [Accordion, CtaBand, Icon, KzPipe, LocalizedPipe, PacoteVidroCard, PageHero, RevealChildren],
   templateUrl: './desenvolvimento-web.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +55,15 @@ export class DesenvolvimentoWeb {
       ...item,
       ...this.createPackageView(item.slug, this.i18n.text(item.nome)),
     })),
+  );
+  readonly websiteCards = computed(() =>
+    webPacotes.map((item) =>
+      criarPacoteVidro(item, (v) => this.i18n.text(v), {
+        startingAt: this.i18n.text(this.copy.labels.startingAt),
+        mostChosen: this.maisEscolhido(),
+        learnMore: this.learnMoreLabel(),
+      }),
+    ),
   );
   readonly shopPackages = computed(() =>
     lojaPacotes.map((item) => ({

@@ -1,0 +1,31 @@
+<a class="pkg-card" [routerLink]="item().href" [style.--tint-rgb]="item().tintRgb">
+  @if (item().destaque) {
+    <span class="svc-badge">{{ item().destaqueLabel }}</span>
+  }
+  @if (item().imagemSrc; as src) {
+    <div class="pkg-media">
+      <img [src]="src" alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+    </div>
+  }
+  <div class="pkg-scrim"></div>
+  <div class="pkg-glass"></div>
+  <div class="pkg-body">
+    <div class="pkg-head">
+      <span class="svc-chip"><app-icon [name]="item().icone" /></span>
+      <h3 class="pkg-title">{{ item().titulo }}</h3>
+    </div>
+    <div class="pkg-details">
+      <div class="pkg-details-inner">
+        <div>
+          <span class="pkg-price-label">{{ item().precoLabel }}</span>
+          <p class="pkg-price-value">{{ item().preco | kz }}</p>
+        </div>
+        <p class="pkg-meta">{{ item().meta }}</p>
+        <div class="svc-cta">
+          <span>{{ item().ctaLabel }}</span>
+          <app-icon name="arrow" />
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

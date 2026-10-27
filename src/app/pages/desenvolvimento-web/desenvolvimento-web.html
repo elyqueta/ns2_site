@@ -34,50 +34,10 @@
         </p>
       </div>
 
-      <ul class="mt-10 grid gap-6 lg:grid-cols-2 align-items-stretch">
-        @for (package of websitePackages(); track package.slug) {
-          <li [id]="package.slug" class="flex flex-col min-h-0">
-            <article
-              class="flex h-full flex-col rounded-card border p-8 sm:p-10"
-              [class.border-accent]="package.destaque"
-              [class.border-line]="!package.destaque"
-              [class.bg-bg]="!package.destaque"
-            >
-              <div class="flex flex-wrap items-start justify-between gap-5 mb-8">
-                <div class="shrink-0 text-left">
-                  <p class="text-sm font-medium text-fg-muted uppercase tracking-wider">
-                    {{ copy.labels.startingAt | localized }}
-                  </p>
-                  <p class="mt-2 font-display text-3xl font-semibold text-fg">
-                    {{ package.aPartirDe | kz }}
-                  </p>
-                </div>
-                <div>
-                  @if (package.destaque) {
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line text-sm font-semibold text-accent-bright">
-                      {{ maisEscolhido() }}
-                      <app-icon name="check" class="mt-0.5 shrink-0 text-accent-bright" />
-                    </span>
-                  }
-                  <h3 class="mt-3 font-display text-h2 font-semibold tracking-tight text-fg">
-                    {{ package.nome | localized }}
-                  </h3>
-                  <p class="mt-4 max-w-[60ch] text-base text-fg-muted leading-relaxed">
-                    {{ package.descricao | localized }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="mt-auto pt-10">
-                <a
-                  class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-button bg-accent px-6 py-3.5 font-semibold text-on-accent transition-colors hover:bg-accent-bright w-full sm:w-auto"
-                  [routerLink]="package.sectionUrl"
-                >
-                  <app-icon name="arrow-diagonal" />
-                  {{ learnMoreLabel() }}
-                </a>
-              </div>
-            </article>
+      <ul class="mt-10 grid justify-items-center gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        @for (card of websiteCards(); track card.titulo) {
+          <li class="w-full max-w-[340px]">
+            <app-pacote-vidro-card [item]="card" />
           </li>
         }
       </ul>

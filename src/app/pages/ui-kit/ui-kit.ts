@@ -22,6 +22,8 @@ import { ProjectCard } from '../../shared/ui/project-card/project-card';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
 import { ServiceCard } from '../../shared/ui/service-card/service-card';
 import { ServicoVidroCard, ServicoVidroCardData } from '../../shared/ui/servico-vidro-card/servico-vidro-card';
+import { PacoteVidroCard } from '../../shared/ui/pacote-vidro-card/pacote-vidro-card';
+import { criarPacoteVidro, PacoteVidroCardData } from '../../shared/ui/pacote-vidro-card/pacote-vidro.mapper';
 import { ThemeToggle } from '../../shared/ui/theme-toggle/theme-toggle';
 import { DataPtPipe } from '../../shared/pipes/data-pt.pipe';
 import { KzPipe } from '../../shared/pipes/kz.pipe';
@@ -33,6 +35,7 @@ import {
   ProjectCardData,
   ServiceCardData,
 } from '../../shared/ui/card-content';
+import { webPacotes } from '../../data/web-pacotes';
 import { pt } from '../../i18n/pt';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { CountUp } from '../../shared/directives/count-up.directive';
@@ -83,6 +86,7 @@ interface PaletteToken {
     ServicoVidroCard,
     SectionHeading,
     ServiceCard,
+    PacoteVidroCard,
     Reveal,
     RevealChildren,
     SplitTextReveal,
@@ -239,6 +243,21 @@ export class UiKit {
     ctaLabel: { pt: this.copy.cardService, en: this.copy.cardService },
     badge: true,
   }));
+
+  readonly pacoteVidroItem = computed<PacoteVidroCardData>(() =>
+    criarPacoteVidro(webPacotes[0], (v) => v.pt, {
+      startingAt: pt.actions.startingAt,
+      mostChosen: pt.actions.maisEscolhido,
+      learnMore: pt.actions.learnMore,
+    }),
+  );
+  readonly pacoteVidroItemDestaque = computed<PacoteVidroCardData>(() =>
+    criarPacoteVidro(webPacotes[2], (v) => v.pt, {
+      startingAt: pt.actions.startingAt,
+      mostChosen: pt.actions.maisEscolhido,
+      learnMore: pt.actions.learnMore,
+    }),
+  );
 
   readonly breadcrumbs: readonly BreadcrumbItem[] = [
     { label: pt.uiKit.breadcrumbHome, href: '/' },

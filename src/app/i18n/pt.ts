@@ -97,6 +97,9 @@ export const pt = {
     sectionServicoVidro: 'Cartões de serviços (vidro)',
     servicoVidroDescription:
       'Cartão de vidro tingido com efeito de foco contínuo, usado na secção de serviços da home.',
+    sectionPacoteVidro: 'Pacotes de web (vidro)',
+    pacoteVidroDescription:
+      'Cartão de vidro tingido para pacotes de desenvolvimento web, com preço a partir de e selo de destaque.',
     sectionBadges: 'Etiquetas',
     sectionIcons: 'Ícones',
     sectionMedia: 'Espaços de imagem',

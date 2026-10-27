@@ -186,6 +186,19 @@
       </p>
     </section>
 
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="pacote-vidro-title">
+      <h2 id="pacote-vidro-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionPacoteVidro }}
+      </h2>
+      <div class="mt-7 flex flex-col gap-8 sm:flex-row sm:items-start">
+        <app-pacote-vidro-card [item]="pacoteVidroItem()" />
+        <app-pacote-vidro-card [item]="pacoteVidroItemDestaque()" />
+      </div>
+      <p class="mt-4 max-w-[62ch] text-sm text-fg-muted">
+        {{ copy.pacoteVidroDescription }}
+      </p>
+    </section>
+
     <section class="border-t border-line py-12 sm:py-16" aria-labelledby="badges-title">
       <h2 id="badges-title" class="font-display text-h2 font-semibold">{{ copy.sectionBadges }}</h2>
       <div class="mt-7 flex flex-wrap gap-3 rounded-2xl border border-line bg-surface p-5 sm:p-8">

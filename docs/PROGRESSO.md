@@ -113,3 +113,29 @@
   - `docs/conteudo/empresa.md`
 - **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros); `npm test` sem novas regressões (4 falhas pré-existentes não relacionadas). Sem `#hex`, sem `any`, sem texto hardcoded no `.html`.
 
+---
+
+## Adição: Pacotes de web em estilo vidro na home, em /desenvolvimento-web e no ui-kit
+
+- **Estado:** concluída
+- **Decisões tomadas:**
+  - Novo componente `app-pacote-vidro-card` em `src/app/shared/ui/pacote-vidro-card/` (`.ts`, `.html`, `.mapper.ts`), com CSS próprio `.pkg-*` em `@layer utilities` (bloco anterior `.svc-card-fluid`/`.svc-price*` removido).
+  - Comportamento: em repouso mostra só a fotografia, o nome em baixo e o selo "Mais escolhido"; no hover/foco de teclado aparece o painel de vidro, o nome sobe e entram preço, páginas e prazo, mais o botão. Em ecrãs sem hover (`@media (hover: none)`) a informação fica sempre visível.
+  - Tons da marca por slug: landing `63 111 181`, institucional `36 140 156`, profissional `84 94 214`, empresarial `120 82 200`.
+  - Sem imagens ainda: `imagemSrc: null` mostra um gradiente na cor do pacote com o nome em baixo; preencher `/images/pacotes/<slug>.webp` (1200×1500 WebP) quando existirem.
+  - `site-profissional` mantém o selo "Mais escolhido" (`destaque: true` nos dados).
+  - Textos via dicionário i18n existente (`actions.startingAt`, `actions.maisEscolhido`, `actions.learnMore`); sem chaves novas.
+  - Exemplo adicionado ao `/ui-kit` com e sem destaque.
+- **Ficheiros alterados:**
+  - `src/styles.css` — `.pkg-card`, `.pkg-media`, `.pkg-scrim`, `.pkg-glass`, `.pkg-body`, `.pkg-head`, `.pkg-title`, `.pkg-details`, `.pkg-price-label`, `.pkg-price-value`, `.pkg-meta` em `@layer utilities`; removido `.svc-card-fluid`, `.svc-media-fallback`, `.svc-price*`
+  - `src/app/pages/home/web-preview/web-preview.ts` + `.html` — `PacoteVidroCard` + `criarPacoteVidro` na grelha de pacotes
+  - `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts` + `.html` — `websiteCards` na secção Websites; nota legal e nota de infraestrutura mantidas
+  - `src/app/pages/ui-kit/ui-kit.ts` + `.html` — exemplo do cartão de pacote (com e sem selo)
+  - `src/app/i18n/pt.ts` + `src/app/i18n/en.ts` — chaves `sectionPacoteVidro`, `pacoteVidroDescription`
+- **Ficheiros criados:**
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.ts`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.html`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro.mapper.ts`
+- **Verificações feitas:** `npm run build` passa (prerender 38 rotas, sem erros; aviso de orçamento inicial pré-existente). Sem `#hex`, sem `any`, sem texto hardcoded no `.html`.
+- **Pendências:** fotografias reais dos pacotes (`public/images/pacotes/<slug>.webp`).
+

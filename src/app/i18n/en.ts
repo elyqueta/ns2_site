@@ -107,6 +107,9 @@ export const en = {
     sectionServicoVidro: 'Service cards (glass)',
     servicoVidroDescription:
       'Tinted glass card with continuous focus effect, used in the home services section.',
+    sectionPacoteVidro: 'Web packages (glass)',
+    pacoteVidroDescription:
+      'Tinted glass card for web development packages, with starting price and featured badge.',
     sectionBadges: 'Badges',
     sectionIcons: 'Icons',
     sectionMedia: 'Media placeholders',

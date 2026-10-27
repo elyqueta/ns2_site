@@ -1,22 +1,22 @@
 # PROGRESSO (o agente actualiza no fim de cada fase)
 
-| Fase                               | Estado      | Aprovada pelo utilizador                    | Notas                                                                                                                                                                                                                                                                                                                                               |
-| ---------------------------------- | ----------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 00 Fundações                       | ✅ aprovada | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Rotas parametrizadas são prerenderizadas nas fases em que os dados correspondentes ficam disponíveis.                                                                                                                                                                                       |
-| 01 Design system e UI kit          | ✅ aprovada | Sim — avançar para fase 02                  | UI kit com componentes reutilizáveis, pipes, ícones e temas; build, testes e validação visual aprovados.                                                                                                                                                                                                                                            |
-| 02 Motor de animação               | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | AnimationService, ScrollService, directivas GSAP/Lenis e demonstração no UI kit; build e testes aprovados.                                                                                                                                                                                                                                          |
-| 03 Layout global                   | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Header com navegação responsiva, menu móvel acessível, footer, WhatsApp flutuante, preloader de sessão e cortina de transição; build, testes e validação runtime aprovados.                                                                                                                                                                         |
-| 04 Início                          | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Indicador com scroll suave, botões/menu sem quebra de linha, pin dos serviços revisto, marcas adaptadas ao mobile e fotografia local fornecida pelo utilizador.                                                                                                                                                                                     |
-| 05 Sobre                           | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Página Sobre com conteúdo oficial, processo animado por scroll, valores, diferenciais e CTA; build, testes e validação responsiva aprovados.                                                                                                                                                                                                        |
-| 06 Serviços                        | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Lista com 9 serviços e 8 páginas de detalhe prerenderizadas; SEO e JSON-LD Service por detalhe, CTAs específicos e navegação anterior/seguinte; build e testes aprovados.                                                                                                                                                                           |
-| 07 Produtos                        | ✅ aprovada | Sim — avançar para fase 08                  | Catálogo com 6 categorias, cartões por marca/linha e tipo, CTAs WhatsApp, âncoras com scroll spy e carrossel infinito de marcas; menu de categorias acompanha o header no scroll.                                                                                                                                                                   |
-| 08 Desenvolvimento web + Projectos | ✅ aprovada | Sim — aprovado pelo utilizador a 2026-10-18 | Páginas `/desenvolvimento-web` e `/projectos`; pacotes com valores "a partir de", nota legal, FAQ, diagnóstico e timeline animada. Ligações do diagnóstico preservam a rota. Conteúdo de IA aguarda confirmação; Gráfica Viva usa MediaSlot.                                                                                                        |
-| 09 Notícias                        | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Lista com artigo em destaque e filtros por categoria; três detalhes com partilha, relacionados e JSON-LD Article; slugs prerenderizados.                                                                                                                                                                                                            |
-| 10 Parceiros                       | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-19 | Lista de marcas e sete detalhes; links para categorias de produtos e pedidos de orçamento por marca; páginas de detalhe prerenderizadas.                                                                                                                                                                                                            |
-| 11 Contacto, legais e 404          | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-19 | Formulário WhatsApp/email, páginas legais e 404. Correcção aprovada: origem do mapa com sugestões Google Places e navegação por teclado; rota continua a ser calculada externamente. A chave pública restrita do Places API ainda tem de ser configurada no meta de `src/index.html`.                                                               |
-| 12 SEO, a11y, desempenho           | 🟡 parcial  | —                                           | SEO e metadados implementados para `https://ns2-site-weld.vercel.app`; sitemap com 29 rotas públicas e `/ui-kit` excluído. Build e 15 testes passam; auditoria estática das 30 páginas prerenderizadas sem problemas. Lighthouse pendente: obtenção do CLI falhou por timeout de rede; falta também submeter/verificar o sitemap na Search Console. |
+| Fase                               | Estado      | Aprovada pelo utilizador                    | Notas                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 00 Fundações                       | ✅ aprovada | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Rotas parametrizadas são prerenderizadas nas fases em que os dados correspondentes ficam disponíveis.                                                                                                                                                                                                                                                                                     |
+| 01 Design system e UI kit          | ✅ aprovada | Sim — avançar para fase 02                  | UI kit com componentes reutilizáveis, pipes, ícones e temas; build, testes e validação visual aprovados.                                                                                                                                                                                                                                                                                                                                          |
+| 02 Motor de animação               | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | AnimationService, ScrollService, directivas GSAP/Lenis e demonstração no UI kit; build e testes aprovados.                                                                                                                                                                                                                                                                                                                                        |
+| 03 Layout global                   | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Header com navegação responsiva, menu móvel acessível, footer, WhatsApp flutuante, preloader de sessão e cortina de transição; build, testes e validação runtime aprovados.                                                                                                                                                                                                                                                                       |
+| 04 Início                          | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Indicador com scroll suave, botões/menu sem quebra de linha, pin dos serviços revisto, marcas adaptadas ao mobile e fotografia local fornecida pelo utilizador.                                                                                                                                                                                                                                                                                   |
+| 05 Sobre                           | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Página Sobre com conteúdo oficial, processo animado por scroll, valores, diferenciais e CTA; build, testes e validação responsiva aprovados.                                                                                                                                                                                                                                                                                                      |
+| 06 Serviços                        | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Lista com 9 serviços e 8 páginas de detalhe prerenderizadas; SEO e JSON-LD Service por detalhe, CTAs específicos e navegação anterior/seguinte; build e testes aprovados.                                                                                                                                                                                                                                                                         |
+| 07 Produtos                        | ✅ aprovada | Sim — avançar para fase 08                  | Catálogo com 6 categorias, cartões por marca/linha e tipo, CTAs WhatsApp, âncoras com scroll spy e carrossel infinito de marcas; menu de categorias acompanha o header no scroll.                                                                                                                                                                                                                                                                 |
+| 08 Desenvolvimento web + Projectos | ✅ aprovada | Sim — aprovado pelo utilizador a 2026-10-18 | Páginas `/desenvolvimento-web` e `/projectos`; pacotes com valores "a partir de", nota legal, FAQ, diagnóstico e timeline animada. Ligações do diagnóstico preservam a rota. Conteúdo de IA aguarda confirmação; Gráfica Viva usa MediaSlot.                                                                                                                                                                                                      |
+| 09 Notícias                        | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-18 | Lista com artigo em destaque e filtros por categoria; três detalhes com partilha, relacionados e JSON-LD Article; slugs prerenderizados.                                                                                                                                                                                                                                                                                                          |
+| 10 Parceiros                       | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-19 | Lista de marcas e sete detalhes; links para categorias de produtos e pedidos de orçamento por marca; páginas de detalhe prerenderizadas.                                                                                                                                                                                                                                                                                                          |
+| 11 Contacto, legais e 404          | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-19 | Formulário WhatsApp/email, páginas legais e 404. Correcção aprovada: origem do mapa com sugestões Google Places e navegação por teclado; rota continua a ser calculada externamente. A chave pública restrita do Places API ainda tem de ser configurada no meta de `src/index.html`.                                                                                                                                                             |
+| 12 SEO, a11y, desempenho           | 🟡 parcial  | —                                           | SEO e metadados implementados para `https://ns2-site-weld.vercel.app`; sitemap com 29 rotas públicas e `/ui-kit` excluído. Build e 15 testes passam; auditoria estática das 30 páginas prerenderizadas sem problemas. Lighthouse pendente: obtenção do CLI falhou por timeout de rede; falta também submeter/verificar o sitemap na Search Console.                                                                                               |
 | 13 Tradução PT/EN                  | ✅ aprovada | Sim — aprovada pelo utilizador a 2026-10-23 | Correcção i18n: removido `languageEffect` com `afterNextRender` na directiva `SplitTextReveal` (NG0203 na app zoneless); `<h1>` da Hero recriado via `@for ... track key` na troca de língua. `cursor-pointer` adicionado a todos os botões (`app-button` e botões `<button>` nativos em layout, contact-map, ui-kit, contacto, noticias, noticia-detalhe). Build e prerender passam; sem regressão nos testes (falhas pré-existentes nos pipes). |
-| 14 Revisão final                   | ⬜ pendente | —                                           |                                                                                                                                                                                                                                                                                                                                                     |
+| 14 Revisão final                   | ⬜ pendente | —                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em correcção
 
@@ -57,6 +57,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - A Fase 12 ainda precisa de resultados Lighthouse mobile em produção; a tentativa local com `npx lighthouse` terminou em `ETIMEDOUT` por falta de acesso à rede. A indexação efectiva só pode ser confirmada após o sitemap ser submetido na Google Search Console.
 
 ## Fase 03 (LEIA-ME) — Home: estrutura e "Quem somos" (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: Imagem `@og-default.png` (usada na secção "Quem somos" em vez da fotografia de stock)
@@ -74,12 +75,14 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: Q5 (CTA final) não foi respondida pelo utilizador, mantida como está
 
 ## Ajuste adicional (2026-10-23)
+
 - `MediaSlot`: adicionado input `objectPosition` (padrão `center`) para controlar o `object-position` da imagem.
 - `about-preview.html`: `objectPosition="left"` para o logo da empresa no lado esquerdo da imagem `og-default.png` ficar visível (não cortado pelo `object-cover` central).
 - Ficheiros alterados: `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/pages/home/about-preview/about-preview.html`
 - Verificações feitas: `npm run build` passa; `npm test` sem regressão.
 
 ## Fase 04 (LEIA-ME) — Serviços: cartões (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: B) Carrossel → depois ajustado: manter template actual (grelha)
@@ -95,6 +98,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Correcção: imagens nos detalhes de serviço (2026-10-23)
+
 - Problema: `<app-media-slot>` na página de detalhe de cada serviço não recebia `[src]`, então nunca mostrava a imagem (apenas o placeholder).
 - Correcção:
   - `servico-detalhe.html`: adicionado `[src]="imagemSrc()"`, `[width]="626"`, `[height]="418"` ao `<app-media-slot>`
@@ -103,6 +107,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+
 - Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
 - O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
 - `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
@@ -112,6 +117,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Fase 05 (LEIA-ME) — Produtos: imagens e cartões (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: Usar todas as imagens sem placeholder
@@ -127,6 +133,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: todas as 6 imagens de produto são provisórias (ver `docs/guia-fotografia-produtos.md` para substituição)
 
 ## Ajuste adicional (2026-10-23)
+
 - `data/servicos.ts`: caminhos das imagens atualizados para apontar aos ficheiros reais em `public/images/servicos/` (`consultoria.webp`, `locacao-equipamentos.webp`, `websites-sistemas-web.webp`)
 - `servicos.ts`: adicionado `imagemSrc` computed que monta o caminho `/images/servicos/<ficheiro>` para cada serviço
 - `servicos.html`: `<app-media-slot>` agora recebe `[src]="service.imagemSrc"` em vez de `null`, mostrando as imagens reais
@@ -134,6 +141,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Verificações feitas: `npm run build` passa; `npm test` sem regressão.
 
 ## Fase 02 (LEIA-ME) — Heros e imagens de fundo (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: Slider de imagens a cada 20s, muda apenas a imagem (pedido do utilizador, fora das opções da fase; implementado em `HomeHeroSlider`)
@@ -148,6 +156,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Fase 01 (LEIA-ME) — Navbar: tema, tradução e logótipo (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: B) Traduzir · Pedir orçamento · Tema (ordem à direita)
@@ -164,6 +173,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Correcção: imagem da secção "Quem somos" da home (2026-10-23)
+
 - Substituída a fotografia de stock (`/images/og/og-default.png`) pela imagem real (`/images/sobre/quem-somos.webp`, 1200×800, proporção 3:2).
 - O ficheiro `og-default.png` **não foi apagado**: ainda é usado no `<meta og:image>` de `src/index.html` e em `src/app/core/seo.service.ts`.
 - `about-preview.html`: `<app-media-slot>` agora usa `src="/images/sobre/quem-somos.webp"`, `[width]="1200"`, `[height]="800"`, `[loading]="'lazy'"`, `[decoding]="'async'"`, sem `objectPosition` (imagem nova, não precisa do ajuste de esquerda).
@@ -173,6 +183,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Fase 06 (LEIA-ME) — Notícias: capas dos artigos (2026-10-23)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: B) Capas tipográficas desenhadas (já em public/images/noticias/, 1200×675, 16:9)
@@ -191,11 +202,13 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Correcção: src dos media-slot nas notícias (2026-10-23)
+
 - Problema: os `<app-media-slot>` das notícias não recebiam `[src]`, então só mostravam o placeholder.
 - Correcção: adicionado `[src]` a todos os media-slot das notícias (listagem e detalhe).
 - Verificações feitas: `npm run build` passa (30 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Fase 07 (LEIA-ME) — Desenvolvimento web e pacotes (2026-10-24)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: A) Destacar Site Profissional com borda e etiqueta "Mais escolhido"
@@ -217,12 +230,14 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Ajuste adicional: altura igual nos cards da home (2024-10-24)
+
 - Problema: os cards de pacotes na home tinham alturas diferentes (o primeiro sempre menor).
 - Correcção: adicionado `flex flex-col h-full` ao `app-card` (`card.html`) e `min-h-0` aos itens do `@for` no `web-preview.html`, forçando altura igual em todos os cards.
 - Ficheiros alterados: `src/app/pages/home/web-preview/web-preview.html`, `src/app/shared/ui/card/card.html`
 - Verificações feitas: `npm run build` passa (34 rotas, sem erros nem warnings); `npm test` sem regressão (8 passed, 3 falhas pré-existentes nos pipes).
 
 ## Fase 08 (LEIA-ME) — Projectos e cartões "Brevemente" (2024-10-24)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: A) Gráfica Viva em destaque (largura total) + Foco + 2 cartões Brevemente
@@ -244,6 +259,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: imagens reais de projetos em falta (registadas em `data/projectos.ts`)
 
 ## Correcção: escala tipográfica e navbar agrupada (2024-10-24)
+
 - Estado: concluída
 - Tipo: correcção transversal (não é fase nova)
 - Implementação:
@@ -263,6 +279,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: nenhuma
 
 ## Fase 10 (LEIA-ME) — Cartões, números e padrões (2024-10-24)
+
 - Estado: concluída
 - Decisões do utilizador:
   - Q1: C) Substituir número por sinal da marca (diagonal) nos eyebrows
@@ -303,6 +320,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/; Q6 (tipografia) não alterada sem aprovação do utilizador
 
 ## Ajuste adicional: logos no carrossel da página de parceiros (2024-10-24)
+
 - Problema: o carrossel infinito (marquee) da página de parceiros mostrava apenas títulos de texto em vez de logos.
 - Correcção:
   - `src/app/shared/ui/marquee/marquee.ts` e `.html`: componente agora aceita `MarqueeItem[]` com type 'text' ou 'image', renderizando `` para imagens e texto para texto.
@@ -314,6 +332,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/.
 
 ## Correcção: vídeo de fundo no hero da home (2024-10-24)
+
 - Estado: concluída
 - Tipo: correcção transversal (não é fase nova)
 - Implementação:
@@ -332,6 +351,7 @@ Legenda: ⬜ pendente · 🟡 a aguardar aprovação · ✅ aprovada · 🔧 em 
 - Pendências: imagens hp.webp e knup.webp em falta em public/images/parceiros/ (pendentes desde Fase 10).
 
 ## Correcção: palavra de destaque com máquina de escrever no hero da home (2024-10-25)
+
 - Estado: concluída
 - Tipo: correcção transversal (não é fase nova)
 - Implementação:

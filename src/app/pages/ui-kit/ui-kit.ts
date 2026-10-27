@@ -247,6 +247,7 @@ export class UiKit {
   readonly pacoteVidroItem = computed<PacoteVidroCardData>(() =>
     criarPacoteVidro(webPacotes[0], (v) => v.pt, {
       startingAt: pt.actions.startingAt,
+      quoteRequired: pt.actions.quoteRequired,
       mostChosen: pt.actions.maisEscolhido,
       learnMore: pt.actions.learnMore,
     }),
@@ -254,6 +255,7 @@ export class UiKit {
   readonly pacoteVidroItemDestaque = computed<PacoteVidroCardData>(() =>
     criarPacoteVidro(webPacotes[2], (v) => v.pt, {
       startingAt: pt.actions.startingAt,
+      quoteRequired: pt.actions.quoteRequired,
       mostChosen: pt.actions.maisEscolhido,
       learnMore: pt.actions.learnMore,
     }),
@@ -263,6 +265,7 @@ export class UiKit {
     webPacotes.map((item) => ({
       ...criarPacoteVidro(item, (v) => v.pt, {
         startingAt: pt.actions.startingAt,
+        quoteRequired: pt.actions.quoteRequired,
         mostChosen: pt.actions.maisEscolhido,
         learnMore: pt.actions.learnMore,
       }),

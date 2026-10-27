@@ -6,7 +6,7 @@ import { Icon, IconName } from '../icon/icon';
 export interface PacoteVidroCardData {
   readonly tintRgb: string;
   readonly titulo: string;
-  readonly preco: number;
+  readonly preco: number | null;
   readonly precoLabel: string;
   readonly meta: string;
   readonly icone: IconName;

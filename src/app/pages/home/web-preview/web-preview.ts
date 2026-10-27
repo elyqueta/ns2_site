@@ -21,6 +21,7 @@ export class HomeWebPreview {
     webPacotes.map((item) => ({
       ...criarPacoteVidro(item, (v) => this.i18n.text(v), {
         startingAt: this.i18n.text(this.copy.startingAt),
+        quoteRequired: this.i18n.t('actions.quoteRequired'),
         mostChosen: this.i18n.t('actions.maisEscolhido'),
         learnMore: this.i18n.t('actions.learnMore'),
       }),

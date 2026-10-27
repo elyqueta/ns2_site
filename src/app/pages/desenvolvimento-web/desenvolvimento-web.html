@@ -21,6 +21,135 @@
   <section class="border-y border-line bg-surface">
     <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
       <div class="max-w-3xl">
+        <p class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+          {{ copy.sections.websites.index | localized }}
+        </p>
+        <h2 class="font-display text-h2 font-semibold tracking-tight text-fg">
+          {{ copy.sections.websites.title | localized }}
+        </h2>
+        <p class="mt-5 max-w-[62ch] text-lead leading-relaxed text-fg-muted">
+          {{ copy.sections.websites.description | localized }}
+        </p>
+      </div>
+
+      <div class="mt-10 rounded-card border border-line bg-bg p-4 sm:p-6">
+        <label class="sr-only" for="web-package-search">{{ catalogSearchLabel() }}</label>
+        <div class="flex min-h-12 items-center gap-3 rounded-button border border-line bg-surface px-4">
+          <app-icon class="shrink-0 text-fg-muted" name="search" />
+          <input
+            id="web-package-search"
+            class="min-w-0 flex-1 bg-transparent text-fg outline-none placeholder:text-fg-muted"
+            type="search"
+            [value]="searchTerm()"
+            [placeholder]="catalogSearchPlaceholder()"
+            (input)="onSearchInput($event)"
+          />
+          @if (searchTerm()) {
+            <button
+              class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-fg-muted hover:bg-surface-2"
+              type="button"
+              [attr.aria-label]="catalogClearSearch()"
+              (click)="clearSearch()"
+            >
+              <app-icon name="close" />
+            </button>
+          }
+        </div>
+
+        <div class="mt-6 flex items-center justify-between gap-3">
+          <button
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line text-fg transition-colors hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-40"
+            type="button"
+            [attr.aria-label]="catalogPrevious()"
+            [disabled]="activeCategoryIndex() === 0"
+            (click)="previousCategory()"
+          >
+            <app-icon name="arrow" />
+          </button>
+          <div class="flex min-w-0 flex-1 justify-center gap-2 overflow-x-auto px-1" role="tablist">
+            @for (category of catalogCategories(); track category.id; let index = $index) {
+              <button
+                class="min-h-11 shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+                [class.border-accent]="activeCategoryIndex() === index"
+                [class.bg-accent]="activeCategoryIndex() === index"
+                [class.text-on-accent]="activeCategoryIndex() === index"
+                [class.border-line]="activeCategoryIndex() !== index"
+                [class.text-fg]="activeCategoryIndex() !== index"
+                type="button"
+                role="tab"
+                [attr.aria-selected]="activeCategoryIndex() === index"
+                [attr.aria-controls]="'web-category-' + category.id"
+                (click)="selectCategory(index)"
+              >
+                {{ category.title }}
+              </button>
+            }
+          </div>
+          <button
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line text-fg transition-colors hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-40"
+            type="button"
+            [attr.aria-label]="catalogNext()"
+            [disabled]="activeCategoryIndex() === catalogCategories().length - 1"
+            (click)="nextCategory()"
+          >
+            <app-icon name="arrow" />
+          </button>
+        </div>
+      </div>
+
+      @if (activeCategory(); as category) {
+        <div class="mt-10" [id]="'web-category-' + category.id" role="tabpanel">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+                {{ category.title }}
+              </p>
+              <p class="mt-3 max-w-[62ch] text-fg-muted">{{ category.description }}</p>
+            </div>
+            @if (category.comingSoon) {
+              <span class="rounded-full border border-line px-4 py-2 text-sm font-semibold text-fg-muted">
+                {{ catalogComingSoon() }}
+              </span>
+            }
+          </div>
+
+          @if (category.comingSoon) {
+            <p class="mt-10 rounded-card border border-dashed border-line p-8 text-center text-fg-muted">
+              {{ catalogAiEmpty() }}
+            </p>
+          } @else if (hasSearchResults()) {
+            <ul class="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              @for (card of catalogCards(); track card.href) {
+                <li class="w-full">
+                  <app-pacote-vidro-card [item]="card" />
+                </li>
+              }
+            </ul>
+          } @else {
+            <div class="mt-8 rounded-card border border-dashed border-line p-8 text-center">
+              <p class="text-fg-muted">{{ catalogNoResults() }}</p>
+              <button
+                class="mt-4 inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-3 font-semibold text-fg hover:bg-surface-2"
+                type="button"
+                (click)="clearSearch()"
+              >
+                {{ catalogClearSearch() }}
+              </button>
+            </div>
+          }
+        </div>
+      }
+
+      <p class="mt-8 rounded-2xl border border-line bg-bg p-5 text-sm leading-relaxed text-fg-muted">
+        {{ homeDisclaimer() }}
+      </p>
+      <p class="mt-4 text-sm text-fg-muted">{{ copy.labels.infrastructureNote | localized }}</p>
+    </div>
+  </section>
+
+  <section class="hidden border-y border-line bg-surface">
+    <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+      <div class="max-w-3xl">
         <p
           class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
         >
@@ -51,7 +180,7 @@
     </div>
   </section>
 
-  <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
+  <section class="hidden mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
     <div class="max-w-3xl">
       <p
         class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
@@ -130,7 +259,7 @@
     <p class="mt-4 text-sm text-fg-muted">{{ shopPaymentNote() }}</p>
   </section>
 
-  <section class="border-y border-line bg-surface">
+  <section class="hidden border-y border-line bg-surface">
     <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16">
       <div class="max-w-3xl">
         <p

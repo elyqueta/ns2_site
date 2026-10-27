@@ -3,7 +3,7 @@ import { noticias } from './data/noticias';
 import { parceiros } from './data/parceiros';
 import { servicos } from './data/servicos';
 import { projectos } from './data/projectos';
-import { webPacotesDetalhe } from './data/web-pacote-detalhe';
+import { allWebPacotesDetalhe } from './data/web-pacote-detalhe';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -40,7 +40,7 @@ export const serverRoutes: ServerRoute[] = [
     path: 'desenvolvimento-web/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      return webPacotesDetalhe.map((item) => ({ slug: item.slug }));
+      return allWebPacotesDetalhe.map((item) => ({ slug: item.slug }));
     },
   },
   {

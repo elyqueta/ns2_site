@@ -1,5 +1,37 @@
 # Progresso — NS2 Innovation Site
 
+## Refactor: catálogo de desenvolvimento web
+
+- **Estado:** concluída
+- **Decisões tomadas:**
+  - A página `/desenvolvimento-web` passou a apresentar pesquisa, navegação por categorias e cartões de vidro.
+  - As categorias Websites, Lojas online e Sistemas web usam exclusivamente `webPacotes`, `lojaPacotes` e `sistemaPacotes`.
+  - IA e automação aparece como categoria futura com estado “Brevemente”, sem pacotes, preços ou promessas adicionais.
+  - A pesquisa filtra nome, descrição, prazo, páginas e finalidade/ideal para.
+  - Todos os pacotes existentes têm páginas de detalhe prerenderizadas; os dados de lojas e sistemas foram adaptados aos campos existentes, sem conteúdo comercial inventado.
+  - O componente `PacoteVidroCard` suporta pacotes sem preço definido, apresentando “Sob orçamento”.
+- **Ficheiros alterados:**
+  - `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`
+  - `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`
+  - `src/app/data/web-pacote-detalhe.ts`
+  - `src/app/app.routes.server.ts`
+  - `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.ts`
+  - `src/app/pages/web-pacote-detalhe/web-pacote-detalhe.html`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.ts`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.html`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro.mapper.ts`
+  - `src/app/shared/ui/icon/icon.ts`
+  - `src/app/shared/ui/icon/icon.html`
+  - `src/app/pages/home/web-preview/web-preview.ts`
+  - `src/app/pages/ui-kit/ui-kit.ts`
+  - `src/app/i18n/pt.ts`
+  - `src/app/i18n/en.ts`
+- **Verificações feitas:**
+  - `npm run build` passa, com 44 rotas prerenderizadas; mantém apenas o aviso de orçamento inicial já existente.
+  - Browser: pesquisa, limpeza, mudança de categoria, estado “Brevemente” e links de detalhe verificados.
+  - `npm test -- --watch=false`: 14 testes passam; 4 falhas pré-existentes não relacionadas.
+- **Pendências:** nenhuma nova pendência de conteúdo; IA e automação continua deliberadamente sem pacotes.
+
 ## Fase 13 — Cartões de serviços da home: estilo "vidro" na secção com efeito pin
 
 - **Estado:** concluída (inclui correcção 1)

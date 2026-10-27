@@ -1,4 +1,5 @@
 import { LocalizedText } from '../../../i18n/types';
+import { NivelWeb } from '../../../data/desenvolvimento-web';
 import { PacoteWeb } from '../../../data/web-pacotes';
 import { PacoteVidroCardData } from './pacote-vidro-card';
 export type { PacoteVidroCardData };
@@ -35,8 +36,33 @@ const gridPositions: Record<string, string> = {
 
 export interface PacoteVidroLabels {
   readonly startingAt: string;
+  readonly quoteRequired: string;
   readonly mostChosen: string;
   readonly learnMore: string;
+}
+
+function criarDadosBase(
+  item: { slug: string; nome: LocalizedText; aPartirDe: number | null; prazo: LocalizedText },
+  text: (value: LocalizedText) => string,
+  labels: PacoteVidroLabels,
+  meta: string,
+): PacoteVidroCardData {
+  return {
+    tintRgb: tons[item.slug] ?? '63 111 181',
+    titulo: text(item.nome),
+    preco: item.aPartirDe,
+    precoLabel: item.aPartirDe === null ? labels.quoteRequired : labels.startingAt,
+    meta,
+    icone: 'code',
+    href: `/desenvolvimento-web/${item.slug}`,
+    imagemSrc: imagens[item.slug] ?? null,
+    ctaLabel: labels.learnMore,
+    destaque: 'destaque' in item && item.destaque === true,
+    destaqueLabel: labels.mostChosen,
+    objectPosition: objectPositions[item.slug] ?? 'center',
+    gridPosition: '',
+    bento: false,
+  };
 }
 
 export function criarPacoteVidro(
@@ -45,19 +71,15 @@ export function criarPacoteVidro(
   labels: PacoteVidroLabels,
 ): PacoteVidroCardData {
   return {
-    tintRgb: tons[item.slug] ?? '63 111 181',
-    titulo: text(item.nome),
-    preco: item.aPartirDe,
-    precoLabel: labels.startingAt,
-    meta: `${text(item.paginas)} · ${text(item.prazo)}`,
-    icone: 'code',
-    href: `/desenvolvimento-web/${item.slug}`,
-    imagemSrc: imagens[item.slug] ?? null,
-    ctaLabel: labels.learnMore,
-    destaque: item.destaque === true,
-    destaqueLabel: labels.mostChosen,
-    objectPosition: objectPositions[item.slug] ?? 'center',
+    ...criarDadosBase(item, text, labels, `${text(item.paginas)} · ${text(item.prazo)}`),
     gridPosition: gridPositions[item.slug] ?? '',
-    bento: false,
   };
+}
+
+export function criarPacoteVidroNivel(
+  item: NivelWeb,
+  text: (value: LocalizedText) => string,
+  labels: PacoteVidroLabels,
+): PacoteVidroCardData {
+  return criarDadosBase(item, text, labels, text(item.prazo));
 }

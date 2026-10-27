@@ -51,6 +51,7 @@ export class WebPacoteDetalhe {
   readonly requestQuoteDescription = computed(() => this.i18n.t('actions.requestQuoteDescription'));
   readonly whatsappLabel = computed(() => this.i18n.t('actions.whatsappLabel'));
   readonly startingAtLabel = computed(() => this.i18n.t('actions.startingAt'));
+  readonly quoteRequiredLabel = computed(() => this.i18n.t('actions.quoteRequired'));
   readonly entregasLabel = computed(() => this.i18n.t('actions.entregasLabel'));
   readonly includesLabel = computed(() => this.i18n.t('actions.includesLabel'));
   readonly pagesLabel = computed(() => this.i18n.t('actions.pagesLabel'));
@@ -89,6 +90,12 @@ export class WebPacoteDetalhe {
     if (!pacote) {
       return '';
     }
+    if (pacote.aPartirDe === null) {
+      return this.whatsapp.createWhatsappUrl(
+        `Olá! Gostaria de pedir um orçamento para ${this.i18n.text(pacote.nome)}.`,
+      );
+    }
+
     const price = new Intl.NumberFormat('pt-AO', {
       style: 'currency',
       currency: 'AOA',

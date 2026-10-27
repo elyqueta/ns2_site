@@ -20,6 +20,7 @@ export const pt = {
     whatsappLabel: 'Falar no WhatsApp',
     contactLabel: 'Ver contactos',
     startingAt: 'A partir de',
+    quoteRequired: 'Sob orçamento',
     entregasLabel: 'O que entregamos',
     includesLabel: 'Inclui',
     pagesLabel: 'Páginas',
@@ -52,6 +53,7 @@ export const pt = {
     submit: 'Enviar',
     open: 'Abrir',
     close: 'Fechar',
+    search: 'Pesquisar',
     previous: 'Anterior',
     next: 'Seguinte',
     languageSelection: 'Idioma',
@@ -84,6 +86,18 @@ export const pt = {
     notFound: 'Página não encontrada',
     notFoundDescription: 'A página que procura não existe.',
     uiKit: 'UI kit',
+  },
+  webCatalog: {
+    searchLabel: 'Pesquisar pacotes',
+    searchPlaceholder: 'Pesquisar por pacote, descrição ou necessidade',
+    clearSearch: 'Limpar pesquisa',
+    previousCategory: 'Categoria anterior',
+    nextCategory: 'Categoria seguinte',
+    comingSoon: 'Brevemente',
+    aiCategory: 'IA e automação',
+    aiDescription: 'Uma área em preparação para futuras soluções da NS2 Innovation.',
+    aiEmpty: 'Esta categoria estará disponível brevemente.',
+    noResults: 'Não encontrámos pacotes para esta pesquisa.',
   },
   uiKit: {
     eyebrow: 'NS2 Innovation · Sistema visual',
@@ -229,6 +243,7 @@ export const pt = {
       moon: 'Lua',
     menu: 'Menu',
     close: 'Fechar',
+    search: 'Pesquisar',
     check: 'Confirmação',
     plus: 'Adicionar',
     pause: 'Pausar',
@@ -262,6 +277,7 @@ export type TranslationKey =
   | `actions.${'requestQuoteTitle' | 'requestQuoteDescription'}`
   | `pages.${keyof typeof pt.pages}`
   | `seo.${keyof typeof pt.seo}`
+  | `webCatalog.${keyof typeof pt.webCatalog}`
   | `actions.${'languageSelection' | 'languagePortuguese' | 'languageEnglish'}`
   | `uiKit.${Exclude<keyof typeof pt.uiKit, 'icons'>}`
   | `uiKit.icons.${keyof typeof pt.uiKit.icons}`;

@@ -15,24 +15,30 @@
             <h3 class="font-display text-h3 font-semibold text-fg mb-4">
               {{ idealParaLabel() }}
             </h3>
-            <p class="text-fg-muted leading-relaxed">
-              {{ item.quemDeveEscolher | localized }}
-            </p>
+            @if (item.quemDeveEscolher; as purpose) {
+              <p class="text-fg-muted leading-relaxed">{{ purpose | localized }}</p>
+            } @else {
+              <p class="text-fg-muted leading-relaxed">{{ item.descricao | localized }}</p>
+            }
           </div>
           <div class="lg:col-span-1">
             <div class="rounded-2xl border border-line bg-surface p-6">
                 <p class="text-xs font-medium text-fg-muted uppercase tracking-wider mb-2">
                   {{ startingAtLabel() }}
                 </p>
-              <p class="font-display text-2xl font-semibold text-fg">
-                {{ item.aPartirDe | kz }}
-              </p>
+                @if (item.aPartirDe; as price) {
+                  <p class="font-display text-2xl font-semibold text-fg">{{ price | kz }}</p>
+                } @else {
+                  <p class="font-display text-2xl font-semibold text-fg">
+                    {{ quoteRequiredLabel() }}
+                  </p>
+                }
               <p class="mt-2 text-xs text-fg-muted">
                 {{ item.prazo | localized }}
               </p>
-              <p class="mt-1 text-xs text-fg-muted">
-                {{ item.paginas | localized }}
-              </p>
+              @if (item.paginas; as pages) {
+                <p class="mt-1 text-xs text-fg-muted">{{ pages | localized }}</p>
+              }
             </div>
           </div>
         </div>

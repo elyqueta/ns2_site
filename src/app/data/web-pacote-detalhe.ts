@@ -1,16 +1,18 @@
 import { LocalizedText } from '../i18n/types';
 
+import { lojaPacotes, sistemaPacotes } from './desenvolvimento-web';
+
 export interface PacoteWebDetalhe {
   readonly slug: string;
   readonly nome: LocalizedText;
-  readonly aPartirDe: number;
+  readonly aPartirDe: number | null;
   readonly prazo: LocalizedText;
-  readonly paginas: LocalizedText;
+  readonly paginas?: LocalizedText;
   readonly descricao: LocalizedText;
   readonly inclui: readonly LocalizedText[];
   readonly naoInclui: readonly LocalizedText[];
   readonly entregas: readonly LocalizedText[];
-  readonly quemDeveEscolher: LocalizedText;
+  readonly quemDeveEscolher?: LocalizedText;
   readonly href: string;
 }
 
@@ -164,6 +166,25 @@ export const webPacotesDetalhe: readonly PacoteWebDetalhe[] = [
   },
 ];
 
+const additionalPackageDetails: readonly PacoteWebDetalhe[] = [...lojaPacotes, ...sistemaPacotes].map(
+  (item) => ({
+    slug: item.slug,
+    nome: item.nome,
+    aPartirDe: item.aPartirDe,
+    prazo: item.prazo,
+    descricao: item.descricao,
+    inclui: item.inclui,
+    naoInclui: [],
+    entregas: item.inclui,
+    href: `/desenvolvimento-web/${item.slug}`,
+  }),
+);
+
+export const allWebPacotesDetalhe: readonly PacoteWebDetalhe[] = [
+  ...webPacotesDetalhe,
+  ...additionalPackageDetails,
+];
+
 export const webPacoteDetalheBySlug = new Map(
-  webPacotesDetalhe.map((item) => [item.slug, item]),
+  allWebPacotesDetalhe.map((item) => [item.slug, item]),
 );

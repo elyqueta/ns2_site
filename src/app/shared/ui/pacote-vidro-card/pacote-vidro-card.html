@@ -27,7 +27,11 @@
       <div class="pkg-details-inner">
         <div>
           <span class="pkg-price-label">{{ item().precoLabel }}</span>
-          <p class="pkg-price-value">{{ item().preco | kz }}</p>
+          @if (item().preco; as price) {
+            <p class="pkg-price-value">{{ price | kz }}</p>
+          } @else {
+            <p class="pkg-price-value">{{ item().precoLabel }}</p>
+          }
         </div>
         <p class="pkg-meta">{{ item().meta }}</p>
         <div class="svc-cta">

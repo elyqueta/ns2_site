@@ -1,7 +1,8 @@
+import { TestBed } from '@angular/core/testing';
 import { WhatsappService } from './whatsapp.service';
 
 describe('WhatsappService', () => {
-  const service = new WhatsappService();
+  const service = TestBed.inject(WhatsappService);
 
   it('encodes WhatsApp messages with Portuguese characters', () => {
     expect(service.createWhatsappUrl('Olá! Quero pedir um orçamento.')).toBe(

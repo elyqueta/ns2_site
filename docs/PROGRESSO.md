@@ -1,5 +1,12 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: falhas da suite de testes
+
+- **Estado:** concluída
+- Os testes de `WhatsappService`, `KzPipe` e `DataPtPipe` passaram a criar dependências Angular através do `TestBed`, respeitando o uso de `inject()` nas classes.
+- O teste de navegação passou a resolver correctamente chaves de tradução compostas, como `nav.home`, nos dicionários português e inglês.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas.
+
 ## Correcção: preview de projectos e categoria activa
 
 - **Estado:** concluída

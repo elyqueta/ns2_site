@@ -3,6 +3,15 @@ import { pt } from '../i18n/pt';
 import { en } from '../i18n/en';
 
 describe('navegação', () => {
+  const resolveTranslation = (root: object, key: string): unknown =>
+    key.split('.').reduce<unknown>((current, segment) => {
+      if (typeof current !== 'object' || current === null) {
+        return undefined;
+      }
+
+      return (current as Record<string, unknown>)[segment];
+    }, root);
+
   it('todas as rotas de primaryNavigation aparecem exactamente uma vez em headerNavigation', () => {
     const primarySlugs = primaryNavigation.map((item) => item.href);
     const headerSlugs = headerNavigation.flatMap((item) =>
@@ -21,8 +30,8 @@ describe('navegação', () => {
     );
 
     for (const key of allNavKeys) {
-      expect(pt.nav[key as keyof typeof pt.nav]).toBeDefined();
-      expect(en.nav[key as keyof typeof en.nav]).toBeDefined();
+      expect(resolveTranslation(pt, key)).toBeDefined();
+      expect(resolveTranslation(en, key)).toBeDefined();
     }
   });
 

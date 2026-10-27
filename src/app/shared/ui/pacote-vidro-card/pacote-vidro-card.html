@@ -4,7 +4,16 @@
   }
   @if (item().imagemSrc && !imageFailed()) {
     <div class="pkg-media">
-      <img [src]="item().imagemSrc" [style.object-position]="item().objectPosition" alt="" width="1200" height="1500" loading="lazy" decoding="async" (error)="onImageError()" />
+      <img
+        [src]="item().imagemSrc"
+        [style.object-position]="item().objectPosition"
+        alt=""
+        width="1200"
+        height="1500"
+        loading="lazy"
+        decoding="async"
+        (error)="onImageError()"
+      />
     </div>
   }
   <div class="pkg-scrim"></div>

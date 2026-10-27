@@ -531,25 +531,25 @@
     .pkg-details {
       transition: none !important;
     }
-  .pkg-card:is(:hover, :focus-visible),
-  .pkg-card:is(:hover, :focus-visible) .pkg-media img {
-    transform: none !important;
+    .pkg-card:is(:hover, :focus-visible),
+    .pkg-card:is(:hover, :focus-visible) .pkg-media img {
+      transform: none !important;
+    }
   }
-}
 
-@media (min-width: 1024px) {
-  .pkg-card-bento {
-    aspect-ratio: auto;
+  app-pacote-vidro-card {
+    display: block;
     height: 100%;
   }
-}
 
-app-pacote-vidro-card {
-  display: block;
-  height: 100%;
-}
+  @media (min-width: 1024px) {
+    .pkg-card-bento {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
 
-@media (max-width: 480px) {
+  @media (max-width: 480px) {
     :root {
       --svc-gap: 16px;
       --svc-lift: 14px;

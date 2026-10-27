@@ -10,14 +10,14 @@ const tons: Record<string, string> = {
   'site-empresarial': '120 82 200',
 };
 
+// TODO(conteúdo): preencher com '/images/pacotes/<slug>.webp' quando as imagens existirem.
+// Enquanto não existirem, o cartão mostra o gradiente da cor do pacote (fundo de .pkg-card).
 const imagens: Record<string, string | null> = {
   'landing-page': null,
   'site-institucional': null,
   'site-profissional': null,
   'site-empresarial': null,
 };
-
-// TODO(conteúdo): preencher com '/images/pacotes/<slug>.webp' quando as imagens existirem.
 
 const objectPositions: Record<string, string> = {
   'landing-page': 'center 35%',

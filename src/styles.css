@@ -94,6 +94,11 @@
     @apply bg-bg font-sans text-fg antialiased;
   }
 
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
   ::selection {
     color: var(--on-accent);
     background: var(--accent);

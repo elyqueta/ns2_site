@@ -2,10 +2,14 @@
 
 ## Correcção: categorias visuais e testemunhos pendentes
 
-- **Estado:** concluída (refinamento visual)
+- **Estado:** concluída (refinamento visual e navegação)
 - **Decisões tomadas:**
   - A área principal de `/desenvolvimento-web` segue a nova referência: pesquisa no topo, banner horizontal em destaque com navegação e cartões de categorias em grelha responsiva.
   - Os cartões de categorias foram estreitados em altura e passaram para proporção panorâmica `16:9`, evitando o aspecto quadrado e aproximando-se dos cartões largos da referência.
+  - Em mobile e tablet, as categorias usam uma faixa horizontal com snap para evitar uma pilha vertical; em desktop continuam numa grelha.
+  - O destaque da Gráfica Viva foi separado e colocado acima da pesquisa, com ligação clicável para `/projectos/grafica-viva`.
+  - O preview de projectos da Home usa o mesmo projecto destacado da Gráfica Viva como card panorâmico clicável.
+  - Botões e controlos com interacção apresentam cursor pointer globalmente.
   - Cada categoria mantém imagens locais, estado activo e chevron, e a selecção continua a controlar o catálogo de pacotes abaixo.
   - Foram adicionados os ícones `chevron-left` e `chevron-right`; a navegação deixou de usar a seta com linha.
   - As secções inferiores da página receberam hierarquia visual adicional através de superfícies, sombras e estados de hover, sem alterar o conteúdo oficial.

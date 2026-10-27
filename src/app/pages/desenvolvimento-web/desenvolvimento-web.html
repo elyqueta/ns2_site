@@ -22,6 +22,34 @@
       </div>
 
       <div class="mt-10 rounded-card border border-line bg-bg p-4 shadow-lg sm:p-6">
+        <a
+          class="group mb-6 block overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          href="/projectos/grafica-viva"
+        >
+          <div class="relative min-h-44 overflow-hidden sm:min-h-56">
+            <img
+              class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+              src="/images/projectos/grafica-viva-desktop.webp"
+              [alt]="copy.proof.text | localized"
+            />
+            <span class="absolute inset-0 bg-linear-to-r from-bg/95 via-bg/60 to-transparent"></span>
+            <span class="relative flex min-h-44 items-end p-5 sm:min-h-56 sm:p-8">
+              <span>
+                <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+                  {{ copy.proof.text | localized }}
+                </span>
+                <span class="mt-3 block font-display text-2xl font-semibold text-fg sm:text-3xl">
+                  {{ copy.proof.link | localized }}
+                </span>
+                <span class="mt-3 inline-flex items-center gap-2 font-semibold text-accent-bright">
+                  {{ learnMoreLabel() }}
+                  <app-icon name="chevron-right" />
+                </span>
+              </span>
+            </span>
+          </div>
+        </a>
+
         <label class="sr-only" for="web-package-search">{{ catalogSearchLabel() }}</label>
         <div class="flex min-h-12 items-center gap-3 rounded-button border border-line bg-surface px-4">
           <app-icon class="shrink-0 text-fg-muted" name="search" />
@@ -60,13 +88,13 @@
             <div class="relative flex min-h-64 items-end justify-between gap-5 p-6 sm:min-h-80 sm:p-10">
               <div class="max-w-xl">
                 <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-                  {{ copy.proof.text | localized }}
+                  {{ copy.sections.websites.index | localized }}
                 </p>
                 <h2 class="mt-4 font-display text-2xl font-semibold tracking-tight text-fg sm:text-4xl">
                   {{ copy.sections.websites.title | localized }}
                 </h2>
                 <p class="mt-3 max-w-[52ch] text-sm leading-relaxed text-fg-muted sm:text-base">
-                  {{ copy.proof.link | localized }}
+                  {{ copy.sections.websites.description | localized }}
                 </p>
               </div>
               <div class="flex shrink-0 gap-2">
@@ -93,10 +121,13 @@
           </div>
         </div>
 
-        <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" role="tablist">
+        <div
+          class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible"
+          role="tablist"
+        >
           @for (category of catalogCategories(); track category.id; let index = $index) {
             <button
-              class="group relative flex aspect-[16/9] min-h-0 items-end overflow-hidden rounded-card border border-line bg-bg p-5 text-left text-fg shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-accent/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:p-6"
+              class="group relative flex aspect-[16/9] w-[82%] shrink-0 snap-center items-end overflow-hidden rounded-card border border-line bg-bg p-5 text-left text-fg shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-accent/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-[46%] sm:p-6 lg:w-auto"
               [class.border-accent]="activeCategoryIndex() === index"
               [class.ring-2]="activeCategoryIndex() === index"
               [class.ring-accent]="activeCategoryIndex() === index"

@@ -4,9 +4,34 @@
     [title]="copy.title | localized"
     [description]="copy.description | localized"
   />
-  <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2 align-items-stretch">
-    @for (project of projects(); track project.title) {
-      <app-project-card [item]="project" />
-    }
+  <div class="mt-10 xl:mt-14">
+    <a
+      class="group relative block min-h-72 overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:min-h-96"
+      [href]="'/projectos/' + featuredProject.slug"
+    >
+      <img
+        class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+        [src]="featuredProject.imagem.escuro.pt.replace('public/', '/')"
+        [alt]="featuredProject.imagem.alt | localized"
+      />
+      <span class="absolute inset-0 bg-linear-to-r from-bg/95 via-bg/55 to-transparent"></span>
+      <span class="relative flex min-h-72 items-end p-6 sm:min-h-96 sm:p-10">
+        <span class="max-w-xl">
+          <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+            {{ featuredProject.tipo | localized }}
+          </span>
+          <span class="mt-4 block font-display text-3xl font-semibold text-fg sm:text-5xl">
+            {{ featuredProject.nome | localized }}
+          </span>
+          <span class="mt-4 block max-w-[52ch] text-fg-muted">
+            {{ featuredProject.descricao | localized }}
+          </span>
+          <span class="mt-6 inline-flex items-center gap-2 font-semibold text-accent-bright">
+            {{ copy.title | localized }}
+            <app-icon name="chevron-right" />
+          </span>
+        </span>
+      </span>
+    </a>
   </div>
 </section>

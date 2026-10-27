@@ -1,5 +1,12 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: UI dos destaques de produtos e links da Home
+
+- **Estado:** concluída
+- A UI solicitada foi aplicada aos cards de destaque dentro das categorias de `/produtos`, mantendo o estado normal da referência e acrescentando realce em hover/foco.
+- A imagem principal de cada categoria voltou a usar `MediaSlot`; não é tratada como card de destaque.
+- O preview de produtos da Home passou a ligar à rota existente `/produtos`, sem apontar para páginas individuais inexistentes.
+
 ## Correcção: cartões de produtos com estado hover
 
 - **Estado:** concluída

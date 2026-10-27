@@ -27,6 +27,8 @@ import { Marquee } from '../../shared/ui/marquee/marquee';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 import { ProductCategoryCard } from '../../shared/ui/product-category-card/product-category-card';
+import { ProductHighlightCard } from '../../shared/ui/product-highlight-card/product-highlight-card';
+import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
 
 @Component({
   selector: 'app-produtos',
@@ -37,7 +39,8 @@ import { ProductCategoryCard } from '../../shared/ui/product-category-card/produ
     LocalizedPipe,
     Marquee,
     PageHero,
-    ProductCategoryCard,
+    MediaSlot,
+    ProductHighlightCard,
     RevealChildren,
   ],
   templateUrl: './produtos.html',
@@ -62,17 +65,12 @@ export class Produtos {
       ordemLabel: category.ordem.toString().padStart(2, '0'),
       whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(category.mensagemWhatsApp)),
       imagemSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
-      productCard: {
-        title: category.titulo,
-        description: category.descricao,
-        imageSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
-        imageAlt: category.imagem.alt,
-        href: category.href,
-        actionLabel: this.copy.quoteLabel,
-      },
       destaques: category.destaques.map((item) => ({
-        ...item,
+        label: item.etiqueta,
+        title: item.titulo,
+        description: item.descricao,
         whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),
+        actionLabel: this.copy.quoteLabel,
       })),
     })),
   );

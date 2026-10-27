@@ -20,7 +20,7 @@ export class HomeProductsPreview {
     description: category.descricao,
     imageSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
     imageAlt: category.imagem.alt,
-    href: category.href,
+    href: '/produtos',
     actionLabel: this.copy.cardLinkLabel,
     slug: category.slug,
   }));

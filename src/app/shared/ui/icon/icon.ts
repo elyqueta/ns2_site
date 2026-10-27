@@ -28,6 +28,7 @@ export const iconNames = [
   'moon',
   'menu',
   'close',
+  'heart',
   'search',
   'check',
   'plus',

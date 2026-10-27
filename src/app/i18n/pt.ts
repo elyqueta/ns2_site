@@ -243,6 +243,7 @@ export const pt = {
       'chevron-right': 'Seta para a direita',
       sun: 'Sol',
       moon: 'Lua',
+      heart: 'Favorito',
     menu: 'Menu',
     close: 'Fechar',
     search: 'Pesquisar',

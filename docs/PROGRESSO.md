@@ -1,5 +1,15 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: cards de destaque de produtos com hover imersivo
+
+- **Estado:** concluída
+- Os cards de destaque das categorias de produtos passaram a suportar imagem opcional no topo, conteúdo informativo em estado normal e composição imersiva sobre a imagem em hover/foco no desktop.
+- Quando não existe imagem, é usado um fallback com gradiente baseado nos tokens do tema, sem espaço vazio nem imagem quebrada.
+- O botão mantém a acção oficial de pedido de orçamento via WhatsApp e transforma-se numa barra com seta circular no estado imersivo.
+- Mobile e tablet não dependem de hover; `prefers-reduced-motion` reduz as transições.
+- Adicionado o ícone de favorito como elemento visual não interactivo, pronto para futura funcionalidade.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas.
+
 ## Correcção: UI dos destaques de produtos e links da Home
 
 - **Estado:** concluída

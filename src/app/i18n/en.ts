@@ -252,6 +252,7 @@ export const en = {
       'chevron-right': 'Chevron right',
       sun: 'Sun',
       moon: 'Moon',
+      heart: 'Favourite',
     menu: 'Menu',
     close: 'Close',
     search: 'Search',

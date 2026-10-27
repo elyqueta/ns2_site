@@ -205,9 +205,21 @@ export const homeContent = {
       en: 'Content pending approval',
     } satisfies LocalizedText,
     items: [
-      { name: 'Oswaldo Bravo', role: { pt: 'TODO(conteúdo): confirmar função', en: 'TODO(content): confirm role' } satisfies LocalizedText },
-      { name: 'Matheus Sassapa', role: { pt: 'Comercial', en: 'Commercial' } satisfies LocalizedText },
-      { name: 'Elisandra Queta', role: { pt: 'Empreendedora', en: 'Entrepreneur' } satisfies LocalizedText },
+      {
+        name: 'Oswaldo Bravo',
+        role: { pt: 'TODO(conteúdo): confirmar função', en: 'TODO(content): confirm role' } satisfies LocalizedText,
+        imageSrc: '/images/servicos/websites-sistemas-web.webp',
+      },
+      {
+        name: 'Matheus Sassapa',
+        role: { pt: 'Comercial', en: 'Commercial' } satisfies LocalizedText,
+        imageSrc: '/images/servicos/consultoria.webp',
+      },
+      {
+        name: 'Elisandra Queta',
+        role: { pt: 'Empreendedora', en: 'Entrepreneur' } satisfies LocalizedText,
+        imageSrc: '/images/servicos/sistemas-software.webp',
+      },
     ],
   },
   news: {

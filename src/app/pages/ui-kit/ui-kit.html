@@ -205,7 +205,7 @@
       </h2>
       <ul class="mt-7 grid grid-cols-2 gap-6 lg:grid lg:grid-cols-12 lg:grid-rows-2 lg:gap-6 lg:auto-rows-[clamp(260px,22vw,320px)]">
         @for (card of bentoPacotes(); track card.titulo) {
-          <li class="w-full {{ card.gridPosition }}">
+          <li class="w-full" [class]="card.gridPosition">
             <app-pacote-vidro-card [item]="card" [bento]="true" />
           </li>
         }

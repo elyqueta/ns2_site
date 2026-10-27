@@ -6,7 +6,7 @@
   />
   <ul class="mt-10 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid lg:grid-cols-12 lg:grid-rows-2 lg:gap-6 lg:auto-rows-[clamp(260px,22vw,320px)] xl:mt-14">
     @for (item of packages(); track item.titulo) {
-      <li class="w-full {{ item.gridPosition }}">
+      <li class="w-full" [class]="item.gridPosition">
         <app-pacote-vidro-card [item]="item" [bento]="true" />
       </li>
     }

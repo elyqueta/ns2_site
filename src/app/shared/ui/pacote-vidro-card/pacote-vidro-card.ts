@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { KzPipe } from '../../pipes/kz.pipe';
 import { Icon, IconName } from '../icon/icon';
@@ -29,4 +29,9 @@ export interface PacoteVidroCardData {
 export class PacoteVidroCard {
   readonly item = input.required<PacoteVidroCardData>();
   readonly bento = input(false);
+  readonly imageFailed = signal(false);
+
+  onImageError(): void {
+    this.imageFailed.set(true);
+  }
 }

@@ -11,11 +11,13 @@ const tons: Record<string, string> = {
 };
 
 const imagens: Record<string, string | null> = {
-  'landing-page': '/images/pacotes/landing-page.webp',
-  'site-institucional': '/images/pacotes/site-institucional.webp',
-  'site-profissional': '/images/pacotes/site-profissional.webp',
-  'site-empresarial': '/images/pacotes/site-empresarial.webp',
+  'landing-page': null,
+  'site-institucional': null,
+  'site-profissional': null,
+  'site-empresarial': null,
 };
+
+// TODO(conteúdo): preencher com '/images/pacotes/<slug>.webp' quando as imagens existirem.
 
 const objectPositions: Record<string, string> = {
   'landing-page': 'center 35%',

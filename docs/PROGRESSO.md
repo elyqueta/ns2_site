@@ -143,27 +143,28 @@
 
 ## Adição: Mosaico (bento) dos cartões de pacotes web na home, só desktop (≥1024px)
 
-- **Estado:** concluída
+- **Estado:** concluída (inclui correcção de colapso)
 - **Decisões tomadas:**
   - CSS grid de 12 colunas × 2 linhas apenas em `lg:` (≥1024px); abaixo mantém a grelha atual (2 colunas sm, 1 mobile).
   - `/desenvolvimento-web` não foi alterado.
-  - `.pkg-card-bento` em `src/styles.css` (`@layer utilities`): `aspect-ratio: auto; height: 100%`, aplicado via input `bento()` só em lg.
+  - `.pkg-card-bento` (aspect-ratio auto, height 100%) movido para dentro de `@media (min-width: 1024px)`; abaixo de 1024px o cartão volta a `.pkg-card` (aspect-ratio 4/5).
+  - Anfitrião do componente: `app-pacote-vidro-card { display: block; height: 100%; }` em `src/styles.css` (@layer utilities), para o `<a>` ocupar a altura do `<li>` da grelha.
+  - Defesa contra imagens em falta: `imagens` agora `null` para todos os pacotes (com `// TODO(conteúdo)`), e `pacote-vidro-card.ts` expõe `imageFailed` signal + `onImageError()`; o `.html` guarda a imagem atrás de `@if (item().imagemSrc && !imageFailed())` com `(error)="onImageError()"` no `<img>`. Nunca mostra ícone de imagem partida.
   - `objectPosition` por slug no mapper (landing `center 35%`, profissional `center 30%`, institucional `center`, empresarial `center`), aplicado via `[style.object-position]`.
-  - `gridPosition` por slug no mapper (Record de classes Tailwind lg:col-span/lg:row-start/lg:row-span), aplicado no `<li>` como interpolação simples `{{ item.gridPosition }}`.
+  - `gridPosition` por slug no mapper (Record de classes Tailwind), aplicado via `[class]="item.gridPosition"` (merge seguro, evita interpolação de classes).
   - `bento: true` forçado no `web-preview.ts`; não altera `/desenvolvimento-web`.
-  - Cartões baixos: se o painel de detalhes não couber, o preço reduz para 22px e o gap aperta (já no CSS `.pkg-*` existente); não corta o botão.
-  - Exemplo do mosaico adicionado ao `/ui-kit` com `bentoPacotes` e secção própria.
+  - Exemplo do mosaico adicionado ao `/ui-kit` com `bentoPacotes` e secção própria (mesma correcção de `[class]`).
   - Novas chaves i18n: `sectionPacoteMosaico`, `pacoteMosaicoDescription` (pt.ts e en.ts).
-  - Novas imagens esperadas registadas em `docs/assets.md` (landing 2000×800, profissional 1200×1400, institucional 1000×1000, empresarial 1400×1000).
+  - Imagens esperadas registadas em `docs/assets.md` (landing 2000×800, profissional 1200×1400, institucional 1000×1000, empresarial 1400×1000).
 - **Ficheiros alterados:**
-  - `src/styles.css` — `.pkg-card-bento` em `@layer utilities`
-  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.ts` — input `bento`, campos `objectPosition`/`gridPosition`/`bento` na interface
-  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.html` — `[class.pkg-card-bento]="bento()"`, `[style.object-position]="item().objectPosition"`
-  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro.mapper.ts` — `imagens`, `objectPositions`, `gridPositions`, campos novos no retorno
+  - `src/styles.css` — `.pkg-card-bento` dentro de `@media (min-width: 1024px)` + `app-pacote-vidro-card { display: block; height: 100%; }`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.ts` — `imageFailed` signal + `onImageError()`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro-card.html` — `@if (item().imagemSrc && !imageFailed())`, `(error)`, `[style.object-position]`
+  - `src/app/shared/ui/pacote-vidro-card/pacote-vidro.mapper.ts` — `imagens` todas `null` + TODO, `objectPositions`, `gridPositions`
   - `src/app/pages/home/web-preview/web-preview.ts` — `bento: true` nos pacotes
-  - `src/app/pages/home/web-preview/web-preview.html` — grid `lg:grid-cols-12 lg:grid-rows-2 lg:auto-rows-[clamp(...)]`, `<li class="w-full {{ item.gridPosition }}">`
+  - `src/app/pages/home/web-preview/web-preview.html` — `<li class="w-full" [class]="item.gridPosition">`
   - `src/app/pages/ui-kit/ui-kit.ts` — `bentoPacotes` computed
-  - `src/app/pages/ui-kit/ui-kit.html` — secção mosaico do ui-kit
+  - `src/app/pages/ui-kit/ui-kit.html` — `<li class="w-full" [class]="card.gridPosition">`
   - `src/app/i18n/pt.ts` + `src/app/i18n/en.ts` — chaves `sectionPacoteMosaico`, `pacoteMosaicoDescription`
   - `docs/assets.md` — registo das 4 imagens de pacotes web
 - **Ficheiros criados:** nenhum

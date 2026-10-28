@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
@@ -25,6 +26,7 @@ import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
     ProcessProgress,
     Reveal,
     RevealChildren,
+    RouterLink,
     SectionHeading,
   ],
   templateUrl: './sobre.html',
@@ -35,6 +37,17 @@ export class Sobre {
   private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
   readonly copy = aboutPageContent;
+  readonly differentiators = aboutPageContent.differentiators.items.map((item, index) => ({
+    ...item,
+    imageSrc: [
+      '/images/servicos/infraestrutura-redes-servidores.webp',
+      '/images/servicos/suporte-remoto.webp',
+      '/images/servicos/suporte-on-site.webp',
+      '/images/produtos/notebooks.webp',
+      '/images/servicos/websites-sistemas-web.webp',
+    ][index],
+    tintRgb: ['63 111 181', '84 94 214', '36 140 156', '120 82 200', '46 125 168'][index],
+  }));
   readonly whatsappUrl = computed(() =>
     this.whatsapp.createWhatsappUrl(this.i18n.text(this.copy.cta.whatsappMessage)),
   );

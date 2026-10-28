@@ -468,6 +468,11 @@
     will-change: transform;
   }
 
+  .about-differentiators .about-differentiator-card {
+    width: 100%;
+    min-width: 0;
+  }
+
   .svc-card:focus-visible {
     outline: 3px solid #9cc0f5;
     outline-offset: 4px;

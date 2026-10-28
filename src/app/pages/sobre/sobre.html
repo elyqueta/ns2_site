@@ -84,19 +84,33 @@
         [index]="copy.differentiators.index | localized"
         [title]="copy.differentiators.title | localized"
       />
-      <ul appRevealChildren class="mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
-        @for (item of copy.differentiators.items; track item.title.pt) {
-          <li class="rounded-3xl border border-line bg-bg p-6 sm:p-8">
-            <span
-              class="inline-flex size-12 items-center justify-center rounded-2xl bg-accent/10 text-accent-bright"
-              aria-hidden="true"
+      <ul appRevealChildren class="about-differentiators mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
+        @for (item of differentiators; track item.title.pt) {
+          <li class="min-w-0">
+            <a
+              class="svc-card about-differentiator-card"
+              [routerLink]="'/servicos'"
+              [style.--tint-rgb]="item.tintRgb"
             >
-              <app-icon [name]="item.icon" />
-            </span>
-            <h3 class="mt-6 font-display text-h3 font-semibold text-fg">
-              {{ item.title | localized }}
-            </h3>
-            <p class="mt-3 leading-relaxed text-fg-muted">{{ item.description | localized }}</p>
+              <div class="svc-media">
+                <img
+                  [src]="item.imageSrc"
+                  alt=""
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="svc-glass"></div>
+              <div class="svc-body">
+                <div class="svc-head">
+                  <span class="svc-chip"><app-icon [name]="item.icon" /></span>
+                  <h3 class="svc-title">{{ item.title | localized }}</h3>
+                </div>
+                <p class="svc-meta">{{ item.description | localized }}</p>
+              </div>
+            </a>
           </li>
         }
       </ul>

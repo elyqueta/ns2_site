@@ -1,5 +1,13 @@
 # PROGRESSO (o agente actualiza no fim de cada fase)
 
+## Correcção: cards visuais na secção "O que nos distingue" da página Sobre
+
+- **Estado:** concluída
+- A secção “O que nos distingue” da página `/sobre` passou a usar a linguagem visual dos cards de serviços da Home: imagem local, gradiente, efeito glass, ícone, texto sobreposto, cantos arredondados e hover/foco com elevação.
+- Foram reutilizadas imagens locais já existentes de infraestrutura, suporte, produtos e desenvolvimento web, sem alterar o conteúdo oficial dos cinco diferenciais.
+- Os cards continuam responsivos e ligados à página geral de serviços; a página `/servicos` não foi alterada nesta correcção.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas. O aviso do orçamento inicial permanece pré-existente.
+
 | Fase                               | Estado      | Aprovada pelo utilizador                    | Notas                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ---------------------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 00 Fundações                       | ✅ aprovada | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Rotas parametrizadas são prerenderizadas nas fases em que os dados correspondentes ficam disponíveis.                                                                                                                                                                                                                                                                                     |

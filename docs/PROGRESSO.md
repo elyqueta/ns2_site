@@ -1,5 +1,12 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: proporção do destaque de notícias na Home
+
+- **Estado:** concluída
+- O cartão principal de notícias passou a organizar imagem e conteúdo em duas colunas a partir de `lg`, evitando o empilhamento vertical que o tornava excessivamente alto.
+- Em mobile mantém uma única coluna, preservando a leitura e a responsividade.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas. O aviso do orçamento inicial permanece pré-existente.
+
 ## Fase 09 — Notícias
 
 - **Estado:** concluída

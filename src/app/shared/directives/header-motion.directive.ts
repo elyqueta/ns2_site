@@ -6,7 +6,7 @@ import { registerAnimationDirective } from './animation-directive';
   standalone: true,
 })
 export class HeaderMotion {
-  private static readonly SURFACE_CLASSES = ['bg-bg/85', 'backdrop-blur-xl'];
+  private static readonly SURFACE_CLASSES = ['bg-bg/45', 'backdrop-blur-2xl', 'backdrop-saturate-150'];
 
   private readonly registration = registerAnimationDirective((element, runtime, mode) => {
     const view = element.ownerDocument.defaultView;

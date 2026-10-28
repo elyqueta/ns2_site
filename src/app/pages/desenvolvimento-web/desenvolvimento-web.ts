@@ -26,6 +26,7 @@ import {
 import { KzPipe } from '../../shared/pipes/kz.pipe';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
+import { ProjectPreviewCard } from '../../shared/ui/project-preview-card/project-preview-card';
 
 interface PackageView {
   readonly slug: string;
@@ -48,7 +49,17 @@ interface CatalogCategory {
 
 @Component({
   selector: 'app-desenvolvimento-web',
-  imports: [Accordion, CtaBand, Icon, KzPipe, LocalizedPipe, PacoteVidroCard, PageHero, RevealChildren],
+  imports: [
+    Accordion,
+    CtaBand,
+    Icon,
+    KzPipe,
+    LocalizedPipe,
+    PacoteVidroCard,
+    PageHero,
+    ProjectPreviewCard,
+    RevealChildren,
+  ],
   templateUrl: './desenvolvimento-web.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -167,12 +178,37 @@ export class DesenvolvimentoWeb {
         .toLocaleLowerCase()
         .includes(term);
     });
-
     return packages?.map((item) =>
       'paginas' in item
         ? criarPacoteVidro(item, (value) => this.i18n.text(value), this.cardLabels())
         : criarPacoteVidroNivel(item, (value) => this.i18n.text(value), this.cardLabels()),
     ) ?? [];
+  });
+  readonly searchCards = computed(() => {
+    const term = this.normalise(this.searchTerm());
+    if (!term) {
+      return [];
+    }
+
+    return this.catalogCategories()
+      .flatMap((category) => category.packages)
+      .filter((item) =>
+        [
+          this.i18n.text(item.nome),
+          this.i18n.text(item.descricao),
+          this.i18n.text(item.prazo),
+          ...('idealPara' in item ? [this.i18n.text(item.idealPara)] : []),
+          ...('paginas' in item ? [this.i18n.text(item.paginas)] : []),
+        ]
+          .join(' ')
+          .toLocaleLowerCase()
+          .includes(term),
+      )
+      .map((item) =>
+        'paginas' in item
+          ? criarPacoteVidro(item, (value) => this.i18n.text(value), this.cardLabels())
+          : criarPacoteVidroNivel(item, (value) => this.i18n.text(value), this.cardLabels()),
+      );
   });
   readonly cardLabels = computed(() => ({
     startingAt: this.i18n.text(this.copy.labels.startingAt),

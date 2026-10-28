@@ -197,27 +197,35 @@ export const homeContent = {
       en: 'Relationships worth hearing about.',
     } satisfies LocalizedText,
     description: {
-      pt: 'Estamos a reunir os testemunhos aprovados de pessoas que já estiveram connosco.',
-      en: 'We are gathering approved testimonials from people who have worked with us.',
-    } satisfies LocalizedText,
-    pendingLabel: {
-      pt: 'Conteúdo pendente de aprovação',
-      en: 'Content pending approval',
+      pt: 'Experiências de quem encontrou na NS2 um parceiro próximo para os seus desafios tecnológicos.',
+      en: 'Experiences from people who found a close partner for their technology challenges in NS2.',
     } satisfies LocalizedText,
     items: [
       {
-        name: 'Oswaldo Bravo',
-        role: { pt: 'TODO(conteúdo): confirmar função', en: 'TODO(content): confirm role' } satisfies LocalizedText,
+        name: 'Osvaldo Bravo',
+        role: { pt: 'Comerciante, Bravo Business', en: 'Merchant, Bravo Business' } satisfies LocalizedText,
+        quote: {
+          pt: 'A NS2 desenvolveu o marketplace da Bravo Business, uma plataforma simples que gere produtos e categorias e fecha os pedidos pelo WhatsApp. Destaco a simplicidade, a rapidez e o acompanhamento ao longo do trabalho.',
+          en: 'NS2 developed the Bravo Business marketplace, a simple platform that manages products and categories and closes orders through WhatsApp. I value the simplicity, speed and support throughout the work.',
+        } satisfies LocalizedText,
         imageSrc: '/images/servicos/websites-sistemas-web.webp',
       },
       {
-        name: 'Matheus Sassapa',
+        name: 'Mateus Sassapa',
         role: { pt: 'Comercial', en: 'Commercial' } satisfies LocalizedText,
+        quote: {
+          pt: 'Destaco a qualidade do trabalho e o cumprimento dos prazos. O suporte da NS2 também faz a diferença depois da entrega.',
+          en: 'I value the quality of the work and the commitment to deadlines. NS2 support also makes a difference after delivery.',
+        } satisfies LocalizedText,
         imageSrc: '/images/servicos/consultoria.webp',
       },
       {
-        name: 'Elisandra Queta',
-        role: { pt: 'Empreendedora', en: 'Entrepreneur' } satisfies LocalizedText,
+        name: 'Elizandra Queta',
+        role: { pt: 'Empreendedora e parceira da NS2', en: 'Entrepreneur and NS2 partner' } satisfies LocalizedText,
+        quote: {
+          pt: 'Avalio muito bem a parceria com a NS2. O profissionalismo, a clareza e a proximidade no atendimento tornam o trabalho mais simples e seguro.',
+          en: 'I rate the partnership with NS2 very highly. Their professionalism, clarity and close support make the work simpler and more reassuring.',
+        } satisfies LocalizedText,
         imageSrc: '/images/servicos/sistemas-software.webp',
       },
     ],

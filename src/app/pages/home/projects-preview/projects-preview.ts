@@ -4,11 +4,12 @@ import { projectos } from '../../../data/projectos';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
 import { Icon } from '../../../shared/ui/icon/icon';
+import { ProjectPreviewCard } from '../../../shared/ui/project-preview-card/project-preview-card';
 
 @Component({
   selector: 'app-home-projects-preview',
   standalone: true,
-  imports: [Icon, LocalizedPipe, SectionHeading],
+  imports: [Icon, LocalizedPipe, ProjectPreviewCard, SectionHeading],
   templateUrl: './projects-preview.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

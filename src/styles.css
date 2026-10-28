@@ -521,6 +521,24 @@
   .about-differentiators .about-differentiator-card {
     width: 100%;
     min-width: 0;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .about-differentiators > li:nth-child(1) {
+      grid-column: span 7;
+    }
+
+    .about-differentiators > li:nth-child(2) {
+      grid-column: span 5;
+    }
+
+    .about-differentiators > li:nth-child(3),
+    .about-differentiators > li:nth-child(4),
+    .about-differentiators > li:nth-child(5) {
+      grid-column: span 4;
+    }
   }
 
   .svc-card:focus-visible {

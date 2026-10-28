@@ -1,5 +1,17 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção transversal — ajustes pontuais de UI
+
+- **Estado:** concluída
+- O preview de projectos da Home e de `/desenvolvimento-web` passou a usar o componente partilhado `ProjectPreviewCard`, com gradiente escuro fixo, altura ampliada e transição GSAP com suporte a reduced motion.
+- Os testemunhos da Home deixaram o marquee e passaram a uma grelha estática responsiva com citação, nomes corrigidos e os textos autorizados expressamente pelo utilizador. A excepção foi registada em `AGENTS.md`.
+- Foi adicionado o projecto Bravo Business ao catálogo, com campos ainda pendentes assinalados como `TODO(conteúdo)` e sem URL ou métricas inventadas.
+- A secção “O que nos distingue” usa uma composição bento de 12 colunas apenas no desktop; o dropdown da navbar abre abaixo do trigger e o header recebeu vidro mais acentuado.
+- A página `/parceiros` usa o padrão dos cards de produtos, com fallback de gradiente para marcas sem logótipo e grelha responsiva de 1 a 4 colunas.
+- A pesquisa de `/desenvolvimento-web` mostra exclusivamente pacotes correspondentes de todas as categorias e esconde o banner/faixa de categorias enquanto há termo.
+- **Verificações:** `npm run build` passa com 45 rotas prerenderizadas; permanece apenas o aviso pré-existente do orçamento inicial. `npm test -- --watch=false` passa com 22/22 testes.
+- **Pendências:** substituir imagens provisórias dos testemunhos e do preview de projectos quando forem fornecidos assets finais; completar os campos TODO do Bravo Business.
+
 ## Correcção: impedir quebra do link de leitura
 
 - **Estado:** concluída

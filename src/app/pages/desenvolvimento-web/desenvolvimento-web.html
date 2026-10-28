@@ -24,33 +24,11 @@
       <div class="mt-10 rounded-card border border-line bg-bg p-4 shadow-lg sm:p-6">
         @if (activeProject(); as project) {
           <div class="relative mb-6">
-            <a
-              class="group block overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-              [href]="'/projectos/' + project.slug"
-            >
-              <div class="relative min-h-44 overflow-hidden sm:min-h-56">
-                <img
-                  class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  [src]="project.imageSrc"
-                  [alt]="project.imagem.alt | localized"
-                />
-                <span class="absolute inset-0 bg-linear-to-r from-bg/95 via-bg/60 to-transparent"></span>
-                <span class="relative flex min-h-44 items-end p-5 sm:min-h-56 sm:p-8">
-                  <span>
-                    <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-                      {{ project.tipo | localized }}
-                    </span>
-                    <span class="mt-3 block font-display text-2xl font-semibold text-fg sm:text-3xl">
-                      {{ project.nome | localized }}
-                    </span>
-                    <span class="mt-3 inline-flex items-center gap-2 font-semibold text-accent-bright">
-                      {{ learnMoreLabel() }}
-                      <app-icon name="chevron-right" />
-                    </span>
-                  </span>
-                </span>
-              </div>
-            </a>
+            <app-project-preview-card
+              [project]="project"
+              [linkLabel]="learnMoreLabel()"
+              [transitionKey]="activeProjectIndex()"
+            />
             <div class="absolute right-4 top-4 z-10 flex gap-2 sm:right-6 sm:top-6">
               <button
                 class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg backdrop-blur transition-colors hover:border-accent hover:text-accent-bright disabled:cursor-not-allowed disabled:opacity-40"
@@ -97,7 +75,29 @@
           }
         </div>
 
-        <div class="mt-6 overflow-hidden rounded-card border border-line bg-bg">
+        @if (searchTerm()) {
+          @if (searchCards().length) {
+            <ul class="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              @for (card of searchCards(); track card.href) {
+                <li class="w-full">
+                  <app-pacote-vidro-card [item]="card" />
+                </li>
+              }
+            </ul>
+          } @else {
+            <div class="mt-6 rounded-card border border-dashed border-line p-8 text-center">
+              <p class="text-fg-muted">{{ catalogNoResults() }}</p>
+              <button
+                class="mt-4 inline-flex min-h-11 items-center justify-center rounded-button border border-line px-5 py-3 font-semibold text-fg hover:bg-surface-2"
+                type="button"
+                (click)="clearSearch()"
+              >
+                {{ catalogClearSearch() }}
+              </button>
+            </div>
+          }
+        }
+        <div class="mt-6 overflow-hidden rounded-card border border-line bg-bg" [class.hidden]="searchTerm()">
           <div class="relative min-h-64 overflow-hidden sm:min-h-80">
             <img
               class="absolute inset-0 size-full object-cover"
@@ -147,6 +147,7 @@
 
         <div
           class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible"
+          [class.hidden]="searchTerm()"
           role="tablist"
         >
           @for (category of catalogCategories(); track category.id; let index = $index) {
@@ -170,8 +171,8 @@
               <span class="absolute inset-0 bg-gradient-to-t from-bg via-bg/65 to-transparent" aria-hidden="true"></span>
               <span class="relative">
                 <span class="block font-display text-xl font-semibold">{{ category.title }}</span>
-                <span class="mt-2 block text-sm text-fg-muted">{{ category.description }}</span>
-                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-bright">
+                <span class="mt-2 block text-sm text-fg-muted lg:opacity-0 lg:transition-opacity lg:duration-300 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">{{ category.description }}</span>
+                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-bright lg:opacity-0 lg:transition-opacity lg:duration-300 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
                   {{ learnMoreLabel() }}
                   <app-icon name="chevron-right" />
                 </span>
@@ -180,10 +181,10 @@
           }
         </div>
 
-      </div>
+        </div>
 
       @if (activeCategory(); as category) {
-        <div class="mt-10" [id]="'web-category-' + category.id" role="tabpanel">
+        <div class="mt-10" [class.hidden]="searchTerm()" [id]="'web-category-' + category.id" role="tabpanel">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">

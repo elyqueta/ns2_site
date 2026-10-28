@@ -1,0 +1,30 @@
+<a
+  class="group relative block min-h-96 overflow-hidden rounded-card border border-white/15 bg-black shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent lg:min-h-[32rem]"
+  [href]="'/projectos/' + project().slug"
+  [appProjectTransition]="transitionKey()"
+>
+  <img
+    data-project-image
+    class="absolute inset-0 size-full object-cover"
+    [src]="project().imageSrc"
+    [alt]="project().imagem.alt | localized"
+  />
+  <span class="absolute inset-0 bg-linear-to-r from-black/70 via-black/30 to-transparent" aria-hidden="true"></span>
+  <span data-project-content class="relative flex min-h-96 items-end p-6 text-white sm:p-10 lg:min-h-[32rem]">
+    <span class="max-w-xl">
+      <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+        {{ project().tipo | localized }}
+      </span>
+      <span class="mt-4 block font-display text-3xl font-semibold sm:text-5xl">
+        {{ project().nome | localized }}
+      </span>
+      <span class="mt-4 block max-w-[52ch] text-white/80">
+        {{ project().descricao | localized }}
+      </span>
+      <span class="mt-6 inline-flex items-center gap-2 font-semibold text-accent-bright">
+        {{ linkLabel() }}
+        <app-icon name="chevron-right" />
+      </span>
+    </span>
+  </span>
+</a>

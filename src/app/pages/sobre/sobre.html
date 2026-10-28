@@ -84,7 +84,7 @@
         [index]="copy.differentiators.index | localized"
         [title]="copy.differentiators.title | localized"
       />
-      <ul appRevealChildren class="about-differentiators mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
+      <ul appRevealChildren class="about-differentiators mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[clamp(16rem,24vw,22rem)] xl:mt-14">
         @for (item of differentiators; track item.title.pt) {
           <li class="min-w-0">
             <a

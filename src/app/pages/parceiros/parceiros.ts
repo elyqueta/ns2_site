@@ -5,16 +5,16 @@ import { WhatsappService } from '../../core/whatsapp.service';
 import { homeContent } from '../../data/home';
 import { partnersPageContent, parceiros } from '../../data/parceiros';
 import { pt } from '../../i18n/pt';
-import { PartnerCard } from '../../shared/ui/partner-card/partner-card';
 import { Marquee } from '../../shared/ui/marquee/marquee';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
+import { ProductCategoryCard } from '../../shared/ui/product-category-card/product-category-card';
 
 @Component({
   selector: 'app-parceiros',
-  imports: [CtaBand, LocalizedPipe, Marquee, PageHero, PartnerCard, SectionHeading],
+  imports: [CtaBand, LocalizedPipe, Marquee, PageHero, ProductCategoryCard, SectionHeading],
   templateUrl: './parceiros.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,12 +26,12 @@ export class Parceiros {
   readonly copy = partnersPageContent;
   readonly partners = computed(() =>
     parceiros.map((partner) => ({
-      type: 'partner' as const,
-      title: partner.nome,
-      description: this.i18n.text(partner.resumo),
-      label: this.i18n.text(partner.categoria),
+      title: { pt: partner.nome, en: partner.nome },
+      description: partner.resumo,
+      imageSrc: partner.logo ?? '',
+      imageAlt: { pt: partner.nome, en: partner.nome },
       href: partner.href,
-      logo: partner.logo,
+      actionLabel: this.copy.contactPageLabel,
     })),
   );
   readonly brands = parceiros.map((partner) => ({

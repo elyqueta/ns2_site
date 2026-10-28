@@ -2,11 +2,15 @@
   class="group relative isolate flex min-h-72 overflow-hidden rounded-card border border-line bg-surface shadow-lg transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:min-h-80"
   [routerLink]="item().href"
 >
-  <img
-    class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
-    [src]="item().imageSrc"
-    [alt]="item().imageAlt | localized"
-  />
+  @if (item().imageSrc) {
+    <img
+      class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+      [src]="item().imageSrc"
+      [alt]="item().imageAlt | localized"
+    />
+  } @else {
+    <span class="absolute inset-0 bg-linear-to-br from-accent/70 via-accent/30 to-surface" aria-hidden="true"></span>
+  }
   <span class="absolute inset-0 bg-linear-to-t from-bg via-bg/55 to-bg/5" aria-hidden="true"></span>
   <span
     class="absolute inset-x-0 bottom-0 flex flex-col p-5 transition-transform duration-500 sm:p-6 lg:translate-y-16 lg:group-hover:translate-y-0 lg:group-focus-within:translate-y-0"

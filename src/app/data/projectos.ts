@@ -139,6 +139,35 @@ export const projectos: readonly Project[] = [
     },
   },
   {
+    slug: 'bravo-business',
+    nome: { pt: 'Bravo Business', en: 'Bravo Business' },
+    tipo: { pt: 'Marketplace', en: 'Marketplace' },
+    descricao: {
+      pt: 'Marketplace simples que gere produtos e categorias e fecha tudo no WhatsApp.',
+      en: 'Simple marketplace that manages products and categories and closes everything through WhatsApp.',
+    },
+    url: '',
+    previewTitle: { pt: 'Marketplace Bravo Business.', en: 'Bravo Business marketplace.' },
+    desafio: {
+      pt: 'TODO(conteúdo): confirmar o desafio do projecto.',
+      en: 'TODO(content): confirm the project challenge.',
+    },
+    solucao: {
+      pt: 'TODO(conteúdo): confirmar a solução implementada.',
+      en: 'TODO(content): confirm the implemented solution.',
+    },
+    resultado: {
+      pt: 'TODO(conteúdo): confirmar os resultados do projecto.',
+      en: 'TODO(content): confirm the project results.',
+    },
+    tecnologias: [],
+    imagem: {
+      claro: { pt: '', en: '' },
+      escuro: { pt: '', en: '' },
+      alt: { pt: 'Marketplace Bravo Business.', en: 'Bravo Business marketplace.' },
+    },
+  },
+  {
     slug: 'brevemente-01',
     nome: { pt: 'Em breve', en: 'Coming soon' },
     tipo: {

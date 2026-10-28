@@ -74,6 +74,8 @@ export const homeContent = {
     } satisfies LocalizedText,
     linkLabel: { pt: 'Ver todos os serviços', en: 'View all services' } satisfies LocalizedText,
     cardLinkLabel: { pt: 'Saber mais', en: 'Learn more' } satisfies LocalizedText,
+    previousLabel: { pt: 'Serviço anterior', en: 'Previous service' } satisfies LocalizedText,
+    nextLabel: { pt: 'Serviço seguinte', en: 'Next service' } satisfies LocalizedText,
   },
   web: {
     index: { pt: 'Desenvolvimento web', en: 'Web development' } satisfies LocalizedText,
@@ -200,6 +202,8 @@ export const homeContent = {
       pt: 'Experiências de quem encontrou na NS2 um parceiro próximo para os seus desafios tecnológicos.',
       en: 'Experiences from people who found a close partner for their technology challenges in NS2.',
     } satisfies LocalizedText,
+    previousLabel: { pt: 'Testemunho anterior', en: 'Previous testimonial' } satisfies LocalizedText,
+    nextLabel: { pt: 'Testemunho seguinte', en: 'Next testimonial' } satisfies LocalizedText,
     items: [
       {
         name: 'Osvaldo Bravo',

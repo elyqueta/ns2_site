@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: carrosséis de testemunhos e serviços na Home
+
+- **Estado:** concluída
+- Os testemunhos da Home passaram para um carrossel horizontal responsivo com o cartão activo centrado e destacado, cartões adjacentes parcialmente visíveis e transições GSAP coordenadas de posição, escala e opacidade.
+- Os controlos de testemunhos são acessíveis, mantêm os limites do conjunto e não provocam navegação ou salto de scroll ao mudar de cartão.
+- Os serviços usam o mesmo padrão apenas em mobile e tablet; o comportamento editorial/pin existente mantém-se no desktop.
+- A geometria do carrossel passou a usar dimensões estruturais (`offsetWidth` e `gap`), evitando oscilações causadas por cartões já transformados. O `appReveal` deixou de disputar o `transform` dos cartões.
+- **Verificações:** `npm run build` passa com 45 rotas prerenderizadas; permanece apenas o aviso pré-existente do orçamento inicial. `npm test -- --watch=false` passa com 22/22 testes.
+
 ## Correcção transversal — ajustes pontuais de UI
 
 - **Estado:** concluída

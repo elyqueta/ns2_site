@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { homeContent } from '../../../data/home';
 import { servicos } from '../../../data/servicos';
 import { HomeServicesPin } from '../../../shared/directives/home-services-pin.directive';
+import { HomeCarousel } from '../../../shared/directives/home-carousel.directive';
 import { Icon } from '../../../shared/ui/icon/icon';
 import { ServicoVidroCard } from '../../../shared/ui/servico-vidro-card/servico-vidro-card';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
@@ -33,6 +34,7 @@ const titulosCurtos: readonly LocalizedText[] = [
   selector: 'app-home-services-preview',
   imports: [
     HomeServicesPin,
+    HomeCarousel,
     ServicoVidroCard,
     Icon,
     LocalizedPipe,
@@ -44,6 +46,7 @@ const titulosCurtos: readonly LocalizedText[] = [
 })
 export class HomeServicesPreview {
   readonly copy = homeContent.services;
+  readonly activeIndex = signal(0);
   readonly ctaLabel = homeContent.services.cardLinkLabel;
   readonly servicosVidro = computed(() => {
     return servicos.map((service, index) => ({
@@ -58,4 +61,14 @@ export class HomeServicesPreview {
       badge: false,
     }));
   });
+
+  previous(event?: Event): void {
+    event?.preventDefault();
+    this.activeIndex.update((index) => Math.max(index - 1, 0));
+  }
+
+  next(event?: Event): void {
+    event?.preventDefault();
+    this.activeIndex.update((index) => Math.min(index + 1, this.servicosVidro().length - 1));
+  }
 }

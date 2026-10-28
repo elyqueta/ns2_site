@@ -6,15 +6,41 @@
       [description]="copy.description | localized"
     />
     <div appHomeServicesPin class="mt-8 lg:mt-10">
-      <div class="relative left-[50%] -mx-[50vw] w-[100vw] overflow-x-auto lg:overflow-hidden">
-        <div
-          data-home-services-track
-          class="svc-track"
-        >
-          @for (service of servicosVidro(); track service.titulo.pt) {
-            <app-servico-vidro-card [item]="service" />
-          }
+      <div
+        class="relative left-[50%] -mx-[50vw] w-[100vw] overflow-hidden"
+        appHomeCarousel
+        [appHomeCarouselIndex]="activeIndex()"
+        [appHomeCarouselMobileOnly]="true"
+      >
+        <div class="overflow-x-hidden lg:overflow-visible">
+          <div data-home-services-track data-home-carousel-track class="svc-track">
+            @for (service of servicosVidro(); track service.titulo.pt; let index = $index) {
+              <div data-home-carousel-card [attr.aria-current]="activeIndex() === index ? 'true' : null">
+                <app-servico-vidro-card [item]="service" />
+              </div>
+            }
+          </div>
         </div>
+      </div>
+      <div class="mt-4 flex justify-center gap-3 lg:hidden">
+        <button
+          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-accent hover:text-accent-bright disabled:cursor-not-allowed disabled:opacity-40"
+          type="button"
+          [attr.aria-label]="copy.previousLabel | localized"
+          [disabled]="activeIndex() === 0"
+          (click)="previous($event)"
+        >
+          <app-icon name="chevron-left" />
+        </button>
+        <button
+          class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-accent hover:text-accent-bright disabled:cursor-not-allowed disabled:opacity-40"
+          type="button"
+          [attr.aria-label]="copy.nextLabel | localized"
+          [disabled]="activeIndex() === servicosVidro().length - 1"
+          (click)="next($event)"
+        >
+          <app-icon name="chevron-right" />
+        </button>
       </div>
       <div
         data-home-services-progress

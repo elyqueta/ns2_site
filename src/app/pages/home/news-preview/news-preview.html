@@ -1,31 +1,89 @@
 <section class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
   <app-section-heading [index]="copy.index | localized" [title]="copy.title | localized" />
-  <div class="mt-10 grid gap-4 lg:grid-cols-3 xl:mt-14">
-    @for (article of articles; track article.slug) {
-      <article
-        class="flex flex-col rounded-card border border-line bg-surface p-6 transition-colors hover:border-accent/50 hover:bg-surface-2 sm:p-8"
+  <div class="mt-10 grid gap-4 xl:mt-14 lg:grid-cols-2">
+    <article
+      class="news-card news-card--featured group grid overflow-hidden rounded-card border border-line bg-surface transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl lg:col-span-2"
+    >
+      <a
+        class="news-card__media block min-h-64 focus-visible:outline-offset-4 lg:min-h-80"
+        [routerLink]="featured.href"
+        [attr.aria-label]="copy.readLabel | localized"
       >
-        <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <p
-            class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
-          >
-            {{ article.categoria | localized }}
+        <app-media-slot
+          class="block h-full"
+          [alt]="featured.titulo | localized"
+          [src]="featured.imageSrc"
+          [expectedFile]="featured.expectedFile"
+          aspectRatio="16/9"
+          [width]="1200"
+          [height]="675"
+          [loading]="'lazy'"
+        />
+      </a>
+      <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+            {{ featured.categoria | localized }}
           </p>
-          <p class="text-xs text-fg-muted">
-            {{ article.tempoLeitura }} {{ copy.minutesLabel | localized }}
-          </p>
+          <time class="text-xs text-fg-muted" [attr.datetime]="featured.data">
+            {{ featured.data | dataPt }}
+          </time>
         </div>
-        <h3 class="mt-7 font-display text-h3 font-semibold leading-snug text-fg">
-          {{ article.titulo | localized }}
+        <h3 class="mt-5 font-display text-h2 font-semibold leading-tight text-fg">
+          {{ featured.titulo | localized }}
         </h3>
-        <p class="mt-3 grow text-fg-muted">{{ article.resumo | localized }}</p>
+        <p class="mt-4 max-w-[62ch] text-fg-muted">{{ featured.resumo | localized }}</p>
         <a
-          class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
-          [routerLink]="article.href"
+          class="mt-6 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-accent-bright focus-visible:outline-offset-4"
+          [routerLink]="featured.href"
         >
           {{ copy.readLabel | localized }}
           <app-icon name="arrow" />
         </a>
+      </div>
+    </article>
+
+    @for (article of secondaryArticles; track article.slug) {
+      <article
+        class="news-card group flex flex-col overflow-hidden rounded-card border border-line bg-surface transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl"
+      >
+        <a
+          class="news-card__media block focus-visible:outline-offset-4"
+          [routerLink]="article.href"
+          [attr.aria-label]="copy.readLabel | localized"
+        >
+          <app-media-slot
+            class="block"
+            [alt]="article.titulo | localized"
+            [src]="article.imageSrc"
+            [expectedFile]="article.expectedFile"
+            aspectRatio="16/9"
+            [width]="1200"
+            [height]="675"
+            [loading]="'lazy'"
+          />
+        </a>
+        <div class="flex flex-1 flex-col p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <p class="font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
+              {{ article.categoria | localized }}
+            </p>
+            <time class="text-xs text-fg-muted" [attr.datetime]="article.data">
+              {{ article.data | dataPt }}
+            </time>
+          </div>
+          <h3 class="mt-5 font-display text-h3 font-semibold leading-snug text-fg">
+            {{ article.titulo | localized }}
+          </h3>
+          <p class="mt-3 grow text-fg-muted">{{ article.resumo | localized }}</p>
+          <a
+            class="mt-6 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-accent-bright focus-visible:outline-offset-4"
+            [routerLink]="article.href"
+          >
+            {{ copy.readLabel | localized }}
+            <app-icon name="arrow" />
+          </a>
+        </div>
       </article>
     }
   </div>

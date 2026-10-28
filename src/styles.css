@@ -159,6 +159,56 @@
       box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .news-card,
+  .news-grid-card {
+    isolation: isolate;
+  }
+
+  .news-card__media {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .news-card__media::after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgb(5 7 13 / 16%) 100%);
+    content: '';
+    opacity: 0.75;
+    transition: opacity 300ms ease;
+  }
+
+  .news-card:hover .news-card__media::after,
+  .news-card:focus-within .news-card__media::after {
+    opacity: 1;
+  }
+
+  .news-card__media app-media-slot,
+  .news-grid-card > a app-media-slot {
+    display: block;
+  }
+
+  .news-card__media app-media-slot figure,
+  .news-grid-card > a app-media-slot figure {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .news-card__media img,
+  .news-grid-card > a img {
+    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .news-card:hover .news-card__media img,
+  .news-card:focus-within .news-card__media img,
+  .news-grid-card:hover > a img,
+  .news-grid-card:focus-within > a img {
+    transform: scale(1.04);
+  }
+
   .product-highlight-card__media {
     position: relative;
     min-height: 12.5rem;

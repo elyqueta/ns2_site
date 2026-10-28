@@ -1,5 +1,15 @@
 # Progresso — NS2 Innovation Site
 
+## Fase 09 — Notícias
+
+- **Estado:** concluída
+- A Home passou a apresentar uma composição editorial com uma notícia principal em formato horizontal e dois destaques secundários, todos com imagens locais, categoria, data, resumo e ligação para o artigo.
+- A página `/noticias` mantém o filtro por categoria e passou a usar uma grelha responsiva com quatro colunas em ecrãs grandes, duas em tablet e uma em ecrãs estreitos.
+- Os cartões usam `MediaSlot`, garantindo fallback temático quando uma imagem não estiver disponível, sem ícones de imagem quebrada.
+- Foram adicionados estados de hover/foco com elevação, sombra, zoom suave da imagem e gradiente discreto, respeitando a navegação por teclado e sem alterar os dados ou rotas existentes.
+- **Verificações:** viewport de 320px sem overflow horizontal; viewport de 1280px com grelha de quatro colunas; `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas.
+- **Pendências:** o catálogo contém actualmente três notícias; a grelha usa quatro colunas quando houver artigos suficientes.
+
 ## Correcção: proporções e transições dos cards de produtos
 
 - **Estado:** concluída

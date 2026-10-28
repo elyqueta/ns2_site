@@ -56,7 +56,7 @@
             {{ featured().resumo | localized }}
           </p>
           <a
-            class="mt-6 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-accent-bright focus-visible:outline-offset-4"
+            class="mt-6 inline-flex min-h-11 items-center gap-2 self-start whitespace-nowrap font-semibold text-accent-bright focus-visible:outline-offset-4"
             [routerLink]="featured().href"
           >
             {{ copy.readLabel | localized }}
@@ -152,7 +152,7 @@
                       {{ article.tempoLeitura }} {{ copy.minutesLabel | localized }}
                     </p>
                     <a
-                      class="inline-flex min-h-11 items-center gap-2 font-semibold text-accent-bright focus-visible:outline-offset-4"
+                      class="inline-flex min-h-11 items-center gap-2 whitespace-nowrap font-semibold text-accent-bright focus-visible:outline-offset-4"
                       [routerLink]="article.href"
                     >
                       {{ copy.readLabel | localized }}

@@ -1,5 +1,10 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: impedir quebra do link de leitura
+
+- **Estado:** concluída
+- Os links “Ler artigo” dos cartões da Home e da página `/noticias` passaram a usar `whitespace-nowrap`, mantendo o texto e o ícone na mesma linha em qualquer largura.
+
 ## Correcção: proporção do destaque de notícias na Home
 
 - **Estado:** concluída

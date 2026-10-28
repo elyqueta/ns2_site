@@ -45,6 +45,7 @@
         type="button"
         [attr.aria-label]="copy.previousLabel | localized"
         [disabled]="activeIndex() === 0"
+        (mousedown)="preventPointerFocus($event)"
         (click)="previous($event)"
       >
         <app-icon name="chevron-left" />
@@ -54,6 +55,7 @@
         type="button"
         [attr.aria-label]="copy.nextLabel | localized"
         [disabled]="activeIndex() === copy.items.length - 1"
+        (mousedown)="preventPointerFocus($event)"
         (click)="next($event)"
       >
         <app-icon name="chevron-right" />

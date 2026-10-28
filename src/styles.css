@@ -433,6 +433,7 @@
 
   .carousel-viewport {
     scrollbar-width: none;
+    overflow-anchor: none;
   }
 
   .carousel-viewport::-webkit-scrollbar {

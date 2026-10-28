@@ -8,6 +8,7 @@
 - A inicialização deixou de esconder a pista dos testemunhos com `appReveal`; o `ResizeObserver` recalcula a geometria após o layout e o carregamento inicial.
 - O carrossel de serviços mantém-se inactivo no desktop e ganhou `snap`, `touch-pan-x` e `overscroll-x-contain` apenas para a utilização mobile/tablet.
 - O viewport de testemunhos foi recentrado no desktop e as scrollbars horizontais foram ocultadas visualmente, mantendo a navegação por gesto, trackpad e teclado.
+- Removida a reposição posterior de `window.scrollTo` que causava um piscar; os controlos impedem apenas o foco automático do rato, preservando o foco por teclado.
 - **Verificações:** `npm run build` passa com 45 rotas prerenderizadas; permanece apenas o aviso pré-existente do orçamento inicial. `npm test -- --watch=false` passa com 22/22 testes.
 
 ## Correcção: carrosséis de testemunhos e serviços na Home

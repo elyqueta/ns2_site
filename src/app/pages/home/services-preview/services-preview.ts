@@ -62,6 +62,10 @@ export class HomeServicesPreview {
     }));
   });
 
+  preventPointerFocus(event: MouseEvent): void {
+    event.preventDefault();
+  }
+
   previous(event?: Event): void {
     event?.preventDefault();
     this.activeIndex.update((index) => Math.max(index - 1, 0));

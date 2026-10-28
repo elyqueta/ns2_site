@@ -422,7 +422,7 @@
     gap: var(--svc-gap);
     padding: 56px var(--svc-track-pad) var(--svc-track-pad-bottom) var(--svc-track-pad);
     width: max-content;
-    overflow-x: auto;
+    overflow: visible;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }

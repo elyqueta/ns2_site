@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: scroll nativo e inicialização dos carrosséis da Home
+
+- **Estado:** concluída
+- Os carrosséis passaram a usar `scrollLeft` e não `transform` na pista, permitindo arrastar e fazer rolagem horizontal nativa sem quebrar a lógica das secções.
+- O cartão activo é recalculado a partir do centro real do viewport e sincroniza os controlos de navegação; a animação GSAP continua a tratar escala, opacidade e deslocamento.
+- A inicialização deixou de esconder a pista dos testemunhos com `appReveal`; o `ResizeObserver` recalcula a geometria após o layout e o carregamento inicial.
+- O carrossel de serviços mantém-se inactivo no desktop e ganhou `snap`, `touch-pan-x` e `overscroll-x-contain` apenas para a utilização mobile/tablet.
+- **Verificações:** `npm run build` passa com 45 rotas prerenderizadas; permanece apenas o aviso pré-existente do orçamento inicial. `npm test -- --watch=false` passa com 22/22 testes.
+
 ## Correcção: carrosséis de testemunhos e serviços na Home
 
 - **Estado:** concluída

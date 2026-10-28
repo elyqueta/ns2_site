@@ -4,11 +4,10 @@ import { HomeCarousel } from '../../../shared/directives/home-carousel.directive
 import { Icon } from '../../../shared/ui/icon/icon';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
-import { Reveal } from '../../../shared/directives/reveal.directive';
 
 @Component({
   selector: 'app-home-testimonials-preview',
-  imports: [HomeCarousel, Icon, LocalizedPipe, Reveal, SectionHeading],
+  imports: [HomeCarousel, Icon, LocalizedPipe, SectionHeading],
   templateUrl: './testimonials-preview.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

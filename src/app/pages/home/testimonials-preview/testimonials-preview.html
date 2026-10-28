@@ -6,20 +6,20 @@
       [description]="copy.description | localized"
     />
     <div
-      class="relative left-[50%] mt-10 w-screen -translate-x-1/2 overflow-hidden px-5 sm:px-8 xl:mt-14 lg:px-16"
+      class="relative left-[50%] mt-10 w-screen snap-x snap-mandatory overscroll-x-contain touch-pan-x overflow-x-auto px-5 sm:px-8 xl:mt-14 lg:px-16"
       appHomeCarousel
       [appHomeCarouselIndex]="activeIndex()"
+      (appHomeCarouselIndexChange)="activeIndex.set($event)"
     >
       <ul
         data-home-carousel-track
         class="flex w-max items-stretch gap-4 py-4 sm:gap-6"
         aria-live="polite"
-        appReveal
       >
         @for (item of copy.items; track item.name; let index = $index) {
           <li
             data-home-carousel-card
-            class="w-[min(78vw,24rem)] shrink-0 rounded-card border border-line bg-bg p-6 shadow-lg sm:p-8"
+            class="w-[min(78vw,24rem)] shrink-0 snap-center rounded-card border border-line bg-bg p-6 shadow-lg sm:p-8"
             [attr.aria-current]="activeIndex() === index ? 'true' : null"
           >
             <div class="flex items-start justify-between gap-5">

@@ -7,15 +7,20 @@
     />
     <div appHomeServicesPin class="mt-8 lg:mt-10">
       <div
-        class="relative left-[50%] -mx-[50vw] w-[100vw] overflow-hidden"
+        class="relative left-[50%] -mx-[50vw] w-[100vw] snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x lg:overflow-hidden"
         appHomeCarousel
         [appHomeCarouselIndex]="activeIndex()"
         [appHomeCarouselMobileOnly]="true"
+        (appHomeCarouselIndexChange)="activeIndex.set($event)"
       >
-        <div class="overflow-x-hidden lg:overflow-visible">
+        <div>
           <div data-home-services-track data-home-carousel-track class="svc-track">
             @for (service of servicosVidro(); track service.titulo.pt; let index = $index) {
-              <div data-home-carousel-card [attr.aria-current]="activeIndex() === index ? 'true' : null">
+              <div
+                data-home-carousel-card
+                class="snap-center"
+                [attr.aria-current]="activeIndex() === index ? 'true' : null"
+              >
                 <app-servico-vidro-card [item]="service" />
               </div>
             }

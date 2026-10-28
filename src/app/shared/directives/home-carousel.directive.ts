@@ -1,4 +1,4 @@
-import { Directive, effect, input } from '@angular/core';
+import { Directive, effect, input, output } from '@angular/core';
 import { AnimationRuntime } from '../../core/animation.service';
 import { registerAnimationDirective } from './animation-directive';
 
@@ -10,6 +10,7 @@ export class HomeCarousel {
   readonly activeIndex = input.required<number>({ alias: 'appHomeCarouselIndex' });
   readonly enabled = input(true, { alias: 'appHomeCarouselEnabled' });
   readonly mobileOnly = input(false, { alias: 'appHomeCarouselMobileOnly' });
+  readonly activeIndexChange = output<number>({ alias: 'appHomeCarouselIndexChange' });
 
   private runtime: AnimationRuntime | null = null;
   private reducedMotion = false;
@@ -33,11 +34,13 @@ export class HomeCarousel {
 
     this.resizeObserver = new ResizeObserver(() => this.animate(false));
     this.resizeObserver.observe(element);
+    element.addEventListener('scroll', this.onScroll, { passive: true });
     this.animate(false);
 
     return () => {
       this.resizeObserver?.disconnect();
       this.resizeObserver = null;
+      element.removeEventListener('scroll', this.onScroll);
     };
   });
 
@@ -65,14 +68,18 @@ export class HomeCarousel {
 
     const activeIndex = Math.min(Math.max(this.activeIndex(), 0), this.cards.length - 1);
     const activeCard = this.cards[activeIndex];
-    const cardWidth = activeCard.offsetWidth;
-    const gap = this.getGap();
     const viewportWidth = this.viewport.getBoundingClientRect().width;
-    const trackOffset = viewportWidth / 2 - cardWidth / 2 - activeIndex * (cardWidth + gap);
+    const sidePadding = Math.max((viewportWidth - activeCard.offsetWidth) / 2, 0);
+    this.track.style.paddingLeft = `${sidePadding}px`;
+    this.track.style.paddingRight = `${sidePadding}px`;
+    const targetScroll = Math.max(
+      activeCard.offsetLeft - (viewportWidth - activeCard.offsetWidth) / 2,
+      0,
+    );
     const to = transition && !this.reducedMotion ? this.runtime.gsap.to : this.runtime.gsap.set;
 
-    to(this.track, {
-      x: trackOffset,
+    to(this.viewport, {
+      scrollLeft: targetScroll,
       duration: this.reducedMotion ? 0 : 0.65,
       ease: 'power3.out',
       overwrite: true,
@@ -91,14 +98,43 @@ export class HomeCarousel {
     });
   }
 
-  private getGap(): number {
-    if (!this.track || this.cards.length < 2) {
-      return 0;
+  private readonly onScroll = (): void => {
+    if (!this.viewport || !this.enabledByMode || this.cards.length === 0) {
+      return;
     }
 
-    const styles = getComputedStyle(this.track);
-    const gap = Number.parseFloat(styles.columnGap || styles.gap);
-    return Number.isFinite(gap) ? gap : 0;
+    const center = this.viewport.scrollLeft + this.viewport.clientWidth / 2;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+    this.cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+    if (closestIndex !== this.activeIndex()) {
+      this.activeIndexChange.emit(closestIndex);
+    }
+    this.animateCards(closestIndex);
+  };
+
+  private animateCards(activeIndex: number): void {
+    if (!this.runtime || this.reducedMotion) {
+      return;
+    }
+    this.cards.forEach((card, index) => {
+      const distance = Math.abs(index - activeIndex);
+      this.runtime?.gsap.to(card, {
+        scale: distance === 0 ? 1 : distance === 1 ? 0.88 : 0.78,
+        autoAlpha: distance === 0 ? 1 : distance === 1 ? 0.58 : 0.22,
+        y: distance === 0 ? 0 : distance === 1 ? 8 : 14,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    });
   }
 
 }

@@ -84,7 +84,34 @@
         [index]="copy.differentiators.index | localized"
         [title]="copy.differentiators.title | localized"
       />
-      <ul appRevealChildren class="about-differentiators mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[clamp(16rem,24vw,22rem)] xl:mt-14">
+      <div
+        class="carousel-viewport relative left-1/2 mt-10 w-screen -translate-x-1/2 snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x lg:hidden"
+        data-lenis-prevent
+        appHomeCarousel
+        [appHomeCarouselIndex]="activeDifferentiator()"
+        [appHomeCarouselMobileOnly]="true"
+        (appHomeCarouselIndexChange)="activeDifferentiator.set($event)"
+      >
+        <div data-home-carousel-track class="flex w-max items-stretch gap-4 px-5 py-4 sm:gap-6 sm:px-8">
+          @for (item of differentiators; track item.title.pt; let index = $index) {
+            <div data-home-carousel-card class="w-[min(82vw,24rem)] min-h-[20rem] shrink-0 snap-center" [attr.aria-current]="activeDifferentiator() === index ? 'true' : null">
+              <a class="svc-card about-differentiator-card" [routerLink]="'/servicos'" [style.--tint-rgb]="item.tintRgb">
+                <div class="svc-media"><img [src]="item.imageSrc" alt="" width="1200" height="750" loading="lazy" decoding="async" /></div>
+                <div class="svc-glass"></div>
+                <div class="svc-body">
+                  <div class="svc-head"><span class="svc-chip"><app-icon [name]="item.icon" /></span><h3 class="svc-title">{{ item.title | localized }}</h3></div>
+                  <p class="svc-meta">{{ item.description | localized }}</p>
+                </div>
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="mt-4 flex justify-center gap-3 lg:hidden">
+        <button class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg" type="button" [attr.aria-label]="carouselLabels.previousLabel | localized" [disabled]="activeDifferentiator() === 0" (mousedown)="preventPointerFocus($event)" (click)="previousDifferentiator($event)"><app-icon name="chevron-left" /></button>
+        <button class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg" type="button" [attr.aria-label]="carouselLabels.nextLabel | localized" [disabled]="activeDifferentiator() === differentiators.length - 1" (mousedown)="preventPointerFocus($event)" (click)="nextDifferentiator($event)"><app-icon name="chevron-right" /></button>
+      </div>
+      <ul appRevealChildren class="about-differentiators mt-10 hidden gap-4 md:grid-cols-2 lg:grid lg:grid-cols-12 lg:auto-rows-[clamp(16rem,24vw,22rem)] xl:mt-14">
         @for (item of differentiators; track item.title.pt) {
           <li class="min-w-0">
             <a

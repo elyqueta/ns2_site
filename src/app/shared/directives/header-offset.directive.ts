@@ -28,12 +28,25 @@ export class HeaderOffset {
       return Number.isFinite(rootFontSize) ? amount * rootFontSize : amount;
     };
     let currentOffset = readOffset();
+    const naturalTop = element.getBoundingClientRect().top + view.scrollY;
     const moveTo = runtime.gsap.quickTo(element, 'y', {
       duration: 0.32,
       ease: 'power3.out',
     });
 
-    runtime.gsap.set(element, { y: currentOffset });
+    const updatePosition = (): void => {
+      const stuck = view.scrollY >= naturalTop - 1;
+      const offset = stuck ? currentOffset : 0;
+      if (mode.reducedMotion) {
+        runtime.gsap.set(element, { y: offset });
+      } else {
+        moveTo(offset);
+      }
+    };
+
+    runtime.gsap.set(element, { y: 0 });
+    view.addEventListener('scroll', updatePosition, { passive: true });
+    updatePosition();
     const observer = new view.MutationObserver(() => {
       const nextOffset = readOffset();
       if (nextOffset === currentOffset) {
@@ -41,16 +54,13 @@ export class HeaderOffset {
       }
 
       currentOffset = nextOffset;
-      if (mode.reducedMotion) {
-        runtime.gsap.set(element, { y: nextOffset });
-      } else {
-        moveTo(nextOffset);
-      }
+      updatePosition();
     });
     observer.observe(root, { attributes: true, attributeFilter: ['style'] });
 
     return () => {
       observer.disconnect();
+      view.removeEventListener('scroll', updatePosition);
       runtime.gsap.set(element, { y: 0 });
     };
   });

@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { homeContent } from '../../data/home';
 import { servicesPageContent, servicos } from '../../data/servicos';
+import { HomeCarousel } from '../../shared/directives/home-carousel.directive';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
+import { Icon } from '../../shared/ui/icon/icon';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { ServicoVidroCard } from '../../shared/ui/servico-vidro-card/servico-vidro-card';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
@@ -21,7 +23,7 @@ const paleta: readonly string[] = [
 
 @Component({
   selector: 'app-servicos',
-  imports: [CtaBand, LocalizedPipe, PageHero, SectionHeading, ServicoVidroCard],
+  imports: [CtaBand, HomeCarousel, Icon, LocalizedPipe, PageHero, SectionHeading, ServicoVidroCard],
   templateUrl: './servicos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -52,6 +54,22 @@ export class Servicos {
   readonly whatsappUrl = computed(() =>
     this.whatsapp.createWhatsappUrl(this.i18n.text(homeContent.cta.whatsappMessage)),
   );
+
+  readonly activeIndex = signal(0);
+
+  preventPointerFocus(event: MouseEvent): void {
+    event.preventDefault();
+  }
+
+  previous(event?: Event): void {
+    event?.preventDefault();
+    this.activeIndex.update((index) => Math.max(index - 1, 0));
+  }
+
+  next(event?: Event): void {
+    event?.preventDefault();
+    this.activeIndex.update((index) => Math.min(index + 1, this.services.length - 1));
+  }
 
   private readonly seoEffect = effect(() =>
     this.seo.setPage(this.i18n.t('pages.services'), this.i18n.t('seo.services')),

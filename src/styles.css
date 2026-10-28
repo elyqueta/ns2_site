@@ -148,6 +148,7 @@
     position: relative;
     display: flex;
     min-height: 28rem;
+    height: 100%;
     flex-direction: column;
     overflow: hidden;
     border: 1px solid var(--line);
@@ -210,15 +211,16 @@
   }
 
   .product-highlight-card__media {
-    position: relative;
-    min-height: 12.5rem;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     overflow: hidden;
     background:
       radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 55%),
       var(--surface-2);
     transition:
-      transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+      transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 550ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .product-highlight-card__image,
@@ -244,7 +246,7 @@
 
   .product-highlight-card__overlay {
     background: linear-gradient(180deg, rgb(5 7 13 / 4%) 18%, rgb(5 7 13 / 76%) 100%);
-    opacity: 0;
+    opacity: 0.72;
     transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -268,10 +270,11 @@
     position: relative;
     z-index: 1;
     display: flex;
-    min-height: 12.5rem;
+    min-height: 28rem;
     flex: 1;
     flex-direction: column;
-    padding: 1.5rem;
+    justify-content: flex-end;
+    padding: 8rem 1.5rem 1.5rem;
   }
 
   .product-highlight-card__label {
@@ -350,9 +353,6 @@
 
     .product-highlight-card:hover .product-highlight-card__media,
     .product-highlight-card:focus-within .product-highlight-card__media {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
       transform: scale(1.02);
     }
 
@@ -368,9 +368,6 @@
 
     .product-highlight-card:hover .product-highlight-card__content,
     .product-highlight-card:focus-within .product-highlight-card__content {
-      justify-content: flex-end;
-      min-height: 28rem;
-      padding-top: 8rem;
       transform: translateY(0);
     }
 
@@ -534,6 +531,10 @@
     aspect-ratio: auto;
   }
 
+  .about-differentiators > li {
+    min-height: 20rem;
+  }
+
   @media (min-width: 1024px) {
     .about-differentiators > li:nth-child(1) {
       grid-column: span 7;
@@ -547,6 +548,22 @@
     .about-differentiators > li:nth-child(4),
     .about-differentiators > li:nth-child(5) {
       grid-column: span 4;
+    }
+
+    .about-differentiators > li {
+      min-height: 0;
+    }
+
+    .services-editorial-grid__item:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .services-editorial-grid__item:last-child .svc-card {
+      min-height: calc(20rem + 20px);
+    }
+
+    .services-editorial-grid__item:last-child .svc-media img {
+      object-position: center 42%;
     }
   }
 

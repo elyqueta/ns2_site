@@ -33,12 +33,19 @@ export class ScrollService {
   private renderedInBrowser = false;
   private stopped = false;
   private loadGeneration = 0;
+  private imageRefreshTimer: ReturnType<typeof setTimeout> | null = null;
   private routerSubscription: Subscription | null = null;
   private readonly onLenisScroll = (): void => this.runtime?.ScrollTrigger.update();
   private readonly onFrame = (time: number): void => this.lenis?.raf(time * 1000);
   private readonly onImageLoad = (event: Event): void => {
     if (event.target instanceof HTMLImageElement) {
-      this.animation.refresh();
+      if (this.imageRefreshTimer !== null) {
+        clearTimeout(this.imageRefreshTimer);
+      }
+      this.imageRefreshTimer = setTimeout(() => {
+        this.imageRefreshTimer = null;
+        this.animation.refresh();
+      }, 180);
     }
   };
 
@@ -71,6 +78,10 @@ export class ScrollService {
     this.routerSubscription?.unsubscribe();
     this.routerSubscription = null;
     this.document.removeEventListener('load', this.onImageLoad, true);
+    if (this.imageRefreshTimer !== null) {
+      clearTimeout(this.imageRefreshTimer);
+      this.imageRefreshTimer = null;
+    }
     this.stopRuntimeReady();
     this.stopMotionListener();
     this.destroyLenis();

@@ -1,5 +1,17 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção transversal — responsivo, carrosséis, hovers e bugs
+
+- **Estado:** concluída
+- **Causas confirmadas:** (4) o `onScroll` emitia índices intermédios durante o tween GSAP, reactivando o `effect` e criando realimentação; a escrita repetida de padding e os refreshes globais de imagens agravavam o reflow. A diferença entre primeira visita e visitas seguintes era explicada pelo carregamento das imagens (sem cache há vários `load` e `ScrollTrigger.refresh()`); o viewport passou também a usar `data-lenis-prevent`. (6) o accordion dependia de altura GSAP apesar de o estado aberto ser apenas um signal. (10) `appHeaderOffset` aplicava o offset antes de a barra estar realmente sticky.
+- A secção “O que nos distingue” passou a ter altura própria em mobile/tablet e carrossel com setas abaixo de `lg`; `/servicos` recebeu o mesmo comportamento, preservando a grelha editorial desktop.
+- O carrossel comum agora desliga temporariamente o snap durante o tween, ignora feedback programático, sincroniza scroll manual por `requestAnimationFrame`/`scrollend`, usa duração de 0,85s e escalas/opacidades mais suaves; reduced motion usa alterações directas.
+- Os cartões de categorias de `/desenvolvimento-web` mostram apenas o título abaixo de `lg`; no desktop a descrição entra por baixo no hover/foco. O accordion tem fallback declarativo com `grid-template-rows`.
+- O último cartão desktop de `/servicos` ocupa a linha completa e recebeu enquadramento largo da imagem. Os destaques de `/produtos` passaram a preencher a altura da célula, limitar título/descrição e manter a imagem como camada de fundo sem alteração de layout no hover.
+- `HomeServicesPin` passou a calcular foco a partir do progresso, usar `scrub: true`/`ease: none` e imagens eager. A barra sticky de `/produtos` só recebe offset quando está colada.
+- **Verificações:** `npm run build` passa com 45 rotas prerenderizadas; permanece o aviso conhecido do orçamento inicial (+49,36 kB). `npm test -- --watch=false` passa com 22/22 testes. Verificação automatizada em 320, 375, 768, 1024, 1280 e 1920 px sem overflow horizontal da página; accordion testado em abertura após carregamento.
+- **Pendências:** validação manual com cache desactivada em dispositivos físicos e substituição futura das imagens provisórias já registadas.
+
 ## Correcção: scroll nativo e inicialização dos carrosséis da Home
 
 - **Estado:** concluída

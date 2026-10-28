@@ -18,13 +18,16 @@
         </button>
       </h3>
       <div
-        class="h-0 overflow-hidden"
+        class="overflow-hidden transition-[grid-template-rows] duration-300 ease-out"
+        [class.grid]="true"
+        [class.grid-rows-[0fr]]="openItem() !== item.id"
+        [class.grid-rows-[1fr]]="openItem() === item.id"
         [appAccordionHeight]="openItem() === item.id"
         [id]="item.id"
         [attr.aria-hidden]="openItem() !== item.id"
         [attr.inert]="openItem() !== item.id ? '' : null"
       >
-        <div class="pb-5 pr-8 text-fg-muted">
+        <div class="min-h-0 pb-5 pr-8 text-fg-muted">
           <p>{{ item.answer }}</p>
         </div>
       </div>

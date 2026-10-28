@@ -169,10 +169,10 @@
                 aria-hidden="true"
               />
               <span class="absolute inset-0 bg-gradient-to-t from-bg via-bg/65 to-transparent" aria-hidden="true"></span>
-              <span class="relative">
+              <span class="relative block w-full lg:transition-transform lg:duration-500 lg:ease-out lg:group-hover:-translate-y-2 lg:group-focus-visible:-translate-y-2">
                 <span class="block font-display text-xl font-semibold">{{ category.title }}</span>
-                <span class="mt-2 block text-sm text-fg-muted lg:opacity-0 lg:transition-opacity lg:duration-300 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">{{ category.description }}</span>
-                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-bright lg:opacity-0 lg:transition-opacity lg:duration-300 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
+                <span class="mt-2 hidden text-sm text-fg-muted lg:block lg:translate-y-4 lg:opacity-0 lg:transition-[opacity,transform] lg:duration-500 lg:ease-out lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100">{{ category.description }}</span>
+                <span class="mt-4 hidden items-center gap-2 text-sm font-semibold text-accent-bright lg:inline-flex lg:translate-y-4 lg:opacity-0 lg:transition-[opacity,transform] lg:duration-500 lg:ease-out lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100">
                   {{ learnMoreLabel() }}
                   <app-icon name="chevron-right" />
                 </span>

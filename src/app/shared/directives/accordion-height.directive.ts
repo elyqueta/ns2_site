@@ -10,11 +10,13 @@ export class AccordionHeight {
   private animate: ((expanded: boolean) => void) | undefined;
 
   private readonly stateEffect = effect(() => {
-    this.animate?.(this.expanded());
+    const expanded = this.expanded();
+    this.animate?.(expanded);
   });
 
   private readonly registration = registerAnimationDirective((element, runtime, mode) => {
     element.style.overflow = 'hidden';
+    element.style.height = 'auto';
     this.animate = (expanded) => {
       if (mode.reducedMotion) {
         runtime.gsap.set(element, { height: expanded ? 'auto' : 0, autoAlpha: expanded ? 1 : 0 });
@@ -32,6 +34,8 @@ export class AccordionHeight {
     return () => {
       this.animate = undefined;
       element.style.removeProperty('overflow');
+      element.style.removeProperty('height');
+      element.style.removeProperty('opacity');
     };
   });
 }

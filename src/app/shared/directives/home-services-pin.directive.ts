@@ -14,15 +14,13 @@ export class HomeServicesPin {
     }
 
     const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
-    const cx = () => window.innerWidth / 2;
-
-    const updateFocus = () => {
-      const centerX = cx();
-      for (const card of cards()) {
-        const r = card.getBoundingClientRect();
-        const d = Math.abs((r.left + r.width / 2) - centerX) / r.width;
-        card.style.setProperty('--focus', Math.max(0, 1 - d).toFixed(3));
-      }
+    const updateFocus = (progress = 0) => {
+      const items = cards();
+      const focusIndex = progress * Math.max(items.length - 1, 1);
+      items.forEach((card, index) => {
+        const distance = Math.abs(index - focusIndex);
+        card.style.setProperty('--focus', Math.max(0, 1 - distance).toFixed(3));
+      });
     };
 
     const scrollLength = () => Math.max(track.scrollWidth - window.innerWidth, 0);
@@ -49,7 +47,7 @@ export class HomeServicesPin {
         runtime.gsap.set(track, { x: initialX });
       }
 
-      updateFocus();
+      updateFocus(0);
       runtime.ScrollTrigger.refresh();
     };
 
@@ -64,12 +62,12 @@ export class HomeServicesPin {
         end: () => `+=${scrollLength()}`,
         pin: true,
         pinSpacing: true,
-        scrub: 0.6,
-        anticipatePin: 1,
+        scrub: true,
+        anticipatePin: 0,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           setProgress(self.progress);
-          updateFocus();
+          updateFocus(self.progress);
         },
       },
     });
@@ -78,16 +76,17 @@ export class HomeServicesPin {
       runtime.ScrollTrigger.refresh();
     });
 
-    window.addEventListener('resize', updateFocus, { passive: true });
+    const onResize = (): void => updateFocus(0);
+    window.addEventListener('resize', onResize, { passive: true });
     const observer = new MutationObserver(() => {
-      updateFocus();
+      updateFocus(0);
       runtime.ScrollTrigger.refresh();
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-    updateFocus();
+    updateFocus(0);
     return () => {
-      window.removeEventListener('resize', updateFocus);
+      window.removeEventListener('resize', onResize);
       observer.disconnect();
     };
   });

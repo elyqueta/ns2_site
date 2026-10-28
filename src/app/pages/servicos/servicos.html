@@ -15,7 +15,45 @@
       [index]="copy.sectionIndex | localized"
       [title]="copy.listTitle | localized"
     />
-    <ol class="services-editorial-grid mt-10 grid gap-4 md:grid-cols-2 xl:mt-14">
+    <div
+      class="carousel-viewport relative left-1/2 mt-10 w-screen -translate-x-1/2 snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x lg:hidden"
+      data-lenis-prevent
+      appHomeCarousel
+      [appHomeCarouselIndex]="activeIndex()"
+      [appHomeCarouselMobileOnly]="true"
+      (appHomeCarouselIndexChange)="activeIndex.set($event)"
+    >
+      <div data-home-carousel-track class="flex w-max items-stretch gap-4 px-5 py-4 sm:gap-6 sm:px-8">
+        @for (service of services; track service.slug; let index = $index) {
+          <div
+            data-home-carousel-card
+            class="w-[min(82vw,24rem)] shrink-0 snap-center"
+            [attr.aria-current]="activeIndex() === index ? 'true' : null"
+          >
+            <app-servico-vidro-card [item]="service.card" />
+          </div>
+        }
+      </div>
+    </div>
+    <div class="mt-4 flex justify-center gap-3 lg:hidden">
+      <button
+        class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg"
+        type="button"
+        [attr.aria-label]="copy.previousLabel | localized"
+        [disabled]="activeIndex() === 0"
+        (mousedown)="preventPointerFocus($event)"
+        (click)="previous($event)"
+      ><app-icon name="chevron-left" /></button>
+      <button
+        class="inline-flex size-11 items-center justify-center rounded-full border border-line bg-surface text-fg"
+        type="button"
+        [attr.aria-label]="copy.nextLabel | localized"
+        [disabled]="activeIndex() === services.length - 1"
+        (mousedown)="preventPointerFocus($event)"
+        (click)="next($event)"
+      ><app-icon name="chevron-right" /></button>
+    </div>
+    <ol class="services-editorial-grid mt-10 hidden gap-4 md:grid-cols-2 lg:grid xl:mt-14">
       @for (service of services; track service.slug) {
         <li class="services-editorial-grid__item min-w-0">
           <app-servico-vidro-card

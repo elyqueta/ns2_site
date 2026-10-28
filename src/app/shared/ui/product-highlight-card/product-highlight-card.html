@@ -1,4 +1,4 @@
-<article class="product-highlight-card group">
+<article class="product-highlight-card group h-full">
   <div class="product-highlight-card__media">
     @if (item().imageSrc && !imageFailed()) {
       <img
@@ -17,8 +17,8 @@
   </div>
   <div class="product-highlight-card__content">
     <p class="product-highlight-card__label">{{ item().label | localized }}</p>
-    <h4 class="product-highlight-card__title">{{ item().title | localized }}</h4>
-    <p class="product-highlight-card__description">{{ item().description | localized }}</p>
+    <h4 class="product-highlight-card__title line-clamp-2 min-h-[2.4em]">{{ item().title | localized }}</h4>
+    <p class="product-highlight-card__description line-clamp-3">{{ item().description | localized }}</p>
     <a
       class="product-highlight-card__action"
       [href]="item().whatsappUrl"

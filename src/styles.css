@@ -431,6 +431,14 @@
     display: none;
   }
 
+  .carousel-viewport {
+    scrollbar-width: none;
+  }
+
+  .carousel-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (min-width: 1024px) {
     .services-editorial-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));

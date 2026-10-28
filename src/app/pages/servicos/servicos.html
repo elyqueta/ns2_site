@@ -15,34 +15,12 @@
       [index]="copy.sectionIndex | localized"
       [title]="copy.listTitle | localized"
     />
-    <ol class="mt-10 grid gap-4 md:grid-cols-2 xl:mt-14 xl:grid-cols-3">
+    <ol class="services-editorial-grid mt-10 grid gap-4 md:grid-cols-2 xl:mt-14">
       @for (service of services; track service.slug) {
-        <li
-          class="group flex min-h-full flex-col rounded-card border border-line bg-surface p-6 transition-colors hover:border-accent/50 hover:bg-surface-2 sm:p-8"
-        >
-          <app-media-slot
-            [alt]="service.imagem.alt | localized"
-            [expectedFile]="service.imagem.ficheiroEsperado | localized"
-            [src]="service.imagemSrc"
-            class="mb-6"
-            [width]="300"
-            [height]="200"
+        <li class="services-editorial-grid__item min-w-0">
+          <app-servico-vidro-card
+            [item]="service.card"
           />
-          <div class="flex items-center justify-between gap-3">
-            <app-icon [name]="service.icone" class="text-accent-bright" />
-          </div>
-          <h3 class="mt-6 font-display text-h3 font-semibold text-fg">
-            {{ service.titulo | localized }}
-          </h3>
-          <p class="mt-3 flex-1 text-fg-muted">{{ service.resumo | localized }}</p>
-          <a
-            class="mt-5 inline-flex min-h-11 items-center gap-2 whitespace-nowrap font-semibold text-accent-bright focus-visible:outline-offset-4"
-            [routerLink]="service.href"
-          >
-            {{ copy.detailLink | localized }}
-            <span class="sr-only">{{ service.titulo | localized }}</span>
-            <app-icon name="arrow" />
-          </a>
         </li>
       }
     </ol>

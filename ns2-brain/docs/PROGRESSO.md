@@ -8,6 +8,15 @@
 - Os cards continuam responsivos e ligados à página geral de serviços; a página `/servicos` não foi alterada nesta correcção.
 - **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas. O aviso do orçamento inicial permanece pré-existente.
 
+## Fase 06 — Grelha personalizada e hover dos serviços
+
+- **Estado:** concluída
+- A página `/servicos` passou a usar os cards visuais da Home numa grelha editorial personalizada no desktop: o primeiro serviço ocupa uma área de destaque, os seguintes formam blocos assimétricos e os restantes completam a composição.
+- Em mobile e tablet a apresentação mantém-se numa grelha simples, sem overflow e sem depender de hover.
+- Os cards da página `/servicos` receberam o mesmo comportamento hover/foco dos cards da Home: elevação, sombra, zoom suave da imagem, reforço do glass overlay, destaque do título e CTA com seta.
+- O nono serviço continua ligado a `/desenvolvimento-web`; os oito detalhes existentes e os dados oficiais não foram alterados.
+- **Verificações:** `npm test -- --watch=false` passa com 22/22 testes; `npm run build` passa com 44 rotas prerenderizadas. O aviso do orçamento inicial permanece pré-existente.
+
 | Fase                               | Estado      | Aprovada pelo utilizador                    | Notas                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ---------------------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 00 Fundações                       | ✅ aprovada | Sim — avançar para fase 01                  | Implementada em `outher_dev`; build e testes aprovados. Rotas parametrizadas são prerenderizadas nas fases em que os dados correspondentes ficam disponíveis.                                                                                                                                                                                                                                                                                     |

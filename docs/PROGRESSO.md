@@ -9,6 +9,10 @@
 - **Verificações:** dimensões verificadas em 320, 768, 1024, 1280, 1440 e 1920px; cartões de produtos mantiveram 448px de altura, descrição com duas linhas e separação de 32px antes do botão; categorias verificadas com gradiente fixo e estados mobile/desktop. `npm run build` e `npm test -- --watch=false` passam após o último ajuste.
 - **Pendências:** nenhuma específica desta correcção; permanecem apenas assets provisórios já registados.
 
+### Ajuste solicitado: posição do título no cartão de categoria
+
+- O conteúdo do cartão passou a ocupar a área interna inteira; o título fica ancorado no canto inferior esquerdo em repouso e sobe apenas no hover/foco desktop, enquanto os detalhes entram na base. Isto corrige a altura reservada dos detalhes invisíveis que estava a empurrar o título para o topo.
+
 ## Correcção: cartão de produtos e salto dos testemunhos
 
 - **Estado:** concluída

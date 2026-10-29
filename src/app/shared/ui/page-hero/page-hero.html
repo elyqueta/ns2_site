@@ -1,4 +1,23 @@
 <header class="relative isolate overflow-hidden border-b border-line bg-surface">
+  @if (imageSrc(); as src) {
+    <img
+      class="absolute inset-0 -z-10 size-full object-cover"
+      [ngSrc]="src"
+      [alt]="''"
+      width="1920"
+      height="1080"
+      loading="eager"
+      fetchpriority="high"
+      [style.object-position]="imagePosition()"
+      [style.object-fit]="imageFit()"
+      [class]="imageClass()"
+      aria-hidden="true"
+    />
+    <div
+      class="absolute inset-0 -z-10 bg-bg/60 dark:bg-bg/40"
+      aria-hidden="true"
+    ></div>
+  }
   <div
     class="pointer-events-none absolute inset-y-0 right-0 -z-10 w-2/3 bg-gradient-to-l from-accent/15 to-transparent [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]"
   ></div>
@@ -23,7 +42,7 @@
       }
       @case ('h3') {
         <h3
-          class="mt-10 max-w-5xl font-display text-page font-semibold leading-[1.08] tracking-tight text-fg"
+          class="mt-10 max-w-[62ch] font-display text-page font-semibold leading-[1.08] tracking-tight text-fg"
         >
           {{ title() }}
         </h3>

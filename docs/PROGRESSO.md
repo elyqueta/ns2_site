@@ -435,3 +435,38 @@
 - **Ficheiros alterados:** `src/app/core/scroll.service.ts`, `src/styles.css`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/servicos/servicos.html`, `src/app/pages/sobre/sobre.html`, `src/app/pages/home/testimonials-preview/testimonials-preview.html`.
 - **Verificações:** `npm run build` passa (45 rotas prerenderizadas, sem erros nem warnings novos). `data-lenis-prevent` confirmado apenas em `mobile-menu.html`.
 - **Pendências:** validação manual passando o rato sobre os cartões e rolando a roda de forma contínua na Home, `/noticias` e `/produtos`.
+
+## Fase 01 — Navbar: tema, tradução e logótipo (2026-10-29)
+
+- **Estado:** saltada
+- **Decisões do utilizador:** Q1-Q4 → "permanece como está" (equivalente a saltar). Nenhuma alteração de código foi feita na navbar.
+- **Ficheiros criados/alterados:** nenhum.
+- **Verificações feitas:** nenhuma (sem alterações de código).
+- **Pendências e dados em falta:** nenhuma. O pedido de imagens nas heros das páginas principais pertence à fase 02 (heros e imagens) e não foi executado nesta fase.
+
+## Fase 02 — Heros e imagens de fundo (2026-10-29)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → permanece como está (home mantida sem alteração)
+  - Q2 → B (fundo a toda a largura atrás do texto, com overlay)
+  - Q3 → A (hero escuro nos dois temas)
+  - Q4 → manter tamanho H1 (a home já tem boa hero)
+  - Q5 → todas as páginas menos a home
+- **Ficheiros criados/alterados:**
+  - `src/app/shared/ui/page-hero/page-hero.ts` — adicionado `NgOptimizedImage` às imports e inputs `imageSrc`, `imagePosition`, `imageClass`, `imageFit`
+  - `src/app/shared/ui/page-hero/page-hero.html` — imagem de fundo absoluta (`object-fit: cover`, `fetchpriority="high"`, `loading="eager"`, `alt=""`) + overlay forte (`bg-bg/60` claro / `dark:bg-bg/40` escuro) quando `imageSrc` está definido
+  - `src/app/pages/sobre/sobre.html` — `imageSrc="/images/heros/sobre.webp"`
+  - `src/app/pages/servicos/servicos.html` — `imageSrc="/images/heros/servicos.webp"`
+  - `src/app/pages/produtos/produtos.html` — `imageSrc="/images/heros/produtos.webp"`
+  - `src/app/pages/desenvolvimento-web/desenvolvimento-web.html` — `imageSrc="/images/heros/desenvolvimento-web.webp"`
+  - `src/app/pages/noticias/noticias.html` — `imageSrc="/images/heros/noticias.webp"`
+  - `src/app/pages/contacto/contacto.html` — `imageSrc="/images/heros/contacto.webp"`
+- **Verificações feitas:** `npm run build` passa (45 rotas prerenderizadas, sem erros nem warnings novos).
+- **Pendências e dados em falta:**
+  - `parceiros`: logomarca (`/brand/logo-mark.svg`) como marca d'água (opacidade 6–10%, recorte diagonal) não implementado (exige CSS específico para não distorcer o SVG)
+  - `projectos`: sem imagem (a ser tratado na fase 08)
+  - `legal` (política/termos): gradiente do sistema, sem imagem
+  - `home`: mantida como está (Q1)
+  - Verificar aspect ratios reais das imagens em `public/images/heros/` para evitar aviso `NG02952` do `NgOptimizedImage`
+  - Validar tema claro/escuro, larguras 320px–1920px, teclado e movimento reduzido nas páginas alteradas

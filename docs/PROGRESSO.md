@@ -9,6 +9,11 @@
 - **Verificações:** cartões do UI kit verificados a 320px, com 448px de altura e estados de repouso/`forceHover`; cinco mudanças consecutivas de testemunho após carregamento da Home mantiveram `window.scrollY` sem salto. `npm run build` passou com 45 rotas prerenderizadas e o aviso conhecido do orçamento inicial (+51,89 kB); `npm test -- --watch=false` passou com 22/22 testes.
 - **Pendências:** substituir as imagens provisórias dos testemunhos/produtos quando forem fornecidos assets finais; validação física em dispositivos touch.
 
+### Reprodução adicional no desktop
+
+- Após hard reload da Home, a primeira mudança de testemunho ainda expôs uma condição de corrida: um `ScrollTrigger.refresh()` de imagem já tinha sido agendado antes do clique e executava durante o tween/interacção. O bloqueio temporal era verificado apenas no evento `load`, demasiado cedo.
+- O callback do refresh volta agora a verificar a janela de interacção imediatamente antes de recalcular o layout, evitando que esse refresh pendente altere a posição vertical durante a mudança do testemunho. Após hard reload e clique real no desktop, a posição manteve-se estável, com apenas variação residual de alguns pixels.
+
 ## Correcção transversal — responsivo, carrosséis, hovers e bugs
 
 - **Estado:** concluída

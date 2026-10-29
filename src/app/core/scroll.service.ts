@@ -56,6 +56,9 @@ export class ScrollService {
       }
       this.imageRefreshTimer = setTimeout(() => {
         this.imageRefreshTimer = null;
+        if (Date.now() < this.interactionUntil) {
+          return;
+        }
         const scrollY = view.scrollY;
         this.animation.refresh();
         if (this.lenis) {

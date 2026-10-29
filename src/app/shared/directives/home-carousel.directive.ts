@@ -112,18 +112,6 @@ export class HomeCarousel {
         }
       },
     });
-
-    this.cards.forEach((card, index) => {
-      const distance = Math.abs(index - activeIndex);
-      to(card, {
-        scale: distance === 0 ? 1 : distance === 1 ? 0.92 : 0.85,
-        autoAlpha: distance === 0 ? 1 : distance === 1 ? 0.68 : 0.38,
-        y: distance === 0 ? 0 : distance === 1 ? 5 : 8,
-        duration: this.reducedMotion ? 0 : 0.85,
-        ease: 'power2.inOut',
-        overwrite: true,
-      });
-    });
   }
 
   private readonly onScroll = (): void => {
@@ -138,7 +126,6 @@ export class HomeCarousel {
     if (this.scrollFrame === null) {
       this.scrollFrame = view.requestAnimationFrame(() => {
         this.scrollFrame = null;
-        this.animateCards(this.closestIndex());
       });
     }
     if (this.scrollEndTimer !== null) {
@@ -175,21 +162,5 @@ export class HomeCarousel {
     return closestIndex;
   };
 
-  private animateCards(activeIndex: number): void {
-    if (!this.runtime || this.reducedMotion) {
-      return;
-    }
-    this.cards.forEach((card, index) => {
-      const distance = Math.abs(index - activeIndex);
-      this.runtime?.gsap.to(card, {
-        scale: distance === 0 ? 1 : distance === 1 ? 0.92 : 0.85,
-        autoAlpha: distance === 0 ? 1 : distance === 1 ? 0.68 : 0.38,
-        y: distance === 0 ? 0 : distance === 1 ? 5 : 8,
-        duration: 0.45,
-        ease: 'power2.inOut',
-        overwrite: true,
-      });
-    });
-  }
-
 }
+

@@ -35,11 +35,21 @@ export class ScrollService {
   private loadGeneration = 0;
   private interactionUntil = 0;
   private readonly wheelOptions: AddEventListenerOptions = { capture: true, passive: true };
+  private scrollIdleTimer: ReturnType<typeof setTimeout> | null = null;
   private routerSubscription: Subscription | null = null;
-  private readonly onLenisScroll = (): void => this.runtime?.ScrollTrigger.update();
+  private readonly onLenisScroll = (): void => {
+    this.runtime?.ScrollTrigger.update();
+    this.handleScroll();
+  };
   private readonly onFrame = (time: number): void => this.lenis?.raf(time * 1000);
   private readonly onInteraction = (): void => {
     this.interactionUntil = Date.now() + 600;
+  };
+  private readonly handleScroll = (): void => {
+    const root = this.document.documentElement;
+    root.classList.add('is-scrolling');
+    if (this.scrollIdleTimer !== null) clearTimeout(this.scrollIdleTimer);
+    this.scrollIdleTimer = setTimeout(() => root.classList.remove('is-scrolling'), 120);
   };
   private readonly stopRuntimeReady = this.animation.whenReady((runtime) => {
     this.runtime = runtime;
@@ -65,6 +75,7 @@ export class ScrollService {
       view?.addEventListener('load', refreshOnce, { once: true });
     }
     void this.document.fonts?.ready.then(() => this.animation.refresh());
+    this.document.defaultView?.addEventListener('scroll', this.handleScroll, { passive: true });
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
@@ -81,6 +92,11 @@ export class ScrollService {
     this.document.removeEventListener('pointerdown', this.onInteraction, true);
     this.document.removeEventListener('wheel', this.onInteraction, this.wheelOptions);
     this.document.removeEventListener('ns2-carousel-interaction', this.onInteraction);
+    this.document.defaultView?.removeEventListener('scroll', this.handleScroll);
+    if (this.scrollIdleTimer !== null) {
+      clearTimeout(this.scrollIdleTimer);
+      this.scrollIdleTimer = null;
+    }
     this.stopRuntimeReady();
     this.stopMotionListener();
     this.destroyLenis();

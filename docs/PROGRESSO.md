@@ -409,3 +409,29 @@
 - **Ficheiros alterados:** `src/app/core/animation.service.ts`, `src/app/core/scroll.service.ts`, `src/app/shared/directives/home-services-pin.directive.ts`, `src/styles.css`.
 - **Verificações:** `npm run build` passa (45 rotas prerenderizadas, sem erros; aviso de orçamento inicial pré-existente). `npm test` não executável neste ambiente (sem Karma/Chrome nem config vitest com jsdom) — limitação pré-existente, sem regressão nos ficheiros toccados.
 - **Pendências:** validação manual com cache desactivada em 320–768px (mudança de cartão), pin em desktop com rato sobre o cartão e troca de tema com pin activo, conforme plano de teste da correcção.
+
+## Correcção transversal — remoção do efeito de foco/elevação nos cartões de serviços
+
+- **Estado:** concluída
+- **Decisão tomada:** eliminar o efeito de foco/elevação (`--focus`, escala, opacidade, `translateY`) nos cartões de serviços para todos ficarem iguais, removendo a causa do conflito entre o `scrub` do pin/ScrollTrigger, o `:hover` e o toque do utilizador. O realce agora é apenas de `box-shadow` suave no hover/foco, sem mexer em layout nem em transform.
+- **Correcções:**
+  1. `home-services-pin.directive.ts`: simplificado para manter apenas o pin horizontal da pista (`scrub: true`, `invalidateOnRefresh: true`). Saiu: `updateFocus`, a escrita de `--focus` nos cartões, o posicionamento inicial centrado no primeiro cartão, o `MutationObserver` de tema, o listener de `resize` e a espera por imagens. Mantido o `document.fonts.ready` + `ScrollTrigger.refresh()` único e a flag `alive` de limpeza. Saiu também o atributo `data-pinned` e as regras CSS associadas (não há mais conflito de `--focus`).
+  2. `home-carousel.directive.ts`: removido o bloco `this.cards.forEach(...)` do `animate()` e o método `animateCards` (e a chamada em `onScroll`). Os cartões ficam sempre com escala 1, opacidade 1 e `y` 0. Mantido o scroll para o cartão activo via `scrollLeft`, o snap e o `activeIndexChange` para os botões de seta.
+  3. `styles.css`: `.svc-card` base passou a `transform: none`, `box-shadow` estático, `transition: box-shadow 0.35s ease`, `will-change: auto`. O `:hover`/`:focus-visible` mantém apenas realce de `box-shadow` (sem `transform`, sem `--focus`). Removida a variável `--svc-lift` (`:root` e `@media max-width: 480px`), a variável `--focus` e o `filter` dependente de `--focus` em `.svc-media img` (agora `filter: none`). Removidas as regras `[data-pinned]` (não são mais necessárias).
+- **Mantém da correcção anterior:** `untracked()` no `AnimationService.updateAnimations` (causa 1) e a remoção do `refresh` por imagem no `ScrollService` (causa 3) continuam necessárias, pois a reconstrução em cadeia ao mudar de índice era independente do efeito de elevação.
+- **Ficheiros alterados:** `src/app/shared/directives/home-services-pin.directive.ts`, `src/app/shared/directives/home-carousel.directive.ts`, `src/styles.css`.
+- **Verificações:** `npm run build` passa (45 rotas prerenderizadas, sem erros nem warnings novos).
+- **Pendências:** validação manual em anónimo (cache vazia) em 320–768px (arrastar carrossel, snap sem saltos), desktop scroll pelo pin com rato sobre um cartão (sem tremor), e `/servicos` + `/sobre` (diferenciais usam o mesmo carrossel).
+
+## Correcção transversal — scroll "colante" em carrosséis (data-lenis-prevent + touch-pan)
+
+- **Estado:** concluída
+- **Causa raiz:** o atributo `data-lenis-prevent` nos viewports de carrossel dizia ao Lenis para ignorar a roda do rato dentro daquele elemento. Com o rato sobre um cartão, a roda passava a ser tratada pelo scroll nativo, enquanto fora dele o Lenis fazia scroll suave e inercial — os dois sistemas competiam pela mesma posição, dando a sensação de "colar" ou travar. Além disso, `touch-pan-x` limitava o toque ao eixo horizontal, impedindo scroll vertical da página no telemóvel com o dedo sobre o carrossel.
+- **Correcções:**
+  1. Removido `data-lenis-prevent` dos viewports de carrossel em `services-preview.html`, `servicos.html`, `sobre.html` e `testimonials-preview.html`. Mantido apenas no `mobile-menu.html` (scroll interno próprio).
+  2. Alterado `touch-pan-x` para `touch-pan-x touch-pan-y` nos mesmos quatro viewports, permitindo scroll vertical da página com o dedo sobre o carrossel.
+  3. Adicionada lógica `is-scrolling` em `scroll.service.ts`: o handler `handleScroll` adiciona a classe `is-scrolling` ao `<html>` durante o scroll (Lenis `onLenisScroll` + listener passivo de `window.scroll`) e remove após 120 ms de paragem.
+  4. Adicionado CSS em `src/styles.css` (`@layer base`): `html.is-scrolling body { pointer-events: none; }`, desligando `:hover` durante o scroll para evitar repaints pesados dos cartões (backdrop-filter, clip-path, translateY).
+- **Ficheiros alterados:** `src/app/core/scroll.service.ts`, `src/styles.css`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/servicos/servicos.html`, `src/app/pages/sobre/sobre.html`, `src/app/pages/home/testimonials-preview/testimonials-preview.html`.
+- **Verificações:** `npm run build` passa (45 rotas prerenderizadas, sem erros nem warnings novos). `data-lenis-prevent` confirmado apenas em `mobile-menu.html`.
+- **Pendências:** validação manual passando o rato sobre os cartões e rolando a roda de forma contínua na Home, `/noticias` e `/produtos`.

@@ -6,8 +6,7 @@
       [description]="copy.description | localized"
     />
     <div
-      class="carousel-viewport relative left-[50%] mt-10 w-screen -translate-x-1/2 snap-x snap-mandatory overscroll-x-contain touch-pan-x overflow-x-auto px-5 sm:px-8 xl:mt-14 lg:px-16"
-      data-lenis-prevent
+      class="carousel-viewport relative left-[50%] mt-10 w-screen -translate-x-1/2 snap-x snap-mandatory overscroll-x-contain touch-pan-x touch-pan-y overflow-x-auto px-5 sm:px-8 xl:mt-14 lg:px-16"
       appHomeCarousel
       [appHomeCarouselIndex]="activeIndex()"
       (appHomeCarouselIndexChange)="activeIndex.set($event)"

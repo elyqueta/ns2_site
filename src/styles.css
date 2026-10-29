@@ -146,18 +146,17 @@
 
   .product-highlight-card {
     position: relative;
-    display: flex;
+    display: block;
+    height: 28rem;
     min-height: 28rem;
-    height: 100%;
-    flex-direction: column;
     overflow: hidden;
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
     background: var(--surface);
     box-shadow: 0 12px 32px rgb(5 7 13 / 7%);
     transition:
-      transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1);
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .news-card,
@@ -215,12 +214,14 @@
     inset: 0;
     z-index: 0;
     overflow: hidden;
+    clip-path: inset(12px 12px 36% 12px round 20px);
     background:
       radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 55%),
       var(--surface-2);
     transition:
-      transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 550ms cubic-bezier(0.22, 1, 0.36, 1);
+      clip-path 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0ms;
   }
 
   .product-highlight-card__image,
@@ -246,8 +247,8 @@
 
   .product-highlight-card__overlay {
     background: linear-gradient(180deg, rgb(5 7 13 / 4%) 18%, rgb(5 7 13 / 76%) 100%);
-    opacity: 0.72;
-    transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .product-highlight-card__favorite {
@@ -267,19 +268,21 @@
   }
 
   .product-highlight-card__content {
-    position: relative;
+    position: absolute;
+    inset: auto 0 0;
     z-index: 1;
     display: flex;
-    min-height: 28rem;
-    flex: 1;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 8rem 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 5.25rem;
+    transition:
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      text-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 40ms;
   }
 
   .product-highlight-card__label {
     margin: 0;
-    color: var(--accent-bright);
+    color: var(--on-accent);
     font-family: var(--font-display);
     font-size: 0.75rem;
     font-weight: 600;
@@ -288,7 +291,7 @@
   }
 
   .product-highlight-card__title {
-    margin: 1rem 0 0;
+    margin: 0.5rem 0 0;
     color: var(--fg);
     font-family: var(--font-display);
     font-size: var(--text-h3);
@@ -298,21 +301,34 @@
 
   .product-highlight-card__description {
     margin: 0.75rem 0 0;
-    flex: 1;
     color: var(--fg-muted);
     line-height: 1.5;
+    transition:
+      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .product-highlight-card__action {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
     display: flex;
     min-height: 2.75rem;
+    width: 42%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1rem;
-    margin-top: 1.25rem;
-    color: var(--accent-bright);
+    padding: 0 1rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-bright));
     font-weight: 600;
     text-decoration: none;
+    transition:
+      width 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 80ms;
+    color: var(--on-accent);
   }
 
   .product-highlight-card__arrow {
@@ -321,22 +337,18 @@
     height: 2.5rem;
     flex: 0 0 auto;
     place-items: center;
-    border: 1px solid currentColor;
     border-radius: 9999px;
+    background: var(--on-accent);
+    color: var(--accent);
+    opacity: 0;
+    transform: scale(0.7);
     transition:
-      background-color 400ms cubic-bezier(0.22, 1, 0.36, 1),
-      color 400ms cubic-bezier(0.22, 1, 0.36, 1),
-      padding 400ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .product-highlight-card__arrow app-icon {
     transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .product-highlight-card__action:hover .product-highlight-card__arrow,
-  .product-highlight-card__action:focus-visible .product-highlight-card__arrow {
-    background: var(--accent);
-    color: var(--on-accent);
   }
 
   .product-highlight-card__action:hover .product-highlight-card__arrow app-icon,
@@ -346,57 +358,106 @@
 
   @media (hover: hover) and (pointer: fine) {
     .product-highlight-card:hover,
-    .product-highlight-card:focus-within {
-      transform: translateY(-6px);
+    .product-highlight-card:focus-within,
+    .product-highlight-card--force-hover {
+      transform: translateY(-3px);
       box-shadow: 0 18px 42px rgb(5 7 13 / 16%);
     }
 
     .product-highlight-card:hover .product-highlight-card__media,
-    .product-highlight-card:focus-within .product-highlight-card__media {
+    .product-highlight-card:focus-within .product-highlight-card__media,
+    .product-highlight-card--force-hover .product-highlight-card__media {
+      clip-path: inset(0 round var(--radius-card));
       transform: scale(1.02);
     }
 
     .product-highlight-card:hover .product-highlight-card__image,
-    .product-highlight-card:focus-within .product-highlight-card__image {
+    .product-highlight-card:focus-within .product-highlight-card__image,
+    .product-highlight-card--force-hover .product-highlight-card__image {
       transform: scale(1.05);
     }
 
     .product-highlight-card:hover .product-highlight-card__overlay,
-    .product-highlight-card:focus-within .product-highlight-card__overlay {
+    .product-highlight-card:focus-within .product-highlight-card__overlay,
+    .product-highlight-card--force-hover .product-highlight-card__overlay {
       opacity: 1;
     }
 
     .product-highlight-card:hover .product-highlight-card__content,
-    .product-highlight-card:focus-within .product-highlight-card__content {
-      transform: translateY(0);
+    .product-highlight-card:focus-within .product-highlight-card__content,
+    .product-highlight-card--force-hover .product-highlight-card__content {
+      text-shadow: 0 1px 14px rgb(5 7 13 / 20%);
     }
 
     .product-highlight-card:hover .product-highlight-card__label,
     .product-highlight-card:hover .product-highlight-card__title,
-    .product-highlight-card:hover .product-highlight-card__description,
     .product-highlight-card:focus-within .product-highlight-card__label,
     .product-highlight-card:focus-within .product-highlight-card__title,
-    .product-highlight-card:focus-within .product-highlight-card__description {
+    .product-highlight-card--force-hover .product-highlight-card__label,
+    .product-highlight-card--force-hover .product-highlight-card__title {
       color: var(--on-accent);
     }
 
     .product-highlight-card:hover .product-highlight-card__description,
-    .product-highlight-card:focus-within .product-highlight-card__description {
+    .product-highlight-card:focus-within .product-highlight-card__description,
+    .product-highlight-card--force-hover .product-highlight-card__description {
       color: rgb(255 255 255 / 78%);
+      opacity: 0;
+      transform: translateY(8px);
     }
 
     .product-highlight-card:hover .product-highlight-card__action,
-    .product-highlight-card:focus-within .product-highlight-card__action {
-      padding: 0.5rem 0.5rem 0.5rem 1rem;
-      border-radius: 9999px;
-      background: var(--on-accent);
-      color: var(--accent);
+    .product-highlight-card:focus-within .product-highlight-card__action,
+    .product-highlight-card--force-hover .product-highlight-card__action {
+      width: calc(100% - 2rem);
+      color: var(--on-accent);
     }
 
-    .product-highlight-card:hover .product-highlight-card__content,
-    .product-highlight-card:focus-within .product-highlight-card__content {
-      text-shadow: 0 1px 14px rgb(5 7 13 / 20%);
+    .product-highlight-card:hover .product-highlight-card__arrow,
+    .product-highlight-card:focus-within .product-highlight-card__arrow,
+    .product-highlight-card--force-hover .product-highlight-card__arrow {
+      opacity: 1;
+      transform: scale(1);
     }
+  }
+
+  .product-highlight-card--force-hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 42px rgb(5 7 13 / 16%);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__media {
+    clip-path: inset(0 round var(--radius-card));
+    transform: scale(1.02);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__image {
+    transform: scale(1.05);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__overlay {
+    opacity: 1;
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__label,
+  .product-highlight-card--force-hover .product-highlight-card__title {
+    color: var(--on-accent);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__description {
+    color: rgb(255 255 255 / 78%);
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__action {
+    width: calc(100% - 2rem);
+    color: var(--on-accent);
+  }
+
+  .product-highlight-card--force-hover .product-highlight-card__arrow {
+    opacity: 1;
+    transform: scale(1);
   }
 
   @media (prefers-reduced-motion: reduce) {

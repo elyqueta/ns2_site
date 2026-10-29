@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: cartão de produtos e salto dos testemunhos
+
+- **Estado:** concluída
+- O `ProductHighlightCard` foi redesenhado como uma composição de altura fixa e camadas estáveis: imagem recortada no repouso, preenchimento total no hover/foco, overlay, texto e pill de orçamento sem alteração de layout. O movimento usa uma curva única de 600ms, elevação máxima de 3px, suporte a reduced motion e estado `forceHover` no UI kit.
+- A causa confirmada do salto vertical dos testemunhos era a combinação de refreshes globais do `ScrollTrigger` durante o carregamento inicial de imagens sem cache com feedback de scroll durante o tween do carrossel. O carregamento de imagens agora é filtrado para imagens visíveis, agrupado por debounce e suspenso durante a interacção do carrossel; a posição vertical é preservada em refreshes provocados por imagem. O carrossel também emite a interacção antes do movimento programático e ignora índices intermédios.
+- **Ficheiros principais:** `src/styles.css`, `src/app/shared/ui/product-highlight-card/product-highlight-card.ts`, `src/app/shared/ui/product-highlight-card/product-highlight-card.html`, `src/app/pages/ui-kit/ui-kit.ts`, `src/app/pages/ui-kit/ui-kit.html`, `src/app/shared/directives/home-carousel.directive.ts` e `src/app/core/scroll.service.ts`.
+- **Verificações:** cartões do UI kit verificados a 320px, com 448px de altura e estados de repouso/`forceHover`; cinco mudanças consecutivas de testemunho após carregamento da Home mantiveram `window.scrollY` sem salto. `npm run build` passou com 45 rotas prerenderizadas e o aviso conhecido do orçamento inicial (+51,89 kB); `npm test -- --watch=false` passou com 22/22 testes.
+- **Pendências:** substituir as imagens provisórias dos testemunhos/produtos quando forem fornecidos assets finais; validação física em dispositivos touch.
+
 ## Correcção transversal — responsivo, carrosséis, hovers e bugs
 
 - **Estado:** concluída

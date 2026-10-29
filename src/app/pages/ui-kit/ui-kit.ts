@@ -18,6 +18,10 @@ import { PackageCard } from '../../shared/ui/package-card/package-card';
 import { PartnerCard } from '../../shared/ui/partner-card/partner-card';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { ProductCard } from '../../shared/ui/product-card/product-card';
+import {
+  ProductHighlightCard,
+  ProductHighlightCardData,
+} from '../../shared/ui/product-highlight-card/product-highlight-card';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
 import { SectionHeading } from '../../shared/ui/section-heading/section-heading';
 import { ServiceCard } from '../../shared/ui/service-card/service-card';
@@ -82,6 +86,7 @@ interface PaletteToken {
     PartnerCard,
     PostCard,
     ProductCard,
+    ProductHighlightCard,
     ProjectCard,
     ServicoVidroCard,
     SectionHeading,
@@ -188,6 +193,15 @@ export class UiKit {
     title: this.copy.cardTitle,
     description: this.copy.cardDescription,
     label: this.copy.cardProduct,
+  }));
+  readonly productHighlightItem = computed<ProductHighlightCardData>(() => ({
+    label: { pt: this.copy.cardProduct, en: this.copy.cardProduct },
+    title: { pt: this.copy.cardTitle, en: this.copy.cardTitle },
+    description: { pt: this.copy.cardDescription, en: this.copy.cardDescription },
+    whatsappUrl: this.whatsapp.createWhatsappUrl(this.copy.ctaDescription),
+    actionLabel: { pt: pt.actions.whatsappLabel, en: pt.actions.whatsappLabel },
+    imageSrc: '/images/produtos/notebooks.webp',
+    imageAlt: { pt: this.copy.cardProduct, en: this.copy.cardProduct },
   }));
   readonly packageItem = computed<PackageCardData>(() => ({
     type: 'package',

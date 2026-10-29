@@ -96,6 +96,7 @@ export class HomeCarousel {
     const to = transition && !this.reducedMotion ? this.runtime.gsap.to : this.runtime.gsap.set;
     this.programmaticScroll = transition && !this.reducedMotion;
     if (this.programmaticScroll) {
+      this.viewport.dispatchEvent(new CustomEvent('ns2-carousel-interaction'));
       this.viewport.style.scrollSnapType = 'none';
     }
 

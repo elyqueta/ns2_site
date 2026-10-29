@@ -173,6 +173,16 @@
       </div>
     </section>
 
+    <section class="border-t border-line py-12 sm:py-16" aria-labelledby="product-highlight-title">
+      <h2 id="product-highlight-title" class="font-display text-h2 font-semibold">
+        {{ copy.sectionCards }}
+      </h2>
+      <div class="mt-7 grid gap-6 sm:grid-cols-2">
+        <app-product-highlight-card [item]="productHighlightItem()" />
+        <app-product-highlight-card [item]="productHighlightItem()" [forceHover]="true" />
+      </div>
+    </section>
+
     <section class="border-t border-line py-12 sm:py-16" aria-labelledby="servico-vidro-title">
       <h2 id="servico-vidro-title" class="font-display text-h2 font-semibold">
         {{ copy.sectionServicoVidro }}

@@ -34,17 +34,35 @@ export class ScrollService {
   private stopped = false;
   private loadGeneration = 0;
   private imageRefreshTimer: ReturnType<typeof setTimeout> | null = null;
+  private interactionUntil = 0;
   private routerSubscription: Subscription | null = null;
   private readonly onLenisScroll = (): void => this.runtime?.ScrollTrigger.update();
   private readonly onFrame = (time: number): void => this.lenis?.raf(time * 1000);
+  private readonly onInteraction = (): void => {
+    this.interactionUntil = Date.now() + 600;
+  };
   private readonly onImageLoad = (event: Event): void => {
     if (event.target instanceof HTMLImageElement) {
+      const view = this.document.defaultView;
+      if (!view || Date.now() < this.interactionUntil) {
+        return;
+      }
+      const rect = event.target.getBoundingClientRect();
+      if (rect.top > view.innerHeight) {
+        return;
+      }
       if (this.imageRefreshTimer !== null) {
         clearTimeout(this.imageRefreshTimer);
       }
       this.imageRefreshTimer = setTimeout(() => {
         this.imageRefreshTimer = null;
+        const scrollY = view.scrollY;
         this.animation.refresh();
+        if (this.lenis) {
+          this.lenis.scrollTo(scrollY, { immediate: true });
+        } else if (Math.abs(view.scrollY - scrollY) > 1) {
+          view.scrollTo({ top: scrollY, behavior: 'auto' });
+        }
       }, 180);
     }
   };
@@ -63,6 +81,9 @@ export class ScrollService {
     this.renderedInBrowser = true;
     this.syncLenis();
     this.document.addEventListener('load', this.onImageLoad, true);
+    this.document.addEventListener('pointerdown', this.onInteraction, true);
+    this.document.addEventListener('wheel', this.onInteraction, { capture: true, passive: true });
+    this.document.addEventListener('ns2-carousel-interaction', this.onInteraction);
     void this.document.fonts?.ready.then(() => this.animation.refresh());
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -78,6 +99,9 @@ export class ScrollService {
     this.routerSubscription?.unsubscribe();
     this.routerSubscription = null;
     this.document.removeEventListener('load', this.onImageLoad, true);
+    this.document.removeEventListener('pointerdown', this.onInteraction, true);
+    this.document.removeEventListener('wheel', this.onInteraction, true);
+    this.document.removeEventListener('ns2-carousel-interaction', this.onInteraction);
     if (this.imageRefreshTimer !== null) {
       clearTimeout(this.imageRefreshTimer);
       this.imageRefreshTimer = null;

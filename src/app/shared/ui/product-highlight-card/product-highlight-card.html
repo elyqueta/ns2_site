@@ -1,4 +1,7 @@
-<article class="product-highlight-card group h-full">
+<article
+  class="product-highlight-card group h-full"
+  [class.product-highlight-card--force-hover]="forceHover()"
+>
   <div class="product-highlight-card__media">
     @if (item().imageSrc && !imageFailed()) {
       <img

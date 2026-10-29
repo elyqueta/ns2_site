@@ -21,6 +21,7 @@ export interface ProductHighlightCardData {
 })
 export class ProductHighlightCard {
   readonly item = input.required<ProductHighlightCardData>();
+  readonly forceHover = input(false);
   readonly imageFailed = signal(false);
 
   onImageError(): void {

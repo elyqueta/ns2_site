@@ -315,8 +315,8 @@
     display: flex;
     min-height: 2.75rem;
     width: max-content;
-    min-width: max-content;
     flex-shrink: 0;
+    interpolate-size: allow-keywords;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -328,7 +328,7 @@
     font-weight: 600;
     text-decoration: none;
     transition:
-      width 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      width 1000ms cubic-bezier(0.25, 1, 0.45, 1),
       background-color 600ms cubic-bezier(0.22, 1, 0.36, 1),
       color 600ms cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 80ms;

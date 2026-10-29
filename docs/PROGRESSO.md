@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: repouso dos cartões de produtos e categorias de desenvolvimento web
+
+- **Estado:** concluída
+- O estado de repouso do `ProductHighlightCard` passou a reservar uma zona independente para o pill de orçamento, que mantém `nowrap`, largura baseada no conteúdo e `flex-shrink: 0`. A descrição fica limitada a duas linhas, o título reserva uma linha mínima e a etiqueta permanece no painel, abaixo do recorte da imagem. O hover aprovado não foi alterado.
+- Os cartões de categoria de `/desenvolvimento-web` usam agora título branco no canto inferior esquerdo sobre gradiente preto independente do tema. Em mobile/tablet a descrição e a acção ficam ocultas; em desktop entram no hover/foco com transição de 500ms, deslocamento curto e reforço do gradiente. O estado seleccionado mantém borda/ring accent.
+- **Ficheiros alterados:** `src/styles.css`, `src/app/shared/ui/product-highlight-card/product-highlight-card.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html` e este ficheiro.
+- **Verificações:** dimensões verificadas em 320, 768, 1024, 1280, 1440 e 1920px; cartões de produtos mantiveram 448px de altura, descrição com duas linhas e separação de 32px antes do botão; categorias verificadas com gradiente fixo e estados mobile/desktop. `npm run build` e `npm test -- --watch=false` passam após o último ajuste.
+- **Pendências:** nenhuma específica desta correcção; permanecem apenas assets provisórios já registados.
+
 ## Correcção: cartão de produtos e salto dos testemunhos
 
 - **Estado:** concluída

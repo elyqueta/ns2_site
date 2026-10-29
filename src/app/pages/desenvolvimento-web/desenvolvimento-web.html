@@ -152,7 +152,7 @@
         >
           @for (category of catalogCategories(); track category.id; let index = $index) {
             <button
-              class="group relative flex aspect-[16/9] w-[82%] shrink-0 snap-center items-end overflow-hidden rounded-card border border-line bg-bg p-5 text-left text-fg shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-accent/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-[46%] sm:p-6 lg:w-auto"
+              class="web-category-card group relative flex aspect-[16/9] w-[82%] shrink-0 snap-center items-end overflow-hidden rounded-card border border-line bg-bg p-5 text-left shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-accent/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-[46%] sm:p-6 lg:w-auto"
               [class.border-accent]="activeCategoryIndex() === index"
               [class.ring-2]="activeCategoryIndex() === index"
               [class.ring-accent]="activeCategoryIndex() === index"
@@ -168,11 +168,11 @@
                 alt=""
                 aria-hidden="true"
               />
-              <span class="absolute inset-0 bg-gradient-to-t from-bg via-bg/65 to-transparent" aria-hidden="true"></span>
-              <span class="relative block w-full lg:transition-transform lg:duration-500 lg:ease-out lg:group-hover:-translate-y-2 lg:group-focus-visible:-translate-y-2">
-                <span class="block font-display text-xl font-semibold">{{ category.title }}</span>
-                <span class="mt-2 hidden text-sm text-fg-muted lg:block lg:translate-y-4 lg:opacity-0 lg:transition-[opacity,transform] lg:duration-500 lg:ease-out lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100">{{ category.description }}</span>
-                <span class="mt-4 hidden items-center gap-2 text-sm font-semibold text-accent-bright lg:inline-flex lg:translate-y-4 lg:opacity-0 lg:transition-[opacity,transform] lg:duration-500 lg:ease-out lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100">
+              <span class="web-category-card__gradient absolute inset-0" aria-hidden="true"></span>
+              <span class="web-category-card__content block w-full">
+                <span class="web-category-card__title font-display text-xl font-semibold">{{ category.title }}</span>
+                <span class="web-category-card__details mt-2 text-sm text-white/85">{{ category.description }}</span>
+                <span class="web-category-card__details web-category-card__action mt-4 text-sm font-semibold text-white">
                   {{ learnMoreLabel() }}
                   <app-icon name="chevron-right" />
                 </span>

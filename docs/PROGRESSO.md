@@ -390,3 +390,12 @@
 - **Verificações feitas:** `npm run build` passa (prerender 38 rotas; apenas o aviso de orçamento inicial já existente). Verificação no browser em 1024, 1280, 1440 e 1920px: os 4 cartões têm altura entre 260 e 320px nas linhas, e o cartão profissional ocupa duas linhas; 360 e 768px mantêm 1 e 2 colunas com proporção 4:5. `npm test`: 14 passam, 4 falhas pré-existentes não relacionadas (sem regressões).
 
 ---
+
+## Ajuste rápido: cartões de categoria e botão de orçamento dos produtos
+
+- **Estado:** concluída
+- `/desenvolvimento-web`: removido o "Saber mais" (`<span class="web-category-card__details web-category-card__action ...">` com `learnMoreLabel()` e ícone) dos botões `role="tab"`; mantidos título e descrição; removida a regra órfã `.web-category-card__action` de `src/styles.css`; `learnMoreLabel()` mantido no `.ts` (usado nos pacotes).
+- `ProductHighlightCard`: texto do botão sempre centrado (`text-align: center` + `justify-content: center`); círculo da seta em `position: absolute; right: 4px; top: 50%; translateY(-50%)`, invisível em repouso (opacity 0 / scale .7) e visível no hover; padding simétrico `0 3rem` para o texto não ser empurrado; `white-space: nowrap` e transição de extensão do botão inalteradas.
+- **Ficheiros alterados:** `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/styles.css`.
+- **Verificações:** `npm run build` passa (45 rotas prerenderizadas, nenhum erro novo).
+

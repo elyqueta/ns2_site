@@ -47,6 +47,7 @@ export class Footer {
   );
   readonly contact = contactDetails;
   readonly contactAddress = computed(() => this.i18n.text(contactDetails.address));
+  readonly currentYear = new Date().getFullYear();
 
   backToTop(): void {
     this.scroll.scrollTo(0, { duration: 0.7 });

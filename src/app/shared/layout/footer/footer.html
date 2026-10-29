@@ -29,7 +29,7 @@
           @for (item of navigation(); track item.href) {
             <li>
               <a
-                class="inline-flex min-h-11 items-center text-sm text-fg-muted transition-colors hover:text-fg"
+                class="inline-flex min-h-11 items-center text-base text-fg-muted transition-colors hover:text-fg"
                 [routerLink]="item.href"
               >
                 {{ item.label }}
@@ -47,7 +47,7 @@
           @for (item of services(); track item.href) {
             <li>
               <a
-                class="inline-flex min-h-11 items-center text-sm text-fg-muted transition-colors hover:text-fg"
+                class="inline-flex min-h-11 items-center text-base text-fg-muted transition-colors hover:text-fg"
                 [routerLink]="item.href"
               >
                 {{ item.label }}
@@ -70,7 +70,7 @@
             <ul class="mt-2 grid gap-1">
               @for (phone of contact.phones; track phone.href) {
                 <li>
-                  <a class="text-fg-muted transition-colors hover:text-fg" [href]="phone.href">
+                  <a class="text-base text-fg-muted transition-colors hover:text-fg" [href]="phone.href">
                     {{ phone.label }}
                   </a>
                 </li>
@@ -79,19 +79,19 @@
           </div>
           <div>
             <h3 class="font-semibold">{{ copy().email }}</h3>
-            <a
-              class="mt-2 inline-block text-fg-muted transition-colors hover:text-fg"
-              [href]="contact.email.href"
-            >
+              <a
+                class="mt-2 inline-block text-base text-fg-muted transition-colors hover:text-fg"
+                [href]="contact.email.href"
+              >
               {{ contact.email.label }}
             </a>
           </div>
           <div>
             <h3 class="font-semibold">{{ copy().address }}</h3>
             <p class="mt-2 text-fg-muted">{{ contactAddress() }}</p>
-            <a
-              class="mt-3 inline-flex min-h-11 items-center gap-2 text-accent-bright hover:text-fg"
-              [href]="contact.mapUrl"
+              <a
+                class="mt-3 inline-flex min-h-11 items-center gap-2 text-base text-accent-bright hover:text-fg"
+                [href]="contact.mapUrl"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -111,7 +111,7 @@
           {{ copy().legal }}
         </span>
         @for (item of legal(); track item.href) {
-          <a class="text-sm text-fg-muted transition-colors hover:text-fg" [routerLink]="item.href">
+          <a class="text-base text-fg-muted transition-colors hover:text-fg" [routerLink]="item.href">
             {{ item.label }}
           </a>
         }

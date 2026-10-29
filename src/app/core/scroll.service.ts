@@ -33,43 +33,14 @@ export class ScrollService {
   private renderedInBrowser = false;
   private stopped = false;
   private loadGeneration = 0;
-  private imageRefreshTimer: ReturnType<typeof setTimeout> | null = null;
   private interactionUntil = 0;
+  private readonly wheelOptions: AddEventListenerOptions = { capture: true, passive: true };
   private routerSubscription: Subscription | null = null;
   private readonly onLenisScroll = (): void => this.runtime?.ScrollTrigger.update();
   private readonly onFrame = (time: number): void => this.lenis?.raf(time * 1000);
   private readonly onInteraction = (): void => {
     this.interactionUntil = Date.now() + 600;
   };
-  private readonly onImageLoad = (event: Event): void => {
-    if (event.target instanceof HTMLImageElement) {
-      const view = this.document.defaultView;
-      if (!view || Date.now() < this.interactionUntil) {
-        return;
-      }
-      const rect = event.target.getBoundingClientRect();
-      if (rect.top > view.innerHeight) {
-        return;
-      }
-      if (this.imageRefreshTimer !== null) {
-        clearTimeout(this.imageRefreshTimer);
-      }
-      this.imageRefreshTimer = setTimeout(() => {
-        this.imageRefreshTimer = null;
-        if (Date.now() < this.interactionUntil) {
-          return;
-        }
-        const scrollY = view.scrollY;
-        this.animation.refresh();
-        if (this.lenis) {
-          this.lenis.scrollTo(scrollY, { immediate: true });
-        } else if (Math.abs(view.scrollY - scrollY) > 1) {
-          view.scrollTo({ top: scrollY, behavior: 'auto' });
-        }
-      }, 180);
-    }
-  };
-
   private readonly stopRuntimeReady = this.animation.whenReady((runtime) => {
     this.runtime = runtime;
     this.syncLenis();
@@ -83,10 +54,16 @@ export class ScrollService {
 
     this.renderedInBrowser = true;
     this.syncLenis();
-    this.document.addEventListener('load', this.onImageLoad, true);
     this.document.addEventListener('pointerdown', this.onInteraction, true);
-    this.document.addEventListener('wheel', this.onInteraction, { capture: true, passive: true });
+    this.document.addEventListener('wheel', this.onInteraction, this.wheelOptions);
     this.document.addEventListener('ns2-carousel-interaction', this.onInteraction);
+    const view = this.document.defaultView;
+    const refreshOnce = () => this.animation.refresh();
+    if (this.document.readyState === 'complete') {
+      refreshOnce();
+    } else {
+      view?.addEventListener('load', refreshOnce, { once: true });
+    }
     void this.document.fonts?.ready.then(() => this.animation.refresh());
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -101,14 +78,9 @@ export class ScrollService {
   private readonly destroyCallback = this.destroyRef.onDestroy(() => {
     this.routerSubscription?.unsubscribe();
     this.routerSubscription = null;
-    this.document.removeEventListener('load', this.onImageLoad, true);
     this.document.removeEventListener('pointerdown', this.onInteraction, true);
-    this.document.removeEventListener('wheel', this.onInteraction, true);
+    this.document.removeEventListener('wheel', this.onInteraction, this.wheelOptions);
     this.document.removeEventListener('ns2-carousel-interaction', this.onInteraction);
-    if (this.imageRefreshTimer !== null) {
-      clearTimeout(this.imageRefreshTimer);
-      this.imageRefreshTimer = null;
-    }
     this.stopRuntimeReady();
     this.stopMotionListener();
     this.destroyLenis();

@@ -13,10 +13,12 @@ export class HomeServicesPin {
       return;
     }
 
+    let alive = true;
+
     const cards = () => Array.from(track.querySelectorAll<HTMLElement>('.svc-card'));
-    const updateFocus = (progress = 0) => {
+    const updateFocus = (progressValue = 0) => {
       const items = cards();
-      const focusIndex = progress * Math.max(items.length - 1, 1);
+      const focusIndex = progressValue * Math.max(items.length - 1, 1);
       items.forEach((card, index) => {
         const distance = Math.abs(index - focusIndex);
         card.style.setProperty('--focus', Math.max(0, 1 - distance).toFixed(3));
@@ -38,6 +40,7 @@ export class HomeServicesPin {
                 }),
         ),
       );
+      if (!alive) return;
 
       // Posiciona o 1.º card centrado no ecrã ao entrar na secção
       const firstCard = cards()[0];
@@ -65,6 +68,9 @@ export class HomeServicesPin {
         scrub: true,
         anticipatePin: 0,
         invalidateOnRefresh: true,
+        onToggle: (self) => {
+          element.toggleAttribute('data-pinned', self.isActive);
+        },
         onUpdate: (self) => {
           setProgress(self.progress);
           updateFocus(self.progress);
@@ -73,7 +79,7 @@ export class HomeServicesPin {
     });
 
     ready().then(() => {
-      runtime.ScrollTrigger.refresh();
+      if (alive) runtime.ScrollTrigger.refresh();
     });
 
     const onResize = (): void => updateFocus(0);
@@ -86,6 +92,8 @@ export class HomeServicesPin {
 
     updateFocus(0);
     return () => {
+      alive = false;
+      element.removeAttribute('data-pinned');
       window.removeEventListener('resize', onResize);
       observer.disconnect();
     };

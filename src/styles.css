@@ -648,6 +648,17 @@
     will-change: transform;
   }
 
+  [data-pinned] .svc-card {
+    transition: box-shadow 0.35s ease;
+  }
+
+  [data-pinned] .svc-card:hover,
+  [data-pinned] .svc-card:focus-visible {
+    --focus: initial;
+    transform: translateY(calc(var(--focus) * var(--svc-lift) * -1))
+      scale(calc(1 + var(--focus) * 0.04));
+  }
+
   .svc-card:hover,
   .svc-card:focus-visible {
     --focus: 1;

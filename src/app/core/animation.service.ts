@@ -10,6 +10,7 @@ import {
   effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { filter, take } from 'rxjs';
 
@@ -69,16 +70,18 @@ export class AnimationService {
       return;
     }
 
-    for (const registration of this.registrations) {
-      this.activate(registration, mode);
-    }
-
-    if (mode.reducedMotion !== this.lastReducedMotion) {
-      this.lastReducedMotion = mode.reducedMotion;
-      for (const listener of this.motionListeners) {
-        listener(mode.reducedMotion);
+    untracked(() => {
+      for (const registration of this.registrations) {
+        this.activate(registration, mode);
       }
-    }
+
+      if (mode.reducedMotion !== this.lastReducedMotion) {
+        this.lastReducedMotion = mode.reducedMotion;
+        for (const listener of this.motionListeners) {
+          listener(mode.reducedMotion);
+        }
+      }
+    });
   });
 
   private readonly renderCallback = afterNextRender(() => {

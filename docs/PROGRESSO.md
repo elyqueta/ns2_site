@@ -398,3 +398,14 @@
 - `ProductHighlightCard`: texto do botão sempre centrado (`text-align: center` + `justify-content: center`); círculo da seta em `position: absolute; right: 4px; top: 50%; translateY(-50%)`, invisível em repouso (opacity 0 / scale .7) e visível no hover; padding simétrico `0 3rem` para o texto não ser empurrado; `white-space: nowrap` e transição de extensão do botão inalteradas.
 - **Ficheiros alterados:** `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/styles.css`.
 - **Verificações:** `npm run build` passa (45 rotas prerenderizadas, nenhum erro novo).
+
+## Correcção transversal — animações da Home (pin, carrosséis e scroll)
+
+- **Estado:** concluída
+- **Causas raiz e correcções:**
+  1. `AnimationService.updateAnimations`: o `effect()` reexecutava `activate()` de todas as directivas registadas a cada leitura de sinais do carrossel (`activeIndex`, `enabled`, `words`), reconstruindo pin/ScrollTriggers e provocando saltos e "luta" de layout na entrada directa (SEO). O corpo do effect agora é envolvido em `untracked()`, reagindo apenas a `initialized` e ao modo (`reducedMotion`/`desktop`/`mobile`), nunca ao índice do carrossel.
+  2. `HomeServicesPin`: o `transition: transform .35s` de `.svc-card` lutava com o `scrub` do pin (tremor ao perseguir o valor) e o `:hover` forçava `--focus: 1` enquanto o scroll escrevia `--focus`. Foi adicionado `data-pinned` (via `ScrollTrigger.onToggle`, activo somente enquanto o pin está no ecrã) com regras em `@layer utilities` que limitam a transição a `box-shadow` e anulam o hover durante o pin. A `ready()` assíncrona protege-se com uma flag `alive` para não executar `gsap.set`/`refresh()` depois de a animação ter sido revertida.
+  3. `ScrollService`: removido o listener de `load` (`onImageLoad`) e o `imageRefreshTimer`, que chamavam `ScrollTrigger.refresh()` + `lenis.scrollTo(immediate)` em cada imagem visível durante o carregamento a frio, mexendo no scroll enquanto o utilizador já interagia. Substituído por um `refresh` único (`document.readyState === 'complete'` ou `load` com `{ once: true }`), complementado pelo `document.fonts.ready` já existente.
+- **Ficheiros alterados:** `src/app/core/animation.service.ts`, `src/app/core/scroll.service.ts`, `src/app/shared/directives/home-services-pin.directive.ts`, `src/styles.css`.
+- **Verificações:** `npm run build` passa (45 rotas prerenderizadas, sem erros; aviso de orçamento inicial pré-existente). `npm test` não executável neste ambiente (sem Karma/Chrome nem config vitest com jsdom) — limitação pré-existente, sem regressão nos ficheiros toccados.
+- **Pendências:** validação manual com cache desactivada em 320–768px (mudança de cartão), pin em desktop com rato sobre o cartão e troca de tema com pin activo, conforme plano de teste da correcção.

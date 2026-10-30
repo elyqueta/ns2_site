@@ -22,7 +22,6 @@ export class HomeCarousel {
   private enabledByMode = true;
   private isAnimating = false;
   private needsReposition = false;
-  private skipNextIndexSync = false;
   private scrollFrame: number | null = null;
   private scrollEndTimer: ReturnType<typeof setTimeout> | null = null;
   private paddingWidth = -1;
@@ -76,10 +75,6 @@ export class HomeCarousel {
     effect(() => {
       const runtime = this.runtimeSignal();
       if (!runtime) {
-        return;
-      }
-      if (this.skipNextIndexSync) {
-        this.skipNextIndexSync = false;
         return;
       }
       if (this.isAnimating) {
@@ -158,7 +153,7 @@ export class HomeCarousel {
     const targetScroll = Math.max(activeCard.offsetLeft - (viewportWidth - cardWidth) / 2, 0);
     const doAnimate = animate && !this.reducedMotion;
 
-    if (doAnimate) {
+    if (doAnimate && this.viewport && Math.abs(this.viewport.scrollLeft - targetScroll) > 2) {
       this.isAnimating = true;
       this.viewport.style.scrollSnapType = 'none';
       const tl = gsap.timeline();
@@ -219,13 +214,6 @@ export class HomeCarousel {
     }
     const closestIndex = this.closestIndex();
     if (closestIndex !== this.activeIndex()) {
-      this.skipNextIndexSync = true;
-      // Reset apenas no próximo macrotask, para que o effect que reage a
-      // activeIndex() não chame reposition (o scroll manual já posicionou os
-      // cartões via applyState durante o rolar).
-      setTimeout(() => {
-        this.skipNextIndexSync = false;
-      }, 0);
       this.activeIndexChange.emit(closestIndex);
     }
     this.scrollEndTimer = null;

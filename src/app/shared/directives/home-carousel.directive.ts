@@ -78,7 +78,6 @@ export class HomeCarousel {
         return;
       }
       if (this.skipNextIndexSync) {
-        this.skipNextIndexSync = false;
         return;
       }
       if (this.programmaticScroll) {
@@ -213,8 +212,15 @@ export class HomeCarousel {
     const closestIndex = this.closestIndex();
     if (closestIndex !== this.activeIndex()) {
       this.skipNextIndexSync = true;
+      // Reset apenas no próximo macrotask, para que o effect que reage a
+      // activeIndex() não chame reposition (o scroll manual já posicionou os
+      // cartões via applyState durante o rolar).
+      setTimeout(() => {
+        this.skipNextIndexSync = false;
+      }, 0);
       this.activeIndexChange.emit(closestIndex);
     }
+    this.scrollEndTimer = null;
   };
 
   private closestIndex(): number {

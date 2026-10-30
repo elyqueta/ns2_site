@@ -19,6 +19,10 @@ export class HomeTestimonialsPreview {
     event.preventDefault();
   }
 
+  activateCard(index: number): void {
+    this.activeIndex.set(index);
+  }
+
   previous(event?: Event): void {
     event?.preventDefault();
     this.activeIndex.update((index) => Math.max(index - 1, 0));

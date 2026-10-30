@@ -226,7 +226,7 @@ export class AnimationService {
 
     const runtime = this.runtime;
     const context = runtime.gsap.context(() => {
-      registration.contextCleanup = registration.builder(runtime, mode) ?? undefined;
+      registration.contextCleanup = untracked(() => registration.builder(runtime, mode) ?? undefined);
     }, registration.element);
     registration.contextRevert = () => context.revert();
   }

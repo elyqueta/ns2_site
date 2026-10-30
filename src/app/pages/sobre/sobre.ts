@@ -64,6 +64,10 @@ export class Sobre {
     event.preventDefault();
   }
 
+  activateCard(index: number): void {
+    this.activeDifferentiator.set(index);
+  }
+
   previousDifferentiator(event?: Event): void {
     event?.preventDefault();
     this.activeDifferentiator.update((index) => Math.max(index - 1, 0));

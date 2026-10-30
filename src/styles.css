@@ -589,6 +589,16 @@
     display: none;
   }
 
+  .carousel-viewport [data-home-carousel-card] {
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-viewport [data-home-carousel-card] {
+      transition: none !important;
+    }
+  }
+
   @media (min-width: 1024px) {
     .services-editorial-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -737,11 +747,6 @@
       transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .svc-card:hover .svc-media img,
-  .svc-card:focus-visible .svc-media img {
-    transform: scale(1.06);
-  }
-
   .svc-glass {
     position: absolute;
     inset: auto 0 0 0;
@@ -761,12 +766,6 @@
       opacity 0.35s ease,
       height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     opacity: 0.86;
-  }
-
-  .svc-card:hover .svc-glass,
-  .svc-card:focus-visible .svc-glass {
-    height: 68%;
-    opacity: 1;
   }
 
   .svc-body {
@@ -819,11 +818,6 @@
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .svc-card:hover .svc-title,
-  .svc-card:focus-visible .svc-title {
-    transform: translateY(-2px);
-  }
-
   .svc-meta {
     margin: 0;
     font-size: 13px;
@@ -861,17 +855,6 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: transform 0.2s ease;
-  }
-
-  .svc-card:hover .svc-cta,
-  .svc-card:focus-visible .svc-cta {
-    background: rgb(255 255 255 / 0.16);
-    border-color: rgb(255 255 255 / 0.28);
-  }
-
-  .svc-card:hover .svc-cta svg,
-  .svc-card:focus-visible .svc-cta svg {
-    transform: translateX(3px);
   }
 
   .svc-badge {

@@ -88,6 +88,12 @@
       />
       <div
         class="carousel-viewport relative left-1/2 mt-10 w-screen -translate-x-1/2 snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x touch-pan-y lg:hidden"
+        role="region"
+        aria-roledescription="carrossel"
+        tabindex="0"
+        [attr.aria-label]="copy.differentiators.title | localized"
+        (keydown.arrow.left)="previousDifferentiator($event)"
+        (keydown.arrow.right)="nextDifferentiator($event)"
         appHomeCarousel
         [appHomeCarouselIndex]="activeDifferentiator()"
         [appHomeCarouselMobileOnly]="true"
@@ -95,7 +101,7 @@
       >
         <div data-home-carousel-track class="flex w-max items-stretch gap-4 px-5 py-4 sm:gap-6 sm:px-8">
           @for (item of differentiators; track item.title.pt; let index = $index) {
-            <div data-home-carousel-card class="w-[min(82vw,24rem)] min-h-[20rem] shrink-0 snap-center" [attr.aria-current]="activeDifferentiator() === index ? 'true' : null">
+            <div data-home-carousel-card class="w-[min(82vw,24rem)] min-h-[20rem] shrink-0 snap-center"             tabindex="0" (focusin)="activateCard(index)" [attr.aria-current]="activeDifferentiator() === index ? 'true' : null">
               <a class="svc-card about-differentiator-card" [routerLink]="'/servicos'" [style.--tint-rgb]="item.tintRgb">
                 <div class="svc-media"><img [src]="item.imageSrc" alt="" width="1200" height="750" loading="lazy" decoding="async" /></div>
                 <div class="svc-glass"></div>

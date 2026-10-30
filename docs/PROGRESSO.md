@@ -1,5 +1,25 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção transversal — carrosséis unificados com cartão activo centrado
+
+- **Estado:** concluída
+- **Causa encontrada:** a animação só ficava suave depois de sair da página e voltar porque o `effect()` do `AnimationService` lia sinais do carrossel (`activeIndex`, `enabled`) sem `untracked()`, reconstruindo todas as animações da página a cada mudança de índice. Além disso, a directiva `appHomeCarousel` não aplicava escala/opacidade/y aos cartões, apenas deslocava a pista.
+- **Decisões tomadas:**
+  - Reutilizada a directiva `appHomeCarousel` (sem directiva paralela). Novo método único `applyState(activeIndex, animate)` que aplica, por distância `d = \|i - activeIndex\|`: d=0 → scale 1 / autoAlpha 1 / y 0; d=1 → scale 0.92 / autoAlpha 0.68 / y 5; d≥2 → scale 0.85 / autoAlpha 0.38 / y 8. Com `animate` true e sem reduced motion usa `gsap.to` (0.7s, `power2.inOut`, `overwrite: true`); caso contrário `gsap.set`.
+  - Mudança por índice (seta/teclado): `scrollLeft` e `applyState` correm na mesma `gsap.timeline` (mesma duração/easing), com `scroll-snap-type` desligado durante o tween e reposto no `onComplete`.
+  - Scroll manual (arrastar/trackpad/toque): `requestAnimationFrame` coalescido chama `applyState(closest, 0.35s)`; `scrollend` (timer de 120 ms) emite `activeIndexChange` só se o índice mudou; ignora scroll enquanto `programmaticScroll` for true.
+  - Geometria: padding lateral = (viewportWidth − larguraDoCartão) / 2, escrito apenas quando a largura muda (guarda `paddingWidth`); `ResizeObserver` no viewport recalcula e reposiciona sem animar no resize; usa `offsetLeft`/`offsetWidth` (dimensões estruturais).
+  - Acessibilidade: viewport `role="region"`, `aria-roledescription="carrossel"`, `aria-label` do dicionário, `tabindex="0"`, setas Esquerda/Direita; cartão activo `aria-current="true"`; cartões sem inert (links alcançáveis por Tab); `@focusin` activa o cartão; botões com `aria-label` i18n, `disabled` nos extremos e `(mousedown)` `preventDefault()`.
+  - `mobileOnly`: actua só abaixo de 1024 px; no desktop remove estados residuais com `gsap.set(cards, { clearProps: 'transform,opacity,visibility' })` na limpeza.
+  - `AnimationService.activate()` envolve o builder em `untracked()` para evitar reconstrução em cadeia.
+  - `ScrollService`: removido o listener `load` (`onImageLoad`) e o `imageRefreshTimer`; mantido um único `animation.refresh()` em `document.readyState === 'complete'` e outro em `document.fonts.ready`. A classe `is-scrolling` já é adicionada/removida no scroll.
+  - CSS: `.carousel-viewport [data-home-carousel-card]` recebe `will-change: transform, opacity` apenas nesse contexto; removido do resto. `.svc-card` fica com `transform: none` e `transition: box-shadow 0.35s ease`; hover/focus altera **só** `box-shadow` (apagadas regras de transform em `.svc-media img`, `.svc-title`, `.svc-glass`, `.svc-cta` e variáveis `--focus`/`--svc-lift` já ausentes). `@media (prefers-reduced-motion: reduce)` remove transições dos cartões de carrossel (estado final directo via GSAP).
+  - Templates: removido `data-lenis-prevent` de todos os viewports de carrossel (mantido apenas em `mobile-menu.html`); `touch-pan-x touch-pan-y` mantido para permitir scroll vertical da página com o dedo sobre o carrossel; sem `appReveal` no conteúdo/viewport dos carrosséis; tokens semânticos (`bg-bg`, `border-line`, `text-fg`, `text-fg-muted`); textos de `homeContent.testimonials` mantidos (autorizados pelo utilizador).
+- **Âmbito por carrossel:** testemunhos (todas as resoluções); serviços da Home e `/servicos` e diferenciais de `/sobre` só mobile/tablet (< 1024 px) — desktop mantém pin horizontal / grelha editorial / bento sem alterações.
+- **Ficheiros alterados:** `src/app/shared/directives/home-carousel.directive.ts`, `src/app/core/animation.service.ts`, `src/app/core/scroll.service.ts`, `src/styles.css`, `src/app/pages/home/testimonials-preview/testimonials-preview.html`, `src/app/pages/home/testimonials-preview/testimonials-preview.ts`, `src/app/pages/home/services-preview/services-preview.html`, `src/app/pages/home/services-preview/services-preview.ts`, `src/app/pages/servicos/servicos.html`, `src/app/pages/servicos/servicos.ts`, `src/app/pages/sobre/sobre.html`, `src/app/pages/sobre/sobre.ts`, `docs/PROGRESSO.md`.
+- **Verificações:** `npm run build` passa com 45 rotas prerenderizadas, sem erros nem warnings novos; `npm test -- --watch=false` passa com 22/22 testes. Sem `any`, sem `console.log`, sem `style=""` inline fora de valores dinâmicos.
+- **Pendências:** validação manual em janela anónima (cache vazia) em 320–1024 px e troca de tema claro/escuro com contraste AA.
+
 ## Correcção: repouso dos cartões de produtos e categorias de desenvolvimento web
 
 - **Estado:** concluída
@@ -470,3 +490,53 @@
   - `home`: mantida como está (Q1)
   - Verificar aspect ratios reais das imagens em `public/images/heros/` para evitar aviso `NG02952` do `NgOptimizedImage`
   - Validar tema claro/escuro, larguras 320px–1920px, teclado e movimento reduzido nas páginas alteradas
+
+## Fase 03 — Home: estrutura e Quem somos (2026-10-29)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → C (manter fotografia de stock actual do "Quem somos" — sem alteração)
+  - Q2 → B (manter texto de posicionamento actual)
+  - Q3 → B (manter ordem actual das secções da home)
+  - Q4 → A ("Descer para explorar" não está renderizado em nenhum template — `scrollLabel` definido em `data/home.ts:29` sem uso nos `.html`; nada a remover)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "manter").
+- **Verificações feitas:** confirmado que `scrollLabel` não é referenciado em qualquer template; sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** nenhuma nova.
+
+## Fase 05 — Produtos: imagens e cartões (2026-10-30)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → "deixa como está" (manter as imagens provisórias actuais sem substituição)
+  - Q2 → "o actual tá bom" (manter o layout actual dos cartões de produto)
+  - Q3 → B (não criar `docs/guia-fotografia-produtos.md`)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "manter como está").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** nenhuma nova.
+
+## Fase 06 — Notícias: capas dos artigos (2026-10-30)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → D (saltar — manter capas actuais)
+  - Q2 → D (saltar — manter proporção actual)
+  - Q3 → C (saltar — manter imagem do cabeamento como está)
+  - Q4 → C (saltar — manter comportamento actual)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** nenhuma nova.
+
+## Fase 07 — Desenvolvimento web e pacotes (2026-10-30)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → D (saltar — manter pacotes sem destaque)
+  - Q2 → D (saltar — manter ilustração actual)
+  - Q3 → D (saltar — manter formato de preço actual)
+  - Q4 → C (saltar — manter conteúdo actual dos cartões)
+  - Q5 → C (saltar — manter nota pequena no fim para extras)
+  - Q6 → D (saltar — manter CTA actual dos cartões)
+  - Q7 → D (saltar — não adicionar tabela comparativa)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** nenhuma nova.

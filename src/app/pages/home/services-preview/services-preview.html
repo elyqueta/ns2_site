@@ -8,6 +8,12 @@
     <div appHomeServicesPin class="mt-8 lg:mt-10">
       <div
         class="carousel-viewport relative left-[50%] -mx-[50vw] w-[100vw] snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x touch-pan-y lg:overflow-hidden"
+        role="region"
+        aria-roledescription="carrossel"
+        tabindex="0"
+        [attr.aria-label]="copy.title | localized"
+        (keydown.arrow.left)="previous($event)"
+        (keydown.arrow.right)="next($event)"
         appHomeCarousel
         [appHomeCarouselIndex]="activeIndex()"
         [appHomeCarouselMobileOnly]="true"
@@ -19,6 +25,8 @@
               <div
                 data-home-carousel-card
                 class="snap-center"
+                tabindex="0"
+                (focusin)="activateCard(index)"
                 [attr.aria-current]="activeIndex() === index ? 'true' : null"
               >
                 <app-servico-vidro-card [item]="service" />

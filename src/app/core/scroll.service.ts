@@ -67,12 +67,8 @@ export class ScrollService {
     this.document.addEventListener('pointerdown', this.onInteraction, true);
     this.document.addEventListener('wheel', this.onInteraction, this.wheelOptions);
     this.document.addEventListener('ns2-carousel-interaction', this.onInteraction);
-    const view = this.document.defaultView;
-    const refreshOnce = () => this.animation.refresh();
     if (this.document.readyState === 'complete') {
-      refreshOnce();
-    } else {
-      view?.addEventListener('load', refreshOnce, { once: true });
+      this.animation.refresh();
     }
     void this.document.fonts?.ready.then(() => this.animation.refresh());
     this.document.defaultView?.addEventListener('scroll', this.handleScroll, { passive: true });

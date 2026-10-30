@@ -1,4 +1,4 @@
-import { Directive, effect, input, output } from '@angular/core';
+import { Directive, effect, input, output, signal } from '@angular/core';
 import { AnimationRuntime } from '../../core/animation.service';
 import { registerAnimationDirective } from './animation-directive';
 
@@ -12,7 +12,7 @@ export class HomeCarousel {
   readonly mobileOnly = input(false, { alias: 'appHomeCarouselMobileOnly' });
   readonly activeIndexChange = output<number>({ alias: 'appHomeCarouselIndexChange' });
 
-  private runtime: AnimationRuntime | null = null;
+  private runtimeSignal = signal<AnimationRuntime | null>(null);
   private reducedMotion = false;
   private viewport: HTMLElement | null = null;
   private track: HTMLElement | null = null;
@@ -31,10 +31,12 @@ export class HomeCarousel {
     this.view = element.ownerDocument.defaultView ?? null;
     this.track = element.querySelector<HTMLElement>('[data-home-carousel-track]');
     this.cards = Array.from(element.querySelectorAll<HTMLElement>('[data-home-carousel-card]'));
-    this.runtime = runtime;
+    this.runtimeSignal.set(runtime);
     const gsap = runtime.gsap;
     this.reducedMotion = mode.reducedMotion;
     this.enabledByMode = !this.mobileOnly() || mode.mobile;
+
+    element.setAttribute('aria-roledescription', 'carrossel');
 
     const shouldActivate = this.enabledByMode && !!this.track && this.cards.length > 0;
     if (shouldActivate) {
@@ -49,22 +51,7 @@ export class HomeCarousel {
       this.reposition(this.activeIndex(), false);
     }
 
-    // Reage a mudanças de índice (seta/teclado) apenas quando o runtime está pronto.
-    const indexEffect = effect(() => {
-      if (this.skipNextIndexSync) {
-        this.skipNextIndexSync = false;
-        return;
-      }
-      if (this.programmaticScroll) {
-        return;
-      }
-      if (this.enabled() && this.enabledByMode) {
-        this.reposition(this.activeIndex(), true);
-      }
-    });
-
     return () => {
-      indexEffect.destroy();
       this.resizeObserver?.disconnect();
       this.resizeObserver = null;
       element.removeEventListener('scroll', this.onScroll);
@@ -84,7 +71,24 @@ export class HomeCarousel {
     };
   });
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      const runtime = this.runtimeSignal();
+      if (!runtime) {
+        return;
+      }
+      if (this.skipNextIndexSync) {
+        this.skipNextIndexSync = false;
+        return;
+      }
+      if (this.programmaticScroll) {
+        return;
+      }
+      if (this.enabled() && this.enabledByMode) {
+        this.reposition(this.activeIndex(), true);
+      }
+    });
+  }
 
   /**
    * Aplica o estado visual (escala, opacidade, y) a todos os cartões pela
@@ -92,10 +96,11 @@ export class HomeCarousel {
    * a duração) e não há reduced motion, usa gsap.to; caso contrário gsap.set.
    */
   private applyState(activeIndex: number, animate: boolean | number = false): void {
-    if (!this.runtime || this.cards.length === 0) {
+    const runtime = this.runtimeSignal();
+    if (!runtime || this.cards.length === 0) {
       return;
     }
-    const gsap = this.runtime.gsap;
+    const gsap = runtime.gsap;
     const duration = animate === true ? 0.7 : typeof animate === 'number' ? animate : 0;
     const doAnimate = animate !== false && !this.reducedMotion;
     this.cards.forEach((card, index) => {
@@ -124,8 +129,9 @@ export class HomeCarousel {
    * GSAP, usada ao mudar de cartão por seta/teclado.
    */
   private reposition(index: number, animate: boolean): void {
+    const runtime = this.runtimeSignal();
     if (
-      !this.runtime ||
+      !runtime ||
       !this.viewport ||
       !this.track ||
       !this.enabled() ||
@@ -137,7 +143,7 @@ export class HomeCarousel {
 
     const activeIndex = Math.min(Math.max(index, 0), this.cards.length - 1);
     const activeCard = this.cards[activeIndex];
-    const gsap = this.runtime.gsap;
+    const gsap = runtime.gsap;
     const viewportWidth = this.viewport.clientWidth;
     const cardWidth = activeCard.offsetWidth;
     const sidePadding = Math.max((viewportWidth - cardWidth) / 2, 0);

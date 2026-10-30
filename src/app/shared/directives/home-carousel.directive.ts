@@ -20,7 +20,8 @@ export class HomeCarousel {
   private resizeObserver: ResizeObserver | null = null;
   private view: Window | null = null;
   private enabledByMode = true;
-  private programmaticScroll = false;
+  private isAnimating = false;
+  private needsReposition = false;
   private skipNextIndexSync = false;
   private scrollFrame: number | null = null;
   private scrollEndTimer: ReturnType<typeof setTimeout> | null = null;
@@ -78,11 +79,14 @@ export class HomeCarousel {
         return;
       }
       if (this.skipNextIndexSync) {
+        this.skipNextIndexSync = false;
         return;
       }
-      if (this.programmaticScroll) {
+      if (this.isAnimating) {
+        this.needsReposition = true;
         return;
       }
+      this.needsReposition = false;
       if (this.enabled() && this.enabledByMode) {
         this.reposition(this.activeIndex(), true);
       }
@@ -155,7 +159,7 @@ export class HomeCarousel {
     const doAnimate = animate && !this.reducedMotion;
 
     if (doAnimate) {
-      this.programmaticScroll = true;
+      this.isAnimating = true;
       this.viewport.style.scrollSnapType = 'none';
       const tl = gsap.timeline();
       tl.to(this.viewport, {
@@ -173,9 +177,13 @@ export class HomeCarousel {
         }, 0);
       });
       tl.eventCallback('onComplete', () => {
-        this.programmaticScroll = false;
+        this.isAnimating = false;
         if (this.viewport) {
           this.viewport.style.removeProperty('scroll-snap-type');
+        }
+        if (this.needsReposition) {
+          this.needsReposition = false;
+          this.reposition(this.activeIndex(), true);
         }
       });
     } else {
@@ -185,7 +193,7 @@ export class HomeCarousel {
   }
 
   private readonly onScroll = (): void => {
-    if (!this.viewport || !this.enabledByMode || this.cards.length === 0 || this.programmaticScroll) {
+    if (!this.viewport || !this.enabledByMode || this.cards.length === 0 || this.isAnimating) {
       return;
     }
     const view = this.viewport.ownerDocument.defaultView;
@@ -206,7 +214,7 @@ export class HomeCarousel {
   };
 
   private readonly onScrollEnd = (): void => {
-    if (!this.viewport || !this.enabledByMode || this.cards.length === 0 || this.programmaticScroll) {
+    if (!this.viewport || !this.enabledByMode || this.cards.length === 0 || this.isAnimating) {
       return;
     }
     const closestIndex = this.closestIndex();

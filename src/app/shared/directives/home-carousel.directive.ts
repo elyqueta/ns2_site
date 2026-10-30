@@ -49,7 +49,22 @@ export class HomeCarousel {
       this.reposition(this.activeIndex(), false);
     }
 
+    // Reage a mudanças de índice (seta/teclado) apenas quando o runtime está pronto.
+    const indexEffect = effect(() => {
+      if (this.skipNextIndexSync) {
+        this.skipNextIndexSync = false;
+        return;
+      }
+      if (this.programmaticScroll) {
+        return;
+      }
+      if (this.enabled() && this.enabledByMode) {
+        this.reposition(this.activeIndex(), true);
+      }
+    });
+
     return () => {
+      indexEffect.destroy();
       this.resizeObserver?.disconnect();
       this.resizeObserver = null;
       element.removeEventListener('scroll', this.onScroll);
@@ -69,21 +84,7 @@ export class HomeCarousel {
     };
   });
 
-  constructor() {
-    effect(() => {
-      if (this.skipNextIndexSync) {
-        this.skipNextIndexSync = false;
-        return;
-      }
-      if (this.programmaticScroll) {
-        return;
-      }
-      const enabled = this.enabled();
-      if (this.runtime && enabled && this.enabledByMode) {
-        this.reposition(this.activeIndex(), true);
-      }
-    });
-  }
+  constructor() {}
 
   /**
    * Aplica o estado visual (escala, opacidade, y) a todos os cartões pela

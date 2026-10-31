@@ -413,7 +413,7 @@ export const servicos: readonly Servico[] = [
         pt: 'Técnico a preparar portáteis e monitores numa sala de formação',
         en: 'Technician preparing laptops and monitors in a training room',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos-ti.webp' },
     },
   },
   {

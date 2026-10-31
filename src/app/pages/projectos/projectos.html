@@ -21,16 +21,16 @@
       <div
         class="group relative overflow-hidden rounded-card border border-line bg-surface lg:col-span-2 lg:row-span-2 aspect-[4/3]"
       >
-        <iframe
-          class="absolute inset-0 h-full w-full border-0 bg-surface"
-          [src]="previewUrl"
-          [title]="featuredProject.previewTitle | localized"
-          loading="lazy"
-          tabindex="-1"
-          aria-hidden="true"
-          scrolling="no"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+        <app-media-slot
+          [src]="featuredProject.imagem.claro.pt"
+          [alt]="featuredProject.imagem.alt | localized"
+          [expectedFile]="featuredProject.imagem.claro.pt"
+          [width]="1590"
+          [height]="784"
+          [sizes]="'(max-width: 768px) 100vw, 50vw'"
+          [srcset]="''"
+          [loading]="'eager'"
+        />
         <a
           class="absolute inset-0 z-10 grid place-items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
           [href]="featuredProject.url"

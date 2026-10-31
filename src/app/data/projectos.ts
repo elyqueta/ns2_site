@@ -125,12 +125,12 @@ export const projectos: readonly Project[] = [
     ],
     imagem: {
       claro: {
-        pt: 'https://foco-umber-xi.vercel.app/',
-        en: 'https://foco-umber-xi.vercel.app/',
+        pt: 'public/images/projectos/foco-dashboard-claro.webp',
+        en: 'public/images/projectos/foco-dashboard-claro.webp',
       },
       escuro: {
-        pt: 'https://foco-umber-xi.vercel.app/',
-        en: 'https://foco-umber-xi.vercel.app/',
+        pt: 'public/images/projectos/foco-dashboard-escuro.webp',
+        en: 'public/images/projectos/foco-dashboard-escuro.webp',
       },
       alt: {
         pt: 'Pré-visualização da plataforma Foco.',
@@ -162,100 +162,10 @@ export const projectos: readonly Project[] = [
     },
     tecnologias: [],
     imagem: {
-      claro: { pt: '', en: '' },
-      escuro: { pt: '', en: '' },
+      claro: { pt: 'public/images/projectos/bravo-business-desktop.webp', en: 'public/images/projectos/bravo-business-desktop.webp' },
+      escuro: { pt: 'public/images/projectos/bravo-business-desktop.webp', en: 'public/images/projectos/bravo-business-desktop.webp' },
       alt: { pt: 'Marketplace Bravo Business.', en: 'Bravo Business marketplace.' },
     },
-  },
-  {
-    slug: 'brevemente-01',
-    nome: { pt: 'Em breve', en: 'Coming soon' },
-    tipo: {
-      pt: 'Em desenvolvimento',
-      en: 'In development',
-    },
-    descricao: {
-      pt: 'Novo projeto em desenvolvimento pela NS2 Innovation.',
-      en: 'New project under development by NS2 Innovation.',
-    },
-    url: '#',
-    previewTitle: {
-      pt: 'Em desenvolvimento',
-      en: 'In development',
-    },
-    desafio: {
-      pt: '',
-      en: '',
-    },
-    solucao: {
-      pt: '',
-      en: '',
-    },
-    resultado: {
-      pt: '',
-      en: '',
-    },
-    tecnologias: [],
-    imagem: {
-      claro: {
-        pt: '',
-        en: '',
-      },
-      escuro: {
-        pt: '',
-        en: '',
-      },
-      alt: {
-        pt: 'Em desenvolvimento',
-        en: 'In development',
-      },
-    },
-    brevemente: true,
-  },
-  {
-    slug: 'brevemente-02',
-    nome: { pt: 'Em breve', en: 'Coming soon' },
-    tipo: {
-      pt: 'Em desenvolvimento',
-      en: 'In development',
-    },
-    descricao: {
-      pt: 'Novo projeto em desenvolvimento pela NS2 Innovation.',
-      en: 'New project under development by NS2 Innovation.',
-    },
-    url: '#',
-    previewTitle: {
-      pt: 'Em desenvolvimento',
-      en: 'In development',
-    },
-    desafio: {
-      pt: '',
-      en: '',
-    },
-    solucao: {
-      pt: '',
-      en: '',
-    },
-    resultado: {
-      pt: '',
-      en: '',
-    },
-    tecnologias: [],
-    imagem: {
-      claro: {
-        pt: '',
-        en: '',
-      },
-      escuro: {
-        pt: '',
-        en: '',
-      },
-      alt: {
-        pt: 'Em desenvolvimento',
-        en: 'In development',
-      },
-    },
-    brevemente: true,
   },
 ];
 

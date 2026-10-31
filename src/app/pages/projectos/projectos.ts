@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from '../../core/seo.service';
 import { I18nService } from '../../core/i18n.service';
 import { WhatsappService } from '../../core/whatsapp.service';
@@ -9,15 +8,15 @@ import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
 import { ProjectCardData } from '../../shared/ui/card-content';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
+import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
 
 @Component({
   selector: 'app-projectos',
-  imports: [CtaBand, LocalizedPipe, PageHero, ProjectCard],
+  imports: [CtaBand, LocalizedPipe, PageHero, ProjectCard, MediaSlot],
   templateUrl: './projectos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Projectos {
-  private readonly sanitizer = inject(DomSanitizer);
   private readonly seo = inject(SeoService);
   private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
@@ -25,7 +24,6 @@ export class Projectos {
   readonly copy = projectosPageContent;
   readonly projects = projectos.filter((p) => !p.brevemente);
   readonly featuredProject = projectos[0];
-  readonly previewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.featuredProject.url);
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.homeLabel), href: '/' },
   ]);

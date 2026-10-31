@@ -9,15 +9,25 @@ const tons: Record<string, string> = {
   'site-institucional': '36 140 156',
   'site-profissional': '84 94 214',
   'site-empresarial': '120 82 200',
+  'loja-essencial': '63 111 181',
+  'loja-profissional': '36 140 156',
+  'loja-avancada': '84 94 214',
+  'sistema-mvp': '120 82 200',
+  'sistema-medio': '63 111 181',
+  'sistema-grande': '36 140 156',
 };
 
-// TODO(conteúdo): preencher com '/images/pacotes/<slug>.webp' quando as imagens existirem.
-// Enquanto não existirem, o cartão mostra o gradiente da cor do pacote (fundo de .pkg-card).
 const imagens: Record<string, string | null> = {
-  'landing-page': null,
-  'site-institucional': null,
-  'site-profissional': null,
-  'site-empresarial': null,
+  'landing-page': '/images/pacotes/landing-page.webp',
+  'site-institucional': '/images/pacotes/site-institucional.webp',
+  'site-profissional': '/images/pacotes/site-profissional.webp',
+  'site-empresarial': '/images/pacotes/site-empresarial.webp',
+  'loja-essencial': '/images/pacotes/loja-essencial.webp',
+  'loja-profissional': '/images/pacotes/loja-profissional.webp',
+  'loja-avancada': '/images/pacotes/loja-avancada.webp',
+  'sistema-mvp': '/images/pacotes/sistema-mvp.webp',
+  'sistema-medio': '/images/pacotes/sistema-medio.webp',
+  'sistema-grande': '/images/pacotes/sistema-grande.webp',
 };
 
 const objectPositions: Record<string, string> = {
@@ -25,6 +35,12 @@ const objectPositions: Record<string, string> = {
   'site-institucional': 'center',
   'site-profissional': 'center 30%',
   'site-empresarial': 'center',
+  'loja-essencial': 'center',
+  'loja-profissional': 'center',
+  'loja-avancada': 'center',
+  'sistema-mvp': 'center',
+  'sistema-medio': 'center',
+  'sistema-grande': 'center',
 };
 
 const gridPositions: Record<string, string> = {

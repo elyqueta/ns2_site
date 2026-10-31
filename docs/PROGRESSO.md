@@ -556,3 +556,68 @@
 - **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
 - **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
 - **Pendências e dados em falta:** nenhuma nova.
+
+## Fase 08 — Projectos e cartões "Brevemente" (2026-10-31)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → A (Gráfica Viva em destaque largura total + Foco + 2 cartões Brevemente)
+  - Q2 → A (2 cartões Brevemente com borda tracejada, tipo de projecto e estado "Em desenvolvimento")
+  - Q3 → A (Desafio → Solução → Resultado, só com dados reais + tecnologias)
+  - Q4 → A (trocar entre captura clara e escura consoante o tema)
+  - Q5 → A (substituir "PROJECTO CONFIRMADO" por "No ar")
+  - Q6 → C (saltar — projectos só na página Projectos, não na home)
+- **Ficheiros criados/alterados:**
+  - `src/app/shared/ui/project-detail-card/project-detail-card.ts` (novo) — componente com dados do projecto, imagem claro/escuro, desafio/solução/resultado, tecnologias, ligação "Ver projeto"
+  - `src/app/shared/ui/project-detail-card/project-detail-card.html` (novo) — template do card de projecto
+  - `src/app/pages/projectos/projectos.ts` — reescrito: `ProjectCardViewData` com todos os campos, separação projectos/brevemente, imagem placeholder `/brand/logo-mark.svg` para Foco, `confirmed` para Gráfica Viva, signal `theme`
+  - `src/app/pages/projectos/projectos.html` — layout: Gráfica Viva em destaque (lg:col-span-2 lg:row-span-2), Foco + demais projectos na coluna direita, secção "Brevemente" em grelha 2 colunas, etiqueta "No ar" via `copy.confirmedLabel`
+  - `src/app/data/projectos.ts` — `confirmedLabel` já era "No ar" (Q5 aplicado nos dados); caminho da imagem da Gráfica Viva corrigido para `/images/projectos/grafica-viva-desktop.webp`
+- **Verificações feitas:** `npm run build` passa (45 rotas prerenderizadas, sem erros nem warnings novos).
+- **Pendências e dados em falta:**
+  - Imagens de projectos não existem em `public/images/projectos/` (ficheiros `grafica-viva-desktop.webp`, `grafica-viva-mobile.webp`, `foco-dashboard-claro.webp`, `foco-dashboard-escuro.webp` em falta) — a ser fornecidos pelo utilizador; enquanto isso, usa-se placeholder `/brand/logo-mark.svg` para o Foco
+  - Validar tema claro/escuro, larguras 320px–1920px, teclado e movimento reduzido na página de projectos
+- **Correcções de imagem (NG02952/NG02954/NG02955):**
+  - `page-hero.html`: imagem do hero com atributo `fill` + `priority` (sem `width`/`height`, sem `loading`) — elimina o erro `NG02954` e o aviso LCP `NG02955`.
+  - `project-detail-card.html`: imagem do logótipo placeholder com `w-full h-auto object-contain` — elimina `NG02952`.
+  - `project-detail-card.html`: imagem do projeto (Gráfica Viva) com `width="1600" height="1000"` — elimina `NG02954`.
+  - `projectos.html`: `main` e grid com `overflow-x-clip`; card destaque com `min-h-[300px] sm:min-h-[400px]` em vez de `aspect-[4/3]`; CTA com `max-w-[1440px]` — elimina o scroll horizontal em mobile.
+
+## Fase 09 — Parceiros e marcas (2026-10-31)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → D (saltar — manter as marcas da faixa actual como estão)
+  - Q2 → D (saltar — manter legenda actual)
+  - Q3 → D (saltar — manter movimento actual)
+  - Q4 → D (saltar — hero da página Parceiros sem alteração)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** logótipos de HP e KNUP em falta (a ser fornecidos pelo utilizador).
+
+## Fase 10 — Cartões, números e padrões "de template" (2026-10-31)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → D (saltar — manter eyebrows numerados)
+  - Q2 → D (saltar — manter números dentro dos cartões)
+  - Q3 → C (saltar — manter brilho radial azul)
+  - Q4 → C (saltar — manter 'Saber mais →')
+  - Q5 → C (saltar — não introduzir novos formatos de cartão)
+  - Q6 → C (saltar — manter tipografia actual)
+  - Q7 → C (saltar — manter formato de preço actual)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** logótipos de HP e KNUP em falta (a ser fornecidos pelo utilizador).
+
+## Fase 11 — Contacto e rodapé (2026-10-31)
+
+- **Estado:** concluída
+- **Decisões do utilizador:**
+  - Q1 → D (saltar — manter hero de ícones da página Contacto como está)
+  - Q2 → D (saltar — manter canais de contacto actuais)
+  - Q3 → D (saltar — manter botão flutuante do WhatsApp como está)
+  - Q4 → D (saltar — manter rodapé como está)
+- **Ficheiros criados/alterados:** nenhum (todas as decisões foram "saltar").
+- **Verificações feitas:** sem alterações de código, o build anterior (45 rotas) continua válido.
+- **Pendências e dados em falta:** logótipos de HP e KNUP em falta (a ser fornecidos pelo utilizador).

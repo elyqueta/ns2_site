@@ -26,8 +26,9 @@ export class HomeProjectsPreview {
   } as const;
 
   private readonly projectImages = [
-    '/images/servicos/desenvolvimento-web.webp',
-    '/images/servicos/sistemas-software.webp',
+    '/images/projectos/grafica-viva-desktop.webp',
+    '/images/projectos/foco-dashboard-claro.webp',
+    '/images/projectos/bravo-business-desktop.webp',
   ] as const;
   readonly projects = projectos
     .filter((project) => !project.brevemente)

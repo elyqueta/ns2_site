@@ -15,6 +15,14 @@ export class HomeTestimonialsPreview {
   readonly copy = homeContent.testimonials;
   readonly activeIndex = signal(0);
 
+  initials(name: string): string {
+    return name
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((word) => word.charAt(0).toUpperCase())
+      .join('');
+  }
+
   preventPointerFocus(event: MouseEvent): void {
     event.preventDefault();
   }

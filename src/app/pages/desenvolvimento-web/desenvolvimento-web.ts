@@ -108,8 +108,9 @@ export class DesenvolvimentoWeb {
   );
   readonly searchTerm = signal('');
   private readonly projectImages = [
-    '/images/servicos/desenvolvimento-web.webp',
-    '/images/servicos/sistemas-software.webp',
+    '/images/projectos/grafica-viva-desktop.webp',
+    '/images/projectos/foco-dashboard-claro.webp',
+    '/images/projectos/bravo-business-desktop.webp',
   ] as const;
   readonly featuredProjects = projectos
     .filter((project) => !project.brevemente)
@@ -129,7 +130,7 @@ export class DesenvolvimentoWeb {
       id: 'websites',
       title: this.i18n.text(this.copy.sections.websites.index),
       description: this.i18n.text(this.copy.sections.websites.description),
-      imageSrc: '/images/servicos/desenvolvimento-web.webp',
+      imageSrc: '/images/pacotes/categoria/categoria-websites.webp',
       packages: webPacotes,
       comingSoon: false,
     },
@@ -137,7 +138,7 @@ export class DesenvolvimentoWeb {
       id: 'lojas',
       title: this.i18n.text(this.copy.sections.shops.index),
       description: this.i18n.text(this.copy.sections.shops.description),
-      imageSrc: '/images/heros/desenvolvimento-web.webp',
+      imageSrc: '/images/pacotes/categoria/categoria-lojas.webp',
       packages: lojaPacotes,
       comingSoon: false,
     },
@@ -145,7 +146,7 @@ export class DesenvolvimentoWeb {
       id: 'sistemas',
       title: this.i18n.text(this.copy.sections.systems.index),
       description: this.i18n.text(this.copy.sections.systems.description),
-      imageSrc: '/images/servicos/sistemas-software.webp',
+      imageSrc: '/images/pacotes/categoria/categoria-sistemas.webp',
       packages: sistemaPacotes,
       comingSoon: false,
     },
@@ -153,7 +154,7 @@ export class DesenvolvimentoWeb {
       id: 'ia-automacao',
       title: this.i18n.t('webCatalog.aiCategory'),
       description: this.i18n.t('webCatalog.aiDescription'),
-      imageSrc: '/images/servicos/sistemas-software.webp',
+      imageSrc: '/images/pacotes/categoria/categoria-ia-automacao.webp',
       packages: [],
       comingSoon: true,
     },

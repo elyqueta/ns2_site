@@ -6,6 +6,7 @@ export interface DestaqueProduto {
   readonly titulo: LocalizedText;
   readonly descricao: LocalizedText;
   readonly mensagemWhatsApp: LocalizedText;
+  readonly imageSrc?: string;
 }
 
 export interface CategoriaProduto {
@@ -57,6 +58,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Dell Latitude.',
           en: 'Hello! I am interested in Dell Latitude.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/dell-latitude.webp',
       },
       {
         etiqueta: { pt: 'Dell' },
@@ -69,6 +71,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Dell Inspiron.',
           en: 'Hello! I am interested in Dell Inspiron.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/dell-inspiron.webp',
       },
       {
         etiqueta: { pt: 'Lenovo' },
@@ -81,6 +84,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Lenovo ThinkPad.',
           en: 'Hello! I am interested in Lenovo ThinkPad.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/lenovo-thinkpad.webp',
       },
       {
         etiqueta: { pt: 'Lenovo' },
@@ -93,6 +97,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Lenovo IdeaPad.',
           en: 'Hello! I am interested in Lenovo IdeaPad.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/lenovo-ideapad.webp',
       },
       {
         etiqueta: { pt: 'HP' },
@@ -105,6 +110,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em HP EliteBook.',
           en: 'Hello! I am interested in HP EliteBook.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/hp-elitebook.webp',
       },
       {
         etiqueta: { pt: 'Apple — MacBook' },
@@ -117,6 +123,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Apple MacBook Air.',
           en: 'Hello! I am interested in Apple MacBook Air.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/apple-macbook-air.webp',
       },
       {
         etiqueta: { pt: 'Apple — MacBook' },
@@ -129,6 +136,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em Apple MacBook Pro.',
           en: 'Hello! I am interested in Apple MacBook Pro.',
         },
+        imageSrc: '/images/produtos/destaques/notebooks/apple-macbook-pro.webp',
       },
     ],
   },
@@ -165,6 +173,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em computadores Dell.',
           en: 'Hello! I am interested in Dell computers.',
         },
+        imageSrc: '/images/produtos/destaques/desktops/dell.webp',
       },
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -177,6 +186,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em computadores Lenovo.',
           en: 'Hello! I am interested in Lenovo computers.',
         },
+        imageSrc: '/images/produtos/destaques/desktops/lenovo.webp',
       },
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -189,6 +199,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em computadores HP.',
           en: 'Hello! I am interested in HP computers.',
         },
+        imageSrc: '/images/produtos/destaques/desktops/hp.webp',
       },
       {
         etiqueta: { pt: 'À medida', en: 'Custom build' },
@@ -201,6 +212,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em montagem personalizada de computador de secretária.',
           en: 'Hello! I am interested in a custom desktop computer build.',
         },
+        imageSrc: '/images/produtos/destaques/desktops/montagem-personalizada.webp',
       },
     ],
   },
@@ -237,6 +249,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em componentes informáticos.',
           en: 'Hello! I am interested in computer components.',
         },
+        imageSrc: '/images/produtos/destaques/pecas/componentes-informaticos.webp',
       },
       {
         etiqueta: { pt: 'Redes', en: 'Networking' },
@@ -249,6 +262,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em equipamentos e activos de rede.',
           en: 'Hello! I am interested in network equipment and assets.',
         },
+        imageSrc: '/images/produtos/destaques/pecas/equipamentos-rede.webp',
       },
       {
         etiqueta: { pt: 'Personalização', en: 'Customisation' },
@@ -261,6 +275,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em montagem de equipamento personalizado.',
           en: 'Hello! I am interested in a custom equipment build.',
         },
+        imageSrc: '/images/produtos/destaques/pecas/montagem-personalizada.webp',
       },
     ],
   },
@@ -297,18 +312,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em acessórios Dell.',
           en: 'Hello! I am interested in Dell accessories.',
         },
-      },
-      {
-        etiqueta: { pt: 'Marca', en: 'Brand' },
-        titulo: { pt: 'Knup' },
-        descricao: {
-          pt: 'Acessórios para melhorar o desempenho e o conforto nas suas actividades.',
-          en: 'Accessories to support performance and comfort in your work.',
-        },
-        mensagemWhatsApp: {
-          pt: 'Olá! Tenho interesse em acessórios Knup.',
-          en: 'Hello! I am interested in Knup accessories.',
-        },
+        // TODO(imagem): acessorios/dell em falta — manter placeholder neutro
       },
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -321,6 +325,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em acessórios Multilaser.',
           en: 'Hello! I am interested in Multilaser accessories.',
         },
+        imageSrc: '/images/produtos/destaques/acessorios/multilaser.webp',
       },
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -333,6 +338,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em acessórios Samsung.',
           en: 'Hello! I am interested in Samsung accessories.',
         },
+        imageSrc: '/images/produtos/destaques/acessorios/samsung.webp',
       },
     ],
   },
@@ -372,6 +378,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em mobiliário de escritório.',
           en: 'Hello! I am interested in office furniture.',
         },
+        imageSrc: '/images/produtos/destaques/moveis/escritorio.webp',
       },
       {
         etiqueta: { pt: 'Gamer', en: 'Gaming' },
@@ -384,6 +391,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em mesas e cadeiras gamer.',
           en: 'Hello! I am interested in gaming desks and chairs.',
         },
+        imageSrc: '/images/produtos/destaques/moveis/gamer.webp',
       },
     ],
   },
@@ -420,6 +428,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em toners e cartuchos de tinta.',
           en: 'Hello! I am interested in toner and ink cartridges.',
         },
+        imageSrc: '/images/produtos/destaques/consumiveis/toners-cartuchos.webp',
       },
       {
         etiqueta: { pt: 'Impressão', en: 'Printing' },
@@ -432,6 +441,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em papel para impressão.',
           en: 'Hello! I am interested in printing paper.',
         },
+        imageSrc: '/images/produtos/destaques/consumiveis/papel-impressao.webp',
       },
       {
         etiqueta: { pt: 'Armazenamento', en: 'Storage' },
@@ -444,6 +454,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em dispositivos de armazenamento.',
           en: 'Hello! I am interested in storage devices.',
         },
+        imageSrc: '/images/produtos/destaques/consumiveis/armazenamento.webp',
       },
       {
         etiqueta: { pt: 'Informática', en: 'Computing' },
@@ -456,6 +467,7 @@ export const produtos: readonly CategoriaProduto[] = [
           pt: 'Olá! Tenho interesse em acessórios de informática.',
           en: 'Hello! I am interested in computer accessories.',
         },
+        imageSrc: '/images/produtos/destaques/consumiveis/acessorios-essenciais.webp',
       },
     ],
   },

@@ -75,7 +75,7 @@ export class Produtos {
           description: item.descricao,
           whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),
           actionLabel: this.copy.quoteLabel,
-          imageSrc: undefined,
+          imageSrc: item.imageSrc,
           imageAlt: item.titulo,
         })),
       };

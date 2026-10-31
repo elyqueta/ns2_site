@@ -41,7 +41,7 @@ export const aboutPageContent = {
         en: 'NS2 Innovation was founded to bring technology solutions to people and businesses. It grew from a strong ability to solve problems and create innovative technology solutions.',
       },
       {
-        pt: 'Com raízes na electrónica, na tecnologia da informação e na inovação, trouxemos para o cenário comercial e industrial angolano — em constante evolução — um diferencial na relação com o cliente: profissionalismo, proximidade e satisfação, através da transparência e da evolução mútua.',
+        pt: 'Com raízes na electrónica, na tecnologia da informação e na inovação, trouxemos para o cenário comercial e industrial angolano, em constante evolução, um diferencial na relação com o cliente: profissionalismo, proximidade e satisfação, através da transparência e da evolução mútua.',
         en: 'With roots in electronics, information technology and innovation, we bring a distinct approach to Angola’s evolving commercial and industrial sectors: professionalism, personal service and satisfaction through transparency and shared growth.',
       },
     ] satisfies readonly LocalizedText[],
@@ -113,8 +113,8 @@ export const aboutPageContent = {
   },
   differentiators: {
     index: {
-      pt: '04 — O que nos distingue',
-      en: '04 — What sets us apart',
+      pt: 'O que nos distingue',
+      en: 'What sets us apart',
     } satisfies LocalizedText,
     title: {
       pt: 'Soluções concentradas num só lugar.',

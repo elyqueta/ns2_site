@@ -10,7 +10,7 @@
 
 <main id="conteudo">
   <section
-    class="mx-auto grid max-w-[1440px] items-center gap-12 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-16"
+    class="mx-auto grid max-w-360 items-center gap-12 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-16"
     aria-labelledby="about-story-title"
   >
     <div class="lg:col-span-6" appReveal>
@@ -38,7 +38,7 @@
   </section>
 
   <section class="border-y border-line bg-surface">
-    <div class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
+    <div class="mx-auto max-w-360 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
       <div class="max-w-5xl" appReveal>
         <p
           class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright"
@@ -56,7 +56,7 @@
   </section>
 
   <section
-    class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
+    class="mx-auto max-w-360 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
     [attr.aria-label]="copy.values.title | localized"
   >
     <app-section-heading
@@ -81,7 +81,7 @@
   </section>
 
   <section class="border-y border-line bg-surface">
-    <div class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
+    <div class="mx-auto max-w-360 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16">
       <app-section-heading
         [index]="copy.differentiators.index | localized"
         [title]="copy.differentiators.title | localized"
@@ -101,7 +101,7 @@
       >
         <div data-home-carousel-track class="flex w-max items-stretch gap-4 px-5 py-4 sm:gap-6 sm:px-8">
           @for (item of differentiators; track item.title.pt; let index = $index) {
-            <div data-home-carousel-card class="w-[min(82vw,24rem)] min-h-[20rem] shrink-0 snap-center"             tabindex="0" (focusin)="activateCard(index)" [attr.aria-current]="activeDifferentiator() === index ? 'true' : null">
+            <div data-home-carousel-card class="w-[min(82vw,24rem)] min-h-80 shrink-0 snap-center"             tabindex="0" (focusin)="activateCard(index)" [attr.aria-current]="activeDifferentiator() === index ? 'true' : null">
               <a class="svc-card about-differentiator-card" [routerLink]="'/servicos'" [style.--tint-rgb]="item.tintRgb">
                 <div class="svc-media"><img [src]="item.imageSrc" alt="" width="1200" height="750" loading="lazy" decoding="async" /></div>
                 <div class="svc-glass"></div>
@@ -152,7 +152,7 @@
   </section>
 
   <section
-    class="mx-auto max-w-[1440px] px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
+    class="mx-auto max-w-360 px-5 py-[clamp(5rem,10vw,10rem)] sm:px-8 lg:px-16"
     [attr.aria-label]="copy.process.title | localized"
   >
     <app-section-heading
@@ -166,7 +166,7 @@
       role="group"
     >
       <div
-        class="absolute bottom-6 left-[1.125rem] top-6 w-px bg-line sm:left-[1.375rem]"
+        class="absolute bottom-6 left-4.5 top-6 w-px bg-line sm:left-5.5"
         aria-hidden="true"
       >
         <span data-process-progress class="absolute inset-0 origin-top scale-y-0 bg-accent"></span>
@@ -196,7 +196,7 @@
     </div>
   </section>
 
-  <section class="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
+  <section class="mx-auto max-w-360 px-5 pb-20 sm:px-8 lg:px-16 lg:pb-28">
     <app-cta-band
       [title]="copy.cta.title | localized"
       [description]="copy.cta.description | localized"

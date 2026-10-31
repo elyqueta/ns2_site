@@ -32,22 +32,28 @@ export class Servicos {
   private readonly i18n = inject(I18nService);
   private readonly whatsapp = inject(WhatsappService);
   readonly copy = servicesPageContent;
-  readonly services = servicos.map((service, index) => ({
-    ...service,
-    imagemSrc: `/images/servicos/${service.imagem.ficheiroEsperado.pt.split('/').pop()}`,
-    tintRgb: paleta[index % paleta.length],
-    ctaLabel: servicesPageContent.detailLink,
-    card: {
+  readonly services = servicos.map((service, index) => {
+    const base = `/images/servicos/${service.imagem.ficheiroEsperado.pt!.split('/').pop()!.replace('.webp', '')}`;
+    const card = {
       tintRgb: paleta[index % paleta.length],
       titulo: service.titulo,
       resumo: service.resumo,
       icone: service.icone,
       href: service.href,
-      imagemSrc: `/images/servicos/${service.imagem.ficheiroEsperado.pt.split('/').pop()}`,
+      imagemSrc: `${base}.webp`,
       imagemAlt: service.imagem.alt,
+      imagemSrcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`,
+      imagemSizes: '(max-width: 1024px) 100vw, 25vw',
       ctaLabel: servicesPageContent.detailLink,
-    },
-  }));
+    };
+    return {
+      ...service,
+      imagemSrc: `${base}.webp`,
+      tintRgb: paleta[index % paleta.length],
+      ctaLabel: servicesPageContent.detailLink,
+      card,
+    };
+  });
   readonly breadcrumbs = computed(() => [
     { label: this.i18n.text(this.copy.homeLabel), href: '/' },
   ]);

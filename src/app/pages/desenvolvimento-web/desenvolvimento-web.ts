@@ -108,7 +108,7 @@ export class DesenvolvimentoWeb {
   );
   readonly searchTerm = signal('');
   private readonly projectImages = [
-    '/images/servicos/websites-sistemas-web.webp',
+    '/images/servicos/desenvolvimento-web.webp',
     '/images/servicos/sistemas-software.webp',
   ] as const;
   readonly featuredProjects = projectos
@@ -129,7 +129,7 @@ export class DesenvolvimentoWeb {
       id: 'websites',
       title: this.i18n.text(this.copy.sections.websites.index),
       description: this.i18n.text(this.copy.sections.websites.description),
-      imageSrc: '/images/servicos/websites-sistemas-web.webp',
+      imageSrc: '/images/servicos/desenvolvimento-web.webp',
       packages: webPacotes,
       comingSoon: false,
     },

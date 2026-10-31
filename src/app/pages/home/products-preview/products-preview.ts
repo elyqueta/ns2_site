@@ -15,13 +15,18 @@ import { Icon } from '../../../shared/ui/icon/icon';
 })
 export class HomeProductsPreview {
   readonly copy = homeContent.products;
-  readonly categories = produtos.map((category) => ({
-    title: category.titulo,
-    description: category.descricao,
-    imageSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
-    imageAlt: category.imagem.alt,
-    href: '/produtos',
-    actionLabel: this.copy.cardLinkLabel,
-    slug: category.slug,
-  }));
+  readonly categories = produtos.map((category) => {
+    const base = `/images/produtos/${category.imagem.ficheiroEsperado.pt!.split('/').pop()!.replace('.webp', '')}`;
+    return {
+      title: category.titulo,
+      description: category.descricao,
+      imageSrc: `${base}.webp`,
+      imageAlt: category.imagem.alt,
+      imageSrcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`,
+      imageSizes: '(max-width: 768px) 100vw, 33vw',
+      href: '/produtos',
+      actionLabel: this.copy.cardLinkLabel,
+      slug: category.slug,
+    };
+  });
 }

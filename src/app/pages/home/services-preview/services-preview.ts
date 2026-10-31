@@ -49,17 +49,22 @@ export class HomeServicesPreview {
   readonly activeIndex = signal(0);
   readonly ctaLabel = homeContent.services.cardLinkLabel;
   readonly servicosVidro = computed(() => {
-    return servicos.map((service, index) => ({
-      tintRgb: paleta[index % paleta.length],
-      titulo: titulosCurtos[index] ?? service.titulo,
-      resumo: service.resumo,
-      icone: service.icone,
-      href: service.href,
-      imagemSrc: service.imagem.ficheiroEsperado.pt.replace('public/', '/'),
-      imagemAlt: service.imagem.alt,
-      ctaLabel: homeContent.services.cardLinkLabel,
-      badge: false,
-    }));
+    return servicos.map((service, index) => {
+      const base = `/images/servicos/${service.imagem.ficheiroEsperado.pt!.split('/').pop()!.replace('.webp', '')}`;
+      return {
+        tintRgb: paleta[index % paleta.length],
+        titulo: titulosCurtos[index] ?? service.titulo,
+        resumo: service.resumo,
+        icone: service.icone,
+        href: service.href,
+        imagemSrc: `${base}.webp`,
+        imagemAlt: service.imagem.alt,
+        imagemSrcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`,
+        imagemSizes: '(max-width: 1024px) 100vw, 25vw',
+        ctaLabel: homeContent.services.cardLinkLabel,
+        badge: false,
+      };
+    });
   });
 
   preventPointerFocus(event: MouseEvent): void {

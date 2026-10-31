@@ -17,4 +17,6 @@ export class MediaSlot {
   readonly loading = input<'eager' | 'lazy'>('lazy');
   readonly decoding = input<'async' | 'sync' | 'auto'>('async');
   readonly aspectRatio = input<'3/2' | '16/9'>('3/2');
+  readonly sizes = input<string>('(max-width: 768px) 100vw, 50vw');
+  readonly srcset = input<string>('');
 }

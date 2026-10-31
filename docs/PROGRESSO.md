@@ -1,6 +1,21 @@
 # Progresso — NS2 Innovation Site
 
-## Correcção transversal — carrosséis unificados com cartão activo centrado
+## Actualização de imagens do site (imagens-site.zip)
+
+- **Estado:** concluída
+- **Decisões tomadas:**
+  - Copiada a pasta `imagens/` do zip para `public/images/` (heros, servicos, produtos, noticias, equipa, og), ignorando `_extras/` e `mapeamento.csv`.
+  - Substituídas as 8 heros (sobre, servicos, produtos, desenvolvimento-web, noticias, contacto, projectos, parceiros) com `srcset`/`sizes` (640w/1024w/1600w) e `alt` da tabela, `loading=eager`+`fetchpriority=high` no hero visível.
+  - Substituídos os 9 cards de serviços, 6 cards de produtos, 3 capas de notícias e a secção Equipa (equipa.webp + -480/-800), com `srcset` (480w/800w/1200w), `sizes` coerentes com a grelha, `loading=lazy`+`decoding=async`.
+  - O `og:image`/`twitter:image` já usava `og/og-default.png`; adicionados `og:image:width=1200` e `og:image:height=630` em `seo.service.ts` e `index.html`.
+  - Corrigidos caminhos divergentes no zip vs código: `consultoria.webp` → `construtoria.webp`, `websites-sistemas-web.webp` → `desenvolvimento-web.webp`; `public/images/equipa.jpeg` → `public/images/equipa.webp`.
+  - Hero da Home mantida inalterada (pedido do utilizador). `MediaSlot` e `PageHero` ganharam inputs `srcset`/`sizes`; `servico-vidro-card` e `product-category-card` passam a usar `ngSrc` com `alt`, `srcset`, `sizes` e `loading=lazy`.
+- **Ficheiros alterados:** `src/app/data/servicos.ts`, `src/app/data/produtos.ts`, `src/app/data/noticias.ts`, `src/app/data/sobre.ts`, `src/app/data/home.ts`, `src/app/shared/ui/media-slot/media-slot.ts`, `src/app/shared/ui/media-slot/media-slot.html`, `src/app/shared/ui/page-hero/page-hero.ts`, `src/app/shared/ui/page-hero/page-hero.html`, `src/app/shared/ui/servico-vidro-card/servico-vidro-card.ts`, `src/app/shared/ui/servico-vidro-card/servico-vidro-card.html`, `src/app/shared/ui/product-category-card/product-category-card.ts`, `src/app/shared/ui/product-category-card/product-category-card.html`, `src/app/pages/servicos/servicos.ts`, `src/app/pages/servicos/servicos.html`, `src/app/pages/servico-detalhe/servico-detalhe.ts`, `src/app/pages/servico-detalhe/servico-detalhe.html`, `src/app/pages/produtos/produtos.ts`, `src/app/pages/produtos/produtos.html`, `src/app/pages/noticias/noticias.ts`, `src/app/pages/noticias/noticias.html`, `src/app/pages/home/news-preview/news-preview.ts`, `src/app/pages/home/services-preview/services-preview.ts`, `src/app/pages/home/products-preview/products-preview.ts`, `src/app/pages/home/about-preview/about-preview.html`, `src/app/pages/sobre/sobre.ts`, `src/app/pages/sobre/sobre.html`, `src/app/pages/parceiros/parceiros.ts`, `src/app/pages/parceiros/parceiros.html`, `src/app/pages/projectos/projectos.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.html`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/ui-kit/ui-kit.ts`, `src/app/core/seo.service.ts`, `src/index.html`, `docs/PROGRESSO.md`.
+- **Ficheiros criados:** `public/images/heros/*.webp`, `public/images/servicos/*.webp`, `public/images/produtos/*.webp`, `public/images/noticias/*.webp`, `public/images/equipa*.webp`, `public/images/og/og-default.png` (novos assets do zip).
+- **Verificações feitas:** `npm run build` passa com 45 rotas prerenderizadas, sem erros nem warnings novos. Nenhuma referência a imagem inexistente no escopo (restam apenas hero-slider da Home e grafica-viva, fora do escopo).
+- **Pendências:** hero da Home (home-a-rede/b/c) e capa do projecto Gráfica Viva continuam sem imagem (fora do escopo desta tarefa); licenças das imagens a confirmar antes do lançamento.
+
+---
 
 - **Estado:** concluída
 - **Causa encontrada:** a animação só ficava suave depois de sair da página e voltar porque o `effect()` do `AnimationService` lia sinais do carrossel (`activeIndex`, `enabled`) sem `untracked()`, reconstruindo todas as animações da página a cada mudança de índice. Além disso, a directiva `appHomeCarousel` não aplicava escala/opacidade/y aos cartões, apenas deslocava a pista.

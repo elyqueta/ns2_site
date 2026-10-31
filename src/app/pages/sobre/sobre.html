@@ -6,6 +6,9 @@
   [breadcrumbLabel]="copy.hero.breadcrumbLabel | localized"
   [imageSrc]="'/images/heros/sobre.webp'"
   [imagePosition]="'center'"
+  [imageAlt]="'Duas pessoas a conversar sobre uma planta de rede, com um portátil na mesa'"
+  [imageSizes]="'100vw'"
+  [imageSrcset]="'/images/heros/sobre-640.webp 640w, /images/heros/sobre-1024.webp 1024w, /images/heros/sobre.webp 1600w'"
 />
 
 <main id="conteudo">
@@ -30,9 +33,11 @@
       <app-media-slot
         [alt]="copy.story.imageAlt | localized"
         [expectedFile]="copy.story.imageFile | localized"
-        src="/images/sobre/quem-somos.webp"
+        src="/images/equipa.webp"
         [width]="626"
         [height]="418"
+        [sizes]="'(max-width: 768px) 100vw, 50vw'"
+        [srcset]="'/images/equipa-480.webp 480w, /images/equipa-800.webp 800w, /images/equipa.webp 1200w'"
       />
     </div>
   </section>

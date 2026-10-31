@@ -6,6 +6,9 @@
   [breadcrumbLabel]="copy.breadcrumbLabel | localized"
   [imageSrc]="'/images/heros/noticias.webp'"
   [imagePosition]="'center'"
+  [imageAlt]="'Mesa de trabalho com portátil, caderno e café'"
+  [imageSizes]="'100vw'"
+  [imageSrcset]="'/images/heros/noticias-640.webp 640w, /images/heros/noticias-1024.webp 1024w, /images/heros/noticias.webp 1600w'"
 />
 
 <main id="conteudo">
@@ -26,12 +29,14 @@
         >
           <app-media-slot
             class="block h-full min-h-64"
-            [alt]="'decorative'"
+            [alt]="featured().imagemAlt | localized"
             [src]="featured().imageSrc"
             [expectedFile]="featured().expectedFile"
             aspectRatio="16/9"
             [width]="1200"
             [height]="675"
+            [sizes]="featured().imageSizes"
+            [srcset]="featured().imageSrcset"
             [loading]="'lazy'"
           />
         </a>
@@ -120,12 +125,14 @@
                   [attr.aria-label]="article.linkLabel"
                 >
                   <app-media-slot
-                    [alt]="''"
+                    [alt]="article.imagemAlt | localized"
                     [src]="article.imageSrc"
                     [expectedFile]="article.expectedFile"
                     aspectRatio="16/9"
                     [width]="1200"
                     [height]="675"
+                    [sizes]="article.imageSizes"
+                    [srcset]="article.imageSrcset"
                     [loading]="'lazy'"
                   />
                 </a>

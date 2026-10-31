@@ -60,21 +60,26 @@ export class Produtos {
   readonly catalog = viewChild<ElementRef<HTMLElement>>('catalog');
   readonly copy = productsPageContent;
   readonly categories = computed(() =>
-    produtos.map((category) => ({
-      ...category,
-      ordemLabel: category.ordem.toString().padStart(2, '0'),
-      whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(category.mensagemWhatsApp)),
-      imagemSrc: `/images/produtos/${category.imagem.ficheiroEsperado.pt.split('/').pop()}`,
-      destaques: category.destaques.map((item) => ({
-        label: item.etiqueta,
-        title: item.titulo,
-        description: item.descricao,
-        whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),
-        actionLabel: this.copy.quoteLabel,
-        imageSrc: undefined,
-        imageAlt: item.titulo,
-      })),
-    })),
+    produtos.map((category) => {
+      const base = `/images/produtos/${category.imagem.ficheiroEsperado.pt!.split('/').pop()!.replace('.webp', '')}`;
+      return {
+        ...category,
+        ordemLabel: category.ordem.toString().padStart(2, '0'),
+        whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(category.mensagemWhatsApp)),
+        imagemSrc: `${base}.webp`,
+        imagemSrcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`,
+        imagemSizes: '(max-width: 768px) 100vw, 42vw',
+        destaques: category.destaques.map((item) => ({
+          label: item.etiqueta,
+          title: item.titulo,
+          description: item.descricao,
+          whatsappUrl: this.whatsapp.createWhatsappUrl(this.i18n.text(item.mensagemWhatsApp)),
+          actionLabel: this.copy.quoteLabel,
+          imageSrc: undefined,
+          imageAlt: item.titulo,
+        })),
+      };
+    }),
   );
   readonly activeCategory = signal(produtos[0].slug);
   readonly breadcrumbs = computed(() => [

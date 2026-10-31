@@ -12,6 +12,7 @@ export interface Noticia {
   readonly data: string;
   readonly tempoLeitura: number;
   readonly imagem: string;
+  readonly imagemAlt: LocalizedText;
   readonly corpo: readonly BlocoNoticia[];
   readonly autor: LocalizedText;
   readonly href: string;
@@ -32,6 +33,10 @@ export const noticias: readonly Noticia[] = [
     data: '2026-10-14',
     tempoLeitura: 3,
     imagem: 'noticias/site-ou-landing-page-qual-escolher.webp',
+    imagemAlt: {
+      pt: 'Comparação entre o desenho de uma página única e de um site com vários separadores',
+      en: 'Comparison between a one-page design and a multi-section website',
+    },
     autor: { pt: 'Equipa NS2 Innovation', en: 'NS2 Innovation team' },
     href: '/noticias/site-ou-landing-page-qual-escolher',
     corpo: [
@@ -95,6 +100,10 @@ export const noticias: readonly Noticia[] = [
     data: '2026-10-09',
     tempoLeitura: 4,
     imagem: 'noticias/cabeamento-estruturado-o-que-verificar.webp',
+    imagemAlt: {
+      pt: 'Técnico a etiquetar cabos num patch panel',
+      en: 'Technician labelling cables on a patch panel',
+    },
     autor: { pt: 'Equipa NS2 Innovation', en: 'NS2 Innovation team' },
     href: '/noticias/cabeamento-estruturado-o-que-verificar',
     corpo: [
@@ -155,6 +164,10 @@ export const noticias: readonly Noticia[] = [
     data: '2026-10-05',
     tempoLeitura: 3,
     imagem: 'noticias/manutencao-preventiva-evita-paragens.webp',
+    imagemAlt: {
+      pt: 'Técnica a inspeccionar um servidor com uma lanterna',
+      en: 'Technician inspecting a server with a flashlight',
+    },
     autor: { pt: 'Equipa NS2 Innovation', en: 'NS2 Innovation team' },
     href: '/noticias/manutencao-preventiva-evita-paragens',
     corpo: [

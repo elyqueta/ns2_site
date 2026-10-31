@@ -30,6 +30,8 @@ export class Parceiros {
       description: partner.resumo,
       imageSrc: partner.logo ?? '',
       imageAlt: { pt: partner.nome, en: partner.nome },
+      imageSrcset: partner.logo ? `${partner.logo} 1200w` : '',
+      imageSizes: '(max-width: 768px) 100vw, 25vw',
       href: partner.href,
       actionLabel: this.copy.contactPageLabel,
     })),

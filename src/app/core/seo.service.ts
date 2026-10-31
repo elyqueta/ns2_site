@@ -49,6 +49,8 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
     this.meta.updateTag({ name: 'twitter:description', content: pageDescription });
     this.meta.updateTag({ name: 'twitter:image', content: DEFAULT_OG_IMAGE });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
 
     const breadcrumbs = options.breadcrumbs ?? this.defaultBreadcrumbs(pageTitle, canonical);
     this.setJsonLd('breadcrumb-json-ld', this.breadcrumbStructuredData(breadcrumbs));

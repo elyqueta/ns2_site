@@ -46,10 +46,10 @@ export const aboutPageContent = {
       },
     ] satisfies readonly LocalizedText[],
     imageAlt: {
-      pt: 'Pessoas a colaborar em frente a computadores num ambiente de trabalho.',
-      en: 'People collaborating in front of computers in a workplace.',
+      pt: 'Colegas a colaborar num ecrã num espaço de trabalho aberto',
+      en: 'Colleagues collaborating on a screen in an open workspace',
     } satisfies LocalizedText,
-    imageFile: { pt: 'public/images/equipa.jpeg' } satisfies LocalizedText,
+    imageFile: { pt: 'public/images/equipa.webp' } satisfies LocalizedText,
   },
   philosophy: {
     index: { pt: 'Filosofia', en: 'Our philosophy' } satisfies LocalizedText,

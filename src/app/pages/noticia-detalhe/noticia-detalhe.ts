@@ -81,6 +81,14 @@ export class NoticiaDetalhe {
     const article = this.article();
     return article ? `/images/${article.imagem}` : null;
   });
+  readonly imageSrcset = computed(() => {
+    const article = this.article();
+    if (!article) {
+      return '';
+    }
+    const base = `/images/${article.imagem.replace('.webp', '')}`;
+    return `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`;
+  });
   readonly image = computed(() => {
     const article = this.article();
     return article

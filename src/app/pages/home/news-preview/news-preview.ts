@@ -16,11 +16,16 @@ import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 })
 export class HomeNewsPreview {
   readonly copy = homeContent.news;
-  readonly articles = noticias.slice(0, 3).map((article) => ({
-    ...article,
-    imageSrc: `/images/${article.imagem}`,
-    expectedFile: `public/images/${article.imagem}`,
-  }));
+  readonly articles = noticias.slice(0, 3).map((article) => {
+    const base = `/images/${article.imagem.replace('.webp', '')}`;
+    return {
+      ...article,
+      imageSrc: `/images/${article.imagem}`,
+      expectedFile: `public/images/${article.imagem}`,
+      imageSrcset: `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`,
+      imageSizes: '(max-width: 768px) 100vw, 50vw',
+    };
+  });
   readonly featured = this.articles[0];
   readonly secondaryArticles = this.articles.slice(1);
 }

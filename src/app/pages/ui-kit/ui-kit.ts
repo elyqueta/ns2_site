@@ -239,6 +239,8 @@ export class UiKit {
     href: '/servicos/infraestrutura-redes-servidores',
     imagemSrc: '/images/servicos/infraestrutura-redes-servidores.webp',
     imagemAlt: { pt: 'Imagem do serviço de redes e servidores', en: 'Network and server infrastructure image' },
+    imagemSrcset: '/images/servicos/infraestrutura-redes-servidores-480.webp 480w, /images/servicos/infraestrutura-redes-servidores-800.webp 800w, /images/servicos/infraestrutura-redes-servidores.webp 1200w',
+    imagemSizes: '(max-width: 768px) 100vw, 25vw',
     ctaLabel: { pt: this.copy.cardService, en: this.copy.cardService },
     badge: false,
   }));
@@ -254,6 +256,8 @@ export class UiKit {
     href: '/servicos/suporte-remoto',
     imagemSrc: '/images/servicos/suporte-remoto.webp',
     imagemAlt: { pt: 'Imagem do serviço de suporte remoto', en: 'Remote support image' },
+    imagemSrcset: '/images/servicos/suporte-remoto-480.webp 480w, /images/servicos/suporte-remoto-800.webp 800w, /images/servicos/suporte-remoto.webp 1200w',
+    imagemSizes: '(max-width: 768px) 100vw, 25vw',
     ctaLabel: { pt: this.copy.cardService, en: this.copy.cardService },
     badge: true,
   }));

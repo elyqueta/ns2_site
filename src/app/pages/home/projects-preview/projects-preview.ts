@@ -26,7 +26,7 @@ export class HomeProjectsPreview {
   } as const;
 
   private readonly projectImages = [
-    '/images/servicos/websites-sistemas-web.webp',
+    '/images/servicos/desenvolvimento-web.webp',
     '/images/servicos/sistemas-software.webp',
   ] as const;
   readonly projects = projectos

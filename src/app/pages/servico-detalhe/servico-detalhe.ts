@@ -48,7 +48,15 @@ export class ServicoDetalhe {
     if (!service) {
       return '';
     }
-    return `/images/servicos/${service.imagem.ficheiroEsperado.pt.split('/').pop()}`;
+    return `/images/servicos/${service.imagem.ficheiroEsperado.pt!.split('/').pop()!}`;
+  });
+  readonly imagemSrcset = computed(() => {
+    const service = this.service();
+    if (!service) {
+      return '';
+    }
+    const base = `/images/servicos/${service.imagem.ficheiroEsperado.pt!.split('/').pop()!.replace('.webp', '')}`;
+    return `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`;
   });
   readonly position = computed(() => {
     const current = this.service();

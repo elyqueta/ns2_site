@@ -5,8 +5,14 @@
   @if (item().imageSrc) {
     <img
       class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
-      [src]="item().imageSrc"
+      [ngSrc]="item().imageSrc"
       [alt]="item().imageAlt | localized"
+      width="1200"
+      height="800"
+      loading="lazy"
+      decoding="async"
+      [sizes]="item().imageSizes"
+      [srcset]="item().imageSrcset"
     />
   } @else {
     <span class="absolute inset-0 bg-linear-to-br from-accent/70 via-accent/30 to-surface" aria-hidden="true"></span>

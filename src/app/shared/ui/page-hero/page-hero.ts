@@ -21,4 +21,7 @@ export class PageHero {
   readonly imagePosition = input<HeroImagePosition>('center');
   readonly imageClass = input<string>();
   readonly imageFit = input<'cover' | 'contain'>('cover');
+  readonly imageAlt = input<string>('');
+  readonly imageSizes = input<string>('100vw');
+  readonly imageSrcset = input<string>('');
 }

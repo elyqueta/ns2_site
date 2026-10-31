@@ -4,6 +4,7 @@ import { LocalizedPipe } from '../../pipes/localized.pipe';
 import { RouterLink } from '@angular/router';
 import { LocalizedText } from '../../../i18n/types';
 import { IconName } from '../icon/icon';
+import { NgOptimizedImage } from '@angular/common';
 
 export interface ServicoVidroCardData {
   readonly tintRgb: string;
@@ -13,13 +14,15 @@ export interface ServicoVidroCardData {
   readonly href: string;
   readonly imagemSrc: string;
   readonly imagemAlt: LocalizedText;
+  readonly imagemSrcset: string;
+  readonly imagemSizes: string;
   readonly ctaLabel: LocalizedText;
   readonly badge?: boolean;
 }
 
 @Component({
   selector: 'app-servico-vidro-card',
-  imports: [Icon, LocalizedPipe, RouterLink],
+  imports: [Icon, LocalizedPipe, RouterLink, NgOptimizedImage],
   templateUrl: './servico-vidro-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -105,8 +105,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/infraestrutura-redes-servidores',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de infraestrutura de redes e servidores.',
-        en: 'Illustration representing network and server infrastructure services.',
+        pt: 'Dois técnicos a instalar cabeamento estruturado num rack',
+        en: 'Two technicians installing structured cabling in a rack',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/infraestrutura-redes-servidores.webp' },
     },
@@ -149,8 +149,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/suporte-remoto',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de suporte remoto.',
-        en: 'Illustration representing remote support services.',
+        pt: 'Técnico com auscultadores a dar suporte remoto num portátil',
+        en: 'Technician with headphones providing remote support on a laptop',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/suporte-remoto.webp' },
     },
@@ -193,8 +193,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/suporte-on-site',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de suporte on site.',
-        en: 'Illustration representing on-site support services.',
+        pt: 'Técnico a ajudar um funcionário no computador do escritório',
+        en: 'Technician helping an employee at the office computer',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/suporte-on-site.webp' },
     },
@@ -234,8 +234,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/manutencao-equipamentos',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de manutenção de equipamentos.',
-        en: 'Illustration representing equipment maintenance services.',
+        pt: 'Técnico a limpar o interior de um portátil aberto',
+        en: 'Technician cleaning the inside of an open laptop',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/manutencao-equipamentos.webp' },
     },
@@ -278,8 +278,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/contratos-ti',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de contratos de TI.',
-        en: 'Illustration representing IT support contracts.',
+        pt: 'Técnico a entregar uma pasta a uma gestora',
+        en: 'Technician handing a folder to a manager',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/contratos-ti.webp' },
     },
@@ -323,10 +323,10 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/construtoria',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de construtoria.',
-        en: 'Illustration representing Construtoria consulting.',
+        pt: 'Duas pessoas a planear fluxos num quadro branco com post-its',
+        en: 'Two people planning workflows on a whiteboard with post-its',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/consultoria.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/construtoria.webp' },
     },
   },
   {
@@ -365,8 +365,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/sistemas-software',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de sistemas e software.',
-        en: 'Illustration representing systems and software services.',
+        pt: 'Gestora de armazém a controlar o stock num tablet',
+        en: 'Warehouse manager controlling stock on a tablet',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/sistemas-software.webp' },
     },
@@ -410,8 +410,8 @@ export const servicos: readonly Servico[] = [
     href: '/servicos/locacao-equipamentos-ti',
     imagem: {
       alt: {
-        pt: 'Imagem representativa do serviço de locação de equipamentos de TI.',
-        en: 'Illustration representing IT equipment rental services.',
+        pt: 'Técnico a preparar portáteis e monitores numa sala de formação',
+        en: 'Technician preparing laptops and monitors in a training room',
       },
       ficheiroEsperado: { pt: 'public/images/servicos/locacao-equipamentos.webp' },
     },
@@ -443,10 +443,10 @@ export const servicos: readonly Servico[] = [
     href: '/desenvolvimento-web',
     imagem: {
       alt: {
-        pt: 'Imagem representativa de websites e sistemas web.',
-        en: 'Illustration representing websites and web systems.',
+        pt: 'Mãos a escrever código num portátil',
+        en: 'Hands writing code on a laptop',
       },
-      ficheiroEsperado: { pt: 'public/images/servicos/websites-sistemas-web.webp' },
+      ficheiroEsperado: { pt: 'public/images/servicos/desenvolvimento-web.webp' },
     },
   },
 ];

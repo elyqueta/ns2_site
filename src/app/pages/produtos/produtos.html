@@ -6,6 +6,9 @@
   [breadcrumbLabel]="copy.breadcrumbLabel | localized"
   [imageSrc]="'/images/heros/produtos.webp'"
   [imagePosition]="'center'"
+  [imageAlt]="'Mãos de um vendedor a abrir um portátil numa loja de informática'"
+  [imageSizes]="'100vw'"
+  [imageSrcset]="'/images/heros/produtos-640.webp 640w, /images/heros/produtos-1024.webp 1024w, /images/heros/produtos.webp 1600w'"
 />
 
 <main id="conteudo" #catalog>
@@ -72,6 +75,8 @@
             [src]="category.imagemSrc"
             [width]="1200"
             [height]="750"
+            [sizes]="'(max-width: 768px) 100vw, 42vw'"
+            [srcset]="category.imagemSrcset"
           />
         </div>
 

@@ -48,7 +48,7 @@ export class Sobre {
       '/images/servicos/suporte-remoto.webp',
       '/images/servicos/suporte-on-site.webp',
       '/images/produtos/notebooks.webp',
-      '/images/servicos/websites-sistemas-web.webp',
+      '/images/servicos/desenvolvimento-web.webp',
     ][index],
     tintRgb: ['63 111 181', '84 94 214', '36 140 156', '120 82 200', '46 125 168'][index],
   }));

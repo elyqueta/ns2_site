@@ -8,12 +8,14 @@
   }
   <div class="svc-media">
     <img
-      [src]="item().imagemSrc"
-      alt=""
+      [ngSrc]="item().imagemSrc"
+      [alt]="item().imagemAlt | localized"
       width="1200"
-      height="750"
-      loading="eager"
+      height="800"
+      loading="lazy"
       decoding="async"
+      [sizes]="item().imagemSizes"
+      [srcset]="item().imagemSrcset"
     />
   </div>
   <div class="svc-glass"></div>

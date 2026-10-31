@@ -1,18 +1,20 @@
 <header class="relative isolate overflow-hidden border-b border-line bg-surface">
   @if (imageSrc(); as src) {
-    <img
-      class="absolute inset-0 -z-10 size-full object-cover"
-      [ngSrc]="src"
-      [alt]="''"
-      width="1920"
-      height="1080"
-      loading="eager"
-      fetchpriority="high"
-      [style.object-position]="imagePosition()"
-      [style.object-fit]="imageFit()"
-      [class]="imageClass()"
-      aria-hidden="true"
-    />
+      <img
+        class="absolute inset-0 -z-10 size-full object-cover"
+        [ngSrc]="src"
+        [alt]="imageAlt()"
+        width="1920"
+        height="1080"
+        loading="eager"
+        fetchpriority="high"
+        [sizes]="imageSizes()"
+        [srcset]="imageSrcset()"
+        [style.object-position]="imagePosition()"
+        [style.object-fit]="imageFit()"
+        [class]="imageClass()"
+        [attr.aria-hidden]="imageAlt() ? null : true"
+      />
     <div
       class="absolute inset-0 -z-10 bg-bg/60 dark:bg-bg/40"
       aria-hidden="true"

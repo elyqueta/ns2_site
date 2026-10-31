@@ -60,7 +60,7 @@ export const homeContent = {
       pt: 'Duas pessoas à secretária com um portátil, ligadas a parceiros especializados',
       en: 'Two people at a desk with a laptop, connected to specialized partners',
     } satisfies LocalizedText,
-    expectedFile: { pt: 'public/images/sobre/quem-somos.webp' } satisfies LocalizedText,
+    expectedFile: { pt: 'public/images/equipa.webp' } satisfies LocalizedText,
   },
   services: {
     index: { pt: 'O que fazemos', en: 'What we do' } satisfies LocalizedText,
@@ -212,7 +212,7 @@ export const homeContent = {
           pt: 'A NS2 desenvolveu o marketplace da Bravo Business, uma plataforma simples que gere produtos e categorias e fecha os pedidos pelo WhatsApp. Destaco a simplicidade, a rapidez e o acompanhamento ao longo do trabalho.',
           en: 'NS2 developed the Bravo Business marketplace, a simple platform that manages products and categories and closes orders through WhatsApp. I value the simplicity, speed and support throughout the work.',
         } satisfies LocalizedText,
-        imageSrc: '/images/servicos/websites-sistemas-web.webp',
+        imageSrc: '/images/servicos/desenvolvimento-web.webp',
       },
       {
         name: 'Mateus Sassapa',
@@ -221,7 +221,7 @@ export const homeContent = {
           pt: 'Destaco a qualidade do trabalho e o cumprimento dos prazos. O suporte da NS2 também faz a diferença depois da entrega.',
           en: 'I value the quality of the work and the commitment to deadlines. NS2 support also makes a difference after delivery.',
         } satisfies LocalizedText,
-        imageSrc: '/images/servicos/consultoria.webp',
+        imageSrc: '/images/servicos/sistemas-software.webp',
       },
       {
         name: 'Elizandra Queta',

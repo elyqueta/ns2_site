@@ -38,13 +38,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em Portáteis.',
       en: 'Hello! I am interested in laptops.',
     },
-    imagem: {
-      alt: {
-        pt: 'Computadores portáteis de diferentes linhas e marcas.',
-        en: 'Laptops from different brands and product lines.',
+      imagem: {
+        alt: {
+          pt: 'Cliente a testar um portátil numa loja',
+          en: 'Customer testing a laptop in a store',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/notebooks.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/notebooks.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Dell' },
@@ -146,13 +146,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em computadores de secretária.',
       en: 'Hello! I am interested in desktop computers.',
     },
-    imagem: {
-      alt: {
-        pt: 'Computadores de secretária para diferentes necessidades.',
-        en: 'Desktop computers for different needs.',
+      imagem: {
+        alt: {
+          pt: 'Técnico a montar um computador personalizado',
+          en: 'Technician assembling a custom computer',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/desktops.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/desktops.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -218,13 +218,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em peças e componentes.',
       en: 'Hello! I am interested in parts and components.',
     },
-    imagem: {
-      alt: {
-        pt: 'Componentes e peças para equipamentos informáticos e redes.',
-        en: 'Components and parts for computer equipment and networks.',
+      imagem: {
+        alt: {
+          pt: 'Mãos a segurar um módulo de memória RAM',
+          en: 'Hands holding a RAM module',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/pecas.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/pecas.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Componentes', en: 'Components' },
@@ -278,13 +278,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em acessórios informáticos.',
       en: 'Hello! I am interested in computer accessories.',
     },
-    imagem: {
-      alt: {
-        pt: 'Acessórios informáticos para diferentes actividades.',
-        en: 'Computer accessories for a range of activities.',
+      imagem: {
+        alt: {
+          pt: 'Secretária com teclado, rato, auscultadores e carregador',
+          en: 'Desk with keyboard, mouse, headphones and charger',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/acessorios.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/acessorios.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Marca', en: 'Brand' },
@@ -350,13 +350,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em mobiliário.',
       en: 'Hello! I am interested in furniture.',
     },
-    imagem: {
-      alt: {
-        pt: 'Mobiliário para escritório e espaços de gaming.',
-        en: 'Furniture for office and gaming spaces.',
+      imagem: {
+        alt: {
+          pt: 'Escritório moderno com secretárias e cadeiras ergonómicas',
+          en: 'Modern office with desks and ergonomic chairs',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/moveis.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/moveis.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Escritório', en: 'Office' },
@@ -401,13 +401,13 @@ export const produtos: readonly CategoriaProduto[] = [
       pt: 'Olá! Tenho interesse em consumíveis informáticos.',
       en: 'Hello! I am interested in computer consumables.',
     },
-    imagem: {
-      alt: {
-        pt: 'Consumíveis e acessórios essenciais para impressão e informática.',
-        en: 'Consumables and essential accessories for printing and computing.',
+      imagem: {
+        alt: {
+          pt: 'Técnico a trocar o toner de uma impressora de escritório',
+          en: 'Technician replacing the toner of an office printer',
+        },
+        ficheiroEsperado: { pt: 'public/images/produtos/consumiveis.webp' },
       },
-      ficheiroEsperado: { pt: 'public/images/produtos/consumiveis.webp' },
-    },
     destaques: [
       {
         etiqueta: { pt: 'Impressão', en: 'Printing' },

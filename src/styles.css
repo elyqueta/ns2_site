@@ -629,7 +629,6 @@
   }
 
   .svc-card {
-    --tint-rgb: 63 111 181;
     position: relative;
     flex: 0 0 var(--svc-card-w);
     width: var(--svc-card-w, 300px);
@@ -638,20 +637,16 @@
     border-radius: var(--svc-card-radius);
     overflow: hidden;
     isolation: isolate;
-    color: #fff;
+    color: var(--fg);
     text-decoration: none;
     scroll-snap-align: center;
     display: block;
-    background: linear-gradient(
-      180deg,
-      rgb(var(--tint-rgb) / 0.55) 0%,
-      rgb(var(--tint-rgb) / 0.92) 62%,
-      rgb(var(--svc-base-dark)) 100%
-    );
+    background: var(--bg);
+    border: 1px solid var(--line);
     transform: none;
     box-shadow:
-      0 22px 44px -16px rgb(var(--tint-rgb) / 0.3),
-      inset 0 0 0 1px rgb(255 255 255 / 0.1);
+      0 22px 44px -16px rgb(0 0 0 / 0.15),
+      inset 0 0 0 1px rgb(0 0 0 / 0.06);
     transition: box-shadow 0.35s ease;
     will-change: auto;
   }
@@ -660,8 +655,8 @@
   .svc-card:focus-visible {
     transform: none;
     box-shadow:
-      0 26px 50px -16px rgb(var(--tint-rgb) / 0.5),
-      inset 0 0 0 1px rgb(255 255 255 / 0.16);
+      0 26px 50px -16px rgb(0 0 0 / 0.22),
+      inset 0 0 0 1px rgb(0 0 0 / 0.1);
   }
 
   .services-editorial-grid {
@@ -755,8 +750,8 @@
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgb(var(--tint-rgb) / 0.50) 34%,
-      rgb(var(--svc-base-dark) / 0.62) 100%
+      rgb(0 0 0 / 0.25) 34%,
+      rgb(0 0 0 / 0.55) 100%
     );
     -webkit-backdrop-filter: blur(14px) saturate(1.15);
     backdrop-filter: blur(14px) saturate(1.15);
@@ -790,8 +785,8 @@
     border-radius: 10px;
     display: grid;
     place-items: center;
-    background: rgb(255 255 255 / 0.14);
-    border: 1px solid rgb(255 255 255 / 0.22);
+    background: rgb(0 0 0 / 0.14);
+    border: 1px solid rgb(0 0 0 / 0.22);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
@@ -799,7 +794,7 @@
   .svc-chip svg {
     width: 16px;
     height: 16px;
-    stroke: #fff;
+    stroke: currentColor;
     fill: none;
     stroke-width: 1.8;
     stroke-linecap: round;
@@ -822,7 +817,7 @@
     margin: 0;
     font-size: 13px;
     line-height: 1.45;
-    color: rgb(255 255 255 / 0.74);
+    color: var(--fg-muted);
     font-family: var(--font-sans);
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -838,9 +833,9 @@
     padding: 13px 14px;
     border-radius: 14px;
     font: 500 15px var(--font-sans);
-    color: rgb(255 255 255 / 0.92);
-    background: rgb(var(--svc-base-dark) / 0.30);
-    border: 1px solid rgb(255 255 255 / 0.14);
+    color: var(--fg);
+    background: rgb(0 0 0 / 0.06);
+    border: 1px solid var(--line);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: background 0.2s ease, border-color 0.2s ease;
@@ -865,9 +860,9 @@
     border-radius: 999px;
     font: 500 12px var(--font-sans);
     letter-spacing: 0.02em;
-    color: #fff;
-    background: rgb(var(--svc-base-dark) / 0.38);
-    border: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--fg);
+    background: rgb(0 0 0 / 0.08);
+    border: 1px solid var(--line);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }

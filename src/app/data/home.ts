@@ -212,7 +212,7 @@ export const homeContent = {
           pt: 'A NS2 desenvolveu o marketplace da Bravo Business, uma plataforma simples que gere produtos e categorias e fecha os pedidos pelo WhatsApp. Destaco a simplicidade, a rapidez e o acompanhamento ao longo do trabalho.',
           en: 'NS2 developed the Bravo Business marketplace, a simple platform that manages products and categories and closes orders through WhatsApp. I value the simplicity, speed and support throughout the work.',
         } satisfies LocalizedText,
-        imageSrc: '/images/testemunhos/osvaldo-bravo.webp',
+        imageSrc: undefined,
       },
       {
         name: 'Mateus Sassapa',
@@ -221,7 +221,7 @@ export const homeContent = {
           pt: 'Destaco a qualidade do trabalho e o cumprimento dos prazos. O suporte da NS2 também faz a diferença depois da entrega.',
           en: 'I value the quality of the work and the commitment to deadlines. NS2 support also makes a difference after delivery.',
         } satisfies LocalizedText,
-        imageSrc: '/images/testemunhos/mateus-sassapa.webp',
+        imageSrc: undefined,
       },
       {
         name: 'Elizandra Queta',
@@ -230,7 +230,7 @@ export const homeContent = {
           pt: 'Avalio muito bem a parceria com a NS2. O profissionalismo, a clareza e a proximidade no atendimento tornam o trabalho mais simples e seguro.',
           en: 'I rate the partnership with NS2 very highly. Their professionalism, clarity and close support make the work simpler and more reassuring.',
         } satisfies LocalizedText,
-        imageSrc: '/images/testemunhos/elizandra-queta.webp',
+        imageSrc: undefined,
       },
     ],
   },

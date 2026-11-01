@@ -1,5 +1,19 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: layout e imagens de `/projectos`
+
+- **Estado:** concluída
+- **Decisões tomadas:**
+  - Grelha uniforme de uma coluna em mobile e duas em `lg`, com proporção `16:10`, sem card destacado.
+  - Reutilização de `ProjectPreviewCard` com variante de grelha; os previews da Home e de `/desenvolvimento-web` mantêm os seus dados e a apresentação base.
+  - Imagens mapeadas por slug num único ponto. A captura WebP fornecida pelo utilizador para Foco é usada no card e na página de detalhe; Gráfica Viva e Bravo Business usam os seus assets locais.
+  - A grelha usa uma sobreposição escura mais forte e ligeiro desfoque para reforçar a leitura do texto, sem mudar os previews da Home e de `/desenvolvimento-web`.
+  - O card Foco mostra “Em breve” e “Em desenvolvimento”, com borda tracejada e sem ligação, apenas na página `/projectos`; não se alteraram os previews das outras páginas.
+  - A imagem do card é reutilizada na página de detalhe do projecto. A URL da Bravo Business foi fornecida pelo utilizador e adicionada ao respectivo registo; os campos `TODO(conteúdo)` foram mantidos.
+- **Ficheiros alterados:** `src/app/pages/projectos/projectos.ts`, `src/app/pages/projectos/projectos.html`, `src/app/shared/ui/project-preview-card/project-preview-card.ts`, `src/app/shared/ui/project-preview-card/project-preview-card.html`, `src/app/data/projectos.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.html`, `public/images/projectos/foco-app.webp`, `docs/assets.md`, `docs/PROGRESSO.md`.
+- **Verificações:** pendentes.
+- **Pendências:** o documento indicado `docs/conteudo/projectos.md` não existe; o utilizador autorizou prosseguir sem ele. Os campos `TODO(conteúdo)` do Bravo Business mantêm-se.
+
 ## Actualização de imagens do site (imagens-site.zip)
 
 - **Estado:** concluída

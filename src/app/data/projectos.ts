@@ -146,7 +146,7 @@ export const projectos: readonly Project[] = [
       pt: 'Marketplace simples que gere produtos e categorias e fecha tudo no WhatsApp.',
       en: 'Simple marketplace that manages products and categories and closes everything through WhatsApp.',
     },
-    url: '',
+    url: 'https://bravo-business-iota.vercel.app/',
     previewTitle: { pt: 'Marketplace Bravo Business.', en: 'Bravo Business marketplace.' },
     desafio: {
       pt: 'TODO(conteúdo): confirmar o desafio do projecto.',
@@ -168,6 +168,12 @@ export const projectos: readonly Project[] = [
     },
   },
 ];
+
+export const projectImageBySlug: Readonly<Partial<Record<string, string>>> = {
+  'grafica-viva': '/images/projectos/grafica-viva-desktop.webp',
+  foco: '/images/projectos/foco-app.webp',
+  'bravo-business': '/images/projectos/bravo-business-desktop.webp',
+};
 
 export const projectosPageContent: ProjectPageContent = {
   title: { pt: 'Projectos', en: 'Projects' },

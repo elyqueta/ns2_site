@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,9 +12,8 @@ import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { SITE_ORIGIN } from '../../core/site-origin';
-import { projectos, projectosPageContent } from '../../data/projectos';
+import { projectImageBySlug, projectos, projectosPageContent } from '../../data/projectos';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
-import { MediaSlot } from '../../shared/ui/media-slot/media-slot';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
 import { CtaBand } from '../../shared/ui/cta-band/cta-band';
@@ -21,7 +21,7 @@ import { CtaBand } from '../../shared/ui/cta-band/cta-band';
 @Component({
   selector: 'app-projecto-detalhe',
   standalone: true,
-  imports: [CtaBand, Icon, LocalizedPipe, PageHero, MediaSlot],
+  imports: [CtaBand, Icon, LocalizedPipe, NgOptimizedImage, PageHero],
   templateUrl: './projecto-detalhe.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,6 +39,10 @@ export class ProjectoDetalhe {
   readonly project = computed(() => {
     const slug = this.params()?.get('slug');
     return slug ? projectos.find((p) => p.slug === slug) ?? null : null;
+  });
+  readonly projectImageSrc = computed(() => {
+    const project = this.project();
+    return project ? projectImageBySlug[project.slug] ?? null : null;
   });
 
   readonly breadcrumbs = computed(() => [

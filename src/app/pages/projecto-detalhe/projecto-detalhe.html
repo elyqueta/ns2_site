@@ -9,16 +9,26 @@
 
   <main id="conteudo">
     <section class="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-16">
-      <app-media-slot
-        [alt]="item.imagem.alt | localized"
-        [expectedFile]="item.imagem.claro | localized"
-        [src]="item.imagem.claro | localized"
-        [width]="1200"
-        [height]="800"
-        objectPosition="center"
-        [loading]="'eager'"
-        [decoding]="'async'"
-      />
+      <figure class="overflow-hidden rounded-image border border-line bg-surface-2">
+        @if (projectImageSrc(); as imageSrc) {
+          <img
+            class="block h-auto w-full"
+            [ngSrc]="imageSrc"
+            [alt]="item.imagem.alt | localized"
+            width="1590"
+            height="784"
+            priority
+            decoding="async"
+            sizes="(max-width: 768px) 100vw, 75vw"
+          />
+        } @else {
+          <div
+            class="aspect-1590/784 bg-linear-to-br from-accent-glow via-surface-2 to-bg"
+            role="img"
+            [attr.aria-label]="item.imagem.alt | localized"
+          ></div>
+        }
+      </figure>
     </section>
 
     <section class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-16">

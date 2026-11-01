@@ -1,30 +1,74 @@
-<a
-  class="group relative block min-h-96 overflow-hidden rounded-card border border-white/15 bg-black shadow-lg transition-transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent lg:min-h-[32rem]"
-  [href]="'/projectos/' + project().slug"
+<article
+  class="group relative isolate block overflow-hidden rounded-card border border-white/15 bg-black focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-accent"
+  [ngClass]="cardClasses()"
   [appProjectTransition]="transitionKey()"
 >
-  <img
-    data-project-image
-    class="absolute inset-0 size-full object-cover"
-    [src]="project().imageSrc"
-    [alt]="project().imagem.alt | localized"
-  />
-  <span class="absolute inset-0 bg-linear-to-r from-black/70 via-black/30 to-transparent" aria-hidden="true"></span>
-  <span data-project-content class="relative flex min-h-96 items-end p-6 text-white sm:p-10 lg:min-h-[32rem]">
-    <span class="max-w-xl">
-      <span class="block font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-        {{ project().tipo | localized }}
+  @if (project().imageSrc; as imageSrc) {
+    <img
+      data-project-image
+      class="absolute left-1/2 top-1/2 h-full w-auto max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-within:scale-[1.03]"
+      [ngSrc]="imageSrc"
+      [alt]="project().imagem.alt | localized"
+      width="1590"
+      height="784"
+      [sizes]="gridLayout() ? '(min-width: 1024px) 50vw, 100vw' : '100vw'"
+      loading="lazy"
+    />
+  } @else {
+    <span
+      data-project-image
+      class="absolute inset-0 bg-linear-to-br from-accent-glow via-surface-2 to-bg"
+      aria-hidden="true"
+    ></span>
+  }
+  <span
+    class="pointer-events-none absolute inset-0"
+    [ngClass]="overlayClasses()"
+    aria-hidden="true"
+  ></span>
+  @if (project().statusLabel; as statusLabel) {
+    <span class="absolute right-3 top-3 z-10 flex max-w-[calc(100%-1.5rem)] flex-wrap justify-end gap-2 sm:right-4 sm:top-4">
+      <span class="inline-flex items-center rounded-full border border-white/20 bg-black/50 px-3 py-1.5 font-display text-[10px] font-semibold text-white backdrop-blur-md sm:text-xs">
+        {{ statusLabel }}
       </span>
-      <span class="mt-4 block font-display text-3xl font-semibold sm:text-5xl">
-        {{ project().nome | localized }}
-      </span>
-      <span class="mt-4 block max-w-[52ch] text-white/80">
-        {{ project().descricao | localized }}
-      </span>
-      <span class="mt-6 inline-flex items-center gap-2 font-semibold text-accent-bright">
+      @if (project().developmentLabel; as developmentLabel) {
+        <span class="inline-flex items-center rounded-full border border-white/20 bg-black/50 px-3 py-1.5 font-display text-[10px] font-semibold text-white backdrop-blur-md sm:text-xs">
+          {{ developmentLabel }}
+        </span>
+      }
+    </span>
+  }
+  <span
+    data-project-content
+    class="absolute inset-0 z-10 flex flex-col justify-end text-white"
+    [ngClass]="contentClasses()"
+  >
+    <span class="inline-flex max-w-full self-start rounded-full border border-white/20 bg-black/30 px-3 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.08em] text-white/90 backdrop-blur-sm sm:text-xs">
+      {{ project().tipo | localized }}
+    </span>
+    <span class="mt-2 block font-display font-semibold" [ngClass]="titleClasses()">
+      {{ project().nome | localized }}
+    </span>
+    <span class="mt-2 block max-w-[52ch] text-white/80" [ngClass]="descriptionClasses()">
+      {{ project().descricao | localized }}
+    </span>
+    @if (!project().comingSoon) {
+      <span
+        class="inline-flex items-center"
+        [ngClass]="ctaClasses()"
+        aria-hidden="true"
+      >
         {{ linkLabel() }}
         <app-icon name="chevron-right" />
       </span>
-    </span>
+    }
   </span>
-</a>
+  @if (!project().comingSoon) {
+    <a
+      class="absolute inset-0 z-20 rounded-card focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-accent"
+      [href]="'/projectos/' + project().slug"
+    >
+      <span class="sr-only">{{ linkLabel() }}: {{ project().nome | localized }}</span>
+    </a>
+  }
+</article>

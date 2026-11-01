@@ -21,6 +21,10 @@
 
 > **Pendência:** verificar a existência e licença dos ficheiros de vídeo e imagem antes do lançamento.
 
+## Imagens de projectos
+
+- `public/images/projectos/foco-app.webp` (1569×768, ~159 kB, WebP lossless) — captura do Foco fornecida pelo utilizador, usada nos cards e na página de detalhe
+
 ## Imagens de parceiros
 
 - `public/images/parceiros/dell.webp`

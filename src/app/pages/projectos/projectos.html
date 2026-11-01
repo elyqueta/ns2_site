@@ -13,44 +13,15 @@
 
 <main id="conteudo">
   <section class="mx-auto max-w-360 px-5 py-16 sm:px-8 lg:px-16">
-    <p class="mb-6 font-display text-xs font-semibold uppercase tracking-[0.08em] text-accent-bright">
-      {{ copy.confirmedLabel | localized }}
-    </p>
-    <div class="grid gap-6 lg:grid-cols-4 lg:grid-rows-2 lg:items-stretch">
-      <!-- Projeto destaque (maior, assimétrico) -->
-      <div
-        class="group relative overflow-hidden rounded-card border border-line bg-surface lg:col-span-2 lg:row-span-2 aspect-[4/3]"
-      >
-        <app-media-slot
-          [src]="featuredProject.imagem.claro.pt"
-          [alt]="featuredProject.imagem.alt | localized"
-          [expectedFile]="featuredProject.imagem.claro.pt"
-          [width]="1590"
-          [height]="784"
-          [sizes]="'(max-width: 768px) 100vw, 50vw'"
-          [srcset]="''"
-          [loading]="'eager'"
+    <div class="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2">
+      @for (project of projectCards(); track project.slug) {
+        <app-project-preview-card
+          [project]="project"
+          [linkLabel]="copy.verProjetoLabel | localized"
+          [transitionKey]="project.slug"
+          [gridLayout]="true"
         />
-        <a
-          class="absolute inset-0 z-10 grid place-items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"
-          [href]="featuredProject.url"
-          [attr.aria-label]="copy.previewLinkLabel | localized"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span
-            class="rounded-button bg-surface px-5 py-3 font-semibold text-fg opacity-0 shadow-xl transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-          >
-            {{ copy.previewLinkLabel | localized }}
-          </span>
-        </a>
-      </div>
-      <!-- Outros projectos (menores, coluna à direita) -->
-      <div class="flex flex-col gap-6 lg:col-span-2 lg:row-span-2">
-        @for (project of projects; track project.slug) {
-          <app-project-card [item]="projectCard(project)" class="h-full" />
-        }
-      </div>
+      }
     </div>
   </section>
 

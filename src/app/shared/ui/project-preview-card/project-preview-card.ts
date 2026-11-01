@@ -12,6 +12,7 @@ export interface ProjectPreviewCardData {
   readonly descricao: LocalizedText;
   readonly imagem: { readonly alt: LocalizedText };
   readonly imageSrc: string | null;
+  readonly mobileImageSrc?: string | null;
   readonly comingSoon?: boolean;
   readonly statusLabel?: string;
   readonly developmentLabel?: string;

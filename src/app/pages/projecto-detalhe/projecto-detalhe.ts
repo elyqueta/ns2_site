@@ -12,7 +12,12 @@ import { I18nService } from '../../core/i18n.service';
 import { SeoService } from '../../core/seo.service';
 import { WhatsappService } from '../../core/whatsapp.service';
 import { SITE_ORIGIN } from '../../core/site-origin';
-import { projectImageBySlug, projectos, projectosPageContent } from '../../data/projectos';
+import {
+  projectImageBySlug,
+  projectMobileImageBySlug,
+  projectos,
+  projectosPageContent,
+} from '../../data/projectos';
 import { LocalizedPipe } from '../../shared/pipes/localized.pipe';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PageHero } from '../../shared/ui/page-hero/page-hero';
@@ -43,6 +48,10 @@ export class ProjectoDetalhe {
   readonly projectImageSrc = computed(() => {
     const project = this.project();
     return project ? projectImageBySlug[project.slug] ?? null : null;
+  });
+  readonly projectMobileImageSrc = computed(() => {
+    const project = this.project();
+    return project ? projectMobileImageBySlug[project.slug] ?? null : null;
   });
 
   readonly breadcrumbs = computed(() => [

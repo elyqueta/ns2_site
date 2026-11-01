@@ -175,6 +175,12 @@ export const projectImageBySlug: Readonly<Partial<Record<string, string>>> = {
   'bravo-business': '/images/projectos/bravo-business-desktop.webp',
 };
 
+export const projectMobileImageBySlug: Readonly<Partial<Record<string, string>>> = {
+  'grafica-viva': '/images/projectos/grafica-viva-mobile.webp',
+  foco: '/images/projectos/foco-app-mobile.webp',
+  'bravo-business': '/images/projectos/bravo-business-mobile.webp',
+};
+
 export const projectosPageContent: ProjectPageContent = {
   title: { pt: 'Projectos', en: 'Projects' },
   lead: {

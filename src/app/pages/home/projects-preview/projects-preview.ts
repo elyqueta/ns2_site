@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { LocalizedText } from '../../../i18n/types';
-import { projectos } from '../../../data/projectos';
+import {
+  projectImageBySlug,
+  projectMobileImageBySlug,
+  projectos,
+} from '../../../data/projectos';
 import { LocalizedPipe } from '../../../shared/pipes/localized.pipe';
 import { SectionHeading } from '../../../shared/ui/section-heading/section-heading';
 import { Icon } from '../../../shared/ui/icon/icon';
@@ -25,16 +29,12 @@ export class HomeProjectsPreview {
     } satisfies LocalizedText,
   } as const;
 
-  private readonly projectImages = [
-    '/images/projectos/grafica-viva-desktop.webp',
-    '/images/projectos/foco-dashboard-claro.webp',
-    '/images/projectos/bravo-business-desktop.webp',
-  ] as const;
   readonly projects = projectos
     .filter((project) => !project.brevemente)
-    .map((project, index) => ({
+    .map((project) => ({
       ...project,
-      imageSrc: this.projectImages[index % this.projectImages.length],
+      imageSrc: projectImageBySlug[project.slug] ?? null,
+      mobileImageSrc: projectMobileImageBySlug[project.slug] ?? null,
     }));
   readonly activeProjectIndex = signal(0);
   readonly featuredProject = computed(() => this.projects[this.activeProjectIndex()]);

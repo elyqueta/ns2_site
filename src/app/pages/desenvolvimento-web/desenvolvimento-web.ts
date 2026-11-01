@@ -11,7 +11,11 @@ import {
   processoDesenvolvimentoWeb,
   sistemaPacotes,
 } from '../../data/desenvolvimento-web';
-import { projectos } from '../../data/projectos';
+import {
+  projectImageBySlug,
+  projectMobileImageBySlug,
+  projectos,
+} from '../../data/projectos';
 import { lojaPacotes, NivelWeb } from '../../data/desenvolvimento-web';
 import { notaLegalPacotes, PacoteWeb, webPacotes } from '../../data/web-pacotes';
 import { RevealChildren } from '../../shared/directives/reveal-children.directive';
@@ -107,16 +111,12 @@ export class DesenvolvimentoWeb {
     ),
   );
   readonly searchTerm = signal('');
-  private readonly projectImages = [
-    '/images/projectos/grafica-viva-desktop.webp',
-    '/images/projectos/foco-dashboard-claro.webp',
-    '/images/projectos/bravo-business-desktop.webp',
-  ] as const;
   readonly featuredProjects = projectos
     .filter((project) => !project.brevemente)
-    .map((project, index) => ({
+    .map((project) => ({
       ...project,
-      imageSrc: this.projectImages[index % this.projectImages.length],
+      imageSrc: projectImageBySlug[project.slug] ?? null,
+      mobileImageSrc: projectMobileImageBySlug[project.slug] ?? null,
     }));
   readonly activeProjectIndex = signal(0);
   readonly activeProject = computed(() => this.featuredProjects[this.activeProjectIndex()]);

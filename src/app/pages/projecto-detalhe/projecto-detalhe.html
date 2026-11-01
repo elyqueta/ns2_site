@@ -11,16 +11,21 @@
     <section class="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-16">
       <figure class="overflow-hidden rounded-image border border-line bg-surface-2">
         @if (projectImageSrc(); as imageSrc) {
-          <img
-            class="block h-auto w-full"
-            [ngSrc]="imageSrc"
-            [alt]="item.imagem.alt | localized"
-            width="1590"
-            height="784"
-            priority
-            decoding="async"
-            sizes="(max-width: 768px) 100vw, 75vw"
-          />
+          <picture class="block">
+            @if (projectMobileImageSrc(); as mobileImageSrc) {
+              <source media="(max-width: 767px)" [srcset]="mobileImageSrc" />
+            }
+            <img
+              class="block h-auto w-full"
+              [ngSrc]="imageSrc"
+              [alt]="item.imagem.alt | localized"
+              width="1590"
+              height="784"
+              priority
+              decoding="async"
+              sizes="(max-width: 767px) 100vw, 75vw"
+            />
+          </picture>
         } @else {
           <div
             class="aspect-1590/784 bg-linear-to-br from-accent-glow via-surface-2 to-bg"

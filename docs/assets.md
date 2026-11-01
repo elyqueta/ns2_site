@@ -24,6 +24,7 @@
 ## Imagens de projectos
 
 - `public/images/projectos/foco-app.webp` (1569×768, ~159 kB, WebP lossless) — captura do Foco fornecida pelo utilizador, usada nos cards e na página de detalhe
+- `public/images/projectos/foco-app-mobile.webp` (800×1553, ~25 kB, WebP) — captura mobile do Foco fornecida pelo utilizador, recortada para mostrar apenas o telefone e optimizada para os previews responsivos
 
 ## Imagens de parceiros
 

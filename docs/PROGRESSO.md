@@ -1,5 +1,13 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: imagens responsivas dos previews de projectos
+
+- **Estado:** concluída
+- **Aplicado:** os previews da Home e de `/desenvolvimento-web` usam o mapeamento central das imagens por projecto, evitando a referência inexistente `foco-dashboard-claro.webp`. Todas as imagens dos previews ficam sempre desfocadas. Os previews e as páginas de detalhe usam apenas a imagem mobile até 767px; a partir de 768px (tablets e computadores), usam apenas a imagem desktop.
+- **Imagem recebida e preparada:** `iPhone-14-PRO-foco-umber-xi.vercel.app.webp` foi recortada para mostrar apenas o telefone, convertida para WebP e redimensionada para 800×1553 em `public/images/projectos/foco-app-mobile.webp` (~25 kB).
+- **Ficheiros alterados:** `src/app/data/projectos.ts`, `src/app/shared/ui/project-preview-card/project-preview-card.ts`, `src/app/shared/ui/project-preview-card/project-preview-card.html`, `src/app/pages/home/projects-preview/projects-preview.ts`, `src/app/pages/desenvolvimento-web/desenvolvimento-web.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.ts`, `src/app/pages/projecto-detalhe/projecto-detalhe.html`, `public/images/projectos/foco-app-mobile.webp`, `docs/assets.md`, `docs/PROGRESSO.md`.
+- **Pendências:** nenhuma.
+
 ## Correcção: scroll no topo ao mudar de página
 
 - **Estado:** concluída

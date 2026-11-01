@@ -4,16 +4,21 @@
   [appProjectTransition]="transitionKey()"
 >
   @if (project().imageSrc; as imageSrc) {
-    <img
-      data-project-image
-      class="absolute left-1/2 top-1/2 h-full w-auto max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-within:scale-[1.03]"
-      [ngSrc]="imageSrc"
-      [alt]="project().imagem.alt | localized"
-      width="1590"
-      height="784"
-      [sizes]="gridLayout() ? '(min-width: 1024px) 50vw, 100vw' : '100vw'"
-      loading="lazy"
-    />
+    <picture class="absolute inset-0">
+      @if (project().mobileImageSrc; as mobileImageSrc) {
+        <source media="(max-width: 767px)" [srcset]="mobileImageSrc" />
+      }
+      <img
+        data-project-image
+        class="absolute left-1/2 top-1/2 h-full w-auto max-w-none -translate-x-1/2 -translate-y-1/2 scale-[1.05] object-cover blur-xs transition-transform duration-500 motion-safe:group-hover:scale-[1.08] motion-safe:group-focus-within:scale-[1.08]"
+        [ngSrc]="imageSrc"
+        [alt]="project().imagem.alt | localized"
+        width="1590"
+        height="784"
+        [sizes]="gridLayout() ? '(min-width: 1024px) 50vw, 100vw' : '100vw'"
+        loading="lazy"
+      />
+    </picture>
   } @else {
     <span
       data-project-image

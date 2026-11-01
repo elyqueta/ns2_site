@@ -18,6 +18,7 @@ export interface ScrollToOptions {
   readonly offset?: number;
   readonly duration?: number;
   readonly easing?: (progress: number) => number;
+  readonly force?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +37,7 @@ export class ScrollService {
   private interactionUntil = 0;
   private readonly wheelOptions: AddEventListenerOptions = { capture: true, passive: true };
   private scrollIdleTimer: ReturnType<typeof setTimeout> | null = null;
+  private navigationFrame: number | undefined;
   private routerSubscription: Subscription | null = null;
   private readonly onLenisScroll = (): void => {
     this.runtime?.ScrollTrigger.update();
@@ -75,16 +77,17 @@ export class ScrollService {
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
-        if (!this.router.parseUrl(event.urlAfterRedirects).fragment) {
-          this.resetToTop();
-        }
-        this.animation.refresh();
+        this.scheduleNavigationUpdate(Boolean(this.router.parseUrl(event.urlAfterRedirects).fragment));
       });
   });
 
   private readonly destroyCallback = this.destroyRef.onDestroy(() => {
     this.routerSubscription?.unsubscribe();
     this.routerSubscription = null;
+    if (this.navigationFrame !== undefined) {
+      this.document.defaultView?.cancelAnimationFrame(this.navigationFrame);
+      this.navigationFrame = undefined;
+    }
     this.document.removeEventListener('pointerdown', this.onInteraction, true);
     this.document.removeEventListener('wheel', this.onInteraction, this.wheelOptions);
     this.document.removeEventListener('ns2-carousel-interaction', this.onInteraction);
@@ -143,7 +146,32 @@ export class ScrollService {
   }
 
   resetToTop(): void {
-    this.scrollTo(0, { immediate: true });
+    const view = this.document.defaultView;
+    if (!view) {
+      return;
+    }
+
+    this.lenis?.scrollTo(0, { immediate: true, force: true });
+    view.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  private scheduleNavigationUpdate(preserveFragment: boolean): void {
+    const view = this.document.defaultView;
+    if (!view) {
+      return;
+    }
+
+    if (this.navigationFrame !== undefined) {
+      view.cancelAnimationFrame(this.navigationFrame);
+    }
+
+    this.navigationFrame = view.requestAnimationFrame(() => {
+      this.navigationFrame = undefined;
+      if (!preserveFragment) {
+        this.resetToTop();
+      }
+      this.animation.refresh();
+    });
   }
 
   private syncLenis(): void {

@@ -1,5 +1,14 @@
 # Progresso — NS2 Innovation Site
 
+## Correcção: scroll no topo ao mudar de página
+
+- **Estado:** concluída
+- **Causa confirmada:** a reposição do scroll estava a ocorrer em múltiplos pontos do ciclo de navegação, e o `ScrollService` fazia o reset antes do layout final da rota destino estabilizar. Em paralelo, o `PageTransition` também podia disparar uma reposição, o que criava concorrência entre `Lenis` e `window.scrollTo`, deixando o browser em posição residual.
+- **Solução aplicada:** centralizou-se a lógica num único ponto, no `ScrollService`. O reset acontece após `NavigationEnd`, em `requestAnimationFrame`, apenas quando a rota não contém fragmento (`#hash`), e aplica-se em ambos os sistemas (`lenis.scrollTo(0, { immediate: true, force: true })` e `window.scrollTo({ top: 0, behavior: 'auto' })`). O `PageTransition` deixou de resetar scroll; a reposição mantém-se instantânea e respeita `prefers-reduced-motion`.
+- **Ficheiros alterados:** `src/app/core/scroll.service.ts`, `src/app/shared/layout/page-transition/page-transition.ts`, `src/app/app.config.ts`, `docs/PROGRESSO.md`.
+- **Verificações:** `npm run build -- --configuration production` passou; `npm test -- --watch=false` passou com 22 testes sem regressões.
+- **Resultado dos percursos:** home → serviços/produtos/contacto/sobre com header; links de serviço e detalhes de pacote/notícia; menu móvel; browser back/rodapé; rotas com fragmento (`/produtos#notebooks`) mantiveram comportamento de âncora; cenário sem hover/reduced-motion e com Lenis ainda não inicializado ficou coberto pelo reset centralizado em `requestAnimationFrame` e por `window.scrollTo` após render. Não houve regressão de scroll em temas claro/escuro nem em 360 px/1280 px.
+
 ## Correcção: layout e imagens de `/projectos`
 
 - **Estado:** concluída

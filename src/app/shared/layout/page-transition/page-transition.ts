@@ -8,7 +8,6 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
-import { ScrollService } from '../../../core/scroll.service';
 import {
   PageTransitionMotion,
   PageTransitionStage,
@@ -25,12 +24,10 @@ export class PageTransition {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
   private readonly document = inject(DOCUMENT);
-  private readonly scroll = inject(ScrollService);
   readonly visible = signal(false);
   readonly stage = signal<PageTransitionStage>('cover');
   private coverComplete = false;
   private navigationComplete = false;
-  private preserveFragment = false;
   private safetyTimer: number | undefined;
 
   private readonly renderCallback = afterNextRender(() => {
@@ -40,7 +37,7 @@ export class PageTransition {
 
     const subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        this.beginTransition(event.url);
+        this.beginTransition();
       } else if (
         event instanceof NavigationEnd ||
         event instanceof NavigationCancel ||
@@ -52,11 +49,10 @@ export class PageTransition {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   });
 
-  private beginTransition(url: string): void {
+  private beginTransition(): void {
     this.clearTimers();
     this.coverComplete = false;
     this.navigationComplete = false;
-    this.preserveFragment = Boolean(this.router.parseUrl(url).fragment);
     this.stage.set('cover');
     this.visible.set(true);
     this.safetyTimer = this.document.defaultView?.setTimeout(() => this.hide(), 850);
@@ -69,9 +65,6 @@ export class PageTransition {
 
   coverFinished(): void {
     this.coverComplete = true;
-    if (!this.preserveFragment) {
-      this.scroll.resetToTop();
-    }
     this.startRevealWhenReady();
   }
 
@@ -91,7 +84,6 @@ export class PageTransition {
     this.stage.set('cover');
     this.coverComplete = false;
     this.navigationComplete = false;
-    this.preserveFragment = false;
   }
 
   private clearTimers(): void {
